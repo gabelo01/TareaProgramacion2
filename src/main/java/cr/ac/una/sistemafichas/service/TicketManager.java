@@ -6,6 +6,7 @@ package cr.ac.una.sistemafichas.service;
 
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.model.Branch;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TicketManager {
@@ -13,16 +14,31 @@ private List<Ticket> tickets;
 private int currentNumber;
 private int nextNumber;
 private Branch branch;
+
+public TicketManager(){
+    tickets= new ArrayList<>();
+    currentNumber=0;
+    nextNumber =1;
+}
  
 public Ticket generateTicket(){
-    
-    return null;
+    Ticket ticket = new Ticket();
+    ticket.setNumber(nextNumber);
+    tickets.add(ticket);
+    nextNumber++;
+    return ticket;
     
 }
 public Ticket callNextTicket(){
+    if(currentNumber < tickets.size()){
+    Ticket ticket=tickets.get(currentNumber);
+    currentNumber++;
+    return ticket;
+    }
     return null;
 }
 public Ticket getCurrentTiket(){
+    
     return null;
 }
 public int getWaitingCount(){
