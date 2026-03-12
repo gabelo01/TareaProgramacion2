@@ -38,15 +38,18 @@ public Ticket callNextTicket(){
     return null;
 }
 public Ticket getCurrentTiket(){
-    
+    if(currentNumber>0 && currentNumber <= tickets.size()){
+        return tickets.get(currentNumber - 1);
+    }
     return null;
 }
 public int getWaitingCount(){
     
-    return 0;   
+    return tickets.size() - currentNumber;   
 }
 public void resetTickets(){
-    
+    currentNumber=0;
+    nextNumber=1;
+    tickets.clear();
 }
-
 }
