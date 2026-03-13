@@ -2,21 +2,14 @@ package cr.ac.una.sistemafichas.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
  *
  * @author agamg
  */
-public class SelectProceduresController implements Initializable {
-
-    @FXML
-    private Button getTicketButton;
-    @FXML
-    private Button preferentialButton;
+public class PreferentialController implements Initializable {
 
     /**
      * Initializes the controller class.
