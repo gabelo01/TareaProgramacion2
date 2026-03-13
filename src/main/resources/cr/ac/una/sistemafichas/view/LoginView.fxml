@@ -23,18 +23,24 @@
             </Text>
             <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="600.0" spacing="25.0">
                <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="45.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" />
                   <TextField alignment="CENTER" maxWidth="1.7976931348623157E308" promptText="USUARIO" HBox.hgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor></TextField>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="600.0" spacing="25.0">
                <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
-                  <PasswordField alignment="CENTER" promptText="Contraseña" HBox.hgrow="ALWAYS" />
+                  <ImageView fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+                  <PasswordField alignment="CENTER" prefHeight="25.0" prefWidth="460.0" promptText="Contraseña" HBox.hgrow="ALWAYS" />
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" prefHeight="68.0" prefWidth="600.0" spacing="25.0">
                <children>
