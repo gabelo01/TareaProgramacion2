@@ -1,4 +1,4 @@
-package cr.ac.una.sistemafichas.controller;
+package cr.ac.una.sistemafichas.controller.kiosk;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,7 +46,7 @@ private void validarID(){
         try{
 
             FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/cr/ac/una/sistemafichas/view/SelectProcedures.fxml")
+                getClass().getResource("/cr/ac/una/sistemafichas/view/kiosk/SelectProcedures.fxml")
             );
 
             Parent root = loader.load();

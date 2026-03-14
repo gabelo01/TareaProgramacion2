@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="405.0" prefWidth="606.0" style="-fx-background-color: #527eff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="cr.ac.una.sistemafichas.controller.LogingAdminController">
+<AnchorPane id="AnchorPane" prefHeight="405.0" prefWidth="606.0" style="-fx-background-color: #527eff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="cr.ac.una.sistemafichas.controller.admin.LogingAdminController">
    <children>
       <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="387.0" prefWidth="584.0" style="-fx-background-color: #aeaeae;">
          <children>

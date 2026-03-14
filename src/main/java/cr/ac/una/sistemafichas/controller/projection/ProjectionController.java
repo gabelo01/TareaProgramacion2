@@ -1,4 +1,4 @@
-package cr.ac.una.sistemafichas.controller;
+package cr.ac.una.sistemafichas.controller.projection;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
  *
  * @author agamg
  */
-public class BranchesController implements Initializable {
+public class ProjectionController implements Initializable {
 
     /**
      * Initializes the controller class.

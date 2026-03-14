@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="cr.ac.una.sistemafichas.controller.SelectProceduresController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="cr.ac.una.sistemafichas.controller.kiosk.SelectProceduresController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;">
          <top>

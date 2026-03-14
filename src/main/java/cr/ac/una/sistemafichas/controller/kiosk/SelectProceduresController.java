@@ -1,4 +1,4 @@
-package cr.ac.una.sistemafichas.controller;
+package cr.ac.una.sistemafichas.controller.kiosk;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,7 +36,7 @@ public class SelectProceduresController implements Initializable {
     private void openPreferential() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/cr/ac/una/sistemafichas/view/Preferential.fxml")
+                getClass().getResource("/cr/ac/una/sistemafichas/view/kiosk/Preferential.fxml")
         );
 
         Parent root = loader.load();
