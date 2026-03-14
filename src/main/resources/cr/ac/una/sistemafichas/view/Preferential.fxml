@@ -21,13 +21,13 @@
                   <Font size="20.0" />
                </font>
             </Text>
-            <PasswordField alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="593.0" promptText="PIN" />
-            <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="159.0" style="-fx-background-color: #90EE90;" text="OBTENER FICHA">
+            <PasswordField fx:id="password" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="593.0" promptText="PIN" />
+            <Button fx:id="getTicket" mnemonicParsing="false" prefHeight="43.0" prefWidth="159.0" style="-fx-background-color: #90EE90;" text="OBTENER FICHA">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" style="-fx-background-color: #D3D3D3;" text="CANCELAR" />
+            <Button fx:id="cancel" mnemonicParsing="false" style="-fx-background-color: #D3D3D3;" text="CANCELAR" />
          </children>
       </VBox>
    </children>
