@@ -10,10 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="405.0" prefWidth="606.0" style="-fx-background-color: #527eff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="cr.ac.una.sistemafichas.controller.LogingAdminController">
+<AnchorPane id="AnchorPane" fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="658.0" style="-fx-background-color: #527eff;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.LogingAdminController">
    <children>
-      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="387.0" prefWidth="584.0" style="-fx-background-color: #aeaeae;">
+      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #aeaeae;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <Text fill="#0044ff" strokeType="OUTSIDE" strokeWidth="0.0" text="BIENVENIDO" textAlignment="CENTER" wrappingWidth="410.4892578125">
                <font>
@@ -28,14 +27,10 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </Text>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="51.0" prefWidth="600.0" spacing="25.0">
+            <PasswordField promptText="id" />
+            <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="51.0" prefWidth="600.0" spacing="25.0">
                <children>
                   <ImageView fitHeight="45.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" />
-                  <PasswordField alignment="CENTER" prefHeight="25.0" prefWidth="499.0" promptText="PIN" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets right="25.0" />
-                     </HBox.margin>
-                  </PasswordField>
                </children>
             </HBox>
             <HBox prefHeight="54.0" prefWidth="600.0" spacing="25.0">
