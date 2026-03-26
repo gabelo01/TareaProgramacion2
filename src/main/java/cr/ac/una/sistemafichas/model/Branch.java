@@ -5,6 +5,9 @@ public class Branch {
  private String direction;
  private List<Station> stations;
  
+ 
+ public Branch() {}
+   
  public Branch(String name, String direction, List<Station>stations){
      this.name=name;
      this.direction=direction;

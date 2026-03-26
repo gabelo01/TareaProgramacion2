@@ -4,19 +4,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
-/**
- * FXML Controller class
- *
- * @author agamg
- */
-public class BranchesController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+public class BranchesController extends Controller {
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    public void initialize() {
+        // aquí va lógica de inicialización
+    }
 }
+    
+

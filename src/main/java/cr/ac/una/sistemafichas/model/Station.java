@@ -5,40 +5,48 @@
 package cr.ac.una.sistemafichas.model;
 
 import java.util.List;
+
 public class Station {
-  private int number;
-  private boolean priority;
-  private List<Procedure> procedures;
-  
-  public Station(int number, boolean priority, List<Procedure>procedures){
-      this.number=number;
-      this.priority=priority;
-      this.procedures=procedures;
-  }
+    private int number;
+    private String name;
+    private boolean preferential;
+    private List<String> procedureNames; // nombres de trámites que atiende. usamos List<String> procedureNames en lugar de List<Procedure> para que el JSON sea simple y no haya datos duplicados entre archivos
+
+    public Station() {}
+
+    public Station(int number, String name, boolean preferential, List<String> procedureNames) {
+        this.number = number;
+        this.name = name;
+        this.preferential = preferential;
+        this.procedureNames = procedureNames;
+    }
 
     public int getNumber() {
-        return number;
+        return number; 
     }
-
     public void setNumber(int number) {
-        this.number = number;
+        this.number = number; 
     }
 
-    public boolean isPriority() {
-        return priority;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) { 
+        this.name = name; 
+    }
+    public boolean isPreferential() {
+        return preferential; 
+    }
+    public void setPreferential(boolean preferential) { 
+        this.preferential = preferential; 
     }
 
-    public void setPriority(boolean priority) {
-        this.priority = priority;
+    public List<String> getProcedureNames() {
+        return procedureNames; 
     }
-
-    public List<Procedure> getProcedures() {
-        return procedures;
+    public void setProcedureNames(List<String> procedureNames) {
+        this.procedureNames = procedureNames;
     }
-
-    public void setProcedures(List<Procedure> procedures) {
-        this.procedures = procedures;
-    }
-
-  
 }
+  
+
