@@ -3,18 +3,18 @@ import java.util.List;
 public class Branch {
  private String name;
  private String direction;
+ private String noticeText;
  private List<Station> stations;
  
  
  public Branch() {}
    
- public Branch(String name, String direction, List<Station>stations){
-     this.name=name;
-     this.direction=direction;
-     this.stations=stations;
-     
- }
-
+public Branch(String name, String direction, String noticeText, List<Station> stations){
+    this.name = name;
+    this.direction = direction;
+    this.noticeText = noticeText;
+    this.stations = stations;
+}
     public String getName() {
         return name;
     }
@@ -38,6 +38,14 @@ public class Branch {
     public void setStations(List<Station> stations) {
         this.stations = stations;
     }
+    
+    public String getNoticeText() {
+    return noticeText;
+}
+
+public void setNoticeText(String noticeText) {
+    this.noticeText = noticeText;
+}
 
  
  

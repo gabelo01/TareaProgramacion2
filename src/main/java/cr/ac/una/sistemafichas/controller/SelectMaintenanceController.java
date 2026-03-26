@@ -28,32 +28,32 @@ public class SelectMaintenanceController extends Controller {
     }
     @FXML
     private void btnVolver() {
-        FlowController.getInstance().goView("Main");
+        FlowController.getInstance().goViewReplace("Main");
     }
 
     @FXML
     private void btnProcedures() {
-        FlowController.getInstance().goView("Procedures");
+        FlowController.getInstance().goViewReplace("ProceduresAndBranchMaintenanceView");
     }
 
     @FXML
     private void btnIndicators() {
-        FlowController.getInstance().goView("Indicators");
+        FlowController.getInstance().goViewReplace("Indicators");
     }
 
     @FXML
     private void btnClients() {
-        FlowController.getInstance().goView("Clients");
+        FlowController.getInstance().goViewReplace("Clients");
     }
 
     @FXML
     private void btnConfig() {
-        FlowController.getInstance().goView("Config");
+        FlowController.getInstance().goViewReplace("ConfigView");
     }
 
     @FXML
     private void btnBranches() {
-        FlowController.getInstance().goView("Branches");
+        FlowController.getInstance().goViewReplace("ProceduresAndBranchMaintenanceView");
     }
 
     private void cargarEncabezado() {

@@ -36,7 +36,7 @@
                   <MFXButton fx:id="btnIndicators" layoutX="215.0" layoutY="229.0" onAction="#btnIndicators" prefHeight="36.0" prefWidth="191.0" text="Indicadores" />
                   <MFXButton fx:id="btnClients" layoutX="215.0" layoutY="206.0" onAction="#btnClients" prefHeight="36.0" prefWidth="191.0" text="Registro de Clientes" />
                   <MFXButton fx:id="btnConfig" onAction="#btnConfig" prefHeight="36.0" prefWidth="191.0" text="Configuración General" />
-                  <MFXButton fx:id="btnBranches" layoutX="215.0" layoutY="198.0" onAction="#btnBranches" prefHeight="36.0" prefWidth="191.0" text="Sucursales y Estaciones" />
+                  <MFXButton fx:id="btnBranches" layoutX="215.0" layoutY="198.0" onAction="#btnBranches" prefHeight="36.0" prefWidth="191.0" text="Sucursales" />
                </children>
             </VBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="52.0" prefWidth="600.0">

@@ -1,6 +1,7 @@
 package cr.ac.una.sistemafichas;
 
 import cr.ac.una.sistemafichas.model.CompanyConfig;
+import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,11 +20,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("LogingAdmin"), 640, 480);
+        scene = new Scene(loadFXML("LogingAdminView"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
+    
 
+    
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }

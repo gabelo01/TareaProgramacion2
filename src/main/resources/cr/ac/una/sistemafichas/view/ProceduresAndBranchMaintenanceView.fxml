@@ -75,8 +75,7 @@
                                                    <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="151.0" spacing="10.0">
                                                       <children>
                                                               <MFXButton onAction="#onDeleteProcedure" prefHeight="38.0" prefWidth="117.0" text="Eliminar" />
-                                             
-                                                                                     <CheckBox fx:id="chkActiveProcedure" prefHeight="17.0" prefWidth="107.0" text="Activo" />
+                                                              <CheckBox fx:id="chkActiveProcedure" prefHeight="17.0" prefWidth="107.0" text="Activo" />
                                                       </children>
                                                       <padding>
                                                          <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
@@ -126,7 +125,7 @@
                                                          <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
                                                       </padding>
                                                    </HBox>
-                                                        <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onAddBranch" prefHeight="25.0" prefWidth="123.0" text="Agregar" />
+                                                        <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onAdd" prefHeight="25.0" prefWidth="123.0" text="Agregar" />
                                                 </children>
                                              </VBox>
                                           </children>

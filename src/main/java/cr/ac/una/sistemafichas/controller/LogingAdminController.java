@@ -33,7 +33,7 @@ public class LogingAdminController extends Controller {
 
         if (pswPin.getText().equals(config.getAdminPin())) {
             pswPin.clear();
-            FlowController.getInstance().goView("SelectMaintenance");
+            FlowController.getInstance().goViewReplace("SelectMaintenance");
         } else {
             pswPin.clear();
             pswPin.setFloatingText("PIN incorrecto, intente de nuevo");
@@ -43,6 +43,6 @@ public class LogingAdminController extends Controller {
     @FXML
     private void btnVolver() {
         pswPin.clear();
-        FlowController.getInstance().goView("Main");
+        FlowController.getInstance().goViewReplace("Main");
     }
 }

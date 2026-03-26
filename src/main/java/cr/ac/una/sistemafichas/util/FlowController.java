@@ -186,7 +186,47 @@ public class FlowController { //singlenton una sola instancia
         stage.showAndWait();
 
     }
+    
+    /***************
+     * 
+     * 
+     * Nuevo metodo
+     * 
+     **************/
 
+    public void goViewReplace(String viewName) {
+    try {
+        Stage stage = getMainStage();
+        Scene scene = new Scene(FXMLLoader.load(
+            App.class.getResource("view/" + viewName + ".fxml"), idioma));
+        MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
+        stage.setScene(scene);
+        stage.show();
+    } catch (IOException ex) {
+        java.util.logging.Logger.getLogger(FlowController.class.getName())
+            .log(Level.SEVERE, "Error cargando vista [" + viewName + "].", ex);
+     }
+    }
+     private Stage getMainStage() {
+        if (mainStage != null) return mainStage;
+        mainStage = Stage.getWindows()
+                    .stream()
+                    .filter(w -> w instanceof Stage && w.isShowing())
+                    .map(w -> (Stage) w)
+                    .findFirst()
+                    .orElse(null);
+        return mainStage;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /////////////////////////////////////
     public Controller getController(String viewName) {
         return getLoader(viewName).getController();
     }
@@ -207,4 +247,7 @@ public class FlowController { //singlenton una sola instancia
         this.mainStage.close();
     }
 
+
+
 }
+
