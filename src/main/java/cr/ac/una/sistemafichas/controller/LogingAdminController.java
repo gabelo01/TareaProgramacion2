@@ -5,15 +5,17 @@ import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class LogingAdminController extends Controller {
 
     @FXML private MFXPasswordField pswPin;
     @FXML private MFXButton btnIngresar;
-    @FXML private MFXButton btnVolver;
 
     private static final String CONFIG_PATH = "data/config.json";
+    @FXML
+    private MFXButton btnSalir;
 
     @Override
     public void initialize() {
@@ -41,8 +43,9 @@ public class LogingAdminController extends Controller {
     }
 
     @FXML
-    private void btnVolver() {
+    private void btnSalir(ActionEvent event) {
         pswPin.clear();
-        FlowController.getInstance().goViewReplace("Main");
+        FlowController.getInstance().salir();
     }
+ 
 }

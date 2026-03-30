@@ -246,8 +246,6 @@ public class FlowController { //singlenton una sola instancia
     public void salir() {
         this.mainStage.close();
     }
-
-
-
+    
 }
 

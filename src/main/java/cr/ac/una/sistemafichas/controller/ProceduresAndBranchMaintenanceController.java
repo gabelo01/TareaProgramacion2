@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.event.ActionEvent;
 
 public class ProceduresAndBranchMaintenanceController extends Controller {
 
@@ -106,7 +107,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
     // ──────────────── PROCEDURES ────────────────
 
     @FXML
-    private void onAddProcedure() {
+    private void btnAddProcedure() {
         String name = txtProcedureName.getText().trim();
 
         if (name.isEmpty()) {
@@ -130,7 +131,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
     }
 
     @FXML
-    private void onDeleteProcedure() {
+    private void btnDeleteProcedure() {
         if (selectedProcedure == null) {
             showAlert("Seleccione un trámite.");
             return;
@@ -151,7 +152,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
     // ──────────────── BRANCHES ────────────────
 
     @FXML
-    private void onAdd() {
+    private void btnAddBranch() {
         String name = txtBranchName.getText().trim();
 
         if (name.isEmpty()) {
@@ -175,7 +176,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
     }
 
     @FXML
-    private void onDeleteBranch() {
+    private void btnDeleteBranch() {
         if (selectedBranch == null) {
             showAlert("Seleccione una sucursal.");
             return;
@@ -195,15 +196,15 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
     // ──────────────── GENERAL ────────────────
 
     @FXML
-    private void onUpdate() {
+    private void btnUpdate() {
         JsonUtil.write(PROCEDURES_PATH, procedures);
         JsonUtil.write(BRANCHES_PATH, branches);
         showAlert("Datos actualizados.");
     }
 
     @FXML
-    private void onBack() {
-        FlowController.getInstance().goView("SelectMaintenance");
+    private void btnBack() {
+        FlowController.getInstance().goViewReplace("SelectMaintenance");
     }
 
     private void showAlert(String msg) {
@@ -228,4 +229,5 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
             System.out.println("Error loading logo");
         }
     }
+
 }

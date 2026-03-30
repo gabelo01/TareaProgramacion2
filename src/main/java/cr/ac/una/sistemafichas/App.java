@@ -17,14 +17,23 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("LogingAdminView"), 640, 480);
-        stage.setScene(scene);
-        stage.show();
-    }
     
+//
+//    @Override
+//    public void start(Stage stage) throws IOException {
+//        scene = new Scene(loadFXML("LoginAdminView"), 640, 480);
+//        stage.setScene(scene);
+//        stage.show();
+//    }
+    
+     @Override
+    public void start(Stage stage) throws Exception {
+
+        FlowController.getInstance().InitializeFlow(stage, null);
+
+        FlowController.getInstance().goViewReplace("LoginAdminView");
+
+    }
 
     
     static void setRoot(String fxml) throws IOException {

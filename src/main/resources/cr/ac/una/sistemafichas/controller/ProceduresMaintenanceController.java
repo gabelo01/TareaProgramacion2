@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
+
 package cr.ac.una.sistemafichas.controller;
 
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -59,9 +56,6 @@ public class ProceduresMaintenanceController implements Initializable {
     private void onDeleteBranch(ActionEvent event) {
     }
 
-    @FXML
-    private void onAdd(ActionEvent event) {
-    }
 
     @FXML
     private void onUpdate(ActionEvent event) {
@@ -69,6 +63,10 @@ public class ProceduresMaintenanceController implements Initializable {
 
     @FXML
     private void onBack(ActionEvent event) {
+    }
+
+    @FXML
+    private void onAdd(ActionEvent event) {
     }
     
 }

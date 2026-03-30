@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.LogingAdminController">
    <children>
       <VBox alignment="CENTER" prefHeight="391.0" prefWidth="624.0">
@@ -34,7 +33,7 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
                   </MFXButton>
-                  <MFXButton fx:id="btnVolver" layoutX="205.0" layoutY="125.0" onAction="#btnVolver" prefHeight="45.0" prefWidth="234.0" text="Volver" />
+                  <MFXButton fx:id="btnSalir" layoutX="205.0" layoutY="125.0" onAction="#btnSalir" prefHeight="45.0" prefWidth="234.0" text="Salir" />
                </children>
             </VBox>
          </children>
