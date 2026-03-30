@@ -1,5 +1,6 @@
 package cr.ac.una.sistemafichas.controller.admin;
 
+import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;

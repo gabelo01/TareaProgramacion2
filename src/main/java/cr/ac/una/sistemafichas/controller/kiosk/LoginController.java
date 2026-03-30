@@ -1,5 +1,6 @@
 package cr.ac.una.sistemafichas.controller.kiosk;
 
+import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.util.FlowController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
