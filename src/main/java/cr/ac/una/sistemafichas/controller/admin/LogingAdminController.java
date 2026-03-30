@@ -15,13 +15,10 @@ public class LogingAdminController extends Controller {
     @FXML private MFXButton btnIngresar;
 
     private static final String CONFIG_PATH = "data/config.json";
-<<<<<<< HEAD:src/main/java/cr/ac/una/sistemafichas/controller/admin/LogingAdminController.java
-    
-=======
+
     @FXML
     private MFXButton btnSalir;
 
->>>>>>> 606ca8b6d0c0af3bfcd1b5ab2235ebe03fd9bde2:src/main/java/cr/ac/una/sistemafichas/controller/LogingAdminController.java
     @Override
     public void initialize() {
         // los botones ya tienen onAction en el FXML
