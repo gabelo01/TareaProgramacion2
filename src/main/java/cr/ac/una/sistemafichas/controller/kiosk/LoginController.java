@@ -23,7 +23,7 @@ public class LoginController extends Controller {
         String pin = password.getText();
         if (pin.equals("123")) {
             password.clear();
-            FlowController.getInstance().goView("SelectProcedures");
+            FlowController.getInstance().goView("kiosk/SelectProcedures");
         } else {
             if (lblError != null) {
                 lblError.setText("PIN incorrecto");
