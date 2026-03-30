@@ -42,7 +42,7 @@ public class ConfigController implements Initializable {
 
     @FXML
     private void btnReturn(ActionEvent event) {
-        FlowController.getInstance().goViewReplace("SelectMaintenance");
+        FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
     }
 
     @FXML
