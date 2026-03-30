@@ -1,5 +1,6 @@
-package cr.ac.una.sistemafichas.controller;
+package cr.ac.una.sistemafichas.controller.admin;
 
+import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Procedure;
 import cr.ac.una.sistemafichas.model.Branch;
@@ -133,7 +134,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
     @FXML
     private void btnDeleteProcedure() {
         if (selectedProcedure == null) {
-            showAlert("Seleccione un trámite.");
+            showAlert("admin/Seleccione un trámite.");
             return;
         }
 
@@ -204,7 +205,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
 
     @FXML
     private void btnBack() {
-        FlowController.getInstance().goViewReplace("SelectMaintenance");
+        FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
     }
 
     private void showAlert(String msg) {

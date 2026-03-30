@@ -22,20 +22,23 @@ public class SelectMaintenanceController extends Controller {
     @FXML private ImageView imgLogo;
 
     private static final String CONFIG_PATH = "data/config.json";
+    
     @FXML
     private MFXButton btnBranchesAndProcedures;
+    
     @Override
     public void initialize() {
         cargarEncabezado();
     }
+    
     @FXML
     private void btnVolver() {
-        FlowController.getInstance().goViewReplace("LoginAdminView");
+        FlowController.getInstance().goViewReplace("admin/LoginAdminView");
     }
 
     @FXML
     private void btnBranchesAndProcedures(ActionEvent event) {
-        FlowController.getInstance().goViewReplace("ProceduresAndBranchMaintenanceView");
+        FlowController.getInstance().goViewReplace("admin/ProceduresAndBranchMaintenanceView");
     }
     
     @FXML
@@ -50,10 +53,8 @@ public class SelectMaintenanceController extends Controller {
 
     @FXML
     private void btnConfig() {
-        FlowController.getInstance().goViewReplace("ConfigView");
+        FlowController.getInstance().goViewReplace("admin/ConfigView");
     }
-
-
 
     private void cargarEncabezado() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);

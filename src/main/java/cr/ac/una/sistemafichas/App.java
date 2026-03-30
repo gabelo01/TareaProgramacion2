@@ -31,7 +31,7 @@ public class App extends Application {
 
         FlowController.getInstance().InitializeFlow(stage, null);
 
-        FlowController.getInstance().goViewReplace("LoginAdminView");
+        FlowController.getInstance().goViewReplace("admin/LoginAdminView");
 
     }
 
@@ -41,7 +41,7 @@ public class App extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/"+/* "kiosk/" + */fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/"+/* "admin/" + */fxml + ".fxml"));
         return fxmlLoader.load();
     }
 

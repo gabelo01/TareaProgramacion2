@@ -9,7 +9,7 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-public class LogingAdminController extends Controller {
+public class LoginAdminController extends Controller {
 
     @FXML private MFXPasswordField pswPin;
     @FXML private MFXButton btnIngresar;
@@ -37,7 +37,7 @@ public class LogingAdminController extends Controller {
 
         if (pswPin.getText().equals(config.getAdminPin())) {
             pswPin.clear();
-            FlowController.getInstance().goViewReplace("SelectMaintenance");
+            FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
         } else {
             pswPin.clear();
             pswPin.setFloatingText("PIN incorrecto, intente de nuevo");

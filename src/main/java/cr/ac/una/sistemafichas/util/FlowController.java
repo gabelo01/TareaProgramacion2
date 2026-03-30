@@ -217,13 +217,7 @@ public class FlowController { //singlenton una sola instancia
                     .orElse(null);
         return mainStage;
     }
-    
-    
-    
-    
-    
-    
-    
+      
     
     
     /////////////////////////////////////

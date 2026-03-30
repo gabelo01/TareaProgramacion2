@@ -1,4 +1,4 @@
-package cr.ac.una.sistemafichas.controller;
+package cr.ac.una.sistemafichas.controller.admin;
 
 import cr.ac.una.sistemafichas.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
