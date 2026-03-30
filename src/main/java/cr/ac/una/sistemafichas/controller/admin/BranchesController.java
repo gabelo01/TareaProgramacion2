@@ -7,12 +7,10 @@ import javafx.fxml.Initializable;
 
 public class BranchesController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    public void initialize() {
+        // aquí va lógica de inicialización
+    }
 }
+    
+

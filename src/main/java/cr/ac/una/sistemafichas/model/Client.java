@@ -6,6 +6,9 @@ public class Client {
     private int age;
     private String photo;
     
+    public Client() {
+    }
+    
     public Client(String name,String ID, int age, String photo ){
         this.name=name;
         this.ID=ID;

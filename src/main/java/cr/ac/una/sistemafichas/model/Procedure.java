@@ -5,6 +5,9 @@ public class Procedure {
     private String name;
     private boolean active;
      
+    public Procedure() {
+    }
+    
     public Procedure(String name, boolean active){
         this.name=name;
         this.active=active;
