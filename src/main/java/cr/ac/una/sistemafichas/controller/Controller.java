@@ -1,5 +1,8 @@
 package cr.ac.una.sistemafichas.controller;
 
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Control;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -40,6 +43,16 @@ public abstract class Controller {
         KeyEvent keyEvent = new KeyEvent(KeyEvent.KEY_PRESSED, null, null, KeyCode.TAB, false, false, false, false);
         ((Control) event.getSource()).fireEvent(keyEvent);
     }
+    
+    protected boolean confirmExit() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+         alert.setTitle("Unsaved Changes");
+        alert.setHeaderText(null);
+        alert.setContentText("You have unsaved changes. Do you want to exit anyway?");
+    
+    Optional<ButtonType> result = alert.showAndWait();
+    return result.isPresent() && result.get() == ButtonType.OK;
+}
 
     public abstract void initialize();
 }
