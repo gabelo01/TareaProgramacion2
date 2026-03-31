@@ -24,11 +24,17 @@ public class ConfigController extends Controller {
     @FXML private MFXButton btnReturn;
  
     private static final String CONFIG_PATH = "data/config.json";
- 
+    private boolean hasChanges = false;
+    
     @Override
     public void initialize() {
         lblMensaje.setVisible(false);
         cargarDatos();
+        
+        ///Para saber si hay cambios en estas variables
+        txtCompanyName.textProperty().addListener((obs, old, nuevo) -> hasChanges = true);  
+        txtPin.textProperty().addListener((obs, old, nuevo) -> hasChanges = true);
+        txtLogo.textProperty().addListener((obs, old, nuevo) -> hasChanges = true);
     }
  
     private void cargarDatos() {
@@ -54,6 +60,7 @@ public class ConfigController extends Controller {
         config.setLogoPath(logo);
  
         JsonUtil.write(CONFIG_PATH, config);
+        hasChanges = false;
     }
  
     
@@ -105,6 +112,7 @@ private void btnSelectLogo(ActionEvent event) { // este metodo es para usarlo no
  
     @FXML
     private void btnReturn(ActionEvent event) {
+         if (hasChanges && !confirmExit()) return;
         FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
     }
 }
