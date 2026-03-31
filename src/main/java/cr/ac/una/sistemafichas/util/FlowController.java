@@ -206,6 +206,7 @@ public class FlowController { //singlenton una sola instancia
         java.util.logging.Logger.getLogger(FlowController.class.getName())
             .log(Level.SEVERE, "Error cargando vista [" + viewName + "].", ex);
      }
+    
     }
      private Stage getMainStage() {
         if (mainStage != null) return mainStage;
