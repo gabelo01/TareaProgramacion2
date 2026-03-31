@@ -28,7 +28,7 @@ public class App extends Application {
 
         FlowController.getInstance().InitializeFlow(stage, null);
 
-        FlowController.getInstance().goViewReplace("admin/LoginAdminView");
+        FlowController.getInstance().goViewFirst("admin/LoginAdminView");
 
     }
 

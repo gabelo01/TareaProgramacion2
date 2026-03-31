@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+//revisar
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,23 +60,37 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
 
     // ──────────────── LOAD DATA ────────────────
 
+//    private void loadData() {
+//
+//        // 🔹 procedimientos
+//        procedures = JsonUtil.read(PROCEDURES_PATH, List.class);
+//        if (procedures == null) {
+//            procedures = new ArrayList<>();
+//        }
+//
+//        // 🔹 sucursales
+//        branches = JsonUtil.read(BRANCHES_PATH, List.class);
+//        if (branches == null) {
+//            branches = new ArrayList<>();
+//        }
+//
+//        refreshProcedures();
+//        refreshBranches();
+//    }
+    
     private void loadData() {
 
-        // 🔹 procedimientos
-        procedures = JsonUtil.read(PROCEDURES_PATH, List.class);
-        if (procedures == null) {
-            procedures = new ArrayList<>();
-        }
+        Type procedureListType = new TypeToken<List<Procedure>>(){}.getType();
+           procedures = JsonUtil.read(PROCEDURES_PATH, procedureListType);
+         if (procedures == null) procedures = new ArrayList<>();
 
-        // 🔹 sucursales
-        branches = JsonUtil.read(BRANCHES_PATH, List.class);
-        if (branches == null) {
-            branches = new ArrayList<>();
-        }
+        Type branchListType = new TypeToken<List<Branch>>(){}.getType();
+          branches = JsonUtil.read(BRANCHES_PATH, branchListType);
+         if (branches == null) branches = new ArrayList<>();
 
         refreshProcedures();
-        refreshBranches();
-    }
+     refreshBranches();
+       }
 
     private void refreshProcedures() {
         listProcedures.getItems().setAll(procedures);

@@ -190,24 +190,50 @@ public class FlowController { //singlenton una sola instancia
     /***************
      * 
      * 
-     * Nuevo metodo
+     * Nuevos metodos
      * 
      **************/
-
-    public void goViewReplace(String viewName) {
-    try {
-        Stage stage = getMainStage();
-        Scene scene = new Scene(FXMLLoader.load(
-            App.class.getResource("view/" + viewName + ".fxml"), idioma));
-        MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
-        stage.setScene(scene);
-        stage.show();
-    } catch (IOException ex) {
-        java.util.logging.Logger.getLogger(FlowController.class.getName())
-            .log(Level.SEVERE, "Error cargando vista [" + viewName + "].", ex);
-     }
-    
+    public void goViewFirst(String viewName) { //para iniciar la ventana la primera vez
+         try {
+            Stage stage = getMainStage();
+            FXMLLoader loader = new FXMLLoader(
+                App.class.getResource("view/" + viewName + ".fxml"), idioma);
+            Parent root = loader.load();
+            Controller controller = loader.getController();
+            controller.initialize();
+            controller.setStage(stage);
+            Scene scene = new Scene(root);
+            MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
+            stage.setScene(scene);
+            stage.setMaximized(true); // o stage.setWidth(800); stage.setHeight(600);
+            stage.show();
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(FlowController.class.getName())
+                .log(Level.SEVERE, "Error cargando vista [" + viewName + "].", ex);
+        }
     }
+    public void goViewReplace(String viewName) { // se cambio en dev3 para que en cada llamada cree un FXMLLoader nuevo sin tener que limpiarLoader y mantiene tamaño ventana de goViewFirst() o anterior
+        try {
+            Stage stage = getMainStage();
+            FXMLLoader loader = new FXMLLoader(
+                App.class.getResource("view/" + viewName + ".fxml"), idioma);
+            Parent root = loader.load();
+        
+            // Guarda el controller y asigna el stage
+            Controller controller = loader.getController();
+            controller.initialize();
+            controller.setStage(stage);
+        
+            // Cambia solo el root, mantiene el tamaño y estado de la ventana
+            stage.getScene().setRoot(root);
+        
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(FlowController.class.getName())
+                .log(Level.SEVERE, "Error cargando vista [" + viewName + "].", ex);
+        }
+    }
+    
+    
      private Stage getMainStage() {
         if (mainStage != null) return mainStage;
         mainStage = Stage.getWindows()

@@ -9,6 +9,9 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+//revisar
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 public class JsonUtil {
 
@@ -33,6 +36,15 @@ public class JsonUtil {
             }
         } catch (IOException e) {
             System.err.println("Error escribiendo JSON: " + filePath);
+        }
+    }
+    
+    public static <T> T read(String filePath, Type tipo) {
+        try (Reader reader = new FileReader(filePath)) {
+            return gson.fromJson(reader, tipo);
+        } catch (IOException e) {
+            System.err.println("Error leyendo JSON: " + filePath);
+            return null;
         }
     }
 }
