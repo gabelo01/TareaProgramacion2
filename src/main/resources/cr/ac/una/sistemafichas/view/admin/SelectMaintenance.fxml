@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.SelectMaintenanceController">
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
@@ -34,7 +33,7 @@
                      </VBox.margin>
                   </Label>
                   <MFXButton fx:id="btnIndicators" layoutX="215.0" layoutY="229.0" onAction="#btnIndicators" prefHeight="36.0" prefWidth="191.0" text="Indicadores" />
-                  <MFXButton fx:id="btnClients" layoutX="215.0" layoutY="206.0" onAction="#btnClients" prefHeight="36.0" prefWidth="191.0" text="Registro de Clientes" />
+                  <MFXButton fx:id="btnClients" layoutX="215.0" layoutY="206.0" onAction="#OnActionBtnClients" prefHeight="36.0" prefWidth="191.0" text="Registro de Clientes" />
                   <MFXButton fx:id="btnBranchesAndProcedures" layoutX="215.0" layoutY="198.0" onAction="#btnBranchesAndProcedures" prefHeight="36.0" prefWidth="191.0" text="Sucursales y Trámites" />
                   <MFXButton fx:id="btnConfig" onAction="#btnConfig" prefHeight="36.0" prefWidth="191.0" text="Configuración General" />
                </children>

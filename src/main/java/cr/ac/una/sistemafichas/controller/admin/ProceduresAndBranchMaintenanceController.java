@@ -30,7 +30,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
 
     @FXML private MFXTextField txtBranchName;
     @FXML private CheckBox chkActiveBranch;
-    @FXML private ListView<Branch> listBranches; // (sí, tu fx:id es ese)
+    @FXML private ListView<Branch> listBranches;
 
     @FXML private Label lbCompany;
     @FXML private ImageView imgLogo;

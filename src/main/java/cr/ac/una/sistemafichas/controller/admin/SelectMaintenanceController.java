@@ -47,8 +47,8 @@ public class SelectMaintenanceController extends Controller {
     }
 
     @FXML
-    private void btnClients() {
-        FlowController.getInstance().goViewReplace("Clients");
+    private void OnActionBtnClients() {
+        FlowController.getInstance().goViewReplace("admin/MaintenanceClientView");
     }
 
     @FXML
