@@ -90,7 +90,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
 
         refreshProcedures();
      refreshBranches();
-       }
+    }
 
     private void refreshProcedures() {
         listProcedures.getItems().setAll(procedures);
