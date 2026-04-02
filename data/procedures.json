@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "name": "a",
+    "active": false
+  },
+  {
+    "name": "d",
+    "active": false
+  }
+]

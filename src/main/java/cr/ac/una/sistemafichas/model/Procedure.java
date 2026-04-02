@@ -24,5 +24,10 @@ public class Procedure {
     public boolean isActive(){
         return active;
     }
+     
+    @Override
+    public String toString(){
+        return name;
+    }
     
 }

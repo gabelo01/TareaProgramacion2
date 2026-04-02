@@ -30,7 +30,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
 
     @FXML private MFXTextField txtBranchName;
     @FXML private CheckBox chkActiveBranch;
-    @FXML private ListView<Branch> listProcedures1; // (sí, tu fx:id es ese)
+    @FXML private ListView<Branch> listBranches;
 
     @FXML private Label lbCompany;
     @FXML private ImageView imgLogo;
@@ -90,14 +90,14 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
 
         refreshProcedures();
      refreshBranches();
-       }
+    }
 
     private void refreshProcedures() {
         listProcedures.getItems().setAll(procedures);
     }
 
     private void refreshBranches() {
-        listProcedures1.getItems().setAll(branches);
+        listBranches.getItems().setAll(branches);
     }
 
     // ──────────────── SELECTION ────────────────
@@ -113,7 +113,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
             }
         });
 
-        listProcedures1.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        listBranches.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             selectedBranch = newVal;
 
             if (newVal != null) {
@@ -151,7 +151,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
     @FXML
     private void btnDeleteProcedure() {
         if (selectedProcedure == null) {
-            showAlert("admin/Seleccione un trámite.");
+            showAlert("Seleccione un trámite.");
             return;
         }
 

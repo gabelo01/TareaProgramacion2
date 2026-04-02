@@ -48,6 +48,10 @@ public Branch(String name, String direction, String noticeText, List<Station> st
 public void setNoticeText(String noticeText) {
     this.noticeText = noticeText;
 }
+@Override
+public String toString(){
+    return name;
+}
 
  
  
