@@ -225,13 +225,6 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
         FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
     }
 
-    private void showAlert(String msg) {
-        Alert a = new Alert(Alert.AlertType.INFORMATION);
-        a.setHeaderText(null);
-        a.setContentText(msg);
-        a.showAndWait();
-    }
-
     private void loadHeader() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         if (config == null) return;

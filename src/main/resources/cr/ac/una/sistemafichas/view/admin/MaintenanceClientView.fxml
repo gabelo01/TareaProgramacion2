@@ -21,14 +21,14 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="586.0" VBox.vgrow="SOMETIMES">
                      <children>
-                        <ImageView fitHeight="100.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                        <ImageView fx:id="imgLogo" fitHeight="100.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </ImageView>
                         <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefHeight="131.0" prefWidth="500.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label text="Nombre de empresa" VBox.vgrow="ALWAYS">
+                              <Label fx:id="lbCompany" text="Nombre de empresa" VBox.vgrow="ALWAYS">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
@@ -65,7 +65,7 @@
                         <VBox prefHeight="479.0" prefWidth="529.0" HBox.hgrow="ALWAYS">
                            <children>
                               <Label prefHeight="18.0" prefWidth="138.0" text=" Clientes Registrados" />
-                              <ListView fx:id="listClientes" prefHeight="260.0" prefWidth="139.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="listClients" prefHeight="260.0" prefWidth="139.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <VBox prefHeight="364.0" prefWidth="407.0" HBox.hgrow="ALWAYS">
@@ -79,9 +79,9 @@
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </padding>
                                           </Label>
-                                          <MFXTextField fx:id="txtNombre" floatMode="BORDER" floatingText="Nombre" prefWidth="260.0" VBox.vgrow="ALWAYS" />
+                                          <MFXTextField fx:id="txtName" floatMode="BORDER" floatingText="Nombre" prefWidth="260.0" VBox.vgrow="ALWAYS" />
                                           <MFXTextField fx:id="txtId" floatMode="BORDER" floatingText="Id" prefWidth="260.0" VBox.vgrow="ALWAYS" />
-                                          <MFXTextField fx:id="txtEdad" floatMode="BORDER" floatingText="Edad" prefWidth="260.0" VBox.vgrow="ALWAYS" />
+                                          <MFXTextField fx:id="txtAge" floatMode="BORDER" floatingText="Edad" prefWidth="260.0" VBox.vgrow="ALWAYS" />
                                        </children>
                                        <padding>
                                           <Insets bottom="5.0" left="1.0" right="1.0" top="5.0" />
@@ -94,7 +94,18 @@
                                                 <Insets bottom="20.0" />
                                              </VBox.margin>
                                           </ImageView>
-                                          <Button mnemonicParsing="false" onAction="#OnActionBtnAddPhoto" text="Agregar Foto" />
+                                          <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#OnActionBtnAddPhoto" text="Agregar Foto" HBox.hgrow="ALWAYS" />
+                                                <Button mnemonicParsing="false" onAction="#OnActionBtnTakephoto" text="Tomar Foto" HBox.hgrow="ALWAYS" />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </HBox>
                                        </children>
                                        <HBox.margin>
                                           <Insets />
