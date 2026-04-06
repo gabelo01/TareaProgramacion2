@@ -30,7 +30,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
 
     @FXML private MFXTextField txtBranchName;
     @FXML private CheckBox chkActiveBranch;
-    @FXML private ListView<Branch> listProcedures1; // (sí, tu fx:id es ese)
+    @FXML private ListView<Branch> listProcedures1; 
 
     @FXML private Label lbCompany;
     @FXML private ImageView imgLogo;
@@ -89,7 +89,7 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
          if (branches == null) branches = new ArrayList<>();
 
         refreshProcedures();
-     refreshBranches();
+        refreshBranches();
        }
 
     private void refreshProcedures() {
@@ -213,7 +213,6 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
 
     // ──────────────── GENERAL ────────────────
 
-    @FXML
     private void btnUpdate() {
         JsonUtil.write(PROCEDURES_PATH, procedures);
         JsonUtil.write(BRANCHES_PATH, branches);
