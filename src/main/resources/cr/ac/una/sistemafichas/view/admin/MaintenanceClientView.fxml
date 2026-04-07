@@ -79,9 +79,9 @@
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </padding>
                                           </Label>
-                                          <MFXTextField fx:id="txtName" floatMode="BORDER" floatingText="Nombre" prefWidth="260.0" VBox.vgrow="ALWAYS" />
-                                          <MFXTextField fx:id="txtId" floatMode="BORDER" floatingText="Id" prefWidth="260.0" VBox.vgrow="ALWAYS" />
-                                          <MFXTextField fx:id="txtAge" floatMode="BORDER" floatingText="Edad" prefWidth="260.0" VBox.vgrow="ALWAYS" />
+                                          <MFXTextField fx:id="txtClientName" floatMode="BORDER" floatingText="Nombre" prefWidth="260.0" VBox.vgrow="ALWAYS" />
+                                          <MFXTextField fx:id="txtClientId" floatMode="BORDER" floatingText="Id" prefWidth="260.0" VBox.vgrow="ALWAYS" />
+                                          <MFXTextField fx:id="txtClientAge" floatMode="BORDER" floatingText="Edad" prefWidth="260.0" VBox.vgrow="ALWAYS" />
                                        </children>
                                        <padding>
                                           <Insets bottom="5.0" left="1.0" right="1.0" top="5.0" />
@@ -97,7 +97,7 @@
                                           <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Button mnemonicParsing="false" onAction="#OnActionBtnAddPhoto" text="Agregar Foto" HBox.hgrow="ALWAYS" />
-                                                <Button mnemonicParsing="false" onAction="#OnActionBtnTakephoto" text="Tomar Foto" HBox.hgrow="ALWAYS" />
+                                                <Button mnemonicParsing="false" onAction="#OnActionBtnTakePhoto" text="Tomar Foto" HBox.hgrow="ALWAYS" />
                                              </children>
                                              <VBox.margin>
                                                 <Insets />

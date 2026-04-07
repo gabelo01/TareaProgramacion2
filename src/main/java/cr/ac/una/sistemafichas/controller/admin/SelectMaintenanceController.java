@@ -43,11 +43,13 @@ public class SelectMaintenanceController extends Controller {
     
     @FXML
     private void btnIndicators() {
+        
         FlowController.getInstance().goViewReplace("Indicators");
     }
 
     @FXML
     private void OnActionBtnClients() {
+        System.out.println("Botón presionado");
         FlowController.getInstance().goViewReplace("admin/MaintenanceClientView");
     }
 
