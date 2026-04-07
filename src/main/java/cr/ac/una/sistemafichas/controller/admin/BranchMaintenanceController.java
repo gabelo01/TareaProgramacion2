@@ -42,7 +42,14 @@ public class BranchMaintenanceController extends Controller {
     public void initialize() {
         loadData();
         setupSelection();
+        chkActiveBranch.selectedProperty().addListener((obs, oldVal, newVal) -> {
+            if (selectedBranch != null){
+            selectedBranch.setActive(newVal);
+            JsonUtil.write(BRANCHES_PATH, branches);
+            }
+        });
     }
+    
 
     private void loadData() {
         Type branchListType = new TypeToken<List<Branch>>(){}.getType();
@@ -84,7 +91,7 @@ public class BranchMaintenanceController extends Controller {
             }
         }
 
-        Branch b = new Branch(name, "", "", new ArrayList<>());
+        Branch b = new Branch(name, "", "", new ArrayList<>(), true);
         branches.add(b);
         JsonUtil.write(BRANCHES_PATH, branches);
         refreshBranches();

@@ -7,15 +7,17 @@ public class Branch {
  private String direction;
  private String noticeText;
  private List<Station> stations;
+ private boolean active;
  
  
  public Branch() {}
    
-public Branch(String name, String direction, String noticeText, List<Station> stations){
+public Branch(String name, String direction, String noticeText, List<Station> stations, boolean active){
     this.name = name;
     this.direction = direction;
     this.noticeText = noticeText;
     this.stations = stations;
+    this.active=active;
 }
     public String getName() {
         return name;
@@ -43,7 +45,16 @@ public Branch(String name, String direction, String noticeText, List<Station> st
     
     public String getNoticeText() {
     return noticeText;
-}
+    }
+
+    public boolean isActive(){
+        return active;
+    }
+    
+    public void setActive(boolean active){
+        this.active=active;
+    }
+
 
 public void setNoticeText(String noticeText) {
     this.noticeText = noticeText;
@@ -52,8 +63,5 @@ public void setNoticeText(String noticeText) {
 public String toString(){
     return name;
 }
-
- 
- 
 }
 

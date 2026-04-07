@@ -4,7 +4,11 @@
     "active": true
   },
   {
-    "name": "d",
+    "name": "credito",
+    "active": true
+  },
+  {
+    "name": "prestamos",
     "active": false
   }
 ]
