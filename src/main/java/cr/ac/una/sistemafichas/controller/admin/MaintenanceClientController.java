@@ -93,7 +93,7 @@ public class MaintenanceClientController extends Controller {
                 selectedClient = newValue;
 
                 txtClientName.setText(newValue.getName());
-                txtClientId.setText(newValue.getId());
+                txtClientId.setText(newValue.getID());
                 txtClientAge.setText(String.valueOf(newValue.getAge()));
 
                 if (newValue.getPhoto() != null) {
@@ -137,7 +137,7 @@ public class MaintenanceClientController extends Controller {
             return;
         }
         for (Client c : client) {
-            if (c.getId().equalsIgnoreCase(id)) {
+            if (c.getID().equalsIgnoreCase(id)) {
                 showAlert("El cliente ya existe");
                 return;
             }
