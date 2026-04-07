@@ -9,7 +9,7 @@ public class Client {
 
     public Client() {
     }
-
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     public Client(String name, String id, int age, String photo) {
         this.name = name;
         this.id = id;
