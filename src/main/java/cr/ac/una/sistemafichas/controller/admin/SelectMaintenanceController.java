@@ -14,17 +14,10 @@ import javafx.event.ActionEvent;
 
 public class SelectMaintenanceController extends Controller {
 
-    @FXML private MFXButton btnIndicators;
-    @FXML private MFXButton btnClients;
-    @FXML private MFXButton btnConfig;
-    @FXML private MFXButton btnVolver;
-    @FXML private Label lbCompany;
-    @FXML private ImageView imgLogo;
-
+    private Label lbCompany;
+    private ImageView imgLogo;
     private static final String CONFIG_PATH = "data/config.json";
-    
-    @FXML
-    private MFXButton btnBranchesAndProcedures;
+
     
     @Override
     public void initialize() {
@@ -32,30 +25,32 @@ public class SelectMaintenanceController extends Controller {
     }
     
     @FXML
-    private void btnVolver() {
-        FlowController.getInstance().goViewReplace("admin/LoginAdminView");
+    private void onActionBtnVolver() {
+        FlowController.getInstance().goView("admin/LoginAdminView");
     }
 
     @FXML
-    private void btnBranchesAndProcedures(ActionEvent event) {
-        FlowController.getInstance().goViewReplace("admin/ProceduresAndBranchMaintenanceView");
+    private void onActionBtnProcedures(ActionEvent event) {
+        FlowController.getInstance().goView("admin/ProceduresAndBranchMaintenanceView");
     }
     
     @FXML
-    private void btnIndicators() {
-        
-        FlowController.getInstance().goViewReplace("Indicators");
+    private void onActionBtnIndicators(ActionEvent event) {
+        FlowController.getInstance().goView("Indicators");
     }
 
     @FXML
-    private void OnActionBtnClients() {
-        System.out.println("Botón presionado");
-        FlowController.getInstance().goViewReplace("admin/MaintenanceClientView");
+    private void onActionBtnClients(ActionEvent event) {
+        FlowController.getInstance().goView("admin/MaintenanceClientView");
     }
 
     @FXML
-    private void btnConfig() {
-        FlowController.getInstance().goViewReplace("admin/ConfigView");
+    private void onActionBtnConfig(ActionEvent event) {
+        FlowController.getInstance().goView("admin/ConfigView");
+    }
+
+    @FXML
+    private void onActionBtnBranches(ActionEvent event) {
     }
 
     private void cargarEncabezado() {
@@ -75,5 +70,4 @@ public class SelectMaintenanceController extends Controller {
             System.err.println("No se pudo cargar el logo.");
         }
     }
-
 }

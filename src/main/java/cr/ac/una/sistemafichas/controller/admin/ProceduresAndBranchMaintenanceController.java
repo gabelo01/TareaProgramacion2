@@ -213,12 +213,11 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
 
     // ──────────────── GENERAL ────────────────
 
-    @FXML
     private void btnUpdate() {
         JsonUtil.write(PROCEDURES_PATH, procedures);
         JsonUtil.write(BRANCHES_PATH, branches);
         showAlert("Datos actualizados.");
-    }
+    } 
 
     @FXML
     private void btnBack() {
