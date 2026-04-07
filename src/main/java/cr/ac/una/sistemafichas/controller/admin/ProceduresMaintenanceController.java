@@ -45,6 +45,12 @@ public class ProceduresMaintenanceController extends Controller {
         loadHeader();
         loadData();
         setupSelection();
+chkActiveProcedure.selectedProperty().addListener((obs, oldVal, newVal) -> {
+    if (selectedProcedure != null) {
+        selectedProcedure.setActive(newVal);
+        JsonUtil.write(PROCEDURES_PATH, procedures);
+    }
+});
     }
 
     private void loadData() {

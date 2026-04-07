@@ -3,12 +3,28 @@
     "name": "a",
     "direction": "",
     "noticeText": "",
-    "stations": []
+    "stations": [],
+    "active": false
   },
   {
     "name": "b",
     "direction": "",
     "noticeText": "",
-    "stations": []
+    "stations": [],
+    "active": false
+  },
+  {
+    "name": "centro",
+    "direction": "",
+    "noticeText": "",
+    "stations": [],
+    "active": true
+  },
+  {
+    "name": "palmares",
+    "direction": "",
+    "noticeText": "",
+    "stations": [],
+    "active": false
   }
 ]
