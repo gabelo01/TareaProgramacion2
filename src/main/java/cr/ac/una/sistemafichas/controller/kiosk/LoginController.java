@@ -1,71 +1,34 @@
 package cr.ac.una.sistemafichas.controller.kiosk;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import cr.ac.una.sistemafichas.controller.Controller;
+import cr.ac.una.sistemafichas.util.FlowController;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.layout.AnchorPane;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author agamg
- */
-public class LoginController implements Initializable {
+public class LoginController extends Controller {
 
-    @FXML
-    private AnchorPane root;
-    @FXML
-    private PasswordField password;
-    @FXML
-    private Button ingresar;
+    @FXML private PasswordField password;
+    @FXML private Button ingresar;
+    @FXML private Label lblError;
 
-    /**
-     * Initializes the controller class.
-     */
-   @Override
-public void initialize(URL url, ResourceBundle rb) {
-    
-    ingresar.setOnAction(event -> validarID());
-    
-}
-
-@FXML
-private void validarID(){
-
-    String id = password.getText();
-
-    if(id.equals("123")){
-
-        try{
-
-            FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/cr/ac/una/sistemafichas/view/kiosk/SelectProcedures.fxml")
-            );
-
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ingresar.getScene().getWindow();
-
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
-            stage.show();
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-    }else{
-        System.out.println("ID incorrecto");
+    @Override
+    public void initialize() {
+        if (lblError != null) lblError.setVisible(false);
+        ingresar.setOnAction(e -> validarID());
     }
 
-}
-    
+    private void validarID() {
+        String pin = password.getText();
+        if (pin.equals("123")) {
+            password.clear();
+            FlowController.getInstance().goView("kiosk/SelectProcedures");
+        } else {
+            if (lblError != null) {
+                lblError.setText("PIN incorrecto");
+                lblError.setVisible(true);
+            }
+        }
+    }
 }

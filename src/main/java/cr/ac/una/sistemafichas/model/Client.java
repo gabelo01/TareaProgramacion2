@@ -1,40 +1,56 @@
 package cr.ac.una.sistemafichas.model;
 
 public class Client {
+
     private String name;
-    private String ID;
+    private String id;
     private int age;
     private String photo;
-    
-    public Client(String name,String ID, int age, String photo ){
-        this.name=name;
-        this.ID=ID;
-        this.age=age;
-        this.photo=photo;
+
+    public Client() {
     }
-    public void setName(String name){
-        this.name=name;
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    public Client(String name, String id, int age, String photo) {
+        this.name = name;
+        this.id = id;
+        this.age = age;
+        this.photo = photo;
     }
-    public void setID(String ID){
-        this.ID=ID;
+
+    public void setName(String name) {
+        this.name = name;
     }
-    public void setAge(int age){
-        this.age=age;
+
+    public void setID(String id) {
+        this.id = id;
     }
-    public void setPhoto(String photo){
-        this.photo=photo;
+
+    public void setAge(int age) {
+        this.age = age;
     }
-    public String getName(){
-        return name;        
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
-    public String getID(){
-        return ID;        
+
+    public String getName() {
+        return name;
     }
-    public int getAge(){
-        return age;        
+
+    public String getId() {
+        return id;
     }
-    public String getPhoto(){
-        return photo;        
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    @Override
+    public String toString() {
+        return name + " - " + id + " - " + age;
     }
 }
-

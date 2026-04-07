@@ -5,6 +5,9 @@ public class Procedure {
     private String name;
     private boolean active;
      
+    public Procedure() {
+    }
+    
     public Procedure(String name, boolean active){
         this.name=name;
         this.active=active;
@@ -20,6 +23,11 @@ public class Procedure {
     }
     public boolean isActive(){
         return active;
+    }
+     
+    @Override
+    public String toString(){
+        return name;
     }
     
 }
