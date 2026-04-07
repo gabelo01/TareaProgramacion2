@@ -189,15 +189,16 @@ public class FlowController { //singlenton una sola instancia
     
     /***************
      * 
-     * 
      * Nuevos metodos
      * 
      **************/
+    
     public void goViewFirst(String viewName) { //para iniciar la ventana la primera vez
          try {
             Stage stage = getMainStage();
             FXMLLoader loader = new FXMLLoader(
-                App.class.getResource("view/" + viewName + ".fxml"), idioma);
+                    
+            App.class.getResource("view/" + viewName + ".fxml"), idioma);
             Parent root = loader.load();
             Controller controller = loader.getController();
             controller.initialize();
@@ -205,11 +206,10 @@ public class FlowController { //singlenton una sola instancia
             Scene scene = new Scene(root);
             MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
             stage.setScene(scene);
-            stage.setMaximized(true); // o stage.setWidth(800); stage.setHeight(600);
+            stage.setMaximized(true); // o cambiar a stage.setWidth(800); stage.setHeight(600);
             stage.show();
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(FlowController.class.getName())
-                .log(Level.SEVERE, "Error cargando vista [" + viewName + "].", ex);
+            java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error cargando vista [" + viewName + "].", ex);
         }
     }
     public void goViewReplace(String viewName) { // se cambio en dev3 para que en cada llamada cree un FXMLLoader nuevo sin tener que limpiarLoader y mantiene tamaño ventana de goViewFirst() o anterior
@@ -247,7 +247,9 @@ public class FlowController { //singlenton una sola instancia
       
     
     
-    /////////////////////////////////////
+     /////////////////////////////////////
+
+     
     public Controller getController(String viewName) {
         return getLoader(viewName).getController();
     }

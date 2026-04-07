@@ -3,51 +3,40 @@ package cr.ac.una.sistemafichas.controller.admin;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Procedure;
-import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-//revisar
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.event.ActionEvent;
 
-public class ProceduresAndBranchMaintenanceController extends Controller {
+public class ProceduresMaintenanceController extends Controller {
 
     // ──────────────── FXML ────────────────
 
     @FXML private MFXTextField txtProcedureName;
     @FXML private CheckBox chkActiveProcedure;
     @FXML private ListView<Procedure> listProcedures;
-
-    @FXML private MFXTextField txtBranchName;
-    @FXML private CheckBox chkActiveBranch;
-    @FXML private ListView<Branch> listBranches;
-
     @FXML private Label lbCompany;
     @FXML private ImageView imgLogo;
 
     // ──────────────── PATHS ────────────────
 
     private static final String PROCEDURES_PATH = "data/procedures.json";
-    private static final String BRANCHES_PATH = "data/branches.json";
     private static final String CONFIG_PATH = "data/config.json";
 
     // ──────────────── DATA ────────────────
 
     private List<Procedure> procedures;
-    private List<Branch> branches;
-
     private Procedure selectedProcedure;
-    private Branch selectedBranch;
 
     // ──────────────── INIT ────────────────
 
@@ -58,71 +47,30 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
         setupSelection();
     }
 
-    // ──────────────── LOAD DATA ────────────────
-
-//    private void loadData() {
-//
-//        // 🔹 procedimientos
-//        procedures = JsonUtil.read(PROCEDURES_PATH, List.class);
-//        if (procedures == null) {
-//            procedures = new ArrayList<>();
-//        }
-//
-//        // 🔹 sucursales
-//        branches = JsonUtil.read(BRANCHES_PATH, List.class);
-//        if (branches == null) {
-//            branches = new ArrayList<>();
-//        }
-//
-//        refreshProcedures();
-//        refreshBranches();
-//    }
-    
     private void loadData() {
-
         Type procedureListType = new TypeToken<List<Procedure>>(){}.getType();
-           procedures = JsonUtil.read(PROCEDURES_PATH, procedureListType);
-         if (procedures == null) procedures = new ArrayList<>();
-
-        Type branchListType = new TypeToken<List<Branch>>(){}.getType();
-          branches = JsonUtil.read(BRANCHES_PATH, branchListType);
-         if (branches == null) branches = new ArrayList<>();
-
+        procedures = JsonUtil.read(PROCEDURES_PATH, procedureListType);
+        if (procedures == null) procedures = new ArrayList<>();
         refreshProcedures();
-     refreshBranches();
     }
 
     private void refreshProcedures() {
         listProcedures.getItems().setAll(procedures);
     }
 
-    private void refreshBranches() {
-        listBranches.getItems().setAll(branches);
-    }
-
     // ──────────────── SELECTION ────────────────
 
     private void setupSelection() {
-
         listProcedures.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             selectedProcedure = newVal;
-
             if (newVal != null) {
                 txtProcedureName.setText(newVal.getName());
                 chkActiveProcedure.setSelected(newVal.isActive());
             }
         });
-
-        listBranches.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            selectedBranch = newVal;
-
-            if (newVal != null) {
-                txtBranchName.setText(newVal.getName());
-            }
-        });
     }
 
-    // ──────────────── PROCEDURES ────────────────
+    // ──────────────── ACTIONS ────────────────
 
     @FXML
     private void btnAddProcedure() {
@@ -142,7 +90,6 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
 
         Procedure p = new Procedure(name, chkActiveProcedure.isSelected());
         procedures.add(p);
-
         JsonUtil.write(PROCEDURES_PATH, procedures);
         refreshProcedures();
         clearProcedure();
@@ -167,78 +114,26 @@ public class ProceduresAndBranchMaintenanceController extends Controller {
         selectedProcedure = null;
     }
 
-    // ──────────────── BRANCHES ────────────────
-
-    @FXML
-    private void btnAddBranch() {
-        String name = txtBranchName.getText().trim();
-
-        if (name.isEmpty()) {
-            showAlert("Ingrese un nombre de sucursal.");
-            return;
-        }
-
-        for (Branch b : branches) {
-            if (b.getName().equalsIgnoreCase(name)) {
-                showAlert("La sucursal ya existe.");
-                return;
-            }
-        }
-
-        Branch b = new Branch(name, "", "", new ArrayList<>());
-        branches.add(b);
-
-        JsonUtil.write(BRANCHES_PATH, branches);
-        refreshBranches();
-        clearBranch();
-    }
-
-    @FXML
-    private void btnDeleteBranch() {
-        if (selectedBranch == null) {
-            showAlert("Seleccione una sucursal.");
-            return;
-        }
-
-        branches.remove(selectedBranch);
-        JsonUtil.write(BRANCHES_PATH, branches);
-        refreshBranches();
-        clearBranch();
-    }
-
-    private void clearBranch() {
-        txtBranchName.clear();
-        selectedBranch = null;
-    }
-
-    // ──────────────── GENERAL ────────────────
-
-    @FXML
-    private void btnUpdate() {
-        JsonUtil.write(PROCEDURES_PATH, procedures);
-        JsonUtil.write(BRANCHES_PATH, branches);
-        showAlert("Datos actualizados.");
-    }
-
     @FXML
     private void btnBack() {
         FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
     }
 
+    // ──────────────── HEADER ────────────────
+
     private void loadHeader() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         if (config == null) return;
 
-        lbCompany.setText(config.getCompanyName());
+        if (lbCompany != null) lbCompany.setText(config.getCompanyName());
 
         try {
             File file = new File(config.getLogoPath());
-            if (file.exists()) {
+            if (file.exists() && imgLogo != null) {
                 imgLogo.setImage(new Image(file.toURI().toString()));
             }
         } catch (Exception e) {
             System.out.println("Error loading logo");
         }
     }
-
 }

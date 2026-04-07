@@ -4,7 +4,6 @@ import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
-import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,48 +13,46 @@ import javafx.event.ActionEvent;
 
 public class SelectMaintenanceController extends Controller {
 
-    @FXML private MFXButton btnIndicators;
-    @FXML private MFXButton btnClients;
-    @FXML private MFXButton btnConfig;
-    @FXML private MFXButton btnVolver;
     @FXML private Label lbCompany;
     @FXML private ImageView imgLogo;
-
     private static final String CONFIG_PATH = "data/config.json";
-    
-    @FXML
-    private MFXButton btnBranchesAndProcedures;
-    
+
     @Override
     public void initialize() {
         cargarEncabezado();
     }
-    
+
+    // Cierra la sesión y regresa al login de admin
     @FXML
-    private void btnVolver() {
+    private void onActionBtnVolver() {
         FlowController.getInstance().goViewReplace("admin/LoginAdminView");
     }
 
+    // Abre la vista de mantenimiento de Trámites
     @FXML
-    private void btnBranchesAndProcedures(ActionEvent event) {
-        FlowController.getInstance().goViewReplace("admin/ProceduresAndBranchMaintenanceView");
+    private void onActionBtnProcedures(ActionEvent event) {
+        FlowController.getInstance().goView("admin/ProceduresMaintenanceView");
     }
-    
+
+    // Abre la vista de mantenimiento de Sucursales
     @FXML
-    private void btnIndicators() {
-        
-        FlowController.getInstance().goViewReplace("Indicators");
+    private void onActionBtnBranches(ActionEvent event) {
+        FlowController.getInstance().goView("admin/BranchMaintenanceView");
     }
 
     @FXML
-    private void OnActionBtnClients() {
-        System.out.println("Botón presionado");
-        FlowController.getInstance().goViewReplace("admin/MaintenanceClientView");
+    private void onActionBtnIndicators(ActionEvent event) {
+        FlowController.getInstance().goView("Indicators");
     }
 
     @FXML
-    private void btnConfig() {
-        FlowController.getInstance().goViewReplace("admin/ConfigView");
+    private void onActionBtnClients(ActionEvent event) {
+        FlowController.getInstance().goView("admin/MaintenanceClientView");
+    }
+
+    @FXML
+    private void onActionBtnConfig(ActionEvent event) {
+        FlowController.getInstance().goView("admin/ConfigView");
     }
 
     private void cargarEncabezado() {
@@ -75,5 +72,4 @@ public class SelectMaintenanceController extends Controller {
             System.err.println("No se pudo cargar el logo.");
         }
     }
-
 }
