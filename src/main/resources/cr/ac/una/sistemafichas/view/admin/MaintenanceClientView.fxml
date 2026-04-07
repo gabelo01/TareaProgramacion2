@@ -19,39 +19,16 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" StackPane.alignment="CENTER_LEFT">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="586.0" VBox.vgrow="SOMETIMES">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="586.0" VBox.vgrow="SOMETIMES">
                      <children>
-                        <ImageView fx:id="imgLogo" fitHeight="100.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </ImageView>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefHeight="131.0" prefWidth="500.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label fx:id="lbCompany" text="Nombre de empresa" VBox.vgrow="ALWAYS">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="22.0" prefWidth="198.0" text="Mantenimiento de Clientes" VBox.vgrow="ALWAYS">
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
+                        <Label prefHeight="22.0" prefWidth="198.0" text="Mantenimiento de Clientes">
                            <padding>
-                              <Insets left="10.0" />
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
-                        </VBox>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

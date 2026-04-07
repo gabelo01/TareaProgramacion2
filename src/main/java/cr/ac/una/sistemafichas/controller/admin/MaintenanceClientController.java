@@ -34,10 +34,6 @@ public class MaintenanceClientController extends Controller {
     private MFXTextField txtClientAge;
     @FXML
     private ImageView imgFoto;
-    @FXML
-    private ImageView imgLogo;
-    @FXML
-    private Label lbCompany;
 
     // ──────────────── PATHS ────────────────
     private static final String CONFIG_PATH = "data/config.json";
@@ -49,10 +45,8 @@ public class MaintenanceClientController extends Controller {
 
     @Override
     public void initialize() {
-        loadHeader();
         loadData();
         setupSelection();
-
     }
 
     private void loadData() {
@@ -70,30 +64,13 @@ public class MaintenanceClientController extends Controller {
         listClients.getItems().setAll(client);
     }
 
-    private void loadHeader() {
-        Type configType = new TypeToken<CompanyConfig>() {
-        }.getType();
-        CompanyConfig config = JsonUtil.read(CONFIG_PATH, configType);
-
-        if (config != null) {
-            lbCompany.setText(config.getCompanyName());
-
-            if (config.getLogoPath() != null) {
-                File file = new File(config.getLogoPath());
-                if (file.exists()) {
-                    imgLogo.setImage(new Image(file.toURI().toString()));
-                }
-            }
-        }
-    }
-
     private void setupSelection() {
         listClients.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedClient = newValue;
 
                 txtClientName.setText(newValue.getName());
-                txtClientId.setText(newValue.getID());
+                txtClientId.setText(newValue.getId());
                 txtClientAge.setText(String.valueOf(newValue.getAge()));
 
                 if (newValue.getPhoto() != null) {
@@ -137,7 +114,7 @@ public class MaintenanceClientController extends Controller {
             return;
         }
         for (Client c : client) {
-            if (c.getID().equalsIgnoreCase(id)) {
+            if (c.getId().equalsIgnoreCase(id)) {
                 showAlert("El cliente ya existe");
                 return;
             }

@@ -8,13 +8,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="375.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.ConfigController">
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="375.0" prefWidth="664.0" spacing="20.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
          <children>
-         
-                <Label styleClass="title" text="Configuración general" />
+            <HBox prefHeight="49.0" prefWidth="642.0">
+               <children>
+               
+                      <Label styleClass="title" text="Configuración general">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          
                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10">
                  <Label minWidth="150" styleClass="label-field" text="Nombre empresa:" />
@@ -46,7 +55,6 @@
          
                 <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="10">
                <MFXButton fx:id="btnSave" onAction="#btnSave" text="Guardar" />
-               <MFXButton fx:id="btnReturn" layoutX="306.0" layoutY="10.0" onAction="#btnReturn" text="Volver" />
              </HBox>
          </children>
          <padding>

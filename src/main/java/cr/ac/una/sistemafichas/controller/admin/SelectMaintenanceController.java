@@ -4,6 +4,7 @@ import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -16,10 +17,12 @@ public class SelectMaintenanceController extends Controller {
     @FXML private Label lbCompany;
     @FXML private ImageView imgLogo;
     private static final String CONFIG_PATH = "data/config.json";
+    @FXML
+    private MFXButton btnClean;
 
     @Override
     public void initialize() {
-        cargarEncabezado();
+        loadHeader();
     }
 
     // Cierra la sesión y regresa al login de admin
@@ -55,21 +58,24 @@ public class SelectMaintenanceController extends Controller {
         FlowController.getInstance().goView("admin/ConfigView");
     }
 
-    private void cargarEncabezado() {
+    private void loadHeader() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         if (config == null) return;
 
-        if (lbCompany != null) {
-            lbCompany.setText(config.getCompanyName());
-        }
+        if (lbCompany != null) lbCompany.setText(config.getCompanyName());
 
         try {
-            File logoFile = new File(config.getLogoPath());
-            if (logoFile.exists() && imgLogo != null) {
-                imgLogo.setImage(new Image(logoFile.toURI().toString()));
+            File file = new File(config.getLogoPath());
+            if (file.exists() && imgLogo != null) {
+                imgLogo.setImage(new Image(file.toURI().toString()));
             }
         } catch (Exception e) {
-            System.err.println("No se pudo cargar el logo.");
+            System.out.println("Error loading logo");
         }
+    }
+
+    @FXML
+    private void onActionBtnClean(ActionEvent event) {
+        FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
     }
 }
