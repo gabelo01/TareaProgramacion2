@@ -34,17 +34,25 @@ public class SelectMaintenanceController extends Controller {
         FlowController.getInstance().goView("admin/ProceduresAndBranchMaintenanceView");
     }
     
-    private void onActionBtnIndicators() {
+    @FXML
+    private void onActionBtnIndicators(ActionEvent event) {
         FlowController.getInstance().goView("Indicators");
     }
 
-    private void onActionBtnClients() {
-        FlowController.getInstance().goView("Clients");
+    @FXML
+    private void onActionBtnClients(ActionEvent event) {
+        FlowController.getInstance().goView("admin/MaintenanceClientView");
     }
 
-    private void onActionBtnConfig() {
+    @FXML
+    private void onActionBtnConfig(ActionEvent event) {
         FlowController.getInstance().goView("admin/ConfigView");
     }
+
+    @FXML
+    private void onActionBtnBranches(ActionEvent event) {
+    }
+
 
     private void cargarEncabezado() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
@@ -63,23 +71,4 @@ public class SelectMaintenanceController extends Controller {
             System.err.println("No se pudo cargar el logo.");
         }
     }
-
-
-    @FXML
-    private void onActionBtnBranches(ActionEvent event) {
-    }
-
-    @FXML
-    private void onActionBtnIndicators(ActionEvent event) {
-    }
-
-    @FXML
-    private void onActionBtnClients(ActionEvent event) {
-    }
-
-    @FXML
-    private void onActionBtnConfig(ActionEvent event) {
-    }
-
-
 }
