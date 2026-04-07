@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<<<<<<< HEAD
 <BorderPane prefHeight="560.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.SelectMaintenanceController">
    <left>
       <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="504.0" prefWidth="217.0" spacing="10.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
@@ -32,6 +33,7 @@
             <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="207.0" onAction="#onActionBtnBranches" prefHeight="36.0" prefWidth="191.0" text="Sucursales" />
             <VBox alignment="BOTTOM_LEFT" prefHeight="210.0" prefWidth="217.0">
                <children>
+<<<<<<< HEAD
                   <HBox alignment="BOTTOM_CENTER" prefHeight="118.0" prefWidth="217.0" spacing="10.0">
                      <children>
                         <MFXButton onAction="#onActionBtnVolver" prefHeight="30.0" text="Cerrar Sesión" />
@@ -40,6 +42,17 @@
                         <Insets bottom="10.0" />
                      </padding>
                   </HBox>
+=======
+                  <Label prefHeight="17.0" prefWidth="141.0" text="PANEL ADMINISTRADOR">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <MFXButton fx:id="btnIndicators" layoutX="215.0" layoutY="229.0" onAction="#btnIndicators" prefHeight="36.0" prefWidth="191.0" text="Indicadores" />
+                  <MFXButton fx:id="btnClients" layoutX="215.0" layoutY="206.0" onAction="#OnActionBtnClients" prefHeight="36.0" prefWidth="191.0" text="Registro de Clientes" />
+                  <MFXButton fx:id="btnBranchesAndProcedures" layoutX="215.0" layoutY="198.0" onAction="#btnBranchesAndProcedures" prefHeight="36.0" prefWidth="191.0" text="Sucursales y Trámites" />
+                  <MFXButton fx:id="btnConfig" onAction="#btnConfig" prefHeight="36.0" prefWidth="191.0" text="Configuración General" />
+>>>>>>> 9dfb1e62dbfa07dd5d9df1f77d9596c5e3592f81
                </children>
             </VBox>
          </children>
