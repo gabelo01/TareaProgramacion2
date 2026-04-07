@@ -2,29 +2,22 @@ package cr.ac.una.sistemafichas.controller.admin;
 
 import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.controller.Controller;
-import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.Client;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
-import cr.ac.una.sistemafichas.model.Procedure;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import io.github.palexdev.materialfx.utils.SwingFXUtils;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 
@@ -34,11 +27,11 @@ public class MaintenanceClientController extends Controller {
     @FXML
     private ListView<Client> listClients;
     @FXML
-    private MFXTextField txtName;
+    private MFXTextField txtClientName;
     @FXML
-    private MFXTextField txtId;
+    private MFXTextField txtClientId;
     @FXML
-    private MFXTextField txtAge;
+    private MFXTextField txtClientAge;
     @FXML
     private ImageView imgFoto;
     @FXML
@@ -49,59 +42,144 @@ public class MaintenanceClientController extends Controller {
     // ──────────────── PATHS ────────────────
     private static final String CONFIG_PATH = "data/config.json";
     private static final String Clients_PATH = "data/clients.json";
+
     // ──────────────── DATA ────────────────
     private List<Client> client;
     private Client selectedClient;
 
+    public MaintenanceClientController() {
+        System.out.println("CONSTRUCTOR");
+    }
+
     @Override
     public void initialize() {
+        System.out.println("1");
         loadHeader();
+        System.out.println("2");
         loadData();
+        System.out.println("3");
         setupSelection();
+
     }
 
     private void loadData() {
+        try {
+            Type clientListType = new TypeToken<List<Client>>() {
+            }.getType();
+            client = JsonUtil.read(Clients_PATH, clientListType);
 
-        Type clientListType = new TypeToken<List<Client>>() {
-        }.getType();
-        client = JsonUtil.read(Clients_PATH, clientListType);
-        if (client == null) {
+            if (client == null) {
+                client = new ArrayList<>();
+            }
+
+            refreshClientes();
+        } catch (Exception e) {
             client = new ArrayList<>();
+            System.out.println("Error cargando clientes: " + e.getMessage());
         }
-        refreshClientes();
     }
 
     private void refreshClientes() {
         listClients.getItems().setAll(client);
     }
 
+    private void loadHeader() {
+        try {
+            Type configType = new TypeToken<CompanyConfig>() {
+            }.getType();
+            CompanyConfig config = JsonUtil.read(CONFIG_PATH, configType);
+
+            if (config != null) {
+                lbCompany.setText(config.getCompanyName());
+
+                if (config.getLogoPath() != null) {
+                    File file = new File(config.getLogoPath());
+                    if (file.exists()) {
+                        imgLogo.setImage(new Image(file.toURI().toString()));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargando encabezado: " + e.getMessage());
+        }
+    }
+
     private void setupSelection() {
+        listClients.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                selectedClient = newValue;
 
-        listClients.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            selectedClient = newVal;
+                txtClientName.setText(newValue.getName());
+                txtClientId.setText(newValue.getId());
+                txtClientAge.setText(String.valueOf(newValue.getAge()));
 
-            if (newVal != null) {
-                txtName.setText(newVal.getName());
-
+                if (newValue.getPhoto() != null) {
+                    File file = new File(newValue.getPhoto());
+                    if (file.exists()) {
+                        imgFoto.setImage(new Image(file.toURI().toString()));
+                    } else {
+                        imgFoto.setImage(null);
+                    }
+                } else {
+                    imgFoto.setImage(null);
+                }
             }
         });
     }
 
-    private void loadHeader() {
-        CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
-        if (config == null) {
+    private void clearClient() {
+        txtClientName.clear();
+        txtClientId.clear();
+        txtClientAge.clear();
+        imgFoto.setImage(null);
+        selectedClient = null;
+    }
+
+    @FXML
+    private void OnActionBtnAddClient(ActionEvent event) {
+        String name = txtClientName.getText().trim();
+        String id = txtClientId.getText().trim();
+        String ageText = txtClientAge.getText().trim();
+
+        if (name.isEmpty() || id.isEmpty() || ageText.isEmpty()) {
+            showAlert("Complete todos los campos.");
+            return;
+        }
+        int age;
+        try {
+            age = Integer.parseInt(ageText);
+
+        } catch (Exception e) {
+            showAlert("Edad Invalida");
+            return;
+        }
+        for (Client c : client) {
+            if (c.getId().equalsIgnoreCase(id)) {
+                showAlert("El cliente ya existe");
+                return;
+            }
+        }
+        Client nuevo = new Client(name, id, age, null);
+        client.add(nuevo);
+
+        JsonUtil.write(Clients_PATH, client);
+        refreshClientes();
+        clearClient();
+    }
+
+    @FXML
+    private void OnActionBtnDeleteClient(ActionEvent event) {
+        if (selectedClient == null) {
+            showAlert("Seleccione un cliente.");
             return;
         }
 
-        lbCompany.setText(config.getCompanyName());
-        try {
-            File file = new File(config.getLogoPath());
-            if (file.exists()) {
-                imgLogo.setImage(new Image(file.toURI().toString()));
-            }
-        } catch (Exception e) {
-            System.out.println("Error loading logo");
-        }
+        client.remove(selectedClient);
+
+        JsonUtil.write(Clients_PATH, client);
+        refreshClientes();
+        clearClient();
+
     }
 
     @FXML
@@ -120,38 +198,31 @@ public class MaintenanceClientController extends Controller {
         try {
             // Copia la imagen a data/images/
             File folder = new File("data/images");
-            if(!folder.exists())folder.mkdirs();
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
             // Le da un nombre unico para cada imagen
-            String fileName = "client "+System.currentTimeMillis()+".png";
+            String fileName = "client " + System.currentTimeMillis() + ".png";
             File destinationFile = new File(folder, fileName);
-            
-            
+
             BufferedImage buferedImage = ImageIO.read(selectedFile);
-            
-            ImageIO.write(buferedImage, "PNG" ,destinationFile);
-            
+
+            ImageIO.write(buferedImage, "PNG", destinationFile);
+
             Image image = SwingFXUtils.toFXImage(buferedImage, null);
             imgFoto.setImage(image);
-            
-            if(selectedClient != null){
+
+            if (selectedClient != null) {
                 selectedClient.setPhoto(destinationFile.getAbsolutePath());
-            }   
+            }
         } catch (Exception e) {
-          showAlert("Error al cargar la imagen");
+            showAlert("Error al cargar la imagen");
         }
 
     }
 
     @FXML
-    private void OnActionBtnAddClient(ActionEvent event) {
-    }
-
-    @FXML
-    private void OnActionBtnDeleteClient(ActionEvent event) {
-    }
-
-    @FXML
-    private void OnActionBtnTakephoto(ActionEvent event) {
+    private void OnActionBtnTakePhoto(ActionEvent event) {
     }
 
 }
