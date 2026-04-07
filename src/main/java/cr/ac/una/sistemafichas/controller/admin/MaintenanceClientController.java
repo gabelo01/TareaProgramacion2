@@ -47,36 +47,23 @@ public class MaintenanceClientController extends Controller {
     private List<Client> client;
     private Client selectedClient;
 
-    public MaintenanceClientController() {
-        System.out.println("CONSTRUCTOR");
-    }
-
     @Override
     public void initialize() {
-        System.out.println("1");
         loadHeader();
-        System.out.println("2");
         loadData();
-        System.out.println("3");
         setupSelection();
 
     }
 
     private void loadData() {
-        try {
-            Type clientListType = new TypeToken<List<Client>>() {
-            }.getType();
-            client = JsonUtil.read(Clients_PATH, clientListType);
+        Type clientListType = new TypeToken<List<Client>>() {
+        }.getType();
+        client = JsonUtil.read(Clients_PATH, clientListType);
 
-            if (client == null) {
-                client = new ArrayList<>();
-            }
-
-            refreshClientes();
-        } catch (Exception e) {
+        if (client == null) {
             client = new ArrayList<>();
-            System.out.println("Error cargando clientes: " + e.getMessage());
         }
+        refreshClientes();
     }
 
     private void refreshClientes() {
@@ -84,23 +71,19 @@ public class MaintenanceClientController extends Controller {
     }
 
     private void loadHeader() {
-        try {
-            Type configType = new TypeToken<CompanyConfig>() {
-            }.getType();
-            CompanyConfig config = JsonUtil.read(CONFIG_PATH, configType);
+        Type configType = new TypeToken<CompanyConfig>() {
+        }.getType();
+        CompanyConfig config = JsonUtil.read(CONFIG_PATH, configType);
 
-            if (config != null) {
-                lbCompany.setText(config.getCompanyName());
+        if (config != null) {
+            lbCompany.setText(config.getCompanyName());
 
-                if (config.getLogoPath() != null) {
-                    File file = new File(config.getLogoPath());
-                    if (file.exists()) {
-                        imgLogo.setImage(new Image(file.toURI().toString()));
-                    }
+            if (config.getLogoPath() != null) {
+                File file = new File(config.getLogoPath());
+                if (file.exists()) {
+                    imgLogo.setImage(new Image(file.toURI().toString()));
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Error cargando encabezado: " + e.getMessage());
         }
     }
 
@@ -218,11 +201,9 @@ public class MaintenanceClientController extends Controller {
         } catch (Exception e) {
             showAlert("Error al cargar la imagen");
         }
-
     }
 
     @FXML
     private void OnActionBtnTakePhoto(ActionEvent event) {
     }
-
 }
