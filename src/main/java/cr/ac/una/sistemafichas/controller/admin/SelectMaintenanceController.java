@@ -4,7 +4,6 @@ import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
-import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,26 +13,33 @@ import javafx.event.ActionEvent;
 
 public class SelectMaintenanceController extends Controller {
 
-    private Label lbCompany;
-    private ImageView imgLogo;
+    @FXML private Label lbCompany;
+    @FXML private ImageView imgLogo;
     private static final String CONFIG_PATH = "data/config.json";
 
-    
     @Override
     public void initialize() {
         cargarEncabezado();
     }
-    
+
+    // Cierra la sesión y regresa al login de admin
     @FXML
     private void onActionBtnVolver() {
-        FlowController.getInstance().goView("admin/LoginAdminView");
+        FlowController.getInstance().goViewReplace("admin/LoginAdminView");
     }
 
+    // Abre la vista de mantenimiento de Trámites
     @FXML
     private void onActionBtnProcedures(ActionEvent event) {
-        FlowController.getInstance().goView("admin/ProceduresAndBranchMaintenanceView");
+        FlowController.getInstance().goView("admin/ProceduresMaintenanceView");
     }
-    
+
+    // Abre la vista de mantenimiento de Sucursales
+    @FXML
+    private void onActionBtnBranches(ActionEvent event) {
+        FlowController.getInstance().goView("admin/BranchMaintenanceView");
+    }
+
     @FXML
     private void onActionBtnIndicators(ActionEvent event) {
         FlowController.getInstance().goView("Indicators");
@@ -48,11 +54,6 @@ public class SelectMaintenanceController extends Controller {
     private void onActionBtnConfig(ActionEvent event) {
         FlowController.getInstance().goView("admin/ConfigView");
     }
-
-    @FXML
-    private void onActionBtnBranches(ActionEvent event) {
-    }
-
 
     private void cargarEncabezado() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
