@@ -27,8 +27,6 @@ public class ConfigController extends Controller {
     private Label lblMensaje;
     @FXML
     private MFXButton btnSave;
-    @FXML
-    private MFXButton btnReturn;
 
     private static final String CONFIG_PATH = "data/config.json";
     private boolean hasChanges = false;
@@ -118,7 +116,6 @@ public class ConfigController extends Controller {
         }
     }
 
-    @FXML
     private void btnReturn(ActionEvent event) {
         if (hasChanges && !confirmExit()) {
             return;

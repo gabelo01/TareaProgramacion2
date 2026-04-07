@@ -14,8 +14,8 @@
          <children>
             <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="99.0" prefWidth="217.0">
                <children>
-                  <ImageView fitHeight="35.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label prefHeight="17.0" prefWidth="250.0" text="Nombre de la empresa">
+                  <ImageView fx:id="imgLogo" fitHeight="35.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lbCompany" prefHeight="17.0" prefWidth="250.0" text="Nombre de la empresa">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -35,6 +35,7 @@
                   <HBox alignment="BOTTOM_CENTER" prefHeight="118.0" prefWidth="217.0" spacing="10.0">
                      <children>
                         <MFXButton onAction="#onActionBtnVolver" prefHeight="30.0" text="Cerrar Sesión" />
+                        <MFXButton fx:id="btnClean" layoutX="73.0" layoutY="88.0" onAction="#onActionBtnClean" prefHeight="30.0" text="Limpiar" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" />

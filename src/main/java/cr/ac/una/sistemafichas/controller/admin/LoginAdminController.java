@@ -8,6 +8,8 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class LoginAdminController extends Controller {
 
@@ -49,5 +51,12 @@ public class LoginAdminController extends Controller {
         pswPin.clear();
         FlowController.getInstance().salir();
     }
+
+    @FXML
+        private void onKeyPressedIngresar(KeyEvent event) {
+            if (event.getCode() == KeyCode.ENTER) {
+            btnIngresar();
+        }
+    }   
  
 }

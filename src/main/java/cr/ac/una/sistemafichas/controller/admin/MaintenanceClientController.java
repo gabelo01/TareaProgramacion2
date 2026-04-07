@@ -34,10 +34,6 @@ public class MaintenanceClientController extends Controller {
     private MFXTextField txtClientAge;
     @FXML
     private ImageView imgFoto;
-    @FXML
-    private ImageView imgLogo;
-    @FXML
-    private Label lbCompany;
 
     // ──────────────── PATHS ────────────────
     private static final String CONFIG_PATH = "data/config.json";
@@ -49,10 +45,8 @@ public class MaintenanceClientController extends Controller {
 
     @Override
     public void initialize() {
-        loadHeader();
         loadData();
         setupSelection();
-
     }
 
     private void loadData() {
@@ -68,23 +62,6 @@ public class MaintenanceClientController extends Controller {
 
     private void refreshClientes() {
         listClients.getItems().setAll(client);
-    }
-
-    private void loadHeader() {
-        Type configType = new TypeToken<CompanyConfig>() {
-        }.getType();
-        CompanyConfig config = JsonUtil.read(CONFIG_PATH, configType);
-
-        if (config != null) {
-            lbCompany.setText(config.getCompanyName());
-
-            if (config.getLogoPath() != null) {
-                File file = new File(config.getLogoPath());
-                if (file.exists()) {
-                    imgLogo.setImage(new Image(file.toURI().toString()));
-                }
-            }
-        }
     }
 
     private void setupSelection() {
