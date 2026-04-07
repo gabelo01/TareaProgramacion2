@@ -25,8 +25,6 @@ public class ProceduresMaintenanceController extends Controller {
     @FXML private MFXTextField txtProcedureName;
     @FXML private CheckBox chkActiveProcedure;
     @FXML private ListView<Procedure> listProcedures;
-    @FXML private Label lbCompany;
-    @FXML private ImageView imgLogo;
 
     // ──────────────── PATHS ────────────────
 
@@ -42,7 +40,6 @@ public class ProceduresMaintenanceController extends Controller {
 
     @Override
     public void initialize() {
-        loadHeader();
         loadData();
         setupSelection();
 chkActiveProcedure.selectedProperty().addListener((obs, oldVal, newVal) -> {
@@ -122,24 +119,7 @@ chkActiveProcedure.selectedProperty().addListener((obs, oldVal, newVal) -> {
 
     @FXML
     private void btnBack() {
-        FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
+       FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
     }
 
-    // ──────────────── HEADER ────────────────
-
-    private void loadHeader() {
-        CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
-        if (config == null) return;
-
-        if (lbCompany != null) lbCompany.setText(config.getCompanyName());
-
-        try {
-            File file = new File(config.getLogoPath());
-            if (file.exists() && imgLogo != null) {
-                imgLogo.setImage(new Image(file.toURI().toString()));
-            }
-        } catch (Exception e) {
-            System.out.println("Error loading logo");
-        }
-    }
 }

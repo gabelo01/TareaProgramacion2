@@ -1,5 +1,10 @@
 {
+<<<<<<< HEAD
   "companyName": "LIGA LIGA",
   "logoPath": "data/images/LogoLiga.png",
+=======
+  "companyName": "GAMA #PUBLICIDAD",
+  "logoPath": "data/images/Gemini_Generated_Image_ha2vs2ha2vs2ha2v.png",
+>>>>>>> b26726b607dd237aa3f4a2b1b2bcaeba1ed4e487
   "adminPin": "1234"
 }
