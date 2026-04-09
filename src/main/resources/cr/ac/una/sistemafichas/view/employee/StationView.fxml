@@ -34,7 +34,9 @@
                   <children>
 
                       <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnNext" prefHeight="44.0" prefWidth="113.0" text="Siguiente" />
+                     <Separator orientation="VERTICAL" prefHeight="200.0" />
                      <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnPreferential" text="Llamar Preferencial" />
+                     <Separator orientation="VERTICAL" prefHeight="200.0" />
                   
                                   <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRepeat" prefHeight="79.0" prefWidth="106.0" text="Repetir" />
                   </children>

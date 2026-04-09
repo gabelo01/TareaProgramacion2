@@ -12,26 +12,29 @@
     <center>
         <VBox spacing="10">
             <padding><Insets bottom="10" left="20" right="20" top="10" /></padding>
-            <Label fx:id="lblTotal" text="Total esperando: 0" />
+         <Label text="Cantidad de Trámites para atender por Tipo:">
+            <VBox.margin>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </VBox.margin>
+         </Label>
             <ListView fx:id="listProcedures" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
         </VBox>
     </center>
    <bottom>
-         <MFXButton onAction="#onActionBtnBack" prefHeight="34.0" prefWidth="84.0" text="Salir" BorderPane.alignment="CENTER_RIGHT">
+         <MFXButton maxWidth="1.7976931348623157E308" onAction="#onActionBtnBack" prefHeight="34.0" prefWidth="84.0" text="Salir" BorderPane.alignment="CENTER_RIGHT">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </MFXButton>
    </bottom>
    <top>
-      <VBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="500.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
                <Label text="Indicadores " />
-            <Label layoutX="10.0" layoutY="10.0" text="Esperando por Tramite">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </Label>
+               <Label fx:id="lblTotal" text="Total esperando: 0" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

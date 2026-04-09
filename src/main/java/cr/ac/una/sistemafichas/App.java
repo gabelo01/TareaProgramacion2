@@ -30,6 +30,8 @@ public class App extends Application {
 
         //FlowController.getInstance().goViewFirst("admin/LoginAdminView");
         FlowController.getInstance().goViewFirst("employee/StationView");
+        //FlowController.getInstance().goViewFirst("kiosk/SelectProcedures");
+        
 
     }
 

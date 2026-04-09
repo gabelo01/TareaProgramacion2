@@ -3,6 +3,7 @@ package cr.ac.una.sistemafichas.controller.kiosk;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,14 +15,13 @@ import javafx.stage.Stage;
 
 public class PreferentialController implements Initializable {
 
-    @FXML
     private PasswordField password;
 
-    @FXML
     private Button getTicket;
 
-    @FXML
     private Button cancel;
+    @FXML
+    private PasswordField pswPin;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,5 +58,17 @@ public class PreferentialController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void OnActionPswPin(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionBtnGetFichaPreferential(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionBtnExit(ActionEvent event) {
     }
 }
