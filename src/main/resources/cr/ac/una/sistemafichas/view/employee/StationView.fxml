@@ -16,8 +16,7 @@
          <VBox alignment="CENTER" layoutY="36.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="559.0" prefWidth="790.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
             <children>
                <Separator prefWidth="200.0" />
-            
-                <!-- NUMERO GRANDE -->
+
                 <Label fx:id="lblCurrentNumber" prefHeight="146.0" prefWidth="207.0" style="-fx-font-size: 100px; -fx-font-weight: bold;" text="A34">
                   <VBox.margin>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -27,15 +26,13 @@
                <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                   <children>
                      <Label text="Total Clientes en espera:" />
-                  
-                      <!-- PENDIENTES -->
+
                       <Label fx:id="lblWaitingCount" prefHeight="25.0" prefWidth="121.0" text="Número Clientes" />
                   </children>
                </HBox>
                <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="84.0" prefWidth="790.0" spacing="10.0">
                   <children>
-                  
-                                  <!-- BOTONES -->
+
                       <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnNext" prefHeight="44.0" prefWidth="113.0" text="Siguiente" />
                      <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnPreferential" text="Llamar Preferencial" />
                   
@@ -55,8 +52,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="227.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                <children>
-               
-                   <!-- HEADER -->
+
                    <ImageView fx:id="imgLogo" fitHeight="50" fitWidth="79.0" />
                    <Label fx:id="lblCompanyName" text="Nombre Empresa" />
                </children>
@@ -83,9 +79,9 @@
       <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="64.0" prefWidth="800.0" spacing="10.0">
          <children>
          
-             <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnListCurrentClient" prefHeight="25.0" prefWidth="168.0" text="Lista Clientes en Espera" />
-         
-             <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnClient" text="Cliente Actual" />
+            <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnListCurrentClient" prefHeight="25.0" prefWidth="168.0" text="Lista Clientes en Espera" />
+            <MFXButton layoutX="172.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnIndicators" prefHeight="25.0" prefWidth="168.0" text="Tramites en Espera" />
+            <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnClient" text="Cliente Actual" />
             <MFXButton layoutX="411.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegisterClient" text="Registrar Cliente" />
          
                    <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnExit" prefHeight="25.0" prefWidth="74.0" text="Salir">

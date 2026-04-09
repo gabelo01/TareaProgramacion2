@@ -42,7 +42,7 @@ public class StationController extends Controller {
         loadHeader();
         loadStation();
         startClock();
-        startAutoRefresh(); // para actualizar tickets y leer json
+        startAutoRefresh(); // para actualizar tickets y que se muestren los cambios cada 5s y leer json
         clearCurrentTicket();
         updateWaitingCount();
 
@@ -175,13 +175,14 @@ public class StationController extends Controller {
         FlowController.getInstance().goViewReplace("employee/WaitListView");
     }
 
+    @FXML
     private void onActionBtnIndicators() {
-        FlowController.getInstance().goViewReplace("employee/IndicatorsView");
+       FlowController.getInstance().goViewInWindow("employee/IndicatorsView");
     }
 
     @FXML
     private void onActionBtnClient() {
-        FlowController.getInstance().goViewReplace("employee/CurrentClientView");
+        FlowController.getInstance().goViewInWindow("employee/CurrentClientView");
     }
     
     @FXML
@@ -217,12 +218,12 @@ public class StationController extends Controller {
 
     @FXML
     private void onActionBtnRegisterClient(ActionEvent event) {
-        FlowController.getInstance().goViewReplace("admin/MaintenanceClientView");
+        FlowController.getInstance().goViewInWindow("admin/MaintenanceClientView");
     }
 
     @FXML
     private void onActionBtnExit(ActionEvent event) {
-        FlowController.getInstance().goViewReplace("employee/StationLogin");
+        FlowController.getInstance().salir();
     }
     
 }
