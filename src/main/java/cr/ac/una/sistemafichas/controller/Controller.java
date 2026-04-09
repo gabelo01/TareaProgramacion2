@@ -53,13 +53,6 @@ public abstract class Controller {
     Optional<ButtonType> result = alert.showAndWait();
     return result.isPresent() && result.get() == ButtonType.OK;
 }
-    protected void showAlert(String msg) {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setHeaderText(null);
-    alert.setContentText(msg);
-    alert.showAndWait();
-}
-
     public abstract void initialize();
 }
 

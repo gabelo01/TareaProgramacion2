@@ -3,23 +3,30 @@ package cr.ac.una.sistemafichas.controller.admin;
 import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Client;
-import cr.ac.una.sistemafichas.model.CompanyConfig;
+import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
+import cr.ac.una.sistemafichas.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import cr.ac.una.sistemafichas.util.Validador;
+import javafx.scene.Node;
 
 public class MaintenanceClientController extends Controller {
 
@@ -43,10 +50,19 @@ public class MaintenanceClientController extends Controller {
     private List<Client> client;
     private Client selectedClient;
 
+    private List<Node> requeridos = new ArrayList();
+
     @Override
     public void initialize() {
         loadData();
         setupSelection();
+        txtClientId.delegateSetTextFormatter(Formato.getInstance().integerFormat());
+        txtClientAge.delegateSetTextFormatter(Formato.getInstance().integerFormat());
+        txtClientName.delegateSetTextFormatter(Formato.getInstance().letrasFormat(30));
+
+        requeridos.add(txtClientName);
+        requeridos.add(txtClientId);
+        requeridos.add(txtClientAge);
     }
 
     private void loadData() {
@@ -97,53 +113,68 @@ public class MaintenanceClientController extends Controller {
 
     @FXML
     private void OnActionBtnAddClient(ActionEvent event) {
-        String name = txtClientName.getText().trim();
-        String id = txtClientId.getText().trim();
-        String ageText = txtClientAge.getText().trim();
-
-        if (name.isEmpty() || id.isEmpty() || ageText.isEmpty()) {
-            showAlert("Complete todos los campos.");
-            return;
-        }
-        int age;
+        String invalidos = Validador.validarRequeridos(requeridos);
         try {
-            age = Integer.parseInt(ageText);
-
-        } catch (Exception e) {
-            showAlert("Edad Invalida");
-            return;
-        }
-        for (Client c : client) {
-            if (c.getId().equalsIgnoreCase(id)) {
-                showAlert("El cliente ya existe");
+            if (!invalidos.isBlank()) {
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Campos vacios", "Llene todos los campos");
                 return;
             }
-        }
-        Client nuevo = new Client(name, id, age, null);
-        client.add(nuevo);
+            String name = txtClientName.getText().trim();
+            String id = txtClientId.getText().trim();
+            String ageText = txtClientAge.getText().trim();
+            int age = Integer.parseInt(ageText);
 
-        JsonUtil.write(Clients_PATH, client);
-        refreshClientes();
-        clearClient();
+            for (Client c : client) {
+                if (c.getId().equalsIgnoreCase(id)) {
+                    new Mensaje().show(Alert.AlertType.INFORMATION, "Cliente existente", "El cliente ya existe.");
+                    return;
+                }
+            }
+
+            Client nuevo = new Client(name, id, age, null);
+            client.add(nuevo);
+
+            JsonUtil.write(Clients_PATH, client);
+            refreshClientes();
+            clearClient();
+            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente agregado", getStage(), "El cliente se agregó correctamente.");
+
+        } catch (Exception ex) {
+            Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, "Error agregando cliente", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Error", getStage(), "Ocurrió un error al guardar el cliente.");
+        }
     }
 
     @FXML
-    private void OnActionBtnDeleteClient(ActionEvent event) {
-        if (selectedClient == null) {
-            showAlert("Seleccione un cliente.");
-            return;
+    private void OnActionBtnDeleteClient(ActionEvent event
+    ) {
+        try {
+            client.remove(selectedClient);
+            if (this.selectedClient.getId() != null) {
+                if (new Mensaje().showConfirmation("Eliminar cliente", getStage(), "¿Esta seguro que desea eliminar al cliente?")) {
+
+                    client.remove(selectedClient);
+                    JsonUtil.write(Clients_PATH, client);
+                    refreshClientes();
+                    clearClient();
+                }
+            } else {
+                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar Cliente", getStage(), "El cliente se elimino correctamente");
+            }
+        } catch (Exception ex) {
+            if (selectedClient == null) {
+                new Mensaje().show(Alert.AlertType.INFORMATION, "No se selecciono un cliente", "Seleccione un cliente");
+            } else {
+                Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, "Error eliminando el cliente", ex);
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar Empleado", getStage(), "Ocurrio un error eliminando el cliente.");
+            }
         }
-
-        client.remove(selectedClient);
-
-        JsonUtil.write(Clients_PATH, client);
-        refreshClientes();
-        clearClient();
 
     }
 
     @FXML
-    private void OnActionBtnAddPhoto(ActionEvent event) {
+    private void OnActionBtnAddPhoto(ActionEvent event
+    ) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar Foto");
         fileChooser.getExtensionFilters().add(
@@ -173,14 +204,15 @@ public class MaintenanceClientController extends Controller {
             imgFoto.setImage(image);
 
             if (selectedClient != null) {
-                selectedClient.setPhoto(destinationFile.getAbsolutePath());
+                selectedClient.setPhoto(fileName);
             }
         } catch (Exception e) {
-            showAlert("Error al cargar la imagen");
+            new Mensaje().show(Alert.AlertType.INFORMATION, "Error al cargar la imagen", "Hubo un error al cargar imagen");
         }
     }
 
     @FXML
-    private void OnActionBtnTakePhoto(ActionEvent event) {
+    private void OnActionBtnTakePhoto(ActionEvent event
+    ) {
     }
 }
