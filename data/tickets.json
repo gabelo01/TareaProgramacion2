@@ -1,3 +1,38 @@
-{
-  "tickets": []
-}
+[
+  {
+    "number": 1,
+    "status": "called",
+    "client": {
+      "name": "Juan Perez",
+      "id": "101110111",
+      "age": 0,
+      "photo": ""
+    },
+    "procedure": {
+      "name": "Retiro",
+      "active": false
+    },
+    "priority": false,
+    "creationDate": "2026-04-08T08:10",
+    "stationNumber": 0,
+    "branchName": "Central"
+  },
+  {
+    "number": 2,
+    "status": "called",
+    "client": {
+      "name": "Maria Lopez",
+      "id": "202220222",
+      "age": 0,
+      "photo": ""
+    },
+    "procedure": {
+      "name": "Depósito",
+      "active": false
+    },
+    "priority": true,
+    "creationDate": "2026-04-08T08:12",
+    "stationNumber": 0,
+    "branchName": "Central"
+  }
+]

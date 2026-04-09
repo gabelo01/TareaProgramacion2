@@ -73,6 +73,7 @@ public class BranchMaintenanceController extends Controller {
             selectedBranch = newVal;
             if (newVal != null) {
                 txtBranchName.setText(newVal.getName());
+                chkActiveBranch.setSelected(newVal.isActive()); // ← falta esta línea
             }
         });
     }

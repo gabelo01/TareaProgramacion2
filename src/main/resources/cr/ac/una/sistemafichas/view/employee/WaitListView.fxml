@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.employee.WaitListController">
+
+    <top>
+        <HBox alignment="TOP_CENTER" spacing="15">
+            <padding><Insets bottom="10" left="20" right="20" top="10" /></padding>
+            <Label text="LISTA DE ESPERA PARA SER ATENDIDOS" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <padding><Insets bottom="10" left="20" right="20" top="10" /></padding>
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label text="Nombre" />
+                <MFXTextField fx:id="txtSearchName" floatingText="Filtrar Por Nombre" prefWidth="180" />
+                <Label text="ID:" />
+                <MFXTextField fx:id="txtSearchID" floatingText="Filtrar Por Cédula" prefWidth="180" />
+                <CheckBox fx:id="chkPreferential" text="Solamente Mostrar Preferenciales " />
+            </HBox>
+            <TableView fx:id="tblTickets" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colNumber" prefWidth="80" text="Ticket" />
+                    <TableColumn fx:id="colProcedure" prefWidth="200" text="Trámite" />
+                    <TableColumn fx:id="colType" prefWidth="120" text="Tipo" />
+                    <TableColumn fx:id="colID" prefWidth="150" text="Id de Cliente" />
+                    <TableColumn fx:id="colName" text="Nombre" prefWidth="150"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="56.0" prefWidth="900.0" spacing="10">
+            <padding><Insets bottom="15" left="20" right="20" top="10" /></padding>
+            <MFXButton fx:id="btnCallSelected" onAction="#onActionBtnCallSelected" prefHeight="46.0" prefWidth="138.0" text="Llamar Seleccionado" />
+         <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <MFXTextField fx:id="txtTicketNumber" floatingText="Numero de Ticket" prefWidth="150" />
+            <MFXButton fx:id="btnCallByNumber" onAction="#onActionBtnCallByNumber" prefHeight="41.0" prefWidth="127.0" text="Llamar por Ticket" />
+         <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <MFXButton onAction="#onActionBtnBack" prefHeight="41.0" prefWidth="112.0" text="Salir" />
+        </HBox>
+    </bottom>
+
+</BorderPane>
