@@ -4,7 +4,7 @@
     "direction": "",
     "noticeText": "",
     "stations": [],
-    "active": false
+    "active": true
   },
   {
     "name": "b",
@@ -18,7 +18,7 @@
     "direction": "",
     "noticeText": "",
     "stations": [],
-    "active": true
+    "active": false
   },
   {
     "name": "palmares",

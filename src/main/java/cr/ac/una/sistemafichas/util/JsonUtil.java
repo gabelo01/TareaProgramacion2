@@ -13,18 +13,21 @@ import java.nio.file.Paths;
 //revisar
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 
 public class JsonUtil {
 
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    //private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).setPrettyPrinting().create();
 
     public static <T> T read(String filePath, Class<T> tipo) {
         try (Reader reader = new FileReader(filePath)) {
             return gson.fromJson(reader, tipo);
         } catch (IOException e) {
-            System.err.println("Error leyendo JSON: " + filePath);
-            return null;
+           e.printStackTrace();
+           return null;
         }
+        
     }
 
     public static void write(String filePath, Object objeto) {
@@ -34,6 +37,7 @@ public class JsonUtil {
             }
         } catch (IOException e) {
             System.err.println("Error escribiendo JSON: " + filePath);
+            e.printStackTrace();
         }
     }
     

@@ -11,6 +11,14 @@ private int currentNumber;
 private int nextNumber;
 private Branch branch;
 
+
+
+/*////////////////////
+*
+*eliminar esta clase
+*
+*////////////////////
+
 public TicketManager(){
     tickets= new ArrayList<>();
     currentNumber=0;

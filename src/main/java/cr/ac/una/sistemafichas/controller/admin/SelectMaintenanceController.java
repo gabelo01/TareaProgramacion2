@@ -25,19 +25,11 @@ public class SelectMaintenanceController extends Controller {
         loadHeader();
     }
 
-    // Cierra la sesión y regresa al login de admin
-    @FXML
-    private void onActionBtnVolver() {
-        FlowController.getInstance().goViewReplace("admin/LoginAdminView");
-    }
-
-    // Abre la vista de mantenimiento de Trámites
     @FXML
     private void onActionBtnProcedures(ActionEvent event) {
         FlowController.getInstance().goView("admin/ProceduresMaintenanceView");
     }
 
-    // Abre la vista de mantenimiento de Sucursales
     @FXML
     private void onActionBtnBranches(ActionEvent event) {
         FlowController.getInstance().goView("admin/BranchMaintenanceView");
@@ -77,5 +69,10 @@ public class SelectMaintenanceController extends Controller {
     @FXML
     private void onActionBtnClean(ActionEvent event) {
         FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
+    }
+
+    @FXML
+    private void onActionBtnExit(ActionEvent event) {
+        FlowController.getInstance().goViewReplace("admin/LoginAdminView");
     }
 }

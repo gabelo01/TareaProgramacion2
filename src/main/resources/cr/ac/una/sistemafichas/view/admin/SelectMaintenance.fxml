@@ -34,7 +34,7 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="118.0" prefWidth="217.0" spacing="10.0">
                      <children>
-                        <MFXButton onAction="#onActionBtnVolver" prefHeight="30.0" text="Cerrar Sesión" />
+                        <MFXButton onAction="#onActionBtnExit" prefHeight="30.0" text="Cerrar Sesión" />
                         <MFXButton fx:id="btnClean" layoutX="73.0" layoutY="88.0" onAction="#onActionBtnClean" prefHeight="30.0" text="Limpiar" />
                      </children>
                      <padding>
