@@ -1,7 +1,7 @@
 [
   {
     "number": 1,
-    "status": "called",
+    "status": "waiting",
     "client": {
       "name": "Juan Perez",
       "id": "101110111",

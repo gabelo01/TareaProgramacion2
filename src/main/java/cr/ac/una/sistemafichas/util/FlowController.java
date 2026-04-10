@@ -16,8 +16,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import cr.ac.una.sistemafichas.controller.Controller;
+import cr.ac.una.sistemafichas.model.CompanyConfig;
 import io.github.palexdev.materialfx.css.themes.MFXThemeManager;
 import io.github.palexdev.materialfx.css.themes.Themes;
+import java.io.File;
 import javafx.scene.layout.HBox;
 
 public class FlowController { //singlenton una sola instancia
@@ -148,7 +150,21 @@ public class FlowController { //singlenton una sola instancia
         Controller controller = loader.getController();// obtiene el controller de ese loader 
         controller.initialize();
         Stage stage = new Stage();
-        stage.getIcons().add(new Image("cr/ac/una/unaplanilla/resource/LogoUNArojo.png"));
+        
+         try {  // este lo agregue para poder meter la imagen en la ventana desde el logo path que esta en el json de config
+            CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
+            if (config != null && config.getLogoPath() != null) {
+                File file = new File(config.getLogoPath());
+                if (file.exists()) {
+                    stage.getIcons().add(new Image(file.toURI().toString()));
+                } else {
+                    System.out.println("Logo no encontrado en: " + config.getLogoPath());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargando logo: " + e.getMessage());
+        }
+         
         stage.setTitle(controller.getNombreVista());
         stage.setOnHidden((WindowEvent event) -> {
             controller.getStage().getScene().setRoot(new Pane());
@@ -168,7 +184,7 @@ public class FlowController { //singlenton una sola instancia
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-        stage.getIcons().add(new Image("cr/ac/una/unaplanilla/resource/LogoUNArojo.png")); // DUDAS
+        stage.getIcons().add(new Image("data/images/LogoLiga.png")); // DUDAS
         stage.setTitle(controller.getNombreVista());
         stage.setResizable(resizable);
         stage.setOnHidden((WindowEvent event) -> {

@@ -1,28 +1,28 @@
 [
   {
-    "name": "a",
-    "direction": "",
-    "noticeText": "",
+    "name": "Perez Central",
+    "direction": "arriba, abajo, centro, pa dentro",
+    "noticeText": "CERRAMOS 2 PM",
     "stations": [],
     "active": true
   },
   {
-    "name": "b",
-    "direction": "",
-    "noticeText": "",
+    "name": "Los Santos",
+    "direction": "aqui estoy",
+    "noticeText": "Tramite Prestamos Cancelado dia de hoy",
     "stations": [],
     "active": false
   },
   {
-    "name": "centro",
-    "direction": "",
-    "noticeText": "",
+    "name": "Palmares",
+    "direction": "en tu corazon",
+    "noticeText": " Contactanos al tel#",
     "stations": [],
     "active": false
   },
   {
-    "name": "aa",
-    "direction": "",
+    "name": "Buenos Aires",
+    "direction": "75mts del sol",
     "noticeText": "",
     "stations": [],
     "active": true
