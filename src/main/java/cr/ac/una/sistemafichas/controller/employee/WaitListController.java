@@ -46,7 +46,7 @@ public class WaitListController extends Controller {
     private void setupColumns() {
         colNumber.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getNumber()).asObject());
         colProcedure.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getProcedure() != null? data.getValue().getProcedure().getName() : " "));
-        colType.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getPriority() ? "Preferential" : "Normal"));
+        colType.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getPriority() ? "Preferencial" : "Normal"));
         colID.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getClient() != null? data.getValue().getClient().getId(): "Sin Registrar"));
         colName.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getClient() != null? data.getValue().getClient().getName(): "Sin Registrar"
     )
@@ -94,7 +94,7 @@ public class WaitListController extends Controller {
     private void onActionBtnCallSelected() {
         Ticket selected = tblTickets.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            showAlert("Select a ticket from the list.");
+            showAlert("Selecciona el campo del Tickete en la Lista.");
             return;
         }
         callTicket(selected);
@@ -110,10 +110,10 @@ public class WaitListController extends Controller {
             if (t != null) {
                 callTicket(t);
             } else {
-                showAlert("Ticket " + num + " not found or not waiting.");
+                showAlert("Ticket " + num + " no encontrado o ya no esta en espera");
             }
         } catch (NumberFormatException e) {
-            showAlert("Enter a valid ticket number.");
+            showAlert("Ingresa un numero de ticket valido.");
         }
     }
 

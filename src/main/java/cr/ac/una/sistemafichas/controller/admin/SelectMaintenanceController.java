@@ -62,7 +62,7 @@ public class SelectMaintenanceController extends Controller {
                 imgLogo.setImage(new Image(file.toURI().toString()));
             }
         } catch (Exception e) {
-            System.out.println("Error loading logo");
+            System.out.println("Error cargando logo");
         }
     }
 

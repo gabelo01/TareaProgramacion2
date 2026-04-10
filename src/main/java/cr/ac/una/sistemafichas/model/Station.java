@@ -7,7 +7,7 @@ public class Station {
     private int number;
     private String name;
     private boolean preferential;
-    private String branchName; // 👈 NUEVO
+    private String branchName;
     private List<String> procedureNames;
 
     public Station() {}

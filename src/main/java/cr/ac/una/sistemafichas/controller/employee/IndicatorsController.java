@@ -36,14 +36,16 @@ public class IndicatorsController extends Controller {
                              t.getProcedure().getName().equals(procName))
                 .count();
             total += count;
-            listProcedures.getItems().add(procName + " — " + count + " waiting");
+            listProcedures.getItems().add(procName + " :  " + count );
         }
 
-        lblTotal.setText("Total waiting: " + total);
+        lblTotal.setText("Total Esperando: " + total);
     }
 
     @FXML
     private void onActionBtnBack() {
-        FlowController.getInstance().goViewReplace("employee/StationView");
+        if(getStage()!=null){
+            getStage().close();
+        }
     }
 }

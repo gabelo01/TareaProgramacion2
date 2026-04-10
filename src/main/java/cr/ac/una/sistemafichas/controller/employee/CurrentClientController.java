@@ -66,6 +66,8 @@ public class CurrentClientController extends Controller {
 
     @FXML
     private void onActionBtnBack() {
-        FlowController.getInstance().goViewReplace("employee/StationView");
+        if(getStage()!=null){
+            getStage().close();
+        }
     }
 }
