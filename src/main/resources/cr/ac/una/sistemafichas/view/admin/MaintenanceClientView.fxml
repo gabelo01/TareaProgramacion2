@@ -96,12 +96,17 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </HBox>
+                              <MFXButton onAction="#OnActionBtnEditClient" text="Editar Cliente" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                              </MFXButton>
                               <MFXButton onAction="#OnActionBtnAddClient" text="Guardar Cliente" VBox.vgrow="ALWAYS">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </VBox.margin>
                               </MFXButton>
-                              <MFXButton onAction="#OnActionBtnDeleteClient" text="Eliminar cliente" VBox.vgrow="ALWAYS">
+                              <MFXButton onAction="#OnActionBtnDeleteClient" text="Eliminar Cliente" VBox.vgrow="ALWAYS">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </VBox.margin>

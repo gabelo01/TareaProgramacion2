@@ -28,10 +28,10 @@ public class App extends Application {
 
         FlowController.getInstance().InitializeFlow(stage, null);
 
-        //FlowController.getInstance().goViewFirst("admin/LoginAdminView");
+        FlowController.getInstance().goViewFirst("admin/LoginAdminView");
         //FlowController.getInstance().goViewFirst("employee/StationView");
         //FlowController.getInstance().goViewFirst("kiosk/SelectProcedures");
-        FlowController.getInstance().goViewFirst("projection/Projection");
+        //FlowController.getInstance().goViewFirst("projection/Projection");
 
     }
 

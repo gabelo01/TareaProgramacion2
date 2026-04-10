@@ -20,8 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import org.controlsfx.control.Notifications;
+import javafx.util.Duration;
+import javafx.geometry.Pos;
 
 public class ProceduresMaintenanceController extends Controller {
 
@@ -88,7 +92,12 @@ public class ProceduresMaintenanceController extends Controller {
             String name = txtProcedureName.getText().trim();
 
             if (name.isEmpty()) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "Nombre vacio", "Ingrese un nombre de trámite.");
+                Notifications.create()
+                        .title("Nombre Vacio")
+                        .text("No hay un trámite para agregar")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(2))
+                        .showError();
                 return;
             }
 
@@ -104,32 +113,49 @@ public class ProceduresMaintenanceController extends Controller {
             JsonUtil.write(PROCEDURES_PATH, procedures);
             refreshProcedures();
             clearProcedure();
-            new Mensaje().showModal(Alert.AlertType.INFORMATION,"Tramite Guardado", getStage(), "El tramite se guardó correctamente.");
+            Notifications.create()
+                    .title("Agregado correctamente")
+                    .text("El trámite ha sido agregado correctamente")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(2))
+                    .showInformation();
         } catch (Exception e) {
-            Logger.getLogger(ProceduresMaintenanceController.class.getName()).log(Level.SEVERE, "Error agregando el tramite", e);
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Error agregando el tramite", getStage(), "Hubo un error al agregar el tramite.");
-
+            Notifications.create()
+                    .title("ERROR")
+                    .text("Error al editar el trámite")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(2))
+                    .showError();
         }
     }
 
     @FXML
     private void btnDeleteProcedure() {
-        try{
-        if (selectedProcedure == null) {
-            new Mensaje().show(Alert.AlertType.INFORMATION,"No se selecciono un tramite" , "Seleccione un trámite.");
-            return;
-        }
-        if (new Mensaje().showConfirmation("Eliminar Tramite", getStage(), "¿Esta seguro que desea eliminar el cliente?")){
+        try {
+            if (selectedProcedure == null) {
+                new Mensaje().show(Alert.AlertType.INFORMATION, "No se selecciono un tramite", "Seleccione un trámite.");
+                return;
+            }
+            if (new Mensaje().showConfirmation("Eliminar Tramite", getStage(), "¿Esta seguro que desea eliminar el cliente?")) {
 
-        procedures.remove(selectedProcedure);
-        JsonUtil.write(PROCEDURES_PATH, procedures);
-        refreshProcedures();
-        clearProcedure();
-         new Mensaje().showModal(Alert.AlertType.INFORMATION,"Tramite Eliminado",getStage(), "Tramite eliminado correctamente.");
-        }
-        }catch(Exception ex){
-            Logger.getLogger(ProceduresMaintenanceController.class.getName()).log(Level.SEVERE, "Error eliminando el tramite", ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Error eliminando el tramite", getStage(), "Hubo un error al eliminar el tramite.");
+                procedures.remove(selectedProcedure);
+                JsonUtil.write(PROCEDURES_PATH, procedures);
+                refreshProcedures();
+                clearProcedure();
+                Notifications.create()
+                        .title("Eliminado correctamente")
+                        .text("El trámite ha sido eliminado correctamente")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(2))
+                        .showInformation();
+            }
+        } catch (Exception ex) {
+            Notifications.create()
+                    .title("ERROR")
+                    .text("Hubo un error al eliminar el trámite")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(2))
+                    .showError();
         }
     }
 
@@ -142,6 +168,38 @@ public class ProceduresMaintenanceController extends Controller {
     @FXML
     private void btnBack() {
         FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
+    }
+
+    @FXML
+    private void OnActionBtnEditProcedure(ActionEvent event) {
+        try {
+            if (selectedProcedure == null) {
+            Notifications.create()
+                    .title("Trámite no seleccionado")
+                    .text("No hay un trámite seleccionado que se pueda editar")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(2))
+                    .showError();
+                return;
+            }
+
+            selectedProcedure.setName(txtProcedureName.getText());
+            JsonUtil.write(PROCEDURES_PATH, procedures);
+            refreshProcedures();
+            Notifications.create()
+                    .title("Editado correctamente")
+                    .text("El trámite ha sido editado correctamente")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(2))
+                    .showInformation();
+        } catch (Exception ex) {
+            Notifications.create()
+                    .title("ERROR")
+                    .text("Hubo un error al editar el trámite")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(2))
+                    .showError();
+        }
     }
 
 }

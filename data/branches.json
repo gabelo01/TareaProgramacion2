@@ -1,10 +1,10 @@
 [
   {
-    "name": "Perez Central",
+    "name": "Central de Pérez Zeledón",
     "direction": "arriba, abajo, centro, pa dentro",
     "noticeText": "CERRAMOS 2 PM",
     "stations": [],
-    "active": true
+    "active": false
   },
   {
     "name": "Los Santos",
@@ -23,6 +23,13 @@
   {
     "name": "Buenos Aires",
     "direction": "75mts del sol",
+    "noticeText": "",
+    "stations": [],
+    "active": true
+  },
+  {
+    "name": "Pérez Zeledón contigo al parque",
+    "direction": "",
     "noticeText": "",
     "stations": [],
     "active": true

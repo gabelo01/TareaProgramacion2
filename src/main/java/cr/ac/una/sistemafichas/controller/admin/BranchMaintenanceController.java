@@ -20,7 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 public class BranchMaintenanceController extends Controller {
 
@@ -139,6 +143,38 @@ public class BranchMaintenanceController extends Controller {
     @FXML
     private void btnBack() {
         FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
+    }
+
+    @FXML
+    private void OnActionBtnEditBranch(ActionEvent event) {
+                try {
+            if (selectedBranch == null) {
+            Notifications.create()
+                    .title("Sucursal no seleccionada")
+                    .text("No hay una sucursal seleccionada que se pueda editar")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(2))
+                    .showError();
+                return;
+            }
+
+            selectedBranch.setName(txtBranchName.getText());
+            JsonUtil.write(BRANCHES_PATH, branches);
+            refreshBranches();
+            Notifications.create()
+                    .title("Editado correctamente")
+                    .text("La sucursal ha sido editada correctamente")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(2))
+                    .showInformation();
+        } catch (Exception ex) {
+            Notifications.create()
+                    .title("ERROR")
+                    .text("Hubo un error al editar la sucursal")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(2))
+                    .showError();
+        }
     }
 
 }

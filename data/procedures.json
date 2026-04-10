@@ -1,14 +1,14 @@
 [
   {
-    "name": "a",
+    "name": "Retiros",
     "active": false
   },
   {
-    "name": "credito",
-    "active": true
+    "name": "Prestamos",
+    "active": false
   },
   {
-    "name": "prestamos",
+    "name": "Creditos",
     "active": true
   }
 ]
