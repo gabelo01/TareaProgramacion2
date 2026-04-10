@@ -26,7 +26,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import cr.ac.una.sistemafichas.util.Validador;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class MaintenanceClientController extends Controller {
 
@@ -51,6 +55,8 @@ public class MaintenanceClientController extends Controller {
     private Client selectedClient;
 
     private List<Node> requeridos = new ArrayList();
+
+   
 
     @Override
     public void initialize() {
@@ -206,13 +212,26 @@ public class MaintenanceClientController extends Controller {
             if (selectedClient != null) {
                 selectedClient.setPhoto(fileName);
             }
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, "Error cargando la imagen", ex);
             new Mensaje().show(Alert.AlertType.INFORMATION, "Error al cargar la imagen", "Hubo un error al cargar imagen");
         }
     }
 
     @FXML
-    private void OnActionBtnTakePhoto(ActionEvent event
-    ) {
+    private void OnActionBtnOpenCamera(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/sistemafichas/view/CameraView.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Camara");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception ex) {
+            Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, "Error cargando la camara", ex);
+            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Error al abrir la camara", getStage(), "Ocurrio un error al abrir la camara");
+
+        }
     }
 }
