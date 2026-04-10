@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+
 public class StationController extends Controller {
 
     @FXML private ImageView imgLogo;

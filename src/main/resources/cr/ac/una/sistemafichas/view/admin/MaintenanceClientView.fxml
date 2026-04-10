@@ -74,7 +74,7 @@
                                           <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Button mnemonicParsing="false" onAction="#OnActionBtnAddPhoto" text="Agregar Foto" HBox.hgrow="ALWAYS" />
-                                                <Button mnemonicParsing="false" onAction="#OnActionBtnTakePhoto" text="Tomar Foto" HBox.hgrow="ALWAYS" />
+                                                <Button mnemonicParsing="false" onAction="#OnActionBtnOpenCamera" text="Abrir Camara" HBox.hgrow="ALWAYS" />
                                              </children>
                                              <VBox.margin>
                                                 <Insets />
