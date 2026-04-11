@@ -10,5 +10,9 @@
   {
     "name": "Creditos",
     "active": true
+  },
+  {
+    "name": "Cobros",
+    "active": true
   }
 ]

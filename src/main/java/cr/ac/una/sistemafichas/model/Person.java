@@ -4,20 +4,20 @@ public class Person {
     protected String name;
     protected String id;
     protected int age;
-    protected String photo;
+    protected String photoPath;
 
     public Person(String name, String id, int age) {     // Constructor sin foto para que sea opcional la de empleado
         this.name = name;
         this.id = id;
         this.age = age;
-        this.photo = null;
+        this.photoPath = null;
     }
 
     public Person(String name, String id, int age, String photo) {
         this.name = name;
         this.id = id;
         this.age = age;
-        this.photo = photo;
+        this.photoPath = photo;
     }
 
     public void setName(String name) {
@@ -33,7 +33,7 @@ public class Person {
     }
 
     public void setPhoto(String photo) {
-        this.photo = photo;
+        this.photoPath = photo;
     }
 
     public String getName() {
@@ -49,7 +49,7 @@ public class Person {
     }
 
     public String getPhoto() {
-        return photo;
+        return photoPath;
     }
 
     @Override
