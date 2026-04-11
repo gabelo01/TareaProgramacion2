@@ -29,7 +29,6 @@ import javafx.geometry.Pos;
 
 public class ProceduresMaintenanceController extends Controller {
 
-    // ──────────────── FXML ────────────────
     @FXML
     private MFXTextField txtProcedureName;
     @FXML
@@ -37,15 +36,12 @@ public class ProceduresMaintenanceController extends Controller {
     @FXML
     private ListView<Procedure> listProcedures;
 
-    // ──────────────── PATHS ────────────────
     private static final String PROCEDURES_PATH = "data/procedures.json";
     private static final String CONFIG_PATH = "data/config.json";
 
-    // ──────────────── DATA ────────────────
     private List<Procedure> procedures;
     private Procedure selectedProcedure;
 
-    // ──────────────── INIT ────────────────
     private List<Node> requeridos = new ArrayList();
 
     @Override
@@ -74,7 +70,6 @@ public class ProceduresMaintenanceController extends Controller {
         listProcedures.getItems().setAll(procedures);
     }
 
-    // ──────────────── SELECTION ────────────────
     private void setupSelection() {
         listProcedures.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             selectedProcedure = newVal;
@@ -85,7 +80,6 @@ public class ProceduresMaintenanceController extends Controller {
         });
     }
 
-    // ──────────────── ACTIONS ────────────────
     @FXML
     private void btnAddProcedure() {
         try {

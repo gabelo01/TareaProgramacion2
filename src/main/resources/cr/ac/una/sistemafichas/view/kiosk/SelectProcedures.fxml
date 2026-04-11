@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXListView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -16,45 +17,71 @@
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
-         <center>
-            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ScrollPane layoutX="20.0" layoutY="28.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="267.0" prefWidth="412.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-               </children>
-            </AnchorPane>
-         </center>
-         <bottom>
-            <VBox prefHeight="83.0" prefWidth="569.0" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <MFXButton fx:id="btnGetTicket" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#OnActionBtnGetTicket" prefHeight="129.0" prefWidth="111.0" text="OBTENER TICKET" />
-                        <MFXButton fx:id="btnPreferential" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#OnActionBtnPreferential" prefHeight="67.0" prefWidth="108.0" text="PREFERENCIAL" />
-                     </children>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </HBox>
-               </children>
-            </VBox>
-         </bottom>
+
          <top>
-            <VBox prefHeight="47.0" prefWidth="569.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="88.0" prefWidth="569.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
                         <ImageView fx:id="imgLogo" fitHeight="53.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="lblName" text="Company Name" />
+                        <VBox prefHeight="122.0" prefWidth="169.0" spacing="4" HBox.hgrow="ALWAYS">
+                           <Label fx:id="lblName" text="Company Name" />
+                        </VBox>
+                        <HBox alignment="TOP_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="310.0">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                           <children>
+                              <MFXButton onAction="#OnActionBtnCancel" text="Cancelar" />
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <VBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="168.0" text="Despúes de seleccionar Trámite" />
+                        <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lblClientInfo" text="Nombre cliente o Invitado" />
+                           </children>
+                        </HBox>
+                        <Label text="Seleccione un Tramite" />
                      </children>
-                  </HBox>
+                  </VBox>
                </children>
             </VBox>
          </top>
+
+         <center>
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <content>
+                        <MFXListView fx:id="listProcedures" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="250.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </center>
+
+         <bottom>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label text="Luego de seleccionar un tramite presione el botón" />
+                        <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" spacing="10.0">
+                           <children>
+                              <MFXButton fx:id="btnGetTicket" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#OnActionBtnGetTicket" prefHeight="80.0" prefWidth="150.0" text="OBTENER TICKET" />
+                              <MFXButton fx:id="btnPreferential" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#OnActionBtnPreferential" prefHeight="80.0" prefWidth="150.0" text="PREFERENCIAL" />
+                           </children>
+                           <padding><Insets top="10.0" /></padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </bottom>
+
       </BorderPane>
    </children>
 </AnchorPane>

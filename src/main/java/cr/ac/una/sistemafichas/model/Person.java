@@ -3,17 +3,17 @@ package cr.ac.una.sistemafichas.model;
 public class Person {
     protected String name;
     protected String id;
-    protected int age;
+    private String age;
     protected String photo;
 
-    public Person(String name, String id, int age) {     // Constructor sin foto para que sea opcional la de empleado
+    public Person(String name, String id, String age) {     // Constructor sin foto para que sea opcional la de empleado
         this.name = name;
         this.id = id;
         this.age = age;
         this.photo = null;
     }
 
-    public Person(String name, String id, int age, String photo) {
+    public Person(String name, String id, String age, String photo) {
         this.name = name;
         this.id = id;
         this.age = age;
@@ -28,7 +28,7 @@ public class Person {
         this.id = id;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -44,7 +44,7 @@ public class Person {
         return id;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 

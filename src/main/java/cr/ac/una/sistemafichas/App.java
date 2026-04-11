@@ -15,23 +15,16 @@ public class App extends Application {
 
     private static Scene scene;
     
-//
-//    @Override
-//    public void start(Stage stage) throws IOException {
-//        scene = new Scene(loadFXML("LoginAdminView"), 640, 480);
-//        stage.setScene(scene);
-//        stage.show();
-//    }
-    
      @Override
     public void start(Stage stage) throws Exception {
 
         FlowController.getInstance().InitializeFlow(stage, null);
 
-        FlowController.getInstance().goViewFirst("admin/LoginAdminView");
+        //FlowController.getInstance().goViewFirst("admin/LoginAdminView");
         //FlowController.getInstance().goViewFirst("employee/StationView");
-        //FlowController.getInstance().goViewFirst("kiosk/SelectProcedures");
+        FlowController.getInstance().goViewFirst("kiosk/LoginView");
         //FlowController.getInstance().goViewFirst("projection/Projection");
+        //FlowController.getInstance().goViewFirst("kiosk/LoginView");
 
     }
 

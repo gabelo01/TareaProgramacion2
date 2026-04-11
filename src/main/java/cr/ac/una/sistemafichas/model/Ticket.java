@@ -1,20 +1,18 @@
 package cr.ac.una.sistemafichas.model;
 
-import java.time.LocalDateTime;
-
 public class Ticket {
-     private int number;
+    private int number;
     private String status;                            // "waiting", "called", "attended"
     private Client client;                             // puede ser null si no se identificó
     private Procedure procedure;
     private boolean priority;
-    private LocalDateTime creationDate;
+    private String creationDate; //Anddy: propare lo de date en String, con LocalDate me esta dando fallos
     private int stationNumber;  // para indicadores y proyección
     private String branchName;  // para indicadores por sucursal
     
     public Ticket(){}
   
-    public Ticket(int number, String status, Client client, Procedure procedure, boolean priority, LocalDateTime creationDate, int stationNumber, String branchName){
+    public Ticket(int number, String status, Client client, Procedure procedure, boolean priority, String creationDate, int stationNumber, String branchName){
     this.number=number;
     this.status=status;
     this.client=client;
@@ -41,7 +39,7 @@ public class Ticket {
     public boolean getPriority(){
         return priority;
     }
-    public LocalDateTime getCreationDate(){
+    public String getCreationDate(){
         return creationDate;
     }
     public void setNumber(int number){
@@ -59,7 +57,7 @@ public class Ticket {
     public void setPriority(boolean priority){
         this.priority=priority;
     }
-    public void setCreationDate(LocalDateTime creationDate){
+    public void setCreationDate(String creationDate){
         this.creationDate=creationDate;
     }
 
