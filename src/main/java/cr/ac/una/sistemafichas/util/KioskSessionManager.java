@@ -6,7 +6,7 @@ import cr.ac.una.sistemafichas.model.Station;
 public class KioskSessionManager {
 
     private static Client currentClient = null;
-
+    private static String branchName;
     private static Station currentStation;
 
     public static void setStation(Station s) {
@@ -23,6 +23,14 @@ public class KioskSessionManager {
 
     public static void setCurrentClient(Client client) {
         currentClient = client;
+    }
+    
+    public static void setBranch(String branch) {
+        branchName = branch;
+    }
+
+    public static String getBranch() {
+        return branchName;
     }
 
     public static void clearSession() {
