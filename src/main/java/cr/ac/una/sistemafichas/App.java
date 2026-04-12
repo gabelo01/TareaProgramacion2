@@ -21,12 +21,6 @@ public class App extends Application {
 
         FlowController.getInstance().InitializeFlow(stage, null);
         FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(getClass().getResource("/cr/ac/una/sistemafichas/view/CameraView.fxml"));
-//        Parent root = loader.load();
-//
-//        stage.setScene(new Scene(root));
-//        stage.setTitle("Cámara");
-//        stage.show();
 
         FlowController.getInstance().goViewFirst("admin/LoginAdminView");
         //FlowController.getInstance().goViewFirst("employee/StationView");

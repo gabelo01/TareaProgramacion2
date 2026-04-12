@@ -30,15 +30,10 @@
       
       
           <VBox spacing="10" HBox.hgrow="ALWAYS">
-            <TextField fx:id="txtNumber" promptText="Id" VBox.vgrow="ALWAYS">
-               <VBox.margin>
-                  <Insets right="5.0" top="6.0" />
-               </VBox.margin>
-            </TextField>
       
               <TextField fx:id="txtName" promptText="Nombre estación" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets right="5.0" />
+                  <Insets right="5.0" top="6.0" />
                </VBox.margin></TextField>
               <CheckBox fx:id="chkPreferential" text="Preferencial" VBox.vgrow="ALWAYS">
                <VBox.margin>

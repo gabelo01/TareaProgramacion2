@@ -1,11 +1,5 @@
 [
   {
-    "name": "Estacion 1",
-    "preferential": true,
-    "branchName": "",
-    "procedureNames": []
-  },
-  {
     "name": "Estacion 2",
     "preferential": false,
     "branchName": "",
