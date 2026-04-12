@@ -2,6 +2,7 @@ package cr.ac.una.sistemafichas.controller.admin;
 
 import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.controller.Controller;
+import static cr.ac.una.sistemafichas.controller.admin.BranchMaintenanceController.BranchName.branchName;
 import cr.ac.una.sistemafichas.model.Procedure;
 import cr.ac.una.sistemafichas.model.Station;
 import cr.ac.una.sistemafichas.util.JsonUtil;
@@ -22,14 +23,13 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 
-
 public class MaintenanceStationController extends Controller {
 
     @FXML
     private TextField txtName;
     @FXML
     private CheckBox chkPreferential;
-    
+
     @FXML
     private ListView<Procedure> tblListAvailableProcedures;
     @FXML
@@ -43,7 +43,6 @@ public class MaintenanceStationController extends Controller {
     private List<Procedure> allProcedures = new ArrayList<>();
     private List<Station> stations;
     private Station selectedStation;
-    
 
     @Override
     public void initialize() {
@@ -91,7 +90,8 @@ public class MaintenanceStationController extends Controller {
         }
     }
 
-    private void onActionNuevo(ActionEvent event) {
+    @FXML
+    private void onActionBtnNew(ActionEvent event) {
         txtName.clear();
         chkPreferential.setSelected(false);
 
@@ -105,10 +105,11 @@ public class MaintenanceStationController extends Controller {
         }
     }
 
-    private void onActionGuardar(ActionEvent event) {
+    @FXML
+    private void onActionBtnSave(ActionEvent event) {
         try {
             String name = txtName.getText().trim();
-
+            String branch= branchName;
             if (name.isEmpty()) {
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Espacio vacio", "Agregue un nombre.");
                 return;
@@ -120,7 +121,7 @@ public class MaintenanceStationController extends Controller {
                 }
             }
             if (selectedStation == null) {
-                Station s = new Station(name, chkPreferential.isSelected(), "", new ArrayList<>());
+                Station s = new Station(name, chkPreferential.isSelected(), branch, new ArrayList<>());
                 stations.add(s);
             } else {
                 selectedStation.setName(name);
@@ -139,7 +140,8 @@ public class MaintenanceStationController extends Controller {
         }
     }
 
-    private void onActionEliminar(ActionEvent event) {
+    @FXML
+    private void onActionBtnDelete(ActionEvent event) {
         try {
             if (selectedStation == null) {
                 new Mensaje().show(Alert.AlertType.INFORMATION, "No se selecciono una estacion", "Seleccione una estacion.");
@@ -247,18 +249,6 @@ public class MaintenanceStationController extends Controller {
             event.setDropCompleted(true);
             event.consume();
         });
-    }
-
-    @FXML
-    private void onActionBtnNew(ActionEvent event) {
-    }
-
-    @FXML
-    private void onActionBtnSave(ActionEvent event) {
-    }
-
-    @FXML
-    private void onActionBtnDelete(ActionEvent event) {
     }
 
 }

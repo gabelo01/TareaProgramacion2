@@ -24,11 +24,11 @@ public class App extends Application {
         loader.setLocation(getClass().getResource("/cr/ac/una/sistemafichas/view/CameraView.fxml"));
         Parent root = loader.load();
 
-        stage.setScene(new Scene(root));
-        stage.setTitle("Cámara");
-        stage.show();
+//        stage.setScene(new Scene(root));
+//        stage.setTitle("Cámara");
+//        stage.show();
 
-        //FlowController.getInstance().goViewFirst("admin/LoginAdminView");
+        FlowController.getInstance().goViewFirst("admin/LoginAdminView");
         //FlowController.getInstance().goViewFirst("employee/StationView");
         //FlowController.getInstance().goViewFirst("kiosk/LoginView");
         //FlowController.getInstance().goViewFirst("projection/Projection");
