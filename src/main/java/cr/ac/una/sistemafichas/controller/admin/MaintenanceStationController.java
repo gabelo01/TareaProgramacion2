@@ -22,17 +22,14 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 
-/**
- * FXML Controller class
- *
- * @author diazv
- */
+
 public class MaintenanceStationController extends Controller {
 
     @FXML
-    private TextField txtNombre;
+    private TextField txtName;
     @FXML
-    private CheckBox chkPreferencial;
+    private CheckBox chkPreferential;
+    
     @FXML
     private ListView<Procedure> tblListAvailableProcedures;
     @FXML
@@ -46,8 +43,7 @@ public class MaintenanceStationController extends Controller {
     private List<Procedure> allProcedures = new ArrayList<>();
     private List<Station> stations;
     private Station selectedStation;
-    @FXML
-    private Label label;
+    
 
     @Override
     public void initialize() {
@@ -79,8 +75,8 @@ public class MaintenanceStationController extends Controller {
         tblListStations.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             selectedStation = newVal;
             if (newVal != null) {
-                txtNombre.setText(newVal.getName());
-                chkPreferencial.setSelected(newVal.isPreferential());
+                txtName.setText(newVal.getName());
+                chkPreferential.setSelected(newVal.isPreferential());
             }
         });
     }
@@ -95,10 +91,9 @@ public class MaintenanceStationController extends Controller {
         }
     }
 
-    @FXML
     private void onActionNuevo(ActionEvent event) {
-        txtNombre.clear();
-        chkPreferencial.setSelected(false);
+        txtName.clear();
+        chkPreferential.setSelected(false);
 
         tblListAsignedProcedures.getItems().clear();
         tblListAvailableProcedures.getItems().setAll(allProcedures);
@@ -106,14 +101,13 @@ public class MaintenanceStationController extends Controller {
 
     private void aplicarPreferencial() {
         if (selectedStation != null) {
-            selectedStation.setPreferential(chkPreferencial.isSelected());
+            selectedStation.setPreferential(chkPreferential.isSelected());
         }
     }
 
-    @FXML
     private void onActionGuardar(ActionEvent event) {
         try {
-            String name = txtNombre.getText().trim();
+            String name = txtName.getText().trim();
 
             if (name.isEmpty()) {
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Espacio vacio", "Agregue un nombre.");
@@ -126,7 +120,7 @@ public class MaintenanceStationController extends Controller {
                 }
             }
             if (selectedStation == null) {
-                Station s = new Station(name, chkPreferencial.isSelected(), "", new ArrayList<>());
+                Station s = new Station(name, chkPreferential.isSelected(), "", new ArrayList<>());
                 stations.add(s);
             } else {
                 selectedStation.setName(name);
@@ -145,7 +139,6 @@ public class MaintenanceStationController extends Controller {
         }
     }
 
-    @FXML
     private void onActionEliminar(ActionEvent event) {
         try {
             if (selectedStation == null) {
@@ -166,8 +159,8 @@ public class MaintenanceStationController extends Controller {
     }
 
     private void clearStation() {
-        txtNombre.clear();
-        chkPreferencial.setSelected(false);
+        txtName.clear();
+        chkPreferential.setSelected(false);
         selectedStation = null;
     }
 
@@ -254,6 +247,18 @@ public class MaintenanceStationController extends Controller {
             event.setDropCompleted(true);
             event.consume();
         });
+    }
+
+    @FXML
+    private void onActionBtnNew(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnSave(ActionEvent event) {
+    }
+
+    @FXML
+    private void onActionBtnDelete(ActionEvent event) {
     }
 
 }

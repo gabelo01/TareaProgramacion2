@@ -1,14 +1,18 @@
 [
   {
     "name": "Retiros",
-    "active": false
+    "active": true
   },
   {
     "name": "Prestamos",
-    "active": false
+    "active": true
   },
   {
     "name": "Creditos",
+    "active": true
+  },
+  {
+    "name": "Cobros",
     "active": true
   }
 ]

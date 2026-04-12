@@ -21,13 +21,17 @@ public class JsonUtil {
     private static final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).setPrettyPrinting().create();
 
     public static <T> T read(String filePath, Class<T> tipo) {
+        
+        if (filePath == null){
+            return null;
+        }
+        
         try (Reader reader = new FileReader(filePath)) {
             return gson.fromJson(reader, tipo);
         } catch (IOException e) {
-           e.printStackTrace();
-           return null;
+            System.err.println("Error leyendo JSON: " + filePath);
+        return null;
         }
-        
     }
 
     public static void write(String filePath, Object objeto) {
@@ -42,6 +46,9 @@ public class JsonUtil {
     }
     
     public static <T> T read(String filePath, Type tipo) {
+        if (filePath == null){
+            return null;
+        }
         try (Reader reader = new FileReader(filePath)) {
             return gson.fromJson(reader, tipo);
         } catch (IOException e) {

@@ -1,74 +1,68 @@
 package cr.ac.una.sistemafichas.controller.kiosk;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import cr.ac.una.sistemafichas.controller.Controller;
+import cr.ac.una.sistemafichas.model.CompanyConfig;
+import cr.ac.una.sistemafichas.util.FlowController;
+import cr.ac.una.sistemafichas.util.JsonUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.stage.Stage;
 
-public class PreferentialController implements Initializable {
+public class PreferentialController extends Controller {
 
-    private PasswordField password;
+    @FXML private PasswordField pswPin;
+    private Label lblError;
 
-    private Button getTicket;
-
-    private Button cancel;
-    @FXML
-    private PasswordField pswPin;
+    private static final String CONFIG_PATH = "data/config.json";
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-        getTicket.setOnAction(e -> validarPin());
-        cancel.setOnAction(e -> volver());
-
-    }
-
-    private void validarPin() {
-
-        String pin = password.getText();
-
-        if (pin.equals("123")) {
-            System.out.println(1);
-        } else {
-            System.out.println("PIN incorrecto");
+    public void initialize() {
+        if (pswPin != null) pswPin.clear();
+        if (lblError != null) {
+            lblError.setVisible(false);
+            lblError.setText("");
         }
     }
 
-    private void volver() {
+    @FXML
+    private void OnActionBtnGetFichaPreferential(ActionEvent event) {
+        validatePin();
+    }
 
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/cr/ac/una/sistemafichas/view/kiosk/SelectProcedures.fxml")
-            );
+    @FXML
+    private void OnActionBtnExit(ActionEvent event) {
+        FlowController.getInstance().goViewReplace("kiosk/SelectProcedures");
+    }
 
-            Parent root = loader.load();
+    private void validatePin() {
+        CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
 
-            Stage stage = (Stage) cancel.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+        if (config == null) {
+            showError("Error leyendo configuración.");
+            return;
+        }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        String pin = pswPin.getText();
+
+        if (pin != null && pin.equals(config.getAdminPin())) {
+            SelectProceduresController.setPreferentialOverride(true); //activa linea de Bolean preferential o priority y luego vuelve a select procedures view
+            FlowController.getInstance().goViewReplace("kiosk/SelectProcedures");
+
+        } else {
+            pswPin.clear();
+            showError("PIN incorrecto.");
+        }
+    }
+
+    private void showError(String msg) {
+        if (lblError != null) {
+            lblError.setText(msg);
+            lblError.setVisible(true);
         }
     }
 
     @FXML
     private void OnActionPswPin(ActionEvent event) {
-    }
-
-    @FXML
-    private void OnActionBtnGetFichaPreferential(ActionEvent event) {
-    }
-
-    @FXML
-    private void OnActionBtnExit(ActionEvent event) {
     }
 }

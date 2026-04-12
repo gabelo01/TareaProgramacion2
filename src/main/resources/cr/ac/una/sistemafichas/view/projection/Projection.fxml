@@ -12,23 +12,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.projection.ProjectionController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="575.0" prefWidth="934.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.projection.ProjectionController">
 
     <top>
-        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER_LEFT">
+        <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="934.0" BorderPane.alignment="CENTER_LEFT">
             <padding><Insets bottom="10" left="20" right="20" top="10" /></padding>
-            <ImageView fx:id="imgLogo" fitHeight="70" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
-            <HBox.margin>
-               <Insets />
-            </HBox.margin>
-            <viewport>
-               <Rectangle2D />
-            </viewport></ImageView>
-            <Label fx:id="lblCompanyName" text="Company Name">
-                <HBox.margin><Insets left="15" /></HBox.margin>
-            </Label>
-            <Pane HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER_RIGHT" spacing="4">
                 <Label fx:id="lblDate" text="Monday 01 January, 2026" />
                 <Label fx:id="lblTime" text="00:00:00" />
@@ -45,25 +35,27 @@
                 <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10">
                     <Label fx:id="lblPriorityBadge" text="PREFERENTIAL" visible="false" />
                     <Pane HBox.hgrow="ALWAYS" />
-                    <Label fx:id="lblNewBadge" text="NEW" visible="false" />
                 </HBox>
                 <Label text="TICKET" />
-                <Label fx:id="lblCurrentTicket" text="---" />
-                <Label fx:id="lblCurrentStation" text="" />
+                <Label fx:id="lblCurrentTicket" text="---">
+               <font>
+                  <Font size="52.0" />
+               </font></Label>
+                <Label fx:id="lblCurrentStation" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="50.0" text="Estación" />
             </VBox>
 
-            <VBox alignment="TOP_CENTER" prefWidth="340" spacing="8" HBox.hgrow="ALWAYS">
-                <Label maxWidth="1.7976931348623157E308" text="LAST CALLS" />
+            <VBox alignment="TOP_CENTER" prefHeight="415.0" prefWidth="281.0" spacing="8" HBox.hgrow="SOMETIMES">
+                <Label fx:id="lblLastCalls" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Ultimos Cuatro Llamados" />
 
                 <GridPane maxWidth="1.7976931348623157E308">
                     <columnConstraints>
-                        <ColumnConstraints minWidth="40" prefWidth="40" />
+                        <ColumnConstraints minWidth="40.0" prefWidth="40.0" />
                         <ColumnConstraints hgrow="ALWAYS" />
                         <ColumnConstraints hgrow="ALWAYS" />
                     </columnConstraints>
                     <Label text="#" GridPane.columnIndex="0" />
                     <Label text="TICKET" GridPane.columnIndex="1" />
-                    <Label text="STATION" GridPane.columnIndex="2" />
+                    <Label text="Estacion Asignada" GridPane.columnIndex="2" />
                     <padding><Insets bottom="6" left="10" right="10" top="6" /></padding>
                <rowConstraints>
                   <RowConstraints />
@@ -72,7 +64,7 @@
 
                 <GridPane maxWidth="1.7976931348623157E308">
                     <columnConstraints>
-                        <ColumnConstraints minWidth="40" prefWidth="40" />
+                        <ColumnConstraints minWidth="40.0" prefWidth="40.0" />
                         <ColumnConstraints hgrow="ALWAYS" />
                         <ColumnConstraints hgrow="ALWAYS" />
                     </columnConstraints>
@@ -100,7 +92,7 @@
                </rowConstraints>
                 </GridPane>
 
-                <GridPane maxWidth="1.7976931348623157E308">
+                <GridPane maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="318.0">
                     <columnConstraints>
                         <ColumnConstraints minWidth="40" prefWidth="40" />
                         <ColumnConstraints hgrow="ALWAYS" />
@@ -129,13 +121,28 @@
                   <RowConstraints />
                </rowConstraints>
                 </GridPane>
+               <ImageView fx:id="imgLogo" fitHeight="159.0" fitWidth="266.0" pickOnBounds="true" preserveRatio="true">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+               <Label fx:id="lblCompanyName" text="Company Name" />
+            <padding>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
             </VBox>
         </HBox>
     </center>
 
     <bottom>
         <AnchorPane maxWidth="1.7976931348623157E308" prefHeight="60">
-            <Label fx:id="lblNotice" text="Welcome...Information" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="15" />
+            <Label fx:id="lblNotice" text="Bienvenido...Informacion tipo carrusel" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="15" />
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
         </AnchorPane>
     </bottom>
 

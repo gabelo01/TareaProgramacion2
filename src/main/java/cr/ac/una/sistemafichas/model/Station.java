@@ -3,7 +3,7 @@ package cr.ac.una.sistemafichas.model;
 import java.util.List;
 
 public class Station {
-
+    
     private String name;
     private boolean preferential;
     private String branchName;
@@ -52,11 +52,10 @@ public class Station {
     }
 
     public String toString() {
-        if(preferential){
-        return name+" - Preferencial";
+        if (preferential) {
+            return name + " - Preferencial";
         }
-        return name+" - Comun";
-        
+        return name + " - Comun";
 
     }
 }

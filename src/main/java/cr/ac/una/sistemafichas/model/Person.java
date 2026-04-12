@@ -3,21 +3,21 @@ package cr.ac.una.sistemafichas.model;
 public class Person {
     protected String name;
     protected String id;
-    protected int age;
-    protected String photo;
+    private String age;
+    protected String photoPath;
 
-    public Person(String name, String id, int age) {     // Constructor sin foto para que sea opcional la de empleado
+    public Person(String name, String id, String age) {     // Constructor sin foto para que sea opcional la de empleado
         this.name = name;
         this.id = id;
         this.age = age;
-        this.photo = null;
+        this.photoPath = null;
     }
 
-    public Person(String name, String id, int age, String photo) {
+    public Person(String name, String id, String age, String photo) {
         this.name = name;
         this.id = id;
         this.age = age;
-        this.photo = photo;
+        this.photoPath = photo;
     }
 
     public void setName(String name) {
@@ -28,12 +28,12 @@ public class Person {
         this.id = id;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
     public void setPhoto(String photo) {
-        this.photo = photo;
+        this.photoPath = photo;
     }
 
     public String getName() {
@@ -44,12 +44,12 @@ public class Person {
         return id;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
     public String getPhoto() {
-        return photo;
+        return photoPath;
     }
 
     @Override
