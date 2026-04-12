@@ -44,6 +44,10 @@ public class SelectMaintenanceController extends Controller {
     private void onActionBtnClients(ActionEvent event) {
         FlowController.getInstance().goView("admin/MaintenanceClientView");
     }
+    @FXML
+    private void onActionBtnStations(ActionEvent event) {
+        FlowController.getInstance().goView("admin/MaintenanceStationView");
+    }
 
     @FXML
     private void onActionBtnConfig(ActionEvent event) {
@@ -75,4 +79,6 @@ public class SelectMaintenanceController extends Controller {
     private void onActionBtnExit(ActionEvent event) {
         FlowController.getInstance().goViewReplace("admin/LoginAdminView");
     }
+
+    
 }

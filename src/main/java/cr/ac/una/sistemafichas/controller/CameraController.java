@@ -1,6 +1,7 @@
 package cr.ac.una.sistemafichas.controller;
 
 import cr.ac.una.sistemafichas.service.CamaraService;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,10 @@ public class CameraController implements Initializable {
 
     private CamaraService camaraService;
     private AnimationTimer liveTimer;
+    @FXML
+    private MFXButton btnTakePhoto;
+    @FXML
+    private MFXButton btnCancel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -100,5 +105,14 @@ public class CameraController implements Initializable {
             Logger.getLogger(CameraController.class.getName())
                     .log(Level.SEVERE, "Error al abrir la vista de previsualización", ex);
         }
+    }
+
+    @FXML
+    private void onActionBtnCancel(ActionEvent event) {
+           stopLivePreview();
+           camaraService.closeCamera();
+           Stage stage = (Stage) imgImageView.getScene().getWindow();
+           stage.close();
+        
     }
 }

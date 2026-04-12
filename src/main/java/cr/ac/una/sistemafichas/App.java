@@ -14,31 +14,26 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-
-//
-//    @Override
-//    public void start(Stage stage) throws IOException {
-//        scene = new Scene(loadFXML("LoginAdminView"), 640, 480);
-//        stage.setScene(scene);
-//        stage.show();
-//    }
+    
     @Override
+
     public void start(Stage stage) throws Exception {
 
         FlowController.getInstance().InitializeFlow(stage, null);
-
         FXMLLoader loader = new FXMLLoader();
-        //loader.setLocation(getClass().getResource("/cr/ac/una/sistemafichas/view/CameraView.fxml"));
-        //Parent root = loader.load();
 
-        //stage.setScene(new Scene(root));
-        //stage.setTitle("Cámara");
-        //stage.show();
-        //FlowController.getInstance().goViewFirst("admin/LoginAdminView");
+//        loader.setLocation(getClass().getResource("/cr/ac/una/sistemafichas/view/CameraView.fxml"));
+//        Parent root = loader.load();
+//
+//        stage.setScene(new Scene(root));
+//        stage.setTitle("Cámara");
+//        stage.show();
+
+        FlowController.getInstance().goViewFirst("admin/LoginAdminView");
         //FlowController.getInstance().goViewFirst("employee/StationView");
-        //FlowController.getInstance().goViewFirst("kiosk/SelectProcedures");
-        FlowController.getInstance().goViewFirst("projection/Projection");
-
+        //FlowController.getInstance().goViewFirst("kiosk/LoginView");
+        //FlowController.getInstance().goViewFirst("projection/Projection");
+        //FlowController.getInstance().goViewFirst("kiosk/LoginView");
     }
 
     static void setRoot(String fxml) throws IOException {

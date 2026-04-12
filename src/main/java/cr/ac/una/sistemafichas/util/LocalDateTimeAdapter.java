@@ -13,7 +13,7 @@ public class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
         if (value == null) {
             out.nullValue();
         } else {
-            out.value(value.toString()); // formato: 2026-04-08T20:30:00
+            out.value(value.toString()); 
         }
     }
 

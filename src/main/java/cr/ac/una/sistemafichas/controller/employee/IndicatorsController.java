@@ -11,41 +11,42 @@ import javafx.scene.control.ListView;
 
 public class IndicatorsController extends Controller {
 
-    @FXML private ListView<String> listProcedures;
-    @FXML private Label lblTotal;
+    @FXML
+    private ListView<String> listProcedures;
+    @FXML
+    private Label lblTotal;
 
     private static final String STATION_PATH = "data/configStation.json";
 
-    @Override
+   @Override
     public void initialize() {
-        loadIndicators();
+//        loadIndicators()
     }
-
-    private void loadIndicators() {
-        listProcedures.getItems().clear();
-        Station station = JsonUtil.read(STATION_PATH, Station.class);
-        if (station == null) return;
-
-        TicketService.getInstance().load();
-        long total = 0;
-
-        for (String procName : station.getProcedureNames()) {
-            long count = TicketService.getInstance().getTickets().stream()
-                .filter(t -> "waiting".equals(t.getStatus()))
-                .filter(t -> t.getProcedure() != null &&
-                             t.getProcedure().getName().equals(procName))
-                .count();
-            total += count;
-            listProcedures.getItems().add(procName + " :  " + count );
-        }
-
-        lblTotal.setText("Total Esperando: " + total);
-    }
-
-    @FXML
-    private void onActionBtnBack() {
-        if(getStage()!=null){
-            getStage().close();
-        }
-    }
+//    private void loadIndicators() {
+//        listProcedures.getItems().clear();
+//        Station station = JsonUtil.read(STATION_PATH, Station.class);
+//        if (station == null) return;
+//
+//        TicketService.getInstance().load();
+//        long total = 0;
+//
+//        for (String procName : station.getProcedureNames()) {
+//            long count = TicketService.getInstance().getTickets().stream()
+//                .filter(t -> "waiting".equals(t.getStatus()))
+//                .filter(t -> t.getProcedure() != null &&
+//                             t.getProcedure().getName().equals(procName))
+//                .count();
+//            total += count;
+//            listProcedures.getItems().add(procName + " :  " + count );
+//        }
+//
+//        lblTotal.setText("Total Esperando: " + total);
+//    }
+//
+//    @FXML
+//    private void onActionBtnBack() {
+//        if(getStage()!=null){
+//            getStage().close();
+//        }
+//    }
 }
