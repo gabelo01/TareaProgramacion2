@@ -108,7 +108,14 @@ public class MaintenanceClientController extends Controller {
 
             String name = txtClientName.getText().trim();
             String id   = txtClientId.getText().trim();
-            String age  = txtClientAge.getText().trim(); // age es String directo
+            String age  = txtClientAge.getText().trim();
+
+            Client nuevo = new Client(name, id, age, null, false);
+            if (!nuevo.isValidBirthDate()) { // Validar formato de fecha usando el modelo
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Fecha inválida",    
+                    "Ingrese la fecha en formato YYYY-MM-DD. Ejemplo: 2000-06-07");
+                return;
+            }
 
             for (Client c : client) {
                 if (c.getId().equalsIgnoreCase(id)) {
@@ -117,9 +124,7 @@ public class MaintenanceClientController extends Controller {
                 }
             }
 
-            Client nuevo = new Client(name, id, age, null, false);
             client.add(nuevo);
-
             JsonUtil.write(CLIENTS_PATH, client);
             refreshClientes();
             clearClient();
@@ -188,6 +193,54 @@ public class MaintenanceClientController extends Controller {
     }
 
     @FXML
+    private void OnActionBtnEditClient(ActionEvent event) {
+        try {
+            if (selectedClient == null) {
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Sin selección", "Seleccione un cliente para editar.");
+                return;
+            }
+
+            String invalidos = Validador.validarRequeridos(requeridos);
+            if (!invalidos.isBlank()) {
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Campos vacíos", "Llene todos los campos.");
+                return;
+            }
+
+            String name = txtClientName.getText().trim();
+            String id   = txtClientId.getText().trim();
+            String age  = txtClientAge.getText().trim();
+
+            // Validar formato de fecha usando el modelo
+            Client temp = new Client(name, id, age, null, false);
+            if (!temp.isValidBirthDate()) {
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Fecha inválida",
+                    "Ingrese la fecha en formato YYYY-MM-DD. Ejemplo: 2000-06-07");
+                return;
+            }
+
+            for (Client c : client) {
+                if (c.getId().equalsIgnoreCase(id) && !c.getId().equalsIgnoreCase(selectedClient.getId())) {
+                    new Mensaje().show(Alert.AlertType.INFORMATION, "ID duplicado", "Ya existe otro cliente con ese ID.");
+                    return;
+                }
+            }
+
+            selectedClient.setName(name);
+            selectedClient.setId(id);
+            selectedClient.setAge(age);
+
+            JsonUtil.write(CLIENTS_PATH, client);
+            refreshClientes();
+            clearClient();
+            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente editado", getStage(), "El cliente se actualizó correctamente.");
+
+        } catch (Exception ex) {
+            Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, "Error editando cliente", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Error", getStage(), "Ocurrió un error al editar el cliente.");
+        }
+    }
+    
+    @FXML
     private void OnActionBtnOpenCamera(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cr/ac/una/sistemafichas/view/CameraView.fxml"));
@@ -202,7 +255,5 @@ public class MaintenanceClientController extends Controller {
         }
     }
 
-    @FXML
-    private void OnActionBtnEditClient(ActionEvent event) {
-    }
+
 }

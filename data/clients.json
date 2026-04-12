@@ -1,14 +1,14 @@
 [
   {
+    "preferential": false,
     "name": "Rodrigo Jara",
-    "id": "123456",
-    "age": "2000-6-5",
-    "preferential": false
+    "id": "1234567",
+    "age": "2000-06-07"
   },
   {
+    "preferential": true,
     "name": "anddy",
     "id": "119830836",
-    "age": "2006-12-14",
-    "preferential": true
+    "age": "2006-12-14"
   }
 ]

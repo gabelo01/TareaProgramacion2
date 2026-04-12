@@ -1,5 +1,8 @@
 package cr.ac.una.sistemafichas.model;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class Person {
     protected String name;
     protected String id;
@@ -56,4 +59,25 @@ public class Person {
     public String toString() {
         return name + " - " + id + " - " + age;
     }
+    
+    public boolean isValidBirthDate() {
+        try {
+            LocalDate.parse(this.age);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    
+    }
+    
+    public int calculateAge() {
+        try {
+            LocalDate birth = LocalDate.parse(this.age);
+            return Period.between(birth, LocalDate.now()).getYears();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    
+    
 }

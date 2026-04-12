@@ -58,7 +58,7 @@
                                           </Label>
                                           <MFXTextField fx:id="txtClientName" floatMode="BORDER" floatingText="Nombre" prefWidth="260.0" VBox.vgrow="ALWAYS" />
                                           <MFXTextField fx:id="txtClientId" floatMode="BORDER" floatingText="Id" prefWidth="260.0" VBox.vgrow="ALWAYS" />
-                                          <MFXTextField fx:id="txtClientAge" floatMode="BORDER" floatingText="Edad" prefWidth="260.0" VBox.vgrow="ALWAYS" />
+                                          <MFXTextField fx:id="txtClientAge" floatMode="BORDER" floatingText="Fecha nacimiento (año/mes/día)" prefWidth="260.0" VBox.vgrow="ALWAYS" />
                                        </children>
                                        <padding>
                                           <Insets bottom="5.0" left="1.0" right="1.0" top="5.0" />
