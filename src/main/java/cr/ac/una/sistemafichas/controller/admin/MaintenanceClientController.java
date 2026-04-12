@@ -234,4 +234,8 @@ public class MaintenanceClientController extends Controller {
 
         }
     }
+
+    @FXML
+    private void OnActionBtnEditClient(ActionEvent event) {
+    }
 }

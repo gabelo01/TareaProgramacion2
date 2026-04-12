@@ -4,28 +4,19 @@ import java.util.List;
 
 public class Station {
 
-    private int number;
     private String name;
     private boolean preferential;
     private String branchName;
-    private List<String> procedureNames;
+    private List<Procedure> procedureNames;
 
-    public Station() {}
+    public Station() {
+    }
 
-    public Station(int number, String name, boolean preferential, String branchName, List<String> procedureNames) {
-        this.number = number;
+    public Station(String name, boolean preferential, String branchName, List<Procedure> procedureNames) {
         this.name = name;
         this.preferential = preferential;
         this.branchName = branchName;
         this.procedureNames = procedureNames;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public String getName() {
@@ -52,11 +43,20 @@ public class Station {
         this.branchName = branchName;
     }
 
-    public List<String> getProcedureNames() {
+    public List<Procedure> getProcedureNames() {
         return procedureNames;
     }
 
-    public void setProcedureNames(List<String> procedureNames) {
+    public void setProcedureNames(List<Procedure> procedureNames) {
         this.procedureNames = procedureNames;
+    }
+
+    public String toString() {
+        if(preferential){
+        return name+" - Preferencial";
+        }
+        return name+" - Comun";
+        
+
     }
 }

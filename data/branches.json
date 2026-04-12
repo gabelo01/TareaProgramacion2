@@ -1,12 +1,5 @@
 [
   {
-    "name": "Central de Pérez Zeledón",
-    "direction": "arriba, abajo, centro, pa dentro",
-    "noticeText": "CERRAMOS 2 PM",
-    "stations": [],
-    "active": false
-  },
-  {
     "name": "Los Santos",
     "direction": "aqui estoy",
     "noticeText": "Tramite Prestamos Cancelado dia de hoy",
@@ -29,6 +22,13 @@
   },
   {
     "name": "Pérez Zeledón contigo al parque",
+    "direction": "",
+    "noticeText": "",
+    "stations": [],
+    "active": true
+  },
+  {
+    "name": "Mira Valles",
     "direction": "",
     "noticeText": "",
     "stations": [],

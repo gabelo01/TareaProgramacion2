@@ -2,19 +2,14 @@ package cr.ac.una.sistemafichas.controller.admin;
 
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Branch;
-import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.util.Mensaje;
-import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +29,10 @@ public class BranchMaintenanceController extends Controller {
     @FXML
     private CheckBox chkActiveBranch;
     @FXML
-    private ListView<Branch> listBranches;
+    private ListView<Branch> tblListBranches;
 
     // ──────────────── PATHS ────────────────
     private static final String BRANCHES_PATH = "data/branches.json";
-    private static final String CONFIG_PATH = "data/config.json";
 
     // ──────────────── DATA ────────────────
     private List<Branch> branches;
@@ -56,7 +50,8 @@ public class BranchMaintenanceController extends Controller {
             }
         });
     }
-
+    
+    // ──────────────── LoadData ────────────────
     private void loadData() {
         Type branchListType = new TypeToken<List<Branch>>() {
         }.getType();
@@ -68,16 +63,16 @@ public class BranchMaintenanceController extends Controller {
     }
 
     private void refreshBranches() {
-        listBranches.getItems().setAll(branches);
+        tblListBranches.getItems().setAll(branches);
     }
 
     // ──────────────── SELECTION ────────────────
     private void setupSelection() {
-        listBranches.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+        tblListBranches.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             selectedBranch = newVal;
             if (newVal != null) {
                 txtBranchName.setText(newVal.getName());
-                chkActiveBranch.setSelected(newVal.isActive()); // ← falta esta línea
+                chkActiveBranch.setSelected(newVal.isActive());
             }
         });
     }
@@ -95,7 +90,7 @@ public class BranchMaintenanceController extends Controller {
 
             for (Branch b : branches) {
                 if (b.getName().equalsIgnoreCase(name)) {
-                    new Mensaje().show(Alert.AlertType.INFORMATION, "Nombre de sucursal exixtente", "La sucursal ya existe.");
+                    new Mensaje().show(Alert.AlertType.INFORMATION, "Sucursal existente", "La sucursal ya existe.");
                     return;
                 }
             }
@@ -147,14 +142,14 @@ public class BranchMaintenanceController extends Controller {
 
     @FXML
     private void OnActionBtnEditBranch(ActionEvent event) {
-                try {
+        try {
             if (selectedBranch == null) {
-            Notifications.create()
-                    .title("Sucursal no seleccionada")
-                    .text("No hay una sucursal seleccionada que se pueda editar")
-                    .position(Pos.BOTTOM_RIGHT)
-                    .hideAfter(Duration.seconds(2))
-                    .showError();
+                Notifications.create()
+                        .title("Sucursal no seleccionada")
+                        .text("No hay una sucursal seleccionada que se pueda editar")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(2))
+                        .showError();
                 return;
             }
 
