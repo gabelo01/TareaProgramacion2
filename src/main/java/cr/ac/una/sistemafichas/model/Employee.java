@@ -1,26 +1,65 @@
 package cr.ac.una.sistemafichas.model;
 
-public class Employee extends Person {
+public class Employee {
 
-    private String password;
+    private String name;
+    private String id;
+    private String pin;
+    private String branchName;
+    private String stationName;
 
+    public Employee() {}
 
-    public Employee(String name, String Id, String age, String password) {    // Constructor sin foto para que sea opcional
-        super(name, Id, age);
-        this.password = password;
+    public Employee(String name, String id, String pin, String branchName, String stationName) {
+        this.name = name;
+        this.id = id;
+        this.pin = pin;
+        this.branchName = branchName;
+        this.stationName = stationName;
     }
 
-
-    public Employee(String name, String Id, String age, String password, String photo) {
-        super(name, Id, age, photo);
-        this.password = password;
+    public String getName() {
+        return name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getId() {
+        return id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getPin() {
+        return pin;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public String getStationName() {
+        return stationName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
+
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
+
+    @Override
+    public String toString() {
+        return name + " - " + stationName;
     }
 }

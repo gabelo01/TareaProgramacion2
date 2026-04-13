@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cr.ac.una.sistemafichas.controller.admin.MaintenanceEmployeeController">
+
+    <children>
+
+        <VBox spacing="15" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10"
+              AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+
+            <!-- TÍTULO -->
+            <Label text="Mantenimiento de Empleados" alignment="CENTER">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+
+            <HBox spacing="20" VBox.vgrow="ALWAYS">
+
+                <!-- LISTA EMPLEADOS -->
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label text="Lista de Empleados"/>
+                    <ListView fx:id="tblEmployees" VBox.vgrow="ALWAYS"/>
+                </VBox>
+
+                <!-- FORMULARIO -->
+                <VBox spacing="10" HBox.hgrow="ALWAYS">
+
+                    <TextField fx:id="txtName" promptText="Nombre"/>
+                    <TextField fx:id="txtId" promptText="ID"/>
+                    <TextField fx:id="txtPin" promptText="PIN"/>
+
+                    <TextField fx:id="txtBranch" promptText="Sucursal"/>
+                    <TextField fx:id="txtStation" promptText="Estación"/>
+
+                    <!-- BOTONES -->
+                    <HBox spacing="10">
+                        <Button text="Nuevo" onAction="#onNew" HBox.hgrow="ALWAYS"/>
+                        <Button text="Guardar" onAction="#onSave" HBox.hgrow="ALWAYS"/>
+                        <Button text="Eliminar" onAction="#onDelete" HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                </VBox>
+
+            </HBox>
+
+        </VBox>
+
+    </children>
+</AnchorPane>

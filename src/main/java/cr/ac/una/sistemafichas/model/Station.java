@@ -7,12 +7,12 @@ public class Station {
     private String name;
     private boolean preferential;
     private String branchName;
-    private List<Procedure> procedureNames;
+    private List<String> procedureNames;
 
     public Station() {
     }
 
-    public Station(String name, boolean preferential, String branchName, List<Procedure> procedureNames) {
+    public Station(String name, boolean preferential, String branchName, List<String> procedureNames) {
         this.name = name;
         this.preferential = preferential;
         this.branchName = branchName;
@@ -43,11 +43,11 @@ public class Station {
         this.branchName = branchName;
     }
 
-    public List<Procedure> getProcedureNames() {
+    public List<String> getProcedureNames() {
         return procedureNames;
     }
 
-    public void setProcedureNames(List<Procedure> procedureNames) {
+    public void setProcedureNames(List<String> procedureNames) {
         this.procedureNames = procedureNames;
     }
 

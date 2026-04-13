@@ -74,7 +74,8 @@
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
-                <MFXButton onAction="#btnBack" prefHeight="37.0" prefWidth="95.0" text="Volver" />
+            <MFXButton onAction="#onActionBtnAddStations" text="Agregar Estaciones" />
+                <MFXButton onAction="#onActionBtnBack" prefHeight="37.0" prefWidth="95.0" text="Volver" />
             </HBox>
         </VBox>
     </children>

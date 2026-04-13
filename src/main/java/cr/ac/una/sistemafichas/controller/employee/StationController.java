@@ -1,15 +1,21 @@
 package cr.ac.una.sistemafichas.controller.employee;
 
+import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.controller.Controller;
+import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Station;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.service.TicketService;
+import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
+import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import java.io.File;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -45,192 +51,212 @@ public class StationController extends Controller {
 
    @Override
     public void initialize() {
-//        loadHeader();
-//        loadStation();
-//        startClock();
-//        startAutoRefresh(); // para actualizar tickets y que se muestren los cambios cada 5s y leer json
-//        clearCurrentTicket();
-//        updateWaitingCount();
-//
-//        Ticket last = TicketService.getInstance().getLastCalled();
-//        if (last != null) showCurrentTicket(last);
-    }
-//
-//    private void loadHeader() {
-//        CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
-//        if (config == null) return;
-//
-//        lblCompanyName.setText(config.getCompanyName());
-//
-//        try {
-//            File file = new File(config.getLogoPath());
-//            if (file.exists()) {
-//                imgLogo.setImage(new Image(file.toURI().toString()));
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Error loading logo");
-//        }
-//    }
-//
+        loadHeader();
+        loadStation();
+        startClock();
+        startAutoRefresh(); // para actualizar tickets y que se muestren los cambios cada 5s y leer json
+        clearCurrentTicket();
+        updateWaitingCount();
 
-////    private void loadStation() {
-////        station = JsonUtil.read(STATION_PATH, Station.class);
-////        if (station != null) {
-////            lblStationName.setText("Estación " + station.getNumber() +
-////                                  " - " + station.getName());
-////        }
-////    }
-//    
-////    private void loadStation() {
-////    station = JsonUtil.read(STATION_PATH, Station.class);
-////
-////    if (station == null) {
-////        lblStationName.setText("Estación no configurada");
-////        return;
-////    }
-////        lblStationName.setText(station.getNumber() +" | Nombre: " + station.getName() +" | Sucursal: " + station.getBranchName());
-////    }
-////
-////    private void startClock() {
-////        if (clockTimeline != null) clockTimeline.stop();
-////
-////        clockTimeline = new Timeline(new KeyFrame(Duration.seconds(1), e ->
-////            lblTime.setText(LocalDateTime.now().format(timeFormatter))
-////        ));
-////
-////        clockTimeline.setCycleCount(Timeline.INDEFINITE);
-////        clockTimeline.play();
-////    }
-//    
-//    private void startAutoRefresh() {
-//        if (refreshTimeline != null) refreshTimeline.stop();
+        Ticket last = TicketService.getInstance().getLastCalled();
+        if (last != null) showCurrentTicket(last);
+    }
+
+    private void loadHeader() {
+        CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
+        if (config == null) return;
+
+        lblCompanyName.setText(config.getCompanyName());
+
+        try {
+            File file = new File(config.getLogoPath());
+            if (file.exists()) {
+                imgLogo.setImage(new Image(file.toURI().toString()));
+            }
+        } catch (Exception e) {
+            System.out.println("Error loading logo");
+        }
+    }
+
+//    private void loadStation() {
+//    station = JsonUtil.read(STATION_PATH, Station.class);
 //
-//        refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
-//            TicketService.getInstance().load();
-//            updateWaitingCount();
-//        }));
-//        refreshTimeline.setCycleCount(Timeline.INDEFINITE);
-//        refreshTimeline.play();
+//    if (station == null) {
+//        lblStationName.setText("Estación no configurada");
+//        return;
 //    }
-//
-//    private void updateWaitingCount() {
-//        long count = TicketService.getInstance().getWaitingCount();
-//        lblWaitingCount.setText("" +count);
+//        lblStationName.setText(station.getName() +" | Nombre: " + station.getName() +" | Sucursal: " + station.getBranchName());
 //    }
-//
-//    public void showCurrentTicket(Ticket t) {
-//        if (t == null) return;
-//
-//        lblCurrentNumber.setText(String.valueOf(t.getNumber()));
-//    }
-//
-//    private void clearCurrentTicket() {
-//        lblCurrentNumber.setText("0");
-//    }
-//    
-//    @FXML
-//    private void onActionBtnNext() {
-//
-//        if (station == null || station.getProcedureNames() == null) {
-//            showAlert("Estación no configurada.");
-//            return;
-//        }
-//
-//        TicketService service = TicketService.getInstance();
-//        Ticket t = null;
-//
-//        if (station.isPreferential()) { // Si la estación es preferencial, buscamos primero preferenciales
-//            t = service.getTickets().stream()
-//                    .filter(ticket -> "waiting".equals(ticket.getStatus()))
-//                    .filter(ticket -> ticket.getProcedure() != null)
-//                    .filter(ticket -> ticket.getPriority()) // solo atendera alos  preferenciales con este filtro
-//                    .filter(ticket -> station.getProcedureNames().contains(ticket.getProcedure().getName()))
-//                    .findFirst()
-//                    .orElse(null);
-//        }
-//
-//        if (t == null) { // Si no encontra preferencial o no es preferencial, buscamos un ticket compatible
-//            t = service.getTickets().stream()
-//                    .filter(ticket -> "waiting".equals(ticket.getStatus()))
-//                    .filter(ticket -> ticket.getProcedure() != null)
-//                    .filter(ticket -> station.getProcedureNames().contains(ticket.getProcedure().getName()))
-//                    .findFirst().orElse(null);
-//        }
-//
-//    
-//        if (t != null) {
-//            t.setStatus("called"); // Si se encontra se llamamos y se actualiza
-//            service.save();
-//            service.setLastCalled(t);showCurrentTicket(t);updateWaitingCount();
-//        } else {
-//            showAlert("No hay tickets para los trámites de esta estación.");
-//        }
-//    }
-//
-//    @FXML
-//    private void onActionBtnRepeat() {
-//        Ticket last = TicketService.getInstance().getLastCalled();
-//        if (last != null) {
-//            showCurrentTicket(last);
-//        } else {
-//            showAlert("No hay ticket llamado.");
-//        }
-//    }
-//
-//    @FXML
-//    private void onActionBtnListCurrentClient() {
-//        FlowController.getInstance().goViewReplace("employee/WaitListView");
-//    }
-//
-//    @FXML
-//    private void onActionBtnIndicators() {
-//       FlowController.getInstance().goViewInWindow("employee/IndicatorsView");
-//    }
-//
-//    @FXML
-//    private void onActionBtnClient() {
-//        FlowController.getInstance().goViewInWindow("employee/CurrentClientView");
-//    }
-//    
-//    @FXML
-//    private void onActionBtnPreferential() {
-//        
-//        if (station == null || station.getProcedureNames() == null) {
-//            showAlert("Estación no configurada.");
-//            return;
-//        }
-//        
-//        TicketService service = TicketService.getInstance();
-//
-//        Ticket t = service.getTickets().stream().filter(x -> "waiting".equals(x.getStatus())).filter(x -> x.getPriority()).filter(x -> x.getProcedure() != null)
-//                      .filter(x -> station.getProcedureNames().contains(x.getProcedure().getName())).findFirst().orElse(null);
-//
-//        if (t != null) {
-//            t.setStatus("called");
-//            service.save();
-//            service.setLastCalled(t);
-//            showCurrentTicket(t);
-//            updateWaitingCount();
-//         } else {
-//            showAlert("No hay tickets preferenciales en espera para esta estacion.");
-//        }
-//    }
-//    
-//    protected void showAlert(String msg) {
-//        Alert a = new Alert(Alert.AlertType.INFORMATION);
-//        a.setHeaderText(null);
-//        a.setContentText(msg);
-//        a.showAndWait();
-//    }
-//
-//    @FXML
-//    private void onActionBtnRegisterClient(ActionEvent event) {
-//        FlowController.getInstance().goViewInWindow("admin/MaintenanceClientView");
-//    }
-//
-//    @FXML
-//    private void onActionBtnExit(ActionEvent event) {
-//        FlowController.getInstance().salir();
-//    }
-//    
+    
+    private void loadStation() {
+
+        String stationName = EmployeeSessionManager.getStation();
+
+        if (stationName == null) {
+            lblStationName.setText("Sin estación asignada");
+            return;
+        }
+
+        Type type = new TypeToken<List<Station>>(){}.getType();
+        List<Station> stations = JsonUtil.read("data/station.json", type);
+
+        if (stations == null){
+            return;
+        }
+
+        station = stations.stream()
+                .filter(s -> s.getName().equals(stationName))
+                .findFirst()
+                .orElse(null);
+
+        if (station != null) {
+            lblStationName.setText(
+                 station.getName() + " | Sucursal: " + station.getBranchName()
+            );
+        } else {
+            lblStationName.setText("Estación no encontrada");
+        }
+    }
+    private void startClock() {
+        if (clockTimeline != null) clockTimeline.stop();
+
+        clockTimeline = new Timeline(new KeyFrame(Duration.seconds(1), e ->
+            lblTime.setText(LocalDateTime.now().format(timeFormatter))
+        ));
+
+        clockTimeline.setCycleCount(Timeline.INDEFINITE);
+        clockTimeline.play();
+    }
+    
+    private void startAutoRefresh() {
+        if (refreshTimeline != null) refreshTimeline.stop();
+
+        refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
+            TicketService.getInstance().load();
+            updateWaitingCount();
+        }));
+        refreshTimeline.setCycleCount(Timeline.INDEFINITE);
+        refreshTimeline.play();
+    }
+
+    private void updateWaitingCount() {
+        long count = TicketService.getInstance().getWaitingCount();
+        lblWaitingCount.setText("" +count);
+    }
+
+    public void showCurrentTicket(Ticket t) {
+        if (t == null) return;
+
+        lblCurrentNumber.setText(String.valueOf(t.getNumber()));
+    }
+
+    private void clearCurrentTicket() {
+        lblCurrentNumber.setText("0");
+    }
+    
+    @FXML
+    private void onActionBtnNext() {
+
+        if (station == null || station.getProcedureNames() == null) {
+            showAlert("Estación no configurada.");
+            return;
+        }
+
+        TicketService service = TicketService.getInstance();
+        Ticket t = null;
+
+        if (station.isPreferential()) { // Si la estación es preferencial, buscamos primero preferenciales
+            t = service.getTickets().stream()
+                    .filter(ticket -> "waiting".equals(ticket.getStatus()))
+                    .filter(ticket -> ticket.getProcedure() != null)
+                    .filter(ticket -> ticket.getPriority()) // solo atendera alos  preferenciales con este filtro
+                    .filter(ticket -> station.getProcedureNames().contains(ticket.getProcedure().getName()))
+                    .findFirst()
+                    .orElse(null);
+        }
+
+        if (t == null) { // Si no encontra preferencial o no es preferencial, buscamos un ticket compatible
+            t = service.getTickets().stream()
+                    .filter(ticket -> "waiting".equals(ticket.getStatus()))
+                    .filter(ticket -> ticket.getProcedure() != null)
+                    .filter(ticket -> station.getProcedureNames().contains(ticket.getProcedure().getName()))
+                    .findFirst().orElse(null);
+        }
+
+    
+        if (t != null) {
+            t.setStatus("called"); // Si se encontra se llamamos y se actualiza
+            service.save();
+            service.setLastCalled(t);showCurrentTicket(t);updateWaitingCount();
+        } else {
+            showAlert("No hay tickets para los trámites de esta estación.");
+        }
+    }
+
+    @FXML
+    private void onActionBtnRepeat() {
+        Ticket last = TicketService.getInstance().getLastCalled();
+        if (last != null) {
+            showCurrentTicket(last);
+        } else {
+            showAlert("No hay ticket llamado.");
+        }
+    }
+
+    @FXML
+    private void onActionBtnListCurrentClient() {
+        FlowController.getInstance().goViewReplace("employee/WaitListView");
+    }
+
+    @FXML
+    private void onActionBtnIndicators() {
+       FlowController.getInstance().goViewInWindow("employee/IndicatorsView");
+    }
+
+    @FXML
+    private void onActionBtnClient() {
+        FlowController.getInstance().goViewInWindow("employee/CurrentClientView");
+    }
+    
+    @FXML
+    private void onActionBtnPreferential() {
+        
+        if (station == null || station.getProcedureNames() == null) {
+            showAlert("Estación no configurada.");
+            return;
+        }
+        
+        TicketService service = TicketService.getInstance();
+
+        Ticket t = service.getTickets().stream().filter(x -> "waiting".equals(x.getStatus())).filter(x -> x.getPriority()).filter(x -> x.getProcedure() != null)
+                      .filter(x -> station.getProcedureNames().contains(x.getProcedure().getName())).findFirst().orElse(null);
+
+        if (t != null) {
+            t.setStatus("called");
+            service.save();
+            service.setLastCalled(t);
+            showCurrentTicket(t);
+            updateWaitingCount();
+         } else {
+            showAlert("No hay tickets preferenciales en espera para esta estacion.");
+        }
+    }
+    
+    protected void showAlert(String msg) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setHeaderText(null);
+        a.setContentText(msg);
+        a.showAndWait();
+    }
+
+    @FXML
+    private void onActionBtnRegisterClient(ActionEvent event) {
+        FlowController.getInstance().goViewInWindow("admin/MaintenanceClientView");
+    }
+
+    @FXML
+    private void onActionBtnExit(ActionEvent event) {
+        FlowController.getInstance().salir();
+    }
+    
 }

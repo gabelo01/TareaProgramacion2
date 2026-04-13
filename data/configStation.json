@@ -1,7 +1,0 @@
-{
-  "number": 1,
-  "name": "Caja 1",
-  "preferential": true,
-  "branchName": "Central",
-  "procedureNames": ["Retiros", "Prestamos", "Creditos"]
-}

@@ -38,6 +38,11 @@ public class BranchMaintenanceController extends Controller {
     private List<Branch> branches;
     private Branch selectedBranch;
 
+    public class BranchName {
+
+        public static String branchName;
+    }
+
     // ──────────────── INIT ────────────────
     @Override
     public void initialize() {
@@ -50,7 +55,7 @@ public class BranchMaintenanceController extends Controller {
             }
         });
     }
-    
+
     // ──────────────── LoadData ────────────────
     private void loadData() {
         Type branchListType = new TypeToken<List<Branch>>() {
@@ -136,7 +141,7 @@ public class BranchMaintenanceController extends Controller {
     }
 
     @FXML
-    private void btnBack() {
+    private void onActionBtnBack() {
         FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
     }
 
@@ -170,6 +175,17 @@ public class BranchMaintenanceController extends Controller {
                     .hideAfter(Duration.seconds(2))
                     .showError();
         }
+    }
+
+    @FXML
+    private void onActionBtnAddStations(ActionEvent event) {
+        if (selectedBranch == null) {
+            new Mensaje().show(Alert.AlertType.INFORMATION, "Sucursal no Seleccionada", "Seleccione una sucursal");
+            return;
+        }
+        BranchName.branchName = selectedBranch.getName();
+        FlowController.getInstance().goView("admin/MaintenanceStationView");
+
     }
 
 }

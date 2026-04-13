@@ -1,17 +1,17 @@
 package cr.ac.una.sistemafichas.controller.kiosk;
 
+import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.controller.Controller;
+import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.Client;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Procedure;
-import cr.ac.una.sistemafichas.model.Station;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.service.TicketService;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import cr.ac.una.sistemafichas.util.PdfUtil;
-import com.google.gson.reflect.TypeToken;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXListView;
 
@@ -40,7 +40,6 @@ public class SelectProceduresController extends Controller {
     @FXML private MFXListView<String> listProcedures;
 
     private static final String CONFIG_PATH  = "data/config.json";
-    private static final String STATION_PATH = "data/configStation.json";
     private static final String PROC_PATH    = "data/procedures.json";
 
     private static boolean preferentialOverride = false;
@@ -60,11 +59,11 @@ public class SelectProceduresController extends Controller {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         if (config == null) return;
 
-        if (lblName != null) lblName.setText(config.getCompanyName());
+        lblName.setText(config.getCompanyName());
 
         try {
             File file = new File(config.getLogoPath());
-            if (file.exists() && imgLogo != null) {
+            if (file.exists()) {
                 imgLogo.setImage(new Image(file.toURI().toString()));
             }
         } catch (Exception e) {
@@ -75,17 +74,36 @@ public class SelectProceduresController extends Controller {
     private void loadProcedures() {
         if (listProcedures == null) return;
 
-        Station station = JsonUtil.read(STATION_PATH, Station.class);
-        if (station == null) return;
+        String branchName = KioskSessionManager.getBranch();
+        if (branchName == null) {
+            showAlert("No hay sucursal seleccionada.");
+            return;
+        }
 
-        Type type = new TypeToken<List<Procedure>>(){}.getType();
-        List<Procedure> allProcedures = JsonUtil.read(PROC_PATH, type);
+        Type branchType = new TypeToken<List<Branch>>(){}.getType();
+        List<Branch> branches = JsonUtil.read("data/branches.json", branchType);
+        if (branches == null) return;
+
+        Branch current = branches.stream()
+                .filter(b -> b.getName().equals(branchName))
+                .findFirst()
+                .orElse(null);
+
+        if (current == null || current.getStations() == null) return;
+
+        Type procType = new TypeToken<List<Procedure>>(){}.getType();
+        List<Procedure> allProcedures = JsonUtil.read(PROC_PATH, procType);
         if (allProcedures == null) return;
+
+        List<String> availableProcedures = current.getStations().stream()
+                .flatMap(st -> st.getProcedureNames().stream())
+                .distinct()
+                .toList();
 
         List<String> filtered = allProcedures.stream()
                 .filter(Procedure::isActive)
-                .filter(p -> station.getProcedureNames().contains(p.getName()))
                 .map(Procedure::getName)
+                .filter(availableProcedures::contains)
                 .toList();
 
         listProcedures.setItems(FXCollections.observableArrayList(filtered));
@@ -94,13 +112,11 @@ public class SelectProceduresController extends Controller {
     private void loadClientInfo() {
         Client client = KioskSessionManager.getCurrentClient();
 
-        if (lblClientInfo == null) return;
-
         if (client != null) {
             lblClientInfo.setText("Bienvenido: " + client.getName());
-            
+
             if (client.isPreferential() || isClientPreferential(client)) {
-                btnPreferential.setVisible(false); // para ocultar boton de ir a preferencial si ya lo es
+                btnPreferential.setVisible(false);
             }
         } else {
             lblClientInfo.setText("Invitado");
@@ -110,11 +126,9 @@ public class SelectProceduresController extends Controller {
     @FXML
     private void OnActionBtnGetTicket(ActionEvent event) {
 
-        String selected = null;
-
-        if (listProcedures != null &&!listProcedures.getSelectionModel().getSelectedValues().isEmpty()) {
-            selected = listProcedures.getSelectionModel().getSelectedValues().get(0);
-        }
+        String selected = (listProcedures != null)
+                ? listProcedures.getSelectionModel().getSelectedValue()
+                : null;
 
         if (selected == null) {
             showAlert("Seleccione un trámite.");
@@ -123,49 +137,39 @@ public class SelectProceduresController extends Controller {
 
         Client client = KioskSessionManager.getCurrentClient();
 
- 
         boolean isPriority = false;
 
         if (client != null) {
-            if (client.isPreferential()) { // si cliente esta marcado como preferencial cambia la prioridad
-                isPriority = true;
-            }
-            else if (isClientPreferential(client)) {  // o si adulto con 65 a'os o mas
+            if (client.isPreferential() || isClientPreferential(client)) {
                 isPriority = true;
             }
         }
 
-
-        if (preferentialOverride) { //preferencial manual con PreferentialView
-         isPriority = true;
+        if (preferentialOverride) {
+            isPriority = true;
         }
-        
-        
 
         Procedure procedure = new Procedure(selected, true);
 
         Ticket ticket = new Ticket();
+        ticket.setBranchName(KioskSessionManager.getBranch());
         ticket.setProcedure(procedure);
         ticket.setClient(client);
         ticket.setPriority(isPriority);
         ticket.setCreationDate(LocalDateTime.now().toString());
         ticket.setStatus("waiting");
 
-        Type type = new TypeToken<List<Station>>(){}.getType();
-        Station stations = JsonUtil.read(STATION_PATH, type);
-        if (stations != null) {
-            Station station = KioskSessionManager.getStation();
-            ticket.setStationName(station.getName());
-        }
-
         TicketService.getInstance().generateTicket(ticket);
+
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         PdfUtil.generateTicketPdf(ticket, config);
 
         showAlert("Ticket #" + ticket.getNumber() + " generado.");
-        preferentialOverride = false; //despues de generar ticket y mandar info se resetea el preferencial
 
-        KioskSessionManager.clearSession();
+        preferentialOverride = false;
+
+        KioskSessionManager.clearClient(); // solo para limpiar cliente, si limpio todo se borra dato de sucursal seleccionada
+
         FlowController.getInstance().goViewReplace("kiosk/LoginView");
     }
 
@@ -187,17 +191,16 @@ public class SelectProceduresController extends Controller {
     }
 
     private void showAlert(String msg) {
-        Alert a = new Alert(Alert.AlertType.INFORMATION);
-        a.setHeaderText(null);
-        a.setContentText(msg);
-        a.show(); //muestra exito de crear ticket
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.show();
     }
 
     @FXML
-    private void OnActionBtnCancel(ActionEvent event) {  //Para limpiar el login y la info del ticket si cancelo
+    private void OnActionBtnCancel(ActionEvent event) {
         preferentialOverride = false;
-        KioskSessionManager.clearSession();
-
+        KioskSessionManager.clearClient(); // solo para limpiar cliente, si limpio todo se borra dato de sucursal seleccionada
         FlowController.getInstance().goViewReplace("kiosk/LoginView");
     }
 }

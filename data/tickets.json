@@ -15,7 +15,6 @@
     },
     "priority": false,
     "creationDate": "2026-04-08T08:10",
-    "stationNumber": 1,
     "branchName": "Central"
   },
   {
@@ -34,7 +33,6 @@
     },
     "priority": true,
     "creationDate": "2026-04-08T08:12",
-    "stationNumber": 2,
     "branchName": "Central"
   },
   {
@@ -53,7 +51,6 @@
     },
     "priority": true,
     "creationDate": "2026-04-08T08:12",
-    "stationNumber": 5,
     "branchName": "Central"
   },
   {
@@ -72,7 +69,6 @@
     },
     "priority": true,
     "creationDate": "2026-04-08T08:12",
-    "stationNumber": 2,
     "branchName": "Central"
   },
   {
@@ -91,7 +87,6 @@
     },
     "priority": true,
     "creationDate": "2026-04-08T08:12",
-    "stationNumber": 0,
     "branchName": "Central"
   },
   {
@@ -103,7 +98,6 @@
     },
     "priority": false,
     "creationDate": "2026-04-11T10:02:19.838473500",
-    "stationNumber": 1,
     "branchName": "Central"
   },
   {
@@ -121,7 +115,6 @@
     },
     "priority": false,
     "creationDate": "2026-04-11T10:03:55.045520800",
-    "stationNumber": 1,
     "branchName": "Central"
   },
   {
@@ -133,7 +126,6 @@
     },
     "priority": false,
     "creationDate": "2026-04-11T10:05:00.313625400",
-    "stationNumber": 1,
     "branchName": "Central"
   },
   {
@@ -145,7 +137,6 @@
     },
     "priority": false,
     "creationDate": "2026-04-11T10:26:45.448825",
-    "stationNumber": 1,
     "branchName": "Central"
   },
   {
@@ -163,7 +154,6 @@
     },
     "priority": true,
     "creationDate": "2026-04-11T11:01:39.242471700",
-    "stationNumber": 1,
     "branchName": "Central"
   },
   {
@@ -175,7 +165,6 @@
     },
     "priority": false,
     "creationDate": "2026-04-11T11:02:55.753449300",
-    "stationNumber": 1,
     "branchName": "Central"
   },
   {
@@ -187,7 +176,6 @@
     },
     "priority": true,
     "creationDate": "2026-04-11T11:14:51.635231300",
-    "stationNumber": 1,
     "branchName": "Central"
   }
 ]

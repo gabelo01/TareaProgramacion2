@@ -62,25 +62,6 @@
             <artifactId>controlsfx</artifactId>
             <version>11.2.1</version>
         </dependency>
-    
-        <!-- del Pdf, esta es la dependencia y la de abajo tambien -->
-        <dependency>
-            <groupId>com.itextpdf</groupId>  
-            <artifactId>kernel</artifactId>
-            <version>8.0.4</version>
-        </dependency>
-     
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>layout</artifactId>
-            <version>8.0.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.sarxos</groupId>
-            <artifactId>webcam-capture</artifactId>
-            <version>0.3.12</version>
-        </dependency>
 
     </dependencies>
     <build>
