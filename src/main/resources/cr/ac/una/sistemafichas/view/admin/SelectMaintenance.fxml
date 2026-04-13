@@ -27,6 +27,7 @@
             </HBox>
             <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="229.0" onAction="#onActionBtnIndicators" prefHeight="36.0" prefWidth="191.0" text="Indicadores" VBox.vgrow="ALWAYS" />
             <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="206.0" onAction="#onActionBtnClients" prefHeight="36.0" prefWidth="191.0" text="Registro de Clientes" VBox.vgrow="ALWAYS" />
+            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="297.0" onAction="#onActionBtnEmployees" prefHeight="36.0" prefWidth="191.0" text="Registro Empleados" />
             <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="198.0" onAction="#onActionBtnProcedures" prefHeight="36.0" prefWidth="191.0" text="Trámites" VBox.vgrow="ALWAYS" />
             <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="207.0" onAction="#onActionBtnBranches" prefHeight="36.0" prefWidth="191.0" text="Sucursales" VBox.vgrow="ALWAYS" />
             <MFXButton alignment="BASELINE_LEFT" onAction="#onActionBtnConfig" prefHeight="36.0" prefWidth="191.0" text="Configuración General" VBox.vgrow="ALWAYS" />

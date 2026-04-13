@@ -76,5 +76,10 @@ public class SelectMaintenanceController extends Controller {
         FlowController.getInstance().goViewReplace("admin/LoginAdminView");
     }
 
+    @FXML
+    private void onActionBtnEmployees(ActionEvent event) {
+        FlowController.getInstance().goView("admin/MaintenanceEmployeeView");
+    }
+
     
 }

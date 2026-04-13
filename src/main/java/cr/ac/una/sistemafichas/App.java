@@ -21,8 +21,11 @@ public class App extends Application {
 
         FlowController.getInstance().InitializeFlow(stage, null);
         FXMLLoader loader = new FXMLLoader();
-
-        FlowController.getInstance().goViewFirst("admin/LoginAdminView");
+        
+        
+        //FlowController.getInstance().goViewFirst("admin/SelectMaintenance");
+        FlowController.getInstance().goViewFirst("employee/StationLogin");
+        //FlowController.getInstance().goViewFirst("employee/StationView");
         //FlowController.getInstance().goViewFirst("employee/StationView");
         //FlowController.getInstance().goViewFirst("kiosk/LoginView");
         //FlowController.getInstance().goViewFirst("projection/Projection");

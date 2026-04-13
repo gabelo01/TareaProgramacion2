@@ -1,15 +1,21 @@
 package cr.ac.una.sistemafichas.controller.employee;
 
+import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.controller.Controller;
+import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Station;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.service.TicketService;
+import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
+import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import java.io.File;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -72,25 +78,45 @@ public class StationController extends Controller {
         }
     }
 
-
 //    private void loadStation() {
-//        station = JsonUtil.read(STATION_PATH, Station.class);
-//        if (station != null) {
-//            lblStationName.setText("Estación " + station.getName() +
-//                                  " - " + station.getName());
-//        }
+//    station = JsonUtil.read(STATION_PATH, Station.class);
+//
+//    if (station == null) {
+//        lblStationName.setText("Estación no configurada");
+//        return;
 //    }
-//    
+//        lblStationName.setText(station.getName() +" | Nombre: " + station.getName() +" | Sucursal: " + station.getBranchName());
+//    }
+    
     private void loadStation() {
-    station = JsonUtil.read(STATION_PATH, Station.class);
 
-    if (station == null) {
-        lblStationName.setText("Estación no configurada");
-        return;
-    }
-        lblStationName.setText(station.getName() +" | Nombre: " + station.getName() +" | Sucursal: " + station.getBranchName());
-    }
+        String stationName = EmployeeSessionManager.getStation();
 
+        if (stationName == null) {
+            lblStationName.setText("Sin estación asignada");
+            return;
+        }
+
+        Type type = new TypeToken<List<Station>>(){}.getType();
+        List<Station> stations = JsonUtil.read("data/station.json", type);
+
+        if (stations == null){
+            return;
+        }
+
+        station = stations.stream()
+                .filter(s -> s.getName().equals(stationName))
+                .findFirst()
+                .orElse(null);
+
+        if (station != null) {
+            lblStationName.setText(
+                 station.getName() + " | Sucursal: " + station.getBranchName()
+            );
+        } else {
+            lblStationName.setText("Estación no encontrada");
+        }
+    }
     private void startClock() {
         if (clockTimeline != null) clockTimeline.stop();
 

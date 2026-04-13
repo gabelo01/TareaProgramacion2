@@ -26,27 +26,24 @@ public class LoginController extends Controller {
     private static final String CLIENTS_PATH = "data/clients.json";
     private static final String CONFIG_PATH = "data/config.json";
     
-    @FXML
-    private AnchorPane root;
-    @FXML
-    private Label lblSaludation;
-    @FXML
-    private ImageView imgLogo;
-    @FXML
-    private Label lblName;
-    @FXML
-    private ImageView imgUser;
+    @FXML private AnchorPane root;
+    @FXML private Label lblSaludation;
+    @FXML private ImageView imgLogo;
+    @FXML private Label lblName;
+    @FXML private ImageView imgUser;
 
     @Override
     public void initialize() {
         loadHeader();
-        KioskSessionManager.clearSession();
+        KioskSessionManager.clearClient();
+
         if (lblError != null) lblError.setVisible(false);
         if (txtId != null) txtId.clear();
     }
 
     @FXML
     private void OnActionBtn(ActionEvent event) {
+
         String id = txtId.getText().trim();
 
         if (id.isEmpty()) {
@@ -63,9 +60,9 @@ public class LoginController extends Controller {
         }
 
         Client found = clients.stream()
-            .filter(c -> c.getId().equals(id))
-            .findFirst()
-            .orElse(null);
+                .filter(c -> c.getId().equals(id))
+                .findFirst()
+                .orElse(null);
 
         if (found != null) {
             KioskSessionManager.setCurrentClient(found);
@@ -74,28 +71,29 @@ public class LoginController extends Controller {
             showError("Cédula no encontrada. Use el botón Invitado.");
         }
     }
-    
-        private void loadHeader() {
+
+    private void loadHeader() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
-        if (config == null){
-            return;
-        }
-        if (lblName != null){
+        if (config == null) return;
+
+        if (lblName != null) {
             lblName.setText(config.getCompanyName());
         }
+
         try {
             File file = new File(config.getLogoPath());
             if (file.exists() && imgLogo != null) {
                 imgLogo.setImage(new Image(file.toURI().toString()));
             }
         } catch (Exception e) {
-            System.out.println("Error cargandoel logo");
+            System.out.println("Error cargando el logo");
         }
     }
 
     @FXML
     private void OnActionBtnGuest(ActionEvent event) {
-        KioskSessionManager.clearSession();
+
+        KioskSessionManager.clearClient();
         FlowController.getInstance().goViewReplace("kiosk/SelectProcedures");
     }
 
