@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXListView?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- 
+    FIX 1: en el root BorderPane para que llene el VBox
+            del centro de SelectMaintenance horizontalmente.
+-->
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.IndicatorsController">
+   <center>
+      <!--
+          FIX 2: TabPane ya tenía maxWidth/maxHeight → mantener.
+                 Reemplazar prefHeight="2000" (hack) por VBox.vgrow="ALWAYS".
+      -->
+      <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+
+            <!-- ══════════════════ TAB 1: Top Clientes ══════════════════ -->
+            <Tab text="Top clientes">
+               <content>
+                  <!--
+                      FIX 3: fitToWidth="true" es la clave del scroll pane.
+                              Sin esto el contenido interior nunca se estira al ancho.
+                  -->
+                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <content>
+                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                           <children>
+                              <!--
+                                  FIX 4: BorderPane interno necesita maxWidth y
+                                          para no quedarse angosto.
+                              -->
+                              <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                 <top>
+                                    <!--
+                                        FIX 5: StackPane/HBox de filtros también necesita
+                                                maxWidth para estirarse.
+                                    -->
+                                    <StackPane maxWidth="1.7976931348623157E308" prefHeight="50.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Filtrar por:" StackPane.alignment="TOP_CENTER" />
+                                          <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" spacing="20.0" StackPane.alignment="BOTTOM_CENTER">
+                                             <children>
+                                                <ToggleButton mnemonicParsing="false" text="Fechas" />
+                                                <ToggleButton mnemonicParsing="false" text="Sucursal" />
+                                                <ToggleButton mnemonicParsing="false" text="Cajas" />
+                                                <ToggleButton mnemonicParsing="false" text="Trámites" />
+                                                <ToggleButton mnemonicParsing="false" text="Preferenciales" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" top="20.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </top>
+                                 <center>
+                                    <!--
+                                        FIX 6: Sin prefWidth hardcodeado. maxWidth y
+                                                maxHeight para que ocupe lo disponible.
+                                    -->
+                                    <MFXListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <VBox.margin>
+                                    <Insets left="2.0" />
+                                 </VBox.margin>
+                              </BorderPane>
+
+                              <Label alignment="TOP_CENTER" text="Gráficos">
+                                 <VBox.margin>
+                                    <Insets bottom="-10.0" top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+
+                              <!--
+                                  FIX 7: LineChart necesita maxWidth y
+                                          o nunca se estirará horizontalmente.
+                              -->
+                              <LineChart maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                 <xAxis>
+                                    <CategoryAxis side="BOTTOM" />
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis side="LEFT" />
+                                 </yAxis>
+                              </LineChart>
+                           </children>
+                        </VBox>
+                     </content>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
+                     </padding>
+                  </MFXScrollPane>
+               </content>
+            </Tab>
+
+            <!-- ══════════════════ TAB 2: Top Sucursales ══════════════════ -->
+            <Tab text="Top sucursales">
+               <content>
+                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <content>
+                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                           <children>
+                              <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                 <top>
+                                    <StackPane maxWidth="1.7976931348623157E308" prefHeight="50.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Filtrar por:" StackPane.alignment="TOP_CENTER" />
+                                          <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" spacing="15.0" StackPane.alignment="BOTTOM_CENTER">
+                                             <children>
+                                                <ToggleButton mnemonicParsing="false" text="Fechas" />
+                                                <ToggleButton mnemonicParsing="false" text="Cajas" />
+                                                <ToggleButton mnemonicParsing="false" text="Trámites" />
+                                                <ToggleButton mnemonicParsing="false" text="Preferenciales" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </top>
+                                 <center>
+                                    <MFXListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <VBox.margin>
+                                    <Insets left="2.0" />
+                                 </VBox.margin>
+                              </BorderPane>
+
+                              <Label alignment="TOP_CENTER" text="Gráficos">
+                                 <VBox.margin>
+                                    <Insets bottom="-10.0" top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+
+                              <LineChart maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                 <xAxis>
+                                    <CategoryAxis side="BOTTOM" />
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis side="LEFT" />
+                                 </yAxis>
+                              </LineChart>
+                           </children>
+                        </VBox>
+                     </content>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
+                     </padding>
+                  </MFXScrollPane>
+               </content>
+            </Tab>
+
+            <!-- ══════════════════ TAB 3: Top Cajas ══════════════════ -->
+            <Tab text="Top Cajas">
+               <content>
+                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <content>
+                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                           <children>
+                              <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                 <top>
+                                    <StackPane maxWidth="1.7976931348623157E308" prefHeight="50.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Filtrar por:" StackPane.alignment="TOP_CENTER" />
+                                          <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" spacing="15.0" StackPane.alignment="BOTTOM_CENTER">
+                                             <children>
+                                                <ToggleButton mnemonicParsing="false" text="Fechas" />
+                                                <ToggleButton mnemonicParsing="false" text="Sucursal" />
+                                                <ToggleButton mnemonicParsing="false" text="Trámites" />
+                                                <ToggleButton mnemonicParsing="false" text="Preferenciales" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </top>
+                                 <center>
+                                    <MFXListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <VBox.margin>
+                                    <Insets left="2.0" />
+                                 </VBox.margin>
+                              </BorderPane>
+
+                              <Label alignment="TOP_CENTER" text="Gráficos">
+                                 <VBox.margin>
+                                    <Insets bottom="-10.0" top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+
+                              <LineChart maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                 <xAxis>
+                                    <CategoryAxis side="BOTTOM" />
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis side="LEFT" />
+                                 </yAxis>
+                              </LineChart>
+                           </children>
+                        </VBox>
+                     </content>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
+                     </padding>
+                  </MFXScrollPane>
+               </content>
+            </Tab>
+
+            <!-- ══════════════════ TAB 4: Top Trámites ══════════════════ -->
+            <Tab text="Top Trámites">
+               <content>
+                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <content>
+                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                           <children>
+                              <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                 <top>
+                                    <StackPane maxWidth="1.7976931348623157E308" prefHeight="50.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Filtrar por:" StackPane.alignment="TOP_CENTER" />
+                                          <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" spacing="15.0" StackPane.alignment="BOTTOM_CENTER">
+                                             <children>
+                                                <ToggleButton mnemonicParsing="false" text="Fechas" />
+                                                <ToggleButton mnemonicParsing="false" text="Sucursal" />
+                                                <ToggleButton mnemonicParsing="false" text="Cajas" />
+                                                <ToggleButton mnemonicParsing="false" text="Preferenciales" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </top>
+                                 <center>
+                                    <MFXListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <VBox.margin>
+                                    <Insets left="2.0" />
+                                 </VBox.margin>
+                              </BorderPane>
+
+                              <Label alignment="TOP_CENTER" text="Gráficos">
+                                 <VBox.margin>
+                                    <Insets bottom="-10.0" top="40.0" />
+                                 </VBox.margin>
+                              </Label>
+
+                              <LineChart maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                 <xAxis>
+                                    <CategoryAxis side="BOTTOM" />
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis side="LEFT" />
+                                 </yAxis>
+                              </LineChart>
+                           </children>
+                        </VBox>
+                     </content>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
+                     </padding>
+                  </MFXScrollPane>
+               </content>
+            </Tab>
+
+         </tabs>
+      </TabPane>
+   </center>
+   <top>
+      <Label text="Top de cada sección" BorderPane.alignment="BOTTOM_CENTER">
+         <BorderPane.margin>
+            <Insets bottom="2.0" top="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+</BorderPane>

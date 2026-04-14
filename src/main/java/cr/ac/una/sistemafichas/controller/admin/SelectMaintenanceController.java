@@ -37,7 +37,7 @@ public class SelectMaintenanceController extends Controller {
 
     @FXML
     private void onActionBtnIndicators(ActionEvent event) {
-        FlowController.getInstance().goView("Indicators");
+        FlowController.getInstance().goView("admin/Indicators");
     }
 
     @FXML
