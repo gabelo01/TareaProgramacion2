@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.File;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 public class SelectMaintenanceController extends Controller {
 
@@ -28,6 +29,9 @@ public class SelectMaintenanceController extends Controller {
     @FXML
     private void onActionBtnProcedures(ActionEvent event) {
         FlowController.getInstance().goView("admin/ProceduresMaintenanceView");
+        //Stage stage = (Stage)lbCompany.getScene().getWindow();
+        //FlowController.getInstance().goViewInStage("admin/Procedures", stage);
+        
     }
 
     @FXML
@@ -68,12 +72,15 @@ public class SelectMaintenanceController extends Controller {
 
     @FXML
     private void onActionBtnClean(ActionEvent event) {
-        FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
+        Stage stage = (Stage) lbCompany.getScene().getWindow();
+        FlowController.getInstance().goViewInStage("admin/SelectMaintenance",stage);
+        
     }
 
     @FXML
     private void onActionBtnExit(ActionEvent event) {
-        FlowController.getInstance().goViewReplace("admin/LoginAdminView");
+        //FlowController.getInstance().goViewReplace("admin/LoginAdminView");
+        FlowController.getInstance().goViewInWindow(CONFIG_PATH);
     }
 
     @FXML

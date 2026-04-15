@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 public class LoginAdminController extends Controller {
 
@@ -39,7 +40,8 @@ public class LoginAdminController extends Controller {
 
         if (pswPin.getText().equals(config.getAdminPin())) {
             pswPin.clear();
-            FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
+            Stage stage = (Stage) btnIngresar.getScene().getWindow();
+            FlowController.getInstance().goViewInStage("admin/SelectMaintenance",stage);
         } else {
             pswPin.clear();
             pswPin.setFloatingText("PIN incorrecto, intente de nuevo");

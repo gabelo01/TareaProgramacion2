@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.kiosk.LoginController">
+<AnchorPane fx:id="root" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.kiosk.LoginKioskController">
    <children>
       <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
@@ -47,7 +47,7 @@
                   <MFXTextField fx:id="txtId" floatingText="Ingrese su cédula" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <MFXButton maxWidth="1.7976931348623157E308" onAction="#OnActionBtn" prefHeight="43.0" prefWidth="150.0" text="INGRESAR" />
+            <MFXButton maxWidth="1.7976931348623157E308" onAction="#OnActionBtnEnter" prefHeight="43.0" prefWidth="150.0" text="INGRESAR" />
 
             <!-- Error label -->
             <Label fx:id="lblError" alignment="CENTER" maxWidth="1.7976931348623157E308" text="" visible="false" />

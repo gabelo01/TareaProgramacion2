@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 public class WaitListController extends Controller {
 
@@ -35,6 +36,8 @@ public class WaitListController extends Controller {
     private MFXButton btnCallSelected;
     @FXML
     private MFXButton btnCallByNumber;
+    
+    Stage stage = (Stage) chkPreferential.getScene().getWindow();
 
     @Override
     public void initialize() {
@@ -121,12 +124,12 @@ public class WaitListController extends Controller {
         t.setStatus("called");
         TicketService.getInstance().save();
         TicketService.getInstance().setLastCalled(t);
-        FlowController.getInstance().goViewReplace("employee/StationView");
+        FlowController.getInstance().goViewInStage("employee/StationView", stage);
     }
 
     @FXML
     private void onActionBtnBack() {
-        FlowController.getInstance().goViewReplace("employee/StationView");
+        FlowController.getInstance().goViewInStage("employee/StationView",stage);
     }
 
     protected void showAlert(String msg) {

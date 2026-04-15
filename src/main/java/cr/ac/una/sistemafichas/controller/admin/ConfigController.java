@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class ConfigController extends Controller {
 
@@ -120,6 +121,7 @@ public class ConfigController extends Controller {
         if (hasChanges && !confirmExit()) {
             return;
         }
-        FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
+        Stage stage = (Stage) txtCompanyName.getScene().getWindow();
+        FlowController.getInstance().goViewInStage("admin/SelectMaintenance", stage);
     }
 }

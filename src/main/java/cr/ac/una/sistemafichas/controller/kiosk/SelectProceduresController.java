@@ -29,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class SelectProceduresController extends Controller {
 
@@ -43,6 +44,8 @@ public class SelectProceduresController extends Controller {
     private static final String PROC_PATH    = "data/procedures.json";
 
     private static boolean preferentialOverride = false;
+    
+    Stage stage = (Stage) btnGetTicket.getScene().getWindow();
 
     public static void setPreferentialOverride(boolean value) {
         preferentialOverride = value;
@@ -84,10 +87,8 @@ public class SelectProceduresController extends Controller {
         List<Branch> branches = JsonUtil.read("data/branches.json", branchType);
         if (branches == null) return;
 
-        Branch current = branches.stream()
-                .filter(b -> b.getName().equals(branchName))
-                .findFirst()
-                .orElse(null);
+        Branch current = branches.stream().filter(b -> b.getName().equals(branchName))
+                                                                        .findFirst().orElse(null);
 
         if (current == null || current.getStations() == null) return;
 
@@ -170,12 +171,12 @@ public class SelectProceduresController extends Controller {
 
         KioskSessionManager.clearClient(); // solo para limpiar cliente, si limpio todo se borra dato de sucursal seleccionada
 
-        FlowController.getInstance().goViewReplace("kiosk/LoginView");
+        FlowController.getInstance().goViewInStage("kiosk/LoginView",stage);
     }
 
     @FXML
     private void OnActionBtnPreferential(ActionEvent event) {
-        FlowController.getInstance().goViewReplace("kiosk/Preferential");
+        FlowController.getInstance().goViewInStage("kiosk/Preferential",stage);
     }
 
     private boolean isClientPreferential(Client client) {
@@ -201,6 +202,6 @@ public class SelectProceduresController extends Controller {
     private void OnActionBtnCancel(ActionEvent event) {
         preferentialOverride = false;
         KioskSessionManager.clearClient(); // solo para limpiar cliente, si limpio todo se borra dato de sucursal seleccionada
-        FlowController.getInstance().goViewReplace("kiosk/LoginView");
+        FlowController.getInstance().goViewInStage("kiosk/LoginKioskView",stage);
     }
 }

@@ -22,13 +22,15 @@ public class App extends Application {
         FlowController.getInstance().InitializeFlow(stage, null);
         FXMLLoader loader = new FXMLLoader();
         
-        FlowController.getInstance().goViewFirst("admin/SelectMaintenance");
-        //FlowController.getInstance().goViewFirst("employee/StationLogin");
-        //FlowController.getInstance().goViewFirst("employee/StationView");
-        //FlowController.getInstance().goViewFirst("employee/StationView");
-        //FlowController.getInstance().goViewFirst("kiosk/LoginView");
-        //FlowController.getInstance().goViewFirst("projection/Projection");
-        //FlowController.getInstance().goViewFirst("kiosk/LoginView");
+        FlowController.getInstance().goViewInWindow("kiosk/SelectBranchKioskView");
+        
+        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
+        
+        //FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
+        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
+        //FlowController.getInstance().goViewInWindow("employee/StationView");
+        //FlowController.getInstance().goViewInWindow("projection/Projection");
+        //FlowController.getInstance().goViewInWindow("kiosk/LoginView");
     }
 
     static void setRoot(String fxml) throws IOException {

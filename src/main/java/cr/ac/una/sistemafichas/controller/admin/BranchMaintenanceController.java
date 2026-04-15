@@ -18,12 +18,12 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
 public class BranchMaintenanceController extends Controller {
 
-    // ──────────────── FXML ────────────────
     @FXML
     private MFXTextField txtBranchName;
     @FXML
@@ -31,10 +31,8 @@ public class BranchMaintenanceController extends Controller {
     @FXML
     private ListView<Branch> tblListBranches;
 
-    // ──────────────── PATHS ────────────────
     private static final String BRANCHES_PATH = "data/branches.json";
 
-    // ──────────────── DATA ────────────────
     private List<Branch> branches;
     private Branch selectedBranch;
 
@@ -158,7 +156,8 @@ public class BranchMaintenanceController extends Controller {
 
     @FXML
     private void onActionBtnBack() {
-        FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
+        Stage stage =  (Stage) txtBranchName.getScene().getWindow();
+        FlowController.getInstance().goViewInStage("admin/SelectMaintenance",stage);
     }
 
     @FXML

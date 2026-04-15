@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 public class StationLoginController extends Controller {
 
@@ -26,7 +27,7 @@ public class StationLoginController extends Controller {
     private MFXButton btnIngresar;
     @FXML
     private MFXButton btnSalir;
-
+   
     private static final String EMPLOYEE_PATH = "data/employees.json";
 
     @Override
@@ -73,13 +74,14 @@ public class StationLoginController extends Controller {
 
         EmployeeSessionManager.setBranch(found.getBranchName());
         EmployeeSessionManager.setStation(found.getStationName());
-
-        FlowController.getInstance().goViewReplace("employee/StationView");
+        
+        FlowController.getInstance().goMain("employee/StationView");
     }
 
     @FXML
     private void btnSalir(ActionEvent event) {
-        FlowController.getInstance().goViewReplace("kiosk/LoginView");
+        
+        FlowController.getInstance().salir();
     }
 
     private void showAlert(String msg) {

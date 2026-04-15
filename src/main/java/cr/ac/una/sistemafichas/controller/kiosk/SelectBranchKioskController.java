@@ -16,13 +16,12 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
-public class SelectBranchController extends Controller {
+public class SelectBranchKioskController extends Controller {
 
     @FXML
     private MFXListView<String> listBranches;
-
-
     private static final String BRANCH_PATH = "data/branches.json";
 
     @Override
@@ -56,7 +55,7 @@ public class SelectBranchController extends Controller {
         }
 
         KioskSessionManager.setBranch(selected);
-        FlowController.getInstance().goViewReplace("kiosk/LoginView");
+        FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
     }
 
     private void showAlert(String msg) {
