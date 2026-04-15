@@ -88,6 +88,26 @@ public class FlowController { //singlenton una sola instancia
             java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
         }
     }
+    
+        public void goMain(String NameView) { //para mandar a llamar la pantalla principal del sistema
+        try {
+            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/"+NameView+".fxml"), this.idioma)));
+            MFXThemeManager.addOn(this.mainStage.getScene(), Themes.DEFAULT, Themes.LEGACY);
+                    
+            CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
+            if (config != null && config.getLogoPath() != null) {
+                File file = new File(config.getLogoPath());
+                if (file.exists()) {
+                    mainStage.getIcons().add(new Image(file.toURI().toString()));
+                } else {
+                    System.out.println("Logo no encontrado en: " + config.getLogoPath());
+                }
+            }
+            this.mainStage.show();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
+        }
+    }
 
     public void goView(String viewName) {
         goView(viewName, "Center", null);
@@ -209,47 +229,6 @@ public class FlowController { //singlenton una sola instancia
      * 
      **************/
     
-    public void goViewFirst(String viewName) { //para iniciar la ventana la primera vez
-         try {
-            Stage stage = getMainStage();
-            FXMLLoader loader = new FXMLLoader(
-                    
-            App.class.getResource("view/" + viewName + ".fxml"), idioma);
-            Parent root = loader.load();
-            Controller controller = loader.getController();
-            controller.initialize();
-            controller.setStage(stage);
-            Scene scene = new Scene(root);
-            MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
-            stage.setScene(scene);
-            stage.setMaximized(true); // o cambiar a stage.setWidth(800); stage.setHeight(600);
-            stage.show();
-        } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error cargando vista [" + viewName + "].", ex);
-        }
-    }
-    public void goViewReplace(String viewName) { // se cambio en dev3 para que en cada llamada cree un FXMLLoader nuevo sin tener que limpiarLoader y mantiene tamaño ventana de goViewFirst() o anterior
-        try {
-            Stage stage = getMainStage();
-            FXMLLoader loader = new FXMLLoader(
-                App.class.getResource("view/" + viewName + ".fxml"), idioma);
-            Parent root = loader.load();
-        
-            // Guarda el controller y asigna el stage
-            Controller controller = loader.getController();
-            controller.initialize();
-            controller.setStage(stage);
-        
-            // Cambia solo el root, mantiene el tamaño y estado de la ventana
-            stage.getScene().setRoot(root);
-        
-        } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(FlowController.class.getName())
-                .log(Level.SEVERE, "Error cargando vista [" + viewName + "].", ex);
-        }
-    }
-    
-    
      private Stage getMainStage() {
         if (mainStage != null) return mainStage;
         mainStage = Stage.getWindows()
@@ -260,9 +239,7 @@ public class FlowController { //singlenton una sola instancia
                     .orElse(null);
         return mainStage;
     }
-      
-    
-    
+     
      /////////////////////////////////////
 
      

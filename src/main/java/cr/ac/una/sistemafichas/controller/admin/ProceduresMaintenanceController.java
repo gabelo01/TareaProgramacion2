@@ -26,6 +26,7 @@ import javafx.scene.control.Alert;
 import org.controlsfx.control.Notifications;
 import javafx.util.Duration;
 import javafx.geometry.Pos;
+import javafx.stage.Stage;
 
 public class ProceduresMaintenanceController extends Controller {
 
@@ -161,7 +162,8 @@ public class ProceduresMaintenanceController extends Controller {
 
     @FXML
     private void btnBack() {
-        FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
+        Stage stage = (Stage) txtProcedureName.getScene().getWindow();
+        FlowController.getInstance().goViewInStage("admin/SelectMaintenance",stage);
     }
 
     @FXML

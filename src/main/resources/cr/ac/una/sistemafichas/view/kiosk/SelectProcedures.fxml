@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXListView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -11,14 +10,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.kiosk.SelectProceduresController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.kiosk.SelectProceduresController">
    <children>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="10.0">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
-
-         <top>
+      
+                     <top>
             <VBox prefHeight="88.0" prefWidth="569.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -54,20 +53,18 @@
                </children>
             </VBox>
          </top>
+      
+                     <center>
+            <ScrollPane fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
 
-         <center>
-            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-               <children>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                     <content>
-                        <MFXListView fx:id="listProcedures" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="250.0" />
-                     </content>
-                  </ScrollPane>
-               </children>
-            </AnchorPane>
+                    <content>
+                        <VBox fx:id="vboxProcedures" fillWidth="true" prefWidth="500.0" spacing="10.0" style="-fx-padding: 10;" />
+                    </content>
+
+            </ScrollPane>
          </center>
-
-         <bottom>
+      
+                     <bottom>
             <VBox BorderPane.alignment="CENTER">
                <children>
                   <VBox alignment="CENTER">
@@ -77,14 +74,16 @@
                            <children>
                               <MFXButton fx:id="btnGetTicket" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#OnActionBtnGetTicket" prefHeight="80.0" prefWidth="150.0" text="OBTENER TICKET" />
                            </children>
-                           <padding><Insets top="10.0" /></padding>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
                         </HBox>
                      </children>
                   </VBox>
                </children>
             </VBox>
          </bottom>
-
-      </BorderPane>
+      
+                  </BorderPane>
    </children>
 </AnchorPane>

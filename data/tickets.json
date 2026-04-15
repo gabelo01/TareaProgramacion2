@@ -177,11 +177,12 @@
     "number": 42,
     "status": "waiting",
     "procedure": {
-      "name": "Creditos",
+      "name": "Retiros",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-12T22:24:14.444583300",
-    "branchName": "Cajon"
+    "creationDate": "2026-04-15T15:20:55.396103500",
+    "branchName": "Buenos Aires"
   }
+
 ]

@@ -13,7 +13,7 @@
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="285.0" text=" CLIENTE PREFERENCIAL" />
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="146.0" text="INGRESE PIN" />
-            <PasswordField fx:id="pswPin" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#OnActionPswPin" prefHeight="25.0" prefWidth="593.0" promptText="PIN" />
+            <PasswordField fx:id="pswPin" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="593.0" promptText="PIN" />
             <MFXButton onAction="#OnActionBtnGetFichaPreferential" text="ACTIVAR " />
             <MFXButton onAction="#OnActionBtnExit" text="Cancelar / Salir" />
          </children>

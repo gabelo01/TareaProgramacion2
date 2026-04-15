@@ -205,12 +205,14 @@ public class StationController extends Controller {
 
     @FXML
     private void onActionBtnListCurrentClient() {
-        FlowController.getInstance().goViewReplace("employee/WaitListView");
+        FlowController.getInstance().goViewInWindow("WaitListView");
     }
 
     @FXML
     private void onActionBtnIndicators() {
        FlowController.getInstance().goViewInWindow("employee/IndicatorsView");
+       
+       
     }
 
     @FXML

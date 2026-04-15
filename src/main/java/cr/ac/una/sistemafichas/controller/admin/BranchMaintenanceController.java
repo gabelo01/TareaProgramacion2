@@ -18,12 +18,12 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
 public class BranchMaintenanceController extends Controller {
 
-    // ──────────────── FXML ────────────────
     @FXML
     private MFXTextField txtBranchName;
     @FXML
@@ -31,10 +31,8 @@ public class BranchMaintenanceController extends Controller {
     @FXML
     private ListView<Branch> tblListBranches;
 
-    // ──────────────── PATHS ────────────────
     private static final String BRANCHES_PATH = "data/branches.json";
 
-    // ──────────────── DATA ────────────────
     private List<Branch> branches;
     private Branch selectedBranch;
 
@@ -117,19 +115,35 @@ public class BranchMaintenanceController extends Controller {
     private void btnDeleteBranch() {
         try {
             if (selectedBranch == null) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "No se selecciono una sucursal", "Seleccione una sucursal.");
+                Notifications.create()
+                        .title("Sucursal no seleccionada")
+                        .text("No hay ninguna sucursal seleccionada que se pueda eliminar")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(2))
+                        .showError();
                 return;
             }
+
             if (new Mensaje().showConfirmation("Eliminar Tramite", getStage(), "¿Esta seguro que desea eliminar el cliente?")) {
                 branches.remove(selectedBranch);
                 JsonUtil.write(BRANCHES_PATH, branches);
                 refreshBranches();
                 clearBranch();
-                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Se elimino la sucursal", getStage(), "Se elimino la sucursal correctamente.");
+                Notifications.create()
+                        .title("Eliminado correctamente")
+                        .text("La sucursal ha sido eliminada correctamente")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(2))
+                        .showInformation();
+                return;
             }
         } catch (Exception ex) {
-            Logger.getLogger(ProceduresMaintenanceController.class.getName()).log(Level.SEVERE, "Error eliminando la sucursal", ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Error eliminando la sucursal", getStage(), "Hubo un error al eliminar la sucursal.");
+            Notifications.create()
+                    .title("ERROR")
+                    .text("Hubo un error al eliminar la sucursal")
+                    .position(Pos.BOTTOM_RIGHT)
+                    .hideAfter(Duration.seconds(2))
+                    .showError();
         }
 
     }
@@ -142,7 +156,8 @@ public class BranchMaintenanceController extends Controller {
 
     @FXML
     private void onActionBtnBack() {
-        FlowController.getInstance().goViewReplace("admin/SelectMaintenance");
+        Stage stage =  (Stage) txtBranchName.getScene().getWindow();
+        FlowController.getInstance().goViewInStage("admin/SelectMaintenance",stage);
     }
 
     @FXML

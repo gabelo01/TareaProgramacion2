@@ -6,13 +6,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.kiosk.LoginController">
-   <children>
-      <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.kiosk.LoginKioskController">
+   <center>
+      <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" spacing="20.0">
          <padding>
             <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
          </padding>
@@ -21,7 +22,7 @@
             <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
       
-                  <Label fx:id="lblSaludation" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Gracias por Visitar " />
+                        <Label fx:id="lblSaludation" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Gracias por Visitar " />
                   <Label fx:id="lblName" text="Company Name" />
                </children>
             </HBox>
@@ -37,22 +38,22 @@
             <Label text="Si no estas registrad@ presiona boton que dice &quot;INVITADO&quot;">
                <VBox.margin>
                   <Insets top="-15.0" />
-               </VBox.margin></Label>
+               </VBox.margin>
+            </Label>
             <MFXButton maxWidth="1.7976931348623157E308" onAction="#OnActionBtnGuest" prefHeight="60.0" prefWidth="150.0" text="INVITADO" />
             <Separator prefWidth="200.0" />
-
+      
             <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="15.0">
                <children>
                   <ImageView fx:id="imgUser" fitHeight="45.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true" />
                   <MFXTextField fx:id="txtId" floatingText="Ingrese su cédula" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <MFXButton maxWidth="1.7976931348623157E308" onAction="#OnActionBtn" prefHeight="43.0" prefWidth="150.0" text="INGRESAR" />
-
-            <!-- Error label -->
+            <MFXButton maxWidth="1.7976931348623157E308" onAction="#OnActionBtnEnter" prefHeight="43.0" prefWidth="150.0" text="INGRESAR" />
+      
             <Label fx:id="lblError" alignment="CENTER" maxWidth="1.7976931348623157E308" text="" visible="false" />
-
+      
          </children>
       </VBox>
-   </children>
-</AnchorPane>
+   </center>
+</BorderPane>

@@ -10,15 +10,20 @@ import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.File;
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
-public class LoginController extends Controller {
+public class LoginKioskController extends Controller implements Initializable{
 
     @FXML private MFXTextField txtId;
     @FXML private Label lblError;
@@ -26,11 +31,12 @@ public class LoginController extends Controller {
     private static final String CLIENTS_PATH = "data/clients.json";
     private static final String CONFIG_PATH = "data/config.json";
     
-    @FXML private AnchorPane root;
+    @FXML private BorderPane root;
     @FXML private Label lblSaludation;
     @FXML private ImageView imgLogo;
     @FXML private Label lblName;
     @FXML private ImageView imgUser;
+    
 
     @Override
     public void initialize() {
@@ -39,10 +45,11 @@ public class LoginController extends Controller {
 
         if (lblError != null) lblError.setVisible(false);
         if (txtId != null) txtId.clear();
+        
     }
 
     @FXML
-    private void OnActionBtn(ActionEvent event) {
+    private void OnActionBtnEnter(ActionEvent event) {
 
         String id = txtId.getText().trim();
 
@@ -66,7 +73,9 @@ public class LoginController extends Controller {
 
         if (found != null) {
             KioskSessionManager.setCurrentClient(found);
-            FlowController.getInstance().goViewReplace("kiosk/SelectProcedures");
+            
+            FlowController.getInstance().goView("kiosk/SelectProcedures");
+            
         } else {
             showError("Cédula no encontrada. Use el botón Invitado.");
         }
@@ -94,7 +103,7 @@ public class LoginController extends Controller {
     private void OnActionBtnGuest(ActionEvent event) {
 
         KioskSessionManager.clearClient();
-        FlowController.getInstance().goViewReplace("kiosk/SelectProcedures");
+        FlowController.getInstance().goView("kiosk/SelectProcedures");
     }
 
     private void showError(String msg) {
@@ -103,4 +112,9 @@ public class LoginController extends Controller {
             lblError.setVisible(true);
         }
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    }
+
 }
