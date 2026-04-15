@@ -93,6 +93,16 @@ public class FlowController { //singlenton una sola instancia
         try {
             this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/"+NameView+".fxml"), this.idioma)));
             MFXThemeManager.addOn(this.mainStage.getScene(), Themes.DEFAULT, Themes.LEGACY);
+                    
+            CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
+            if (config != null && config.getLogoPath() != null) {
+                File file = new File(config.getLogoPath());
+                if (file.exists()) {
+                    mainStage.getIcons().add(new Image(file.toURI().toString()));
+                } else {
+                    System.out.println("Logo no encontrado en: " + config.getLogoPath());
+                }
+            }
             this.mainStage.show();
         } catch (IOException ex) {
             java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);

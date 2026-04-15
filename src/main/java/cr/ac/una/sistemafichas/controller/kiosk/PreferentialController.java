@@ -15,8 +15,6 @@ public class PreferentialController extends Controller {
     @FXML private PasswordField pswPin;
     private Label lblError;
     
-    Stage stage = (Stage) pswPin.getScene().getWindow();
-
     private static final String CONFIG_PATH = "data/config.json";
 
     @Override
@@ -35,7 +33,7 @@ public class PreferentialController extends Controller {
 
     @FXML
     private void OnActionBtnExit(ActionEvent event) {
-        FlowController.getInstance().goViewInStage("kiosk/SelectProcedures", stage);
+        FlowController.getInstance().goView("kiosk/SelectProcedures");
     }
 
     private void validatePin() {
@@ -50,7 +48,7 @@ public class PreferentialController extends Controller {
 
         if (pin != null && pin.equals(config.getAdminPin())) {
             SelectProceduresController.setPreferentialOverride(true); //activa linea de Bolean preferential o priority y luego vuelve a select procedures view
-            FlowController.getInstance().goViewInStage("kiosk/SelectProcedures", stage);
+            FlowController.getInstance().goView("kiosk/SelectProcedures");
 
         } else {
             pswPin.clear();
@@ -65,7 +63,4 @@ public class PreferentialController extends Controller {
         }
     }
 
-    @FXML
-    private void OnActionPswPin(ActionEvent event) {
-    }
 }

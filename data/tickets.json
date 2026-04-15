@@ -6,8 +6,7 @@
       "preferential": false,
       "name": "Juan Perez",
       "id": "101110111",
-      "age": "78",
-      "photo": ""
+      "age": "78"
     },
     "procedure": {
       "name": "Retiro",
@@ -24,8 +23,7 @@
       "preferential": false,
       "name": "Maria Lopez",
       "id": "202220222",
-      "age": "22",
-      "photo": ""
+      "age": "22"
     },
     "procedure": {
       "name": "Depósito",
@@ -42,8 +40,7 @@
       "preferential": false,
       "name": "Marco Segura",
       "id": "293298321",
-      "age": "45",
-      "photo": ""
+      "age": "45"
     },
     "procedure": {
       "name": "Depósito",
@@ -60,8 +57,7 @@
       "preferential": false,
       "name": "Chori Pan",
       "id": "110298321",
-      "age": "22",
-      "photo": ""
+      "age": "22"
     },
     "procedure": {
       "name": "Retiro",
@@ -78,8 +74,7 @@
       "preferential": false,
       "name": "Alonso Fonseca",
       "id": "114293221",
-      "age": "34",
-      "photo": ""
+      "age": "34"
     },
     "procedure": {
       "name": "Retiro",
@@ -177,5 +172,17 @@
     "priority": true,
     "creationDate": "2026-04-11T11:14:51.635231300",
     "branchName": "Central"
+  },
+  {
+    "number": 42,
+    "status": "waiting",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-15T15:20:55.396103500",
+    "branchName": "Buenos Aires"
   }
+
 ]

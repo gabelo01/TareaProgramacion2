@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import cr.ac.una.sistemafichas.service.CamaraService;
+import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import java.io.IOException;
 
 public class App extends Application {
@@ -22,7 +23,8 @@ public class App extends Application {
         FlowController.getInstance().InitializeFlow(stage, null);
         FXMLLoader loader = new FXMLLoader();
         
-        FlowController.getInstance().goViewInWindow("kiosk/SelectBranchKioskView");
+        KioskSessionManager.setBranch("Buenos Aires");
+        FlowController.getInstance().goMain("kiosk/LoginKioskView");
         
         //FlowController.getInstance().goViewInWindow("employee/StationLogin");
         

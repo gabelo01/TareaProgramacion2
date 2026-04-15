@@ -13,23 +13,23 @@ import cr.ac.una.sistemafichas.util.JsonUtil;
 import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import cr.ac.una.sistemafichas.util.PdfUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXListView;
 
 import java.io.File;
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
+import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 public class SelectProceduresController extends Controller {
 
@@ -38,14 +38,14 @@ public class SelectProceduresController extends Controller {
     @FXML private Label lblName;
     @FXML private Label lblClientInfo;
     @FXML private ImageView imgLogo;
-    @FXML private MFXListView<String> listProcedures;
+    @FXML private VBox vboxProcedures;
 
-    private static final String CONFIG_PATH  = "data/config.json";
-    private static final String PROC_PATH    = "data/procedures.json";
+    private static final String CONFIG_PATH = "data/config.json";
+    private static final String PROC_PATH = "data/procedures.json";
 
     private static boolean preferentialOverride = false;
-    
-    Stage stage = (Stage) btnGetTicket.getScene().getWindow();
+
+    private String selectedProcedure = null;
 
     public static void setPreferentialOverride(boolean value) {
         preferentialOverride = value;
@@ -75,20 +75,31 @@ public class SelectProceduresController extends Controller {
     }
 
     private void loadProcedures() {
-        if (listProcedures == null) return;
+        if (vboxProcedures == null){
+            return;
+        }
+
+        vboxProcedures.getChildren().clear();
 
         String branchName = KioskSessionManager.getBranch();
+
+
         if (branchName == null) {
-            showAlert("No hay sucursal seleccionada.");
-            return;
+            branchName = "Buenos Aires";
+            KioskSessionManager.setBranch(branchName);
         }
 
         Type branchType = new TypeToken<List<Branch>>(){}.getType();
         List<Branch> branches = JsonUtil.read("data/branches.json", branchType);
-        if (branches == null) return;
+        if (branches == null){
+            return;
+        }
 
-        Branch current = branches.stream().filter(b -> b.getName().equals(branchName))
-                                                                        .findFirst().orElse(null);
+        final String finalBranchName = branchName;
+        Branch current = branches.stream()
+                .filter(b -> b.getName().equalsIgnoreCase(finalBranchName))
+                .findFirst()
+                .orElse(null);
 
         if (current == null || current.getStations() == null) return;
 
@@ -107,7 +118,27 @@ public class SelectProceduresController extends Controller {
                 .filter(availableProcedures::contains)
                 .toList();
 
-        listProcedures.setItems(FXCollections.observableArrayList(filtered));
+        //crear botones de los tramites
+        for (String procName : filtered) {
+            MFXButton btn = new MFXButton(procName);
+
+            btn.setMaxWidth(Double.MAX_VALUE);
+            btn.setPrefHeight(50);
+
+            btn.setStyle(
+                    "-fx-font-size: 16px;" +
+                    "-fx-background-radius: 10;" +
+                    "-fx-padding: 10;"
+            );
+
+            btn.setOnAction(e -> seleccionarProcedimiento(procName));
+
+            vboxProcedures.getChildren().add(btn);
+        }
+    }
+
+    private void seleccionarProcedimiento(String procName) {
+        selectedProcedure = procName;
     }
 
     private void loadClientInfo() {
@@ -127,9 +158,7 @@ public class SelectProceduresController extends Controller {
     @FXML
     private void OnActionBtnGetTicket(ActionEvent event) {
 
-        String selected = (listProcedures != null)
-                ? listProcedures.getSelectionModel().getSelectedValue()
-                : null;
+        String selected = selectedProcedure;
 
         if (selected == null) {
             showAlert("Seleccione un trámite.");
@@ -169,14 +198,21 @@ public class SelectProceduresController extends Controller {
 
         preferentialOverride = false;
 
-        KioskSessionManager.clearClient(); // solo para limpiar cliente, si limpio todo se borra dato de sucursal seleccionada
+        KioskSessionManager.clearClient();
 
-        FlowController.getInstance().goViewInStage("kiosk/LoginView",stage);
+        FlowController.getInstance().goView("kiosk/LoginKioskView");
     }
 
     @FXML
     private void OnActionBtnPreferential(ActionEvent event) {
-        FlowController.getInstance().goViewInStage("kiosk/Preferential",stage);
+        FlowController.getInstance().goView("kiosk/Preferential");
+    }
+
+    @FXML
+    private void OnActionBtnCancel(ActionEvent event) {
+        preferentialOverride = false;
+        KioskSessionManager.clearClient();
+        FlowController.getInstance().goView("kiosk/LoginKioskView");
     }
 
     private boolean isClientPreferential(Client client) {
@@ -196,12 +232,5 @@ public class SelectProceduresController extends Controller {
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.show();
-    }
-
-    @FXML
-    private void OnActionBtnCancel(ActionEvent event) {
-        preferentialOverride = false;
-        KioskSessionManager.clearClient(); // solo para limpiar cliente, si limpio todo se borra dato de sucursal seleccionada
-        FlowController.getInstance().goViewInStage("kiosk/LoginKioskView",stage);
     }
 }
