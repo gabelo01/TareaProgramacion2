@@ -1,64 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" minHeight="600.0" minWidth="800.0"
-      xmlns="http://javafx.com/javafx/25"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="cr.ac.una.sistemafichas.controller.admin.MaintenanceStationController">
+<VBox alignment="TOP_CENTER" minHeight="600.0" minWidth="800.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.MaintenanceStationController">
 
    <children>
 
       <Label text="Mantenimiento de Estaciones">
          <font>
-            <Font size="18.0"/>
+            <Font size="18.0" />
          </font>
       </Label>
 
       <HBox spacing="10">
-         <Label text="Sucursal:"/>
-         <ComboBox fx:id="cmbBranches" prefWidth="250"/>
+         <Label text="Sucursal:" />
+         <ComboBox fx:id="cmbBranches" prefWidth="250" />
       </HBox>
 
       <HBox spacing="20" VBox.vgrow="ALWAYS">
 
          <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
             <children>
-               <Label text="Lista de Estaciones"/>
-               <ListView fx:id="tblListStations" VBox.vgrow="ALWAYS"/>
+               <Label text="Lista de Estaciones" />
+               <ListView fx:id="tblListStations" VBox.vgrow="ALWAYS" />
             </children>
          </VBox>
 
          <VBox spacing="10" HBox.hgrow="ALWAYS">
 
-            <TextField fx:id="txtName" promptText="Nombre estación"/>
-            <CheckBox fx:id="chkPreferential" text="Preferencial"/>
+            <TextField fx:id="txtName" promptText="Nombre estación" />
+            <CheckBox fx:id="chkPreferential" styleClass="mfx-checkbox" text="Preferencial" />
 
             <HBox spacing="15" VBox.vgrow="ALWAYS">
 
                <VBox HBox.hgrow="ALWAYS">
                   <children>
-                     <Label text="Disponibles"/>
-                     <ListView fx:id="tblListAvailableProcedures" VBox.vgrow="ALWAYS"/>
+                     <Label text="Disponibles" />
+                     <ListView fx:id="tblListAvailableProcedures" VBox.vgrow="ALWAYS" />
                   </children>
                </VBox>
 
                <VBox HBox.hgrow="ALWAYS">
                   <children>
-                     <Label text="Asignados"/>
-                     <ListView fx:id="tblListAsignedProcedures" VBox.vgrow="ALWAYS"/>
+                     <Label text="Asignados" />
+                     <ListView fx:id="tblListAsignedProcedures" VBox.vgrow="ALWAYS" />
                   </children>
                </VBox>
 
             </HBox>
 
             <HBox spacing="10">
-               <Button text="Nuevo" onAction="#onActionBtnNew"/>
-               <Button text="Guardar" onAction="#onActionBtnSave"/>
-               <Button text="Eliminar" onAction="#onActionBtnDelete"/>
+               <Button onAction="#onActionBtnNew" styleClass="jfx-btn-nuevo" text="Nuevo" />
+               <Button onAction="#onActionBtnSave" styleClass="jfx-btn-agregar" text="Agregar" />
+               <Button onAction="#onActionBtnDelete" styleClass="jfx-btn-eliminar" text="Eliminar" />
             </HBox>
 
          </VBox>

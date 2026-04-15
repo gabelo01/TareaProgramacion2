@@ -34,15 +34,6 @@
           "Prestamos",
           "Creditos"
         ]
-      },
-      {
-        "name": "Caja 2",
-        "preferential": false,
-        "branchName": "Buenos Aires",
-        "procedureNames": [
-          "Creditos",
-          "Prestamos"
-        ]
       }
     ],
     "active": true

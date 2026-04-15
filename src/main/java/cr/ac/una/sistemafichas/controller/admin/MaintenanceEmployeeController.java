@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Employee;
 import cr.ac.una.sistemafichas.util.JsonUtil;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -11,12 +12,22 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 
 public class MaintenanceEmployeeController extends Controller {
 
-    @FXML private ListView<Employee> tblEmployees;
-    @FXML private TextField txtName, txtId, txtPin, txtBranch, txtStation;
+    @FXML
+    private ListView<Employee> tblEmployees;
+    @FXML
+    private MFXTextField txtName;
+    @FXML
+    private MFXTextField txtId;
+    @FXML
+    private MFXTextField txtPin;
+    @FXML
+    private MFXTextField txtBranch;
+    @FXML
+    private MFXTextField txtStation;
+    
 
     private static final String PATH = "data/employees.json";
 
@@ -30,10 +41,13 @@ public class MaintenanceEmployeeController extends Controller {
     }
 
     private void load() {
-        Type type = new TypeToken<List<Employee>>(){}.getType();
+        Type type = new TypeToken<List<Employee>>() {
+        }.getType();
         employees = JsonUtil.read(PATH, type);
 
-        if (employees == null) employees = new ArrayList<>();
+        if (employees == null) {
+            employees = new ArrayList<>();
+        }
 
         tblEmployees.getItems().setAll(employees);
     }
@@ -53,7 +67,11 @@ public class MaintenanceEmployeeController extends Controller {
 
     @FXML
     private void onNew() {
-        clear();
+        txtBranch.clear();
+        txtId.clear();
+        txtName.clear();
+        txtPin.clear();
+        txtStation.clear();
     }
 
     @FXML

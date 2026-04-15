@@ -1,0 +1,75 @@
+/*
+generales
+*/
+
+*{
+    -fx-base-color-focus:#ff3333;
+    -fx-base-color-unfocus:#4d4d4d;
+    -fx-base-color-etiquetas:#999999;
+    -fx-base-color-texto:#000000;
+    -fx-base-color-titulos:#51b6cd;
+    -fx-base-color-error:#d34336;
+    -fx-base-color-id:#00c853;
+    -mfx-main:-fx-base-color-focus;
+    -mfx-purple:-fx-base-color-focus;
+}
+
+.mfx-text-field{
+    -mfx-float-mode:BORDER;
+    -fx-font-size:14px;
+    -fx-pref-heigth:40px;
+    -fx-min-heigth:40px;
+    -fx-max-heigth:40px;
+    -fx-alignment:TOP_LEFT;
+    -fx-text-fill:-fx-base-color-titulos;
+    -fx-prompt-text-fill:-fx-base-color-etiquetas;
+}
+
+.mfx-text-field .text-field{
+    -fx-highlight-fill:-fx-base-color-focus;
+}
+
+.mfx-button{
+    -mfx-button-type:RAISED;
+    -fx-opacity:0.8;
+    -fx-content-display:left;
+    -fx-text-fill:black;
+    -fx-font-weight:bold;
+    -fx-font-size:14px;
+    -fx-aligment:center-left;
+}
+.mfx-button .mfx-ripple-generator{
+    -mfx-ripple-color:white;
+}
+
+.button:hover{
+    -fx-background-color:#ff6d00;
+}
+.mfx-checkbox {
+    -fx-font-size:15px;
+    -fx-pref-heigth:25px;
+    -fx-min-heigth:25px;
+    -fx-max-height:25px;
+    -fx-text-fill: -fx-base-color-etiquetas;
+    -mfx-main: -fx-base-color-focus;
+    -mfx-secondary: -fx-base-color-unfocus;
+}
+
+/*
+Botones
+*/
+.jfx-btn-nuevo, .jfx-btn-nuevo:armed, .jfx-btn-nuevo:focused{
+    -fx-background-color:#2196f3;
+}
+
+.jfx-btn-agregar, .jfx-btn-agregar:armed, .jfx-btn-agregar:focused{
+    -fx-background-color:#2196f3;
+}
+
+.jfx-btn-eliminar, .jfx-btn-eliminar:armed, .jfx-btn-eliminar:focused{
+    -fx-background-color:#2196f3;
+}
+
+
+
+

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 public class JsonUtil {
 
-    //private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    
     private static final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).setPrettyPrinting().create();
 
     public static <T> T read(String filePath, Class<T> tipo) {

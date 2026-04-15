@@ -23,8 +23,8 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader();
         
         
-        //FlowController.getInstance().goViewFirst("admin/SelectMaintenance");
-        FlowController.getInstance().goViewFirst("employee/StationLogin");
+        FlowController.getInstance().goViewFirst("admin/SelectMaintenance");
+        //FlowController.getInstance().goViewFirst("employee/StationLogin");
         //FlowController.getInstance().goViewFirst("employee/StationView");
         //FlowController.getInstance().goViewFirst("employee/StationView");
         //FlowController.getInstance().goViewFirst("kiosk/LoginView");
@@ -44,7 +44,6 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
-
     }
 
 }
