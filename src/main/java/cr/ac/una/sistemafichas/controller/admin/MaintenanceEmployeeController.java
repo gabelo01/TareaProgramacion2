@@ -5,6 +5,7 @@ import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.Employee;
 import cr.ac.una.sistemafichas.model.Station;
+import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import cr.ac.una.sistemafichas.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -44,6 +45,8 @@ public class MaintenanceEmployeeController extends Controller {
         load();
         loadBranches();
         setupSelection();
+        txtName.delegateSetTextFormatter(Formato.getInstance().letrasFormat(30));
+        txtPin.delegateSetTextFormatter(Formato.getInstance().integerFormat());
     }
 
     private void load() {

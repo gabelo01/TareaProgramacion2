@@ -3,7 +3,7 @@ package cr.ac.una.sistemafichas.model;
 import java.util.List;
 
 public class Station {
-    
+
     private String name;
     private boolean preferential;
     private String branchName;
@@ -29,20 +29,20 @@ public class Station {
         this.name = name;
     }
 
-    public boolean isPreferential() {
-        return preferential;
-    }
-
-    public void setPreferential(boolean preferential) {
-        this.preferential = preferential;
-    }
-
     public String getBranchName() {
         return branchName;
     }
 
     public void setBranchName(String branchName) {
         this.branchName = branchName;
+    }
+
+    public boolean isPreferential() {
+        return preferential;
+    }
+
+    public void setPreferential(boolean preferential) {
+        this.preferential = preferential;
     }
 
     public List<String> getProcedureNames() {

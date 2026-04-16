@@ -5,6 +5,7 @@ import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Employee;
 import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
+import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
@@ -27,11 +28,12 @@ public class StationLoginController extends Controller {
     private MFXButton btnIngresar;
     @FXML
     private MFXButton btnSalir;
-   
+
     private static final String EMPLOYEE_PATH = "data/employees.json";
 
     @Override
     public void initialize() {
+        pswPin.delegateSetTextFormatter(Formato.getInstance().integerFormat());
         if (pswPin != null) {
             pswPin.clear();
         }
@@ -54,7 +56,8 @@ public class StationLoginController extends Controller {
             return;
         }
 
-        Type type = new TypeToken<List<Employee>>(){}.getType();
+        Type type = new TypeToken<List<Employee>>() {
+        }.getType();
         List<Employee> employees = JsonUtil.read(EMPLOYEE_PATH, type);
 
         if (employees == null || employees.isEmpty()) {
@@ -71,10 +74,9 @@ public class StationLoginController extends Controller {
             showAlert("PIN incorrecto");
             return;
         }
+        EmployeeSessionManager.setBranchName(found.getBranchName());
+        EmployeeSessionManager.setStationName(found.getStationName());
 
-        EmployeeSessionManager.setBranch(found.getBranchName());
-        EmployeeSessionManager.setStation(found.getStationName());
-        
         FlowController.getInstance().goMain("employee/StationView");
     }
 

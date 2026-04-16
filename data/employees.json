@@ -19,5 +19,12 @@
     "pin": "1234",
     "branchName": "Cajon",
     "stationName": "Caja 1"
+  },
+  {
+    "name": "Pepito Hernandez",
+    "id": "112991222",
+    "pin": "1212",
+    "branchName": "Cajón",
+    "stationName": "Caja 2"
   }
 ]
