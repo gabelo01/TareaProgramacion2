@@ -8,15 +8,17 @@ public class Station {
     private boolean preferential;
     private String branchName;
     private List<String> procedureNames;
+    private boolean active;
 
     public Station() {
     }
 
-    public Station(String name, boolean preferential, String branchName, List<String> procedureNames) {
+    public Station(String name, boolean preferential, String branchName, List<String> procedureNames, boolean active) {
         this.name = name;
         this.preferential = preferential;
         this.branchName = branchName;
         this.procedureNames = procedureNames;
+        this.active = active;
     }
 
     public String getName() {
@@ -57,5 +59,13 @@ public class Station {
         }
         return name + " - Comun";
 
+    }
+    
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

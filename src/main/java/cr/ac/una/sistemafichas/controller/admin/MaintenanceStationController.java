@@ -19,13 +19,21 @@ import javafx.scene.input.*;
 
 public class MaintenanceStationController extends Controller {
 
-    @FXML private TextField txtName;
-    @FXML private CheckBox chkPreferential;
-    @FXML private ComboBox<String> cmbBranches;
+    @FXML
+    private TextField txtName;
+    @FXML 
+    private CheckBox chkPreferential;
+    @FXML
+    private CheckBox chkIsStationActive;
+    @FXML 
+    private ComboBox<String> cmbBranches;
 
-    @FXML private ListView<Procedure> tblListAvailableProcedures;
-    @FXML private ListView<Procedure> tblListAsignedProcedures;
-    @FXML private ListView<Station> tblListStations;
+    @FXML 
+    private ListView<Procedure> tblListAvailableProcedures;
+    @FXML
+    private ListView<Procedure> tblListAsignedProcedures;
+    @FXML 
+    private ListView<Station> tblListStations;
 
     private static final String BRANCH_PATH = "data/branches.json";
     private static final String PROCEDURES_PATH = "data/procedures.json";
@@ -91,6 +99,7 @@ public class MaintenanceStationController extends Controller {
             if (st != null) {
                 txtName.setText(st.getName());
                 chkPreferential.setSelected(st.isPreferential());
+                chkIsStationActive.setSelected(st.isActive());
 
                 List<Procedure> assigned = allProcedures.stream()
                         .filter(p -> st.getProcedureNames().contains(p.getName()))
@@ -110,6 +119,8 @@ public class MaintenanceStationController extends Controller {
     private void onActionBtnNew(ActionEvent e) {
         txtName.clear();
         chkPreferential.setSelected(false);
+        chkIsStationActive.setSelected(true);
+
         selectedStation = null;
 
         tblListAsignedProcedures.getItems().clear();
@@ -131,26 +142,38 @@ public class MaintenanceStationController extends Controller {
             return;
         }
 
-        List<String> procedures = tblListAsignedProcedures.getItems().stream()
-                .map(Procedure::getName)
-                .toList();
+        //si la estación esta activa debe tener un trámite minimo
+        if (chkIsStationActive.isSelected() && tblListAsignedProcedures.getItems().isEmpty()) {
+            new Mensaje().show(Alert.AlertType.WARNING, "Error","Una estación activa debe tener al menos un trámite asignado.");
+            return;
+        }
+
+        List<String> procedures = tblListAsignedProcedures.getItems().stream().map(Procedure::getName).toList();
 
         if (selectedStation == null) {
-            Station s = new Station(name, chkPreferential.isSelected(), currentBranch.getName(), procedures);
+            Station s = new Station(
+                    name,
+                    chkPreferential.isSelected(),
+                    currentBranch.getName(),
+                    procedures,
+                    chkIsStationActive.isSelected()
+            );
             stations.add(s);
-        } else {
+        } else {// actualiza todo
+            
             selectedStation.setName(name);
             selectedStation.setPreferential(chkPreferential.isSelected());
             selectedStation.setProcedureNames(procedures);
-        }
-
-        JsonUtil.write(BRANCH_PATH, branches);
-
-        tblListStations.getItems().setAll(stations);
-        onActionBtnNew(null);
-
-        new Mensaje().show(Alert.AlertType.INFORMATION, "OK", "Guardado");
+            selectedStation.setActive(chkIsStationActive.isSelected());
     }
+
+    JsonUtil.write(BRANCH_PATH, branches);
+
+    tblListStations.getItems().setAll(stations);
+    onActionBtnNew(null);
+
+    new Mensaje().show(Alert.AlertType.INFORMATION, "OK", "Guardado");
+}
 
     @FXML
     private void onActionBtnDelete(ActionEvent e) {
@@ -169,7 +192,6 @@ public class MaintenanceStationController extends Controller {
                 .findFirst()
                 .orElse(null);
     }
-
 
     private void dragAndDrop() {
 

@@ -77,46 +77,37 @@ public class StationController extends Controller {
             System.out.println("Error loading logo");
         }
     }
-
-//    private void loadStation() {
-//    station = JsonUtil.read(STATION_PATH, Station.class);
-//
-//    if (station == null) {
-//        lblStationName.setText("Estación no configurada");
-//        return;
-//    }
-//        lblStationName.setText(station.getName() +" | Nombre: " + station.getName() +" | Sucursal: " + station.getBranchName());
-//    }
     
     private void loadStation() {
 
         String stationName = EmployeeSessionManager.getStation();
+        String branchName = EmployeeSessionManager.getBranch();
 
-        if (stationName == null) {
+        if (stationName == null || branchName == null) {
             lblStationName.setText("Sin estación asignada");
             return;
         }
 
-        Type type = new TypeToken<List<Station>>(){}.getType();
-        List<Station> stations = JsonUtil.read("data/station.json", type);
+        Type type = new TypeToken<List<Branch>>(){}.getType();
+        List<Branch> branches = JsonUtil.read("data/branches.json", type);
 
-        if (stations == null){
+        if (branches == null){
             return;
         }
 
-        station = stations.stream()
-                .filter(s -> s.getName().equals(stationName))
-                .findFirst()
-                .orElse(null);
+        station = branches.stream().filter(b -> b.getName().equalsIgnoreCase(branchName))
+            .flatMap(b -> b.getStations().stream()).filter(s -> s.getName().equalsIgnoreCase(stationName))
+            .findFirst().orElse(null);
 
         if (station != null) {
             lblStationName.setText(
-                 station.getName() + " | Sucursal: " + station.getBranchName()
+                    station.getName() + " | Sucursal: " + station.getBranchName()
             );
         } else {
             lblStationName.setText("Estación no encontrada");
         }
     }
+    
     private void startClock() {
         if (clockTimeline != null) clockTimeline.stop();
 
@@ -159,6 +150,11 @@ public class StationController extends Controller {
 
         if (station == null || station.getProcedureNames() == null) {
             showAlert("Estación no configurada.");
+            return;
+        }
+
+        if (!station.isActive()) {
+            showAlert("La estación está inactiva.");
             return;
         }
 
@@ -205,7 +201,7 @@ public class StationController extends Controller {
 
     @FXML
     private void onActionBtnListCurrentClient() {
-        FlowController.getInstance().goViewInWindow("WaitListView");
+        FlowController.getInstance().goViewInWindow("employee/WaitListView");
     }
 
     @FXML
@@ -227,9 +223,13 @@ public class StationController extends Controller {
             showAlert("Estación no configurada.");
             return;
         }
+
+        if (!station.isActive()) {
+            showAlert("La estación está inactiva.");
+            return;
+        }
         
         TicketService service = TicketService.getInstance();
-
         Ticket t = service.getTickets().stream().filter(x -> "waiting".equals(x.getStatus())).filter(x -> x.getPriority()).filter(x -> x.getProcedure() != null)
                       .filter(x -> station.getProcedureNames().contains(x.getProcedure().getName())).findFirst().orElse(null);
 

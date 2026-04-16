@@ -80,8 +80,7 @@ public class StationLoginController extends Controller {
 
     @FXML
     private void btnSalir(ActionEvent event) {
-        
-        FlowController.getInstance().salir();
+        getStage().close();
     }
 
     private void showAlert(String msg) {

@@ -110,10 +110,8 @@ public class SelectProceduresController extends Controller {
         List<Procedure> allProcedures = JsonUtil.read(PROC_PATH, procType);
         if (allProcedures == null) return;
 
-        List<String> availableProcedures = current.getStations().stream()
-                .flatMap(st -> st.getProcedureNames().stream())
-                .distinct()
-                .toList();
+        List<String> availableProcedures = current.getStations().stream().filter(st -> st.isActive()) //solo tramites de estaciones activas
+                                                       .flatMap(st -> st.getProcedureNames().stream()).distinct().toList();
 
         List<String> filtered = allProcedures.stream()
                 .filter(Procedure::isActive)

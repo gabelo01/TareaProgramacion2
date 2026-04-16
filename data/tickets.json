@@ -97,7 +97,7 @@
   },
   {
     "number": 36,
-    "status": "waiting",
+    "status": "called",
     "client": {
       "preferential": false,
       "name": "anddy",

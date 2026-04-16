@@ -3,21 +3,21 @@
     "name": "Juan Perez",
     "id": "123",
     "pin": "1111",
-    "branchName": "Central",
+    "branchName": "Buenos Aires",
     "stationName": "Caja 1"
   },
   {
     "name": "Maria Lopez",
     "id": "456",
     "pin": "2222",
-    "branchName": "Central",
+    "branchName": "Buenos Aires",
     "stationName": "Caja 2"
   },
   {
-    "name": "Carlos Acuña",
+    "name": "Carlos Ruiz",
     "id": "789",
     "pin": "1234",
-    "branchName": "Sucursal Central",
+    "branchName": "Cajon",
     "stationName": "Caja 1"
   }
 ]

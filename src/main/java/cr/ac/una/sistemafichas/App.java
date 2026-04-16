@@ -28,13 +28,14 @@ public class App extends Application {
        // FlowController.getInstance().goMain("kiosk/LoginKioskView");
         
         //Admin
-        FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
+        //FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
         
-        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
+        //Employee
+        
+        FlowController.getInstance().goViewInWindow("employee/StationLogin");
         
         //FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
-        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
-        //FlowController.getInstance().goViewInWindow("employee/StationView");
+
         //FlowController.getInstance().goViewInWindow("projection/Projection");
         //FlowController.getInstance().goViewInWindow("kiosk/LoginView");
     }
