@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import com.google.gson.reflect.TypeToken;
+import cr.ac.una.sistemafichas.model.Station;
+import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.Mensaje;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -35,11 +37,6 @@ public class BranchMaintenanceController extends Controller {
 
     private List<Branch> branches;
     private Branch selectedBranch;
-
-    public class BranchName {
-
-        public static String branchName;
-    }
 
     // ──────────────── INIT ────────────────
     @Override
@@ -156,8 +153,8 @@ public class BranchMaintenanceController extends Controller {
 
     @FXML
     private void onActionBtnBack() {
-        Stage stage =  (Stage) txtBranchName.getScene().getWindow();
-        FlowController.getInstance().goViewInStage("admin/SelectMaintenance",stage);
+        Stage stage = (Stage) txtBranchName.getScene().getWindow();
+        FlowController.getInstance().goViewInStage("admin/SelectMaintenance", stage);
     }
 
     @FXML
@@ -173,7 +170,21 @@ public class BranchMaintenanceController extends Controller {
                 return;
             }
 
-            selectedBranch.setName(txtBranchName.getText());
+            String name = txtBranchName.getText().trim();
+            if (name.isEmpty()) {
+                Notifications.create()
+                        .title("Nombre inválido")
+                        .text("El nombre no puede estar vacío")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(2))
+                        .showError();
+                return;
+            }
+            selectedBranch.setName(name);
+            selectedBranch.setActive(chkActiveBranch.isSelected());
+            for (Station s : selectedBranch.getStations()) {
+                s.setBranchName(name);
+            }
             JsonUtil.write(BRANCHES_PATH, branches);
             refreshBranches();
             Notifications.create()
@@ -198,7 +209,7 @@ public class BranchMaintenanceController extends Controller {
             new Mensaje().show(Alert.AlertType.INFORMATION, "Sucursal no Seleccionada", "Seleccione una sucursal");
             return;
         }
-        BranchName.branchName = selectedBranch.getName();
+        EmployeeSessionManager.setBranchName(selectedBranch.getName());
         FlowController.getInstance().goView("admin/MaintenanceStationView");
 
     }

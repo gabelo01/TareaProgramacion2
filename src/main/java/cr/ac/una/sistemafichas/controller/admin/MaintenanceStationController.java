@@ -64,7 +64,7 @@ public class MaintenanceStationController extends Controller {
                     .orElse(null);
 
             if (currentBranch != null) {
-                stations = currentBranch.getStations();
+                 stations = currentBranch.getStations();
                 tblListStations.getItems().setAll(stations);
             }
         });
@@ -153,7 +153,7 @@ public class MaintenanceStationController extends Controller {
     }
 
     @FXML
-    private void onActionBtnDelete(ActionEvent e) {
+    private void onActionBtnDelete(ActionEvent event) {
         if (selectedStation == null) return;
 
         stations.remove(selectedStation);

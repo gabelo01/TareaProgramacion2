@@ -3,7 +3,7 @@
     "name": "Juan Perez",
     "id": "123",
     "pin": "1111",
-    "branchName": "Central",
+    "branchName": "Buenos Aires",
     "stationName": "Caja 1"
   },
   {
@@ -12,12 +12,5 @@
     "pin": "2222",
     "branchName": "Central",
     "stationName": "Caja 2"
-  },
-  {
-    "name": "Carlos Acuña",
-    "id": "789",
-    "pin": "1234",
-    "branchName": "Sucursal Central",
-    "stationName": "Caja 1"
   }
 ]

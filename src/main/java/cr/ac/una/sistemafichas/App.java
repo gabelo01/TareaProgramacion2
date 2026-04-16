@@ -24,12 +24,12 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader();
         
         KioskSessionManager.setBranch("Buenos Aires");
-        FlowController.getInstance().goMain("kiosk/LoginKioskView");
+//        FlowController.getInstance().goMain("kiosk/LoginKioskView");
         
         //FlowController.getInstance().goViewInWindow("employee/StationLogin");
         
         //FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
-        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
+        FlowController.getInstance().goViewInWindow("employee/StationLogin");
         //FlowController.getInstance().goViewInWindow("employee/StationView");
         //FlowController.getInstance().goViewInWindow("projection/Projection");
         //FlowController.getInstance().goViewInWindow("kiosk/LoginView");

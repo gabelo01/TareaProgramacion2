@@ -11,6 +11,7 @@ import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import cr.ac.una.sistemafichas.util.KioskSessionManager;
+import cr.ac.una.sistemafichas.util.Mensaje;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -49,7 +50,7 @@ public class StationController extends Controller {
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     private Timeline refreshTimeline;
 
-   @Override
+    @Override
     public void initialize() {
         loadHeader();
         loadStation();
@@ -59,12 +60,16 @@ public class StationController extends Controller {
         updateWaitingCount();
 
         Ticket last = TicketService.getInstance().getLastCalled();
-        if (last != null) showCurrentTicket(last);
+        if (last != null) {
+            showCurrentTicket(last);
+        }
     }
 
     private void loadHeader() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
-        if (config == null) return;
+        if (config == null) {
+            return;
+        }
 
         lblCompanyName.setText(config.getCompanyName());
 
@@ -78,58 +83,40 @@ public class StationController extends Controller {
         }
     }
 
-//    private void loadStation() {
-//    station = JsonUtil.read(STATION_PATH, Station.class);
-//
-//    if (station == null) {
-//        lblStationName.setText("Estación no configurada");
-//        return;
-//    }
-//        lblStationName.setText(station.getName() +" | Nombre: " + station.getName() +" | Sucursal: " + station.getBranchName());
-//    }
-    
     private void loadStation() {
 
-        String stationName = EmployeeSessionManager.getStation();
+    String branch = EmployeeSessionManager.getBranchName();
+    String stationName = EmployeeSessionManager.getStationName();
 
-        if (stationName == null) {
-            lblStationName.setText("Sin estación asignada");
-            return;
-        }
-
-        Type type = new TypeToken<List<Station>>(){}.getType();
-        List<Station> stations = JsonUtil.read("data/station.json", type);
-
-        if (stations == null){
-            return;
-        }
-
-        station = stations.stream()
-                .filter(s -> s.getName().equals(stationName))
-                .findFirst()
-                .orElse(null);
-
-        if (station != null) {
-            lblStationName.setText(
-                 station.getName() + " | Sucursal: " + station.getBranchName()
-            );
-        } else {
-            lblStationName.setText("Estación no encontrada");
-        }
+    if (branch == null || stationName == null) {
+        lblStationName.setText("Estación no configurada");
+        return;
     }
-    private void startClock() {
-        if (clockTimeline != null) clockTimeline.stop();
 
-        clockTimeline = new Timeline(new KeyFrame(Duration.seconds(1), e ->
-            lblTime.setText(LocalDateTime.now().format(timeFormatter))
+    station = new Station();
+    station.setName(stationName);
+    station.setBranchName(branch);
+
+    lblStationName.setText(stationName + " | Sucursal: " + branch);
+}
+
+    private void startClock() {
+        if (clockTimeline != null) {
+            clockTimeline.stop();
+        }
+
+        clockTimeline = new Timeline(new KeyFrame(Duration.seconds(1), e
+                -> lblTime.setText(LocalDateTime.now().format(timeFormatter))
         ));
 
         clockTimeline.setCycleCount(Timeline.INDEFINITE);
         clockTimeline.play();
     }
-    
+
     private void startAutoRefresh() {
-        if (refreshTimeline != null) refreshTimeline.stop();
+        if (refreshTimeline != null) {
+            refreshTimeline.stop();
+        }
 
         refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
             TicketService.getInstance().load();
@@ -141,11 +128,13 @@ public class StationController extends Controller {
 
     private void updateWaitingCount() {
         long count = TicketService.getInstance().getWaitingCount();
-        lblWaitingCount.setText("" +count);
+        lblWaitingCount.setText("" + count);
     }
 
     public void showCurrentTicket(Ticket t) {
-        if (t == null) return;
+        if (t == null) {
+            return;
+        }
 
         lblCurrentNumber.setText(String.valueOf(t.getNumber()));
     }
@@ -153,7 +142,7 @@ public class StationController extends Controller {
     private void clearCurrentTicket() {
         lblCurrentNumber.setText("0");
     }
-    
+
     @FXML
     private void onActionBtnNext() {
 
@@ -183,11 +172,12 @@ public class StationController extends Controller {
                     .findFirst().orElse(null);
         }
 
-    
         if (t != null) {
             t.setStatus("called"); // Si se encontra se llamamos y se actualiza
             service.save();
-            service.setLastCalled(t);showCurrentTicket(t);updateWaitingCount();
+            service.setLastCalled(t);
+            showCurrentTicket(t);
+            updateWaitingCount();
         } else {
             showAlert("No hay tickets para los trámites de esta estación.");
         }
@@ -210,28 +200,27 @@ public class StationController extends Controller {
 
     @FXML
     private void onActionBtnIndicators() {
-       FlowController.getInstance().goViewInWindow("employee/IndicatorsView");
-       
-       
+        FlowController.getInstance().goViewInWindow("employee/IndicatorsView");
+
     }
 
     @FXML
     private void onActionBtnClient() {
         FlowController.getInstance().goViewInWindow("employee/CurrentClientView");
     }
-    
+
     @FXML
     private void onActionBtnPreferential() {
-        
+
         if (station == null || station.getProcedureNames() == null) {
             showAlert("Estación no configurada.");
             return;
         }
-        
+
         TicketService service = TicketService.getInstance();
 
         Ticket t = service.getTickets().stream().filter(x -> "waiting".equals(x.getStatus())).filter(x -> x.getPriority()).filter(x -> x.getProcedure() != null)
-                      .filter(x -> station.getProcedureNames().contains(x.getProcedure().getName())).findFirst().orElse(null);
+                .filter(x -> station.getProcedureNames().contains(x.getProcedure().getName())).findFirst().orElse(null);
 
         if (t != null) {
             t.setStatus("called");
@@ -239,11 +228,11 @@ public class StationController extends Controller {
             service.setLastCalled(t);
             showCurrentTicket(t);
             updateWaitingCount();
-         } else {
+        } else {
             showAlert("No hay tickets preferenciales en espera para esta estacion.");
         }
     }
-    
+
     protected void showAlert(String msg) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setHeaderText(null);
@@ -260,5 +249,5 @@ public class StationController extends Controller {
     private void onActionBtnExit(ActionEvent event) {
         FlowController.getInstance().salir();
     }
-    
+
 }

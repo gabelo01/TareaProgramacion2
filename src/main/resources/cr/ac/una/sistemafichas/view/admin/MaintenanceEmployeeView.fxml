@@ -42,10 +42,9 @@
 
                     <!-- BOTONES -->
                     <HBox spacing="10">
-                        <Button maxWidth="1.7976931348623157E308" onAction="#onNew" text="Nuevo" HBox.hgrow="ALWAYS" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnActionBtnEditEmployee" text="Editar" HBox.hgrow="ALWAYS" />
-                        <Button maxWidth="1.7976931348623157E308" onAction="#onSave" text="Guardar" HBox.hgrow="ALWAYS" />
-                        <Button maxWidth="1.7976931348623157E308" onAction="#onDelete" text="Eliminar" HBox.hgrow="ALWAYS" />
+                        <Button onAction="#onNew" text="Nuevo" HBox.hgrow="ALWAYS" />
+                        <Button onAction="#onSave" text="Guardar" HBox.hgrow="ALWAYS" />
+                        <Button onAction="#onDelete" text="Eliminar" HBox.hgrow="ALWAYS" />
                     </HBox>
 
                 </VBox>

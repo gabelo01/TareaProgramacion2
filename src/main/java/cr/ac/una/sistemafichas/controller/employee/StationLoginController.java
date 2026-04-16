@@ -27,7 +27,7 @@ public class StationLoginController extends Controller {
     private MFXButton btnIngresar;
     @FXML
     private MFXButton btnSalir;
-   
+
     private static final String EMPLOYEE_PATH = "data/employees.json";
 
     @Override
@@ -54,7 +54,8 @@ public class StationLoginController extends Controller {
             return;
         }
 
-        Type type = new TypeToken<List<Employee>>(){}.getType();
+        Type type = new TypeToken<List<Employee>>() {
+        }.getType();
         List<Employee> employees = JsonUtil.read(EMPLOYEE_PATH, type);
 
         if (employees == null || employees.isEmpty()) {
@@ -71,16 +72,15 @@ public class StationLoginController extends Controller {
             showAlert("PIN incorrecto");
             return;
         }
+        EmployeeSessionManager.setBranchName(found.getBranchName());
+        EmployeeSessionManager.setStationName(found.getStationName());
 
-        EmployeeSessionManager.setBranch(found.getBranchName());
-        EmployeeSessionManager.setStation(found.getStationName());
-        
         FlowController.getInstance().goMain("employee/StationView");
     }
 
     @FXML
     private void btnSalir(ActionEvent event) {
-        
+
         FlowController.getInstance().salir();
     }
 
