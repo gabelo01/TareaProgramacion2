@@ -5,6 +5,7 @@ import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Employee;
 import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
+import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
@@ -32,6 +33,7 @@ public class StationLoginController extends Controller {
 
     @Override
     public void initialize() {
+        pswPin.delegateSetTextFormatter(Formato.getInstance().integerFormat());
         if (pswPin != null) {
             pswPin.clear();
         }

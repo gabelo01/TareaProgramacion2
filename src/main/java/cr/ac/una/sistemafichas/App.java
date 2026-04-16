@@ -25,14 +25,14 @@ public class App extends Application {
         
         //Kiosko
         //KioskSessionManager.setBranch("Buenos Aires");
-       // FlowController.getInstance().goMain("kiosk/LoginKioskView");
+       //FlowController.getInstance().goMain("kiosk/LoginKioskView");
         
         //Admin
         //FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
         
         //employee
         
-        FlowController.getInstance().goViewInWindow("employee/StationLogin");
+        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
         
         //FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
 

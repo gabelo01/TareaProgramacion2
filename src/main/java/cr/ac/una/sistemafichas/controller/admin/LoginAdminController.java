@@ -3,6 +3,7 @@ package cr.ac.una.sistemafichas.controller.admin;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
+import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
@@ -30,8 +31,7 @@ public class LoginAdminController extends Controller implements Initializable{
 
     @Override
     public void initialize() {
-        // los botones ya tienen onAction en el FXML
-        // solo limpiamos el campo al entrar
+        pswPin.delegateSetTextFormatter(Formato.getInstance().integerFormat());
         pswPin.clear();
     }
     @FXML

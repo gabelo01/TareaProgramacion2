@@ -205,5 +205,38 @@
     "priority": false,
     "creationDate": "2026-04-15T19:11:45.873756100",
     "branchName": "Buenos Aires"
+  },
+  {
+    "number": 45,
+    "status": "waiting",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T00:27:30.417531300",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 46,
+    "status": "waiting",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T00:27:43.513683900",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 47,
+    "status": "waiting",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": true,
+    "creationDate": "2026-04-16T00:28:34.321953700",
+    "branchName": "Buenos Aires"
   }
 ]

@@ -3,7 +3,9 @@ package cr.ac.una.sistemafichas.controller.kiosk;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
+import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,13 +14,15 @@ import javafx.stage.Stage;
 
 public class PreferentialController extends Controller {
 
-    @FXML private PasswordField pswPin;
+    @FXML 
+    private MFXPasswordField pswPin;
     private Label lblError;
     
     private static final String CONFIG_PATH = "data/config.json";
 
     @Override
     public void initialize() {
+        pswPin.delegateSetTextFormatter(Formato.getInstance().integerFormat());
         if (pswPin != null) pswPin.clear();
         if (lblError != null) {
             lblError.setVisible(false);

@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.model.Station;
 import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
+import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.Mensaje;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class BranchMaintenanceController extends Controller {
     public void initialize() {
         loadData();
         setupSelection();
+        txtBranchName.delegateSetTextFormatter(Formato.getInstance().letrasFormat(30));
         chkActiveBranch.selectedProperty().addListener((obs, oldVal, newVal) -> {
             if (selectedBranch != null) {
                 selectedBranch.setActive(newVal);

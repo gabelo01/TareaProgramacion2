@@ -13,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import com.google.gson.reflect.TypeToken;
+import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.Mensaje;
 import java.io.File;
 import java.lang.reflect.Type;
@@ -49,6 +50,7 @@ public class ProceduresMaintenanceController extends Controller {
     public void initialize() {
         loadData();
         setupSelection();
+        txtProcedureName.delegateSetTextFormatter(Formato.getInstance().letrasFormat(30));
         chkActiveProcedure.selectedProperty().addListener((obs, oldVal, newVal) -> {
             if (selectedProcedure != null) {
                 selectedProcedure.setActive(newVal);

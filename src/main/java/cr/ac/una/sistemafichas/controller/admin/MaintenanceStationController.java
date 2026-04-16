@@ -5,8 +5,10 @@ import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.Procedure;
 import cr.ac.una.sistemafichas.model.Station;
+import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import cr.ac.una.sistemafichas.util.Mensaje;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import javafx.scene.input.*;
 public class MaintenanceStationController extends Controller {
 
     @FXML
-    private TextField txtName;
+    private MFXTextField txtName;
     @FXML 
     private CheckBox chkPreferential;
     @FXML

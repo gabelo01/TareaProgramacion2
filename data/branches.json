@@ -26,26 +26,25 @@
     "active": true
   },
   {
-    "name": "Cajon",
+    "name": "Cajón",
     "stations": [
       {
         "name": "Caja 1",
         "preferential": true,
-        "branchName": "Cajon",
+        "branchName": "Cajón",
         "procedureNames": [
-          "Prestamos",
-          "Creditos"
+          "Prestamos"
         ],
         "active": true
       },
       {
         "name": "Caja 2",
         "preferential": false,
-        "branchName": "Cajon",
+        "branchName": "Cajón",
         "procedureNames": [
           "Retiros"
         ],
-        "active": true
+        "active": false
       }
     ],
     "active": true
