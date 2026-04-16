@@ -28,11 +28,10 @@ public class App extends Application {
        // FlowController.getInstance().goMain("kiosk/LoginKioskView");
         
         //Admin
-        //FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
+        FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
         
         //Employee
-        
-        FlowController.getInstance().goViewInWindow("employee/StationLogin");
+        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
         
         //FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
 
