@@ -62,6 +62,18 @@ Botones
     -fx-background-color:#2196f3;
 }
 
+.jfx-btn-nuevo > ImageView{
+    
+    -fx-image: url("../resources/Save.png");
+    
+}
+
+.jfx-btn-nuevo-empleados > ImageView{
+    
+    -fx-image: url("../resources/Employees.png");
+    
+}
+
 .jfx-btn-agregar, .jfx-btn-agregar:armed, .jfx-btn-agregar:focused{
     -fx-background-color:#2196f3;
 }

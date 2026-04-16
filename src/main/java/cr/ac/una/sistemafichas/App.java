@@ -24,7 +24,7 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader();
         
         //Kiosko
-        KioskSessionManager.setBranch("Buenos Aires");
+        //KioskSessionManager.setBranch("Buenos Aires");
        // FlowController.getInstance().goMain("kiosk/LoginKioskView");
         
         //Admin
