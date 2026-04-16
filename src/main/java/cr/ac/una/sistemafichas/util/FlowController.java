@@ -26,6 +26,7 @@ public class FlowController { //singlenton una sola instancia
 
     private static FlowController INSTANCE = null;
     private static Stage mainStage;
+
     private static ResourceBundle idioma; //para manejar diferentes idiomas en la interfaz
     private static HashMap<String, FXMLLoader> loaders = new HashMap<>(); //almacenar todas las vistas FXML que vamos cargando
 
@@ -170,6 +171,7 @@ public class FlowController { //singlenton una sola instancia
         Controller controller = loader.getController();// obtiene el controller de ese loader 
         controller.initialize();
         Stage stage = new Stage();
+
         
          try {  // este lo agregue para poder meter la imagen en la ventana desde el logo path que esta en el json de config
             CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);

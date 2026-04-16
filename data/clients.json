@@ -9,12 +9,19 @@
     "preferential": true,
     "name": "anddy",
     "id": "119830836",
-    "age": "2006-12-14"
+    "age": "2006-12-14",
+    "photoPath": "data\\fotos-clientes\\client_1776308789803.png"
   },
   {
     "preferential": false,
     "name": "Ashley",
     "id": "112332112",
     "age": "2007-06-14"
+  },
+  {
+    "preferential": false,
+    "name": "Isaac",
+    "id": "12345678",
+    "age": "2002-03-11"
   }
 ]

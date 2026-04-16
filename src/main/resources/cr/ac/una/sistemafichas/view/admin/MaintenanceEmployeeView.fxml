@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -15,7 +16,6 @@
 
         <VBox spacing="15" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
 
-            <!-- TÍTULO -->
             <Label alignment="CENTER" text="Mantenimiento de Empleados">
                 <font>
                     <Font size="18.0" />
@@ -24,29 +24,33 @@
 
             <HBox spacing="20" VBox.vgrow="ALWAYS">
 
-                <!-- LISTA EMPLEADOS -->
                 <VBox spacing="5" HBox.hgrow="ALWAYS">
                     <Label text="Lista de Empleados" />
                     <ListView fx:id="tblEmployees" VBox.vgrow="ALWAYS" />
                 </VBox>
-
-                <!-- FORMULARIO -->
+                
                 <VBox spacing="10" HBox.hgrow="ALWAYS">
+                     <MFXButton onAction="#onNew" text="Nuevo" />
 
-                    <TextField fx:id="txtName" promptText="Nombre" />
-                    <TextField fx:id="txtId" promptText="ID" />
-                    <TextField fx:id="txtPin" promptText="PIN" />
+                    <MFXTextField fx:id="txtName" floatingText="Nombre" maxWidth="1.7976931348623157E308" />
+                    <MFXTextField fx:id="txtId" floatingText="ID" maxWidth="1.7976931348623157E308" />
+                    <MFXTextField fx:id="txtPin" floatingText="PIN" maxWidth="1.7976931348623157E308" />
 
-                    <TextField fx:id="txtBranch" promptText="Sucursal" />
-                    <TextField fx:id="txtStation" promptText="Estación" />
+                    <MFXTextField fx:id="txtBranch" floatingText="Sucursal" maxWidth="1.7976931348623157E308" />
+                    <MFXTextField fx:id="txtStation" floatingText="Estación" maxWidth="1.7976931348623157E308" />
 
-                    <!-- BOTONES -->
                     <HBox spacing="10">
-                        <Button maxWidth="1.7976931348623157E308" onAction="#onNew" text="Nuevo" HBox.hgrow="ALWAYS" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#OnActionBtnEditEmployee" text="Editar" HBox.hgrow="ALWAYS" />
-                        <Button maxWidth="1.7976931348623157E308" onAction="#onSave" text="Guardar" HBox.hgrow="ALWAYS" />
-                        <Button maxWidth="1.7976931348623157E308" onAction="#onDelete" text="Eliminar" HBox.hgrow="ALWAYS" />
+                        <MFXButton onAction="#OnActionBtnEditEmployee" text="Editar" HBox.hgrow="ALWAYS" />
+                        <MFXButton onAction="#onDelete" text="Eliminar" HBox.hgrow="ALWAYS" />
                     </HBox>
+               <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                           <MFXButton onAction="#onSave" text="Guardar" HBox.hgrow="ALWAYS" />
+                  </children>
+               </HBox>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
 
                 </VBox>
 

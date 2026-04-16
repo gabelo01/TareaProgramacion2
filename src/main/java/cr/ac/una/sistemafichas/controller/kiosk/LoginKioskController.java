@@ -85,7 +85,7 @@ public class LoginKioskController extends Controller implements Initializable{
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         if (config == null) return;
 
-        if (lblName != null) {
+        if (lblName != null){
             lblName.setText(config.getCompanyName());
         }
 
@@ -95,7 +95,7 @@ public class LoginKioskController extends Controller implements Initializable{
                 imgLogo.setImage(new Image(file.toURI().toString()));
             }
         } catch (Exception e) {
-            System.out.println("Error cargando el logo");
+            System.out.println("Error cargando logo");
         }
     }
 
@@ -115,6 +115,12 @@ public class LoginKioskController extends Controller implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        loadHeader();
+        KioskSessionManager.clearClient();
+
+        if (lblError != null) lblError.setVisible(false);
+        if (txtId != null) txtId.clear();
+        
     }
 
 }
