@@ -238,5 +238,16 @@
     "priority": true,
     "creationDate": "2026-04-16T00:28:34.321953700",
     "branchName": "Buenos Aires"
+  },
+  {
+    "number": 48,
+    "status": "waiting",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T01:25:43.289986300",
+    "branchName": "Buenos Aires"
   }
 ]
