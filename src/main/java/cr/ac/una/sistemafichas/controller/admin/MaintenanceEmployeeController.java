@@ -11,7 +11,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.ListView;
@@ -20,19 +19,12 @@ import org.controlsfx.control.Notifications;
 
 public class MaintenanceEmployeeController extends Controller {
 
-    @FXML
-    private ListView<Employee> tblEmployees;
-    @FXML
-    private MFXTextField txtName;
-    @FXML
-    private MFXTextField txtId;
-    @FXML
-    private MFXTextField txtPin;
-    @FXML
-    private MFXTextField txtBranch;
-    @FXML
-    private MFXTextField txtStation;
-    
+    @FXML private ListView<Employee> tblEmployees;
+    @FXML private MFXTextField txtName;
+    @FXML private MFXTextField txtId;
+    @FXML private MFXTextField txtPin;
+    @FXML private MFXTextField txtBranch;
+    @FXML private MFXTextField txtStation;
 
     private static final String PATH = "data/employees.json";
 
@@ -46,8 +38,7 @@ public class MaintenanceEmployeeController extends Controller {
     }
 
     private void load() {
-        Type type = new TypeToken<List<Employee>>() {
-        }.getType();
+        Type type = new TypeToken<List<Employee>>(){}.getType();
         employees = JsonUtil.read(PATH, type);
 
         if (employees == null) {
@@ -72,11 +63,7 @@ public class MaintenanceEmployeeController extends Controller {
 
     @FXML
     private void onNew() {
-        txtBranch.clear();
-        txtId.clear();
-        txtName.clear();
-        txtPin.clear();
-        txtStation.clear();
+        clear();
     }
 
     @FXML
@@ -89,8 +76,7 @@ public class MaintenanceEmployeeController extends Controller {
                     || txtBranch.getText().trim().isEmpty()
                     || txtStation.getText().trim().isEmpty()) {
 
-                new Mensaje().showConfirmation("Campos imcompletos", getStage(), "Todos los campos deben estar llenos");
-
+                new Mensaje().showConfirmation("Campos incompletos", getStage(), "Todos los campos deben estar llenos");
                 return;
             }
 
@@ -103,18 +89,20 @@ public class MaintenanceEmployeeController extends Controller {
                         txtStation.getText()
                 );
                 employees.add(e);
-                Notifications.create()
-                        .title("Guardado correctamente")
-                        .text("El empleado ha sido guardado correctamente")
-                        .position(Pos.BOTTOM_RIGHT)
-                        .hideAfter(Duration.seconds(2))
-                        .showInformation();
-                return;
+            } else {
+                selected.setName(txtName.getText());
+                selected.setId(txtId.getText());
+                selected.setPin(txtPin.getText());
+                selected.setBranchName(txtBranch.getText());
+                selected.setStationName(txtStation.getText());
             }
 
             JsonUtil.write(PATH, employees);
             load();
             clear();
+
+            Notifications.create().title("Guardado correctamente").text("El empleado ha sido guardado correctamente")
+                    .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
 
         } catch (Exception ex) {
             Notifications.create()
@@ -132,32 +120,31 @@ public class MaintenanceEmployeeController extends Controller {
             if (selected == null) {
                 Notifications.create()
                         .title("Empleado no seleccionado")
-                        .text("No hay ningún empleado seleccionado que se pueda eliminar")
+                        .text("Seleccione un empleado")
                         .position(Pos.BOTTOM_RIGHT)
                         .hideAfter(Duration.seconds(2))
                         .showError();
                 return;
             }
 
-            if (new Mensaje().showConfirmation("Eliminar Empleado", getStage(), "¿Esta seguro que desea eliminar el empleado?")) {
+            if (new Mensaje().showConfirmation("Eliminar Empleado", getStage(), "¿Está seguro?")) {
                 employees.remove(selected);
                 JsonUtil.write(PATH, employees);
                 load();
                 clear();
 
                 Notifications.create()
-                        .title("Eliminado correctamente")
-                        .text("El empleado ha sido eliminado correctamente")
+                        .title("Eliminado")
+                        .text("Empleado eliminado correctamente")
                         .position(Pos.BOTTOM_RIGHT)
                         .hideAfter(Duration.seconds(2))
                         .showInformation();
-                return;
             }
 
         } catch (Exception ex) {
             Notifications.create()
                     .title("ERROR")
-                    .text("Hubo un error al eliminar el empleado")
+                    .text("Error al eliminar")
                     .position(Pos.BOTTOM_RIGHT)
                     .hideAfter(Duration.seconds(2))
                     .showError();
@@ -175,40 +162,6 @@ public class MaintenanceEmployeeController extends Controller {
 
     @FXML
     private void OnActionBtnEditEmployee(ActionEvent event) {
-        try {
-            if (selected == null) {
-                Notifications.create()
-                        .title("Empleado no seleccionado")
-                        .text("No hay un empleado seleccionado que se pueda editar")
-                        .position(Pos.BOTTOM_RIGHT)
-                        .hideAfter(Duration.seconds(2))
-                        .showError();
-                return;
-            }
-
-            selected.setName(txtName.getText());
-            selected.setId(txtId.getText());
-            selected.setPin(txtPin.getText());
-            selected.setBranchName(txtBranch.getText());
-            selected.setStationName(txtStation.getText());
-            JsonUtil.write(PATH, employees);
-            load();
-            clear();
-
-            Notifications.create()
-                    .title("Editado correctamente")
-                    .text("El empleado ha sido editado correctamente")
-                    .position(Pos.BOTTOM_RIGHT)
-                    .hideAfter(Duration.seconds(2))
-                    .showInformation();
-            return;
-        } catch (Exception ex) {
-            Notifications.create()
-                    .title("ERROR")
-                    .text("Hubo un error al editar el empleado")
-                    .position(Pos.BOTTOM_RIGHT)
-                    .hideAfter(Duration.seconds(2))
-                    .showError();
-        }
+        onSave(); // reutiliza lógica
     }
 }

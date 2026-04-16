@@ -58,7 +58,9 @@ public class SelectMaintenanceController extends Controller {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         if (config == null) return;
 
-        if (lbCompany != null) lbCompany.setText(config.getCompanyName());
+        if (lbCompany != null){
+            lbCompany.setText(config.getCompanyName());
+        }
 
         try {
             File file = new File(config.getLogoPath());
@@ -86,6 +88,11 @@ public class SelectMaintenanceController extends Controller {
     @FXML
     private void onActionBtnEmployees(ActionEvent event) {
         FlowController.getInstance().goView("admin/MaintenanceEmployeeView");
+    }
+
+    @FXML
+    private void onActionBtnProceduresForStation(ActionEvent event) {
+        FlowController.getInstance().goView("admin/MaintenanceStationView");
     }
 
     

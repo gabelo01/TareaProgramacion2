@@ -9,15 +9,18 @@
         "procedureNames": [
           "Retiros",
           "Prestamos"
-        ]
+        ],
+        "active": true
       },
       {
         "name": "Caja 2",
         "preferential": false,
         "branchName": "Buenos Aires",
         "procedureNames": [
+          "Prestamos",
           "Creditos"
-        ]
+        ],
+        "active": true
       }
     ],
     "active": true
@@ -30,10 +33,19 @@
         "preferential": true,
         "branchName": "Cajon",
         "procedureNames": [
-          "Retiros",
           "Prestamos",
           "Creditos"
-        ]
+        ],
+        "active": true
+      },
+      {
+        "name": "Caja 2",
+        "preferential": false,
+        "branchName": "Cajon",
+        "procedureNames": [
+          "Retiros"
+        ],
+        "active": true
       }
     ],
     "active": true

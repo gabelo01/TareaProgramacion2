@@ -6,13 +6,17 @@ import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class LoginAdminController extends Controller {
+public class LoginAdminController extends Controller implements Initializable{
 
     @FXML private MFXPasswordField pswPin;
     @FXML private MFXButton btnIngresar;
@@ -21,6 +25,8 @@ public class LoginAdminController extends Controller {
 
     @FXML
     private MFXButton btnSalir;
+    @FXML
+    private AnchorPane root;
 
     @Override
     public void initialize() {
@@ -28,9 +34,8 @@ public class LoginAdminController extends Controller {
         // solo limpiamos el campo al entrar
         pswPin.clear();
     }
-
     @FXML
-    private void btnIngresar() {
+    private void  OnActionBtnIngresar() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
 
         if (config == null) {
@@ -40,16 +45,18 @@ public class LoginAdminController extends Controller {
 
         if (pswPin.getText().equals(config.getAdminPin())) {
             pswPin.clear();
-            Stage stage = (Stage) btnIngresar.getScene().getWindow();
-            FlowController.getInstance().goViewInStage("admin/SelectMaintenance",stage);
+            
+            FlowController.getInstance().goMain("admin/SelectMaintenance");
+            getStage().close();
+            
         } else {
             pswPin.clear();
+     
             pswPin.setFloatingText("PIN incorrecto, intente de nuevo");
         }
     }
-
     @FXML
-    private void btnSalir(ActionEvent event) {
+    private void OnActionBtnSalir(ActionEvent event) {
         pswPin.clear();
         FlowController.getInstance().salir();
     }
@@ -57,8 +64,15 @@ public class LoginAdminController extends Controller {
     @FXML
         private void onKeyPressedIngresar(KeyEvent event) {
             if (event.getCode() == KeyCode.ENTER) {
-            btnIngresar();
+            OnActionBtnIngresar();
         }
     }   
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+    }
+
+
  
 }

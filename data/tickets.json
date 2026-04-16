@@ -86,7 +86,7 @@
   },
   {
     "number": 35,
-    "status": "waiting",
+    "status": "called",
     "procedure": {
       "name": "Retiros",
       "active": true
@@ -97,7 +97,7 @@
   },
   {
     "number": 36,
-    "status": "waiting",
+    "status": "called",
     "client": {
       "preferential": false,
       "name": "anddy",
@@ -114,7 +114,7 @@
   },
   {
     "number": 37,
-    "status": "waiting",
+    "status": "called",
     "procedure": {
       "name": "Creditos",
       "active": true
@@ -125,7 +125,7 @@
   },
   {
     "number": 38,
-    "status": "waiting",
+    "status": "called",
     "procedure": {
       "name": "Retiros",
       "active": true
@@ -136,7 +136,7 @@
   },
   {
     "number": 39,
-    "status": "waiting",
+    "status": "called",
     "client": {
       "preferential": true,
       "name": "anddy",
@@ -153,7 +153,7 @@
   },
   {
     "number": 40,
-    "status": "waiting",
+    "status": "called",
     "procedure": {
       "name": "Retiros",
       "active": true
@@ -164,7 +164,7 @@
   },
   {
     "number": 41,
-    "status": "waiting",
+    "status": "called",
     "procedure": {
       "name": "Retiros",
       "active": true
@@ -175,7 +175,7 @@
   },
   {
     "number": 42,
-    "status": "waiting",
+    "status": "called",
     "procedure": {
       "name": "Retiros",
       "active": true
@@ -183,6 +183,27 @@
     "priority": false,
     "creationDate": "2026-04-15T15:20:55.396103500",
     "branchName": "Buenos Aires"
+  },
+  {
+    "number": 43,
+    "status": "called",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-15T19:04:00.776813300",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 44,
+    "status": "called",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-15T19:11:45.873756100",
+    "branchName": "Buenos Aires"
   }
-
 ]

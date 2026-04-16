@@ -32,17 +32,27 @@ import cr.ac.una.sistemafichas.util.Validador;
 
 public class MaintenanceClientController extends Controller {
 
-    @FXML private ListView<Client> listClients;
-    @FXML private MFXTextField txtClientName;
-    @FXML private MFXTextField txtClientId;
-    @FXML private MFXTextField txtClientAge;
-    @FXML private ImageView imgFoto;
+    @FXML 
+    private ListView<Client> listClients;
+    @FXML 
+    private MFXTextField txtClientName;
+    @FXML 
+    private MFXTextField txtClientId;
+    @FXML 
+    private MFXTextField txtClientAge;
+    @FXML
+    private ImageView imgClient;
+
     
     private static final String CLIENTS_PATH = "data/clients.json";
 
     private List<Client> client;
     private Client selectedClient;
     private List<Node> requeridos = new ArrayList<>();
+    private String tempPhotoPath;
+
+
+
 
     @Override
     public void initialize() {
@@ -78,62 +88,58 @@ public class MaintenanceClientController extends Controller {
                 if (newValue.getPhoto() != null) {
                     File file = new File(newValue.getPhoto());
                     if (file.exists()) {
-                        imgFoto.setImage(new Image(file.toURI().toString()));
+                        imgClient.setImage(new Image(file.toURI().toString()));
                     } else {
-                        imgFoto.setImage(null);
+                        imgClient.setImage(null);
                     }
                 } else {
-                    imgFoto.setImage(null);
+                    imgClient.setImage(null);
                 }
             }
         });
     }
-
+    
     private void clearClient() {
         txtClientName.clear();
         txtClientId.clear();
         txtClientAge.clear();
-        imgFoto.setImage(null);
+        imgClient.setImage(null);
         selectedClient = null;
+        tempPhotoPath = null; // limpiar
     }
 
     @FXML
     private void OnActionBtnAddClient(ActionEvent event) {
+
         String invalidos = Validador.validarRequeridos(requeridos);
-        try {
-            if (!invalidos.isBlank()) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "Campos vacios", "Llene todos los campos");
-                return;
-            }
 
-            String name = txtClientName.getText().trim();
-            String id   = txtClientId.getText().trim();
-            String age  = txtClientAge.getText().trim();
-
-            Client nuevo = new Client(name, id, age, null, false);
-            if (!nuevo.isValidBirthDate()) { // Validar formato de fecha usando el modelo
-                new Mensaje().show(Alert.AlertType.INFORMATION, "Fecha inválida",    
-                    "Ingrese la fecha en formato YYYY-MM-DD. Ejemplo: 2000-06-07");
-                return;
-            }
-
-            for (Client c : client) {
-                if (c.getId().equalsIgnoreCase(id)) {
-                    new Mensaje().show(Alert.AlertType.INFORMATION, "Cliente existente", "El cliente ya existe.");
-                    return;
-                }
-            }
-
-            client.add(nuevo);
-            JsonUtil.write(CLIENTS_PATH, client);
-            refreshClientes();
-            clearClient();
-            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente agregado", getStage(), "El cliente se agregó correctamente.");
-
-        } catch (Exception ex) {
-            Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, "Error agregando cliente", ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Error", getStage(), "Ocurrió un error al guardar el cliente.");
+        if (!invalidos.isBlank()) {
+            new Mensaje().show(Alert.AlertType.INFORMATION, "Campos vacios", "Llene todos los campos");
+            return;
         }
+
+        String name = txtClientName.getText().trim();
+        String id   = txtClientId.getText().trim();
+        String age  = txtClientAge.getText().trim();
+
+        Client nuevo = new Client(name, id, age, tempPhotoPath, false);
+
+        for (Client c : client) {
+            if (c.getId().equalsIgnoreCase(id)) {
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Cliente existente", "El cliente ya existe.");
+                return;
+            }
+        }
+
+        client.add(nuevo);
+        JsonUtil.write(CLIENTS_PATH, client);
+
+        refreshClientes();
+        clearClient();
+
+        tempPhotoPath = null; // para limpiar
+
+        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente agregado", getStage(), "Exito");
     }
 
     @FXML
@@ -157,7 +163,7 @@ public class MaintenanceClientController extends Controller {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar Cliente", getStage(), "Ocurrió un error eliminando el cliente.");
         }
     }
-
+    
     @FXML
     private void OnActionBtnAddPhoto(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -170,7 +176,7 @@ public class MaintenanceClientController extends Controller {
         if (selectedFile == null) return;
 
         try {
-            File folder = new File("data/images");
+            File folder = new File("data/fotos-clientes");
             if (!folder.exists()) folder.mkdirs();
 
             String fileName = "client_" + System.currentTimeMillis() + ".png";
@@ -180,19 +186,25 @@ public class MaintenanceClientController extends Controller {
             ImageIO.write(bufferedImage, "PNG", destinationFile);
 
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-            imgFoto.setImage(image);
+            imgClient.setImage(image);
 
-            if (selectedClient != null) {
-                selectedClient.setPhoto(destinationFile.getPath());
+            tempPhotoPath = destinationFile.getPath(); // guardar temporal
+
+      
+            if (selectedClient != null) {   //guardar directo si esta editando
+            selectedClient.setPhoto(tempPhotoPath);
+
+                JsonUtil.write(CLIENTS_PATH, client);
+
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Foto guardada", "Se actualizó la foto del cliente");
             }
 
-        } catch (Exception ex) {
-            Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, "Error cargando la imagen", ex);
-            new Mensaje().show(Alert.AlertType.INFORMATION, "Error al cargar la imagen", "Hubo un error al cargar la imagen.");
+         } catch (Exception ex) {
+            Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @FXML
+    
+   @FXML
     private void OnActionBtnEditClient(ActionEvent event) {
         try {
             if (selectedClient == null) {
@@ -210,14 +222,14 @@ public class MaintenanceClientController extends Controller {
             String id   = txtClientId.getText().trim();
             String age  = txtClientAge.getText().trim();
 
-            // Validar formato de fecha usando el modelo
             Client temp = new Client(name, id, age, null, false);
             if (!temp.isValidBirthDate()) {
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Fecha inválida",
-                    "Ingrese la fecha en formato YYYY-MM-DD. Ejemplo: 2000-06-07");
+                    "Ingrese la fecha en formato YYYY-MM-DD.");
                 return;
             }
 
+            // Validar ID duplicado
             for (Client c : client) {
                 if (c.getId().equalsIgnoreCase(id) && !c.getId().equalsIgnoreCase(selectedClient.getId())) {
                     new Mensaje().show(Alert.AlertType.INFORMATION, "ID duplicado", "Ya existe otro cliente con ese ID.");
@@ -225,18 +237,23 @@ public class MaintenanceClientController extends Controller {
                 }
             }
 
-            selectedClient.setName(name);
+            selectedClient.setName(name);// actualiza todo
             selectedClient.setId(id);
             selectedClient.setAge(age);
+
+            
+            if (tempPhotoPath != null) { // actualizar foto si cambio
+                selectedClient.setPhoto(tempPhotoPath);
+            }
 
             JsonUtil.write(CLIENTS_PATH, client);
             refreshClientes();
             clearClient();
-            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente editado", getStage(), "El cliente se actualizó correctamente.");
+
+            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente editado", getStage(), "OK");
 
         } catch (Exception ex) {
-            Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, "Error editando cliente", ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Error", getStage(), "Ocurrió un error al editar el cliente.");
+            Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

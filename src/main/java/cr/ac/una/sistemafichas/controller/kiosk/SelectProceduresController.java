@@ -25,11 +25,14 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 public class SelectProceduresController extends Controller {
 
@@ -107,10 +110,8 @@ public class SelectProceduresController extends Controller {
         List<Procedure> allProcedures = JsonUtil.read(PROC_PATH, procType);
         if (allProcedures == null) return;
 
-        List<String> availableProcedures = current.getStations().stream()
-                .flatMap(st -> st.getProcedureNames().stream())
-                .distinct()
-                .toList();
+        List<String> availableProcedures = current.getStations().stream().filter(st -> st.isActive()) //solo tramites de estaciones activas
+                                                       .flatMap(st -> st.getProcedureNames().stream()).distinct().toList();
 
         List<String> filtered = allProcedures.stream()
                 .filter(Procedure::isActive)
@@ -194,7 +195,9 @@ public class SelectProceduresController extends Controller {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         PdfUtil.generateTicketPdf(ticket, config);
 
-        showAlert("Ticket #" + ticket.getNumber() + " generado.");
+        Notifications.create().title("PDF").text("Ticket #" + ticket.getNumber() + " generado.")
+               .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
+        //showAlert("Ticket #" + ticket.getNumber() + " generado.");
 
         preferentialOverride = false;
 

@@ -23,14 +23,19 @@ public class App extends Application {
         FlowController.getInstance().InitializeFlow(stage, null);
         FXMLLoader loader = new FXMLLoader();
         
-        KioskSessionManager.setBranch("Buenos Aires");
-//        FlowController.getInstance().goMain("kiosk/LoginKioskView");
+        //Kiosko
+        //KioskSessionManager.setBranch("Buenos Aires");
+       // FlowController.getInstance().goMain("kiosk/LoginKioskView");
         
-        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
+        //Admin
+        //FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
+        
+        //employee
+        
+        FlowController.getInstance().goViewInWindow("employee/StationLogin");
         
         //FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
-        FlowController.getInstance().goViewInWindow("employee/StationLogin");
-        //FlowController.getInstance().goViewInWindow("employee/StationView");
+
         //FlowController.getInstance().goViewInWindow("projection/Projection");
         //FlowController.getInstance().goViewInWindow("kiosk/LoginView");
     }

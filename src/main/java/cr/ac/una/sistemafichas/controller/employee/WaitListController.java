@@ -36,8 +36,6 @@ public class WaitListController extends Controller {
     private MFXButton btnCallSelected;
     @FXML
     private MFXButton btnCallByNumber;
-    
-    Stage stage = (Stage) chkPreferential.getScene().getWindow();
 
     @Override
     public void initialize() {
@@ -124,12 +122,13 @@ public class WaitListController extends Controller {
         t.setStatus("called");
         TicketService.getInstance().save();
         TicketService.getInstance().setLastCalled(t);
-        FlowController.getInstance().goViewInStage("employee/StationView", stage);
+        
+        getStage().close();
     }
 
     @FXML
     private void onActionBtnBack() {
-        FlowController.getInstance().goViewInStage("employee/StationView",stage);
+        getStage().close();
     }
 
     protected void showAlert(String msg) {
