@@ -23,10 +23,19 @@ generales
     -fx-alignment:TOP_LEFT;
     -fx-text-fill:-fx-base-color-titulos;
     -fx-prompt-text-fill:-fx-base-color-etiquetas;
+    
 }
 
 .mfx-text-field .text-field{
     -fx-highlight-fill:-fx-base-color-focus;
+}
+
+.jfx-titulo-label{
+    -fx-font-size:18px;
+    -fx-padding:5 0 5 0;
+    -fx-text-fill:fx-base-color-titulos;
+    -fx-font-weight: bold;   
+    -fx-text-fill:#333333
 }
 
 .mfx-button{
@@ -45,6 +54,10 @@ generales
 .button:hover{
     -fx-background-color:#ff6d00;
 }
+
+.anchor-pane {
+    -fx-background-color: #cccccc;
+}
 .mfx-checkbox {
     -fx-font-size:15px;
     -fx-pref-heigth:25px;
@@ -54,6 +67,11 @@ generales
     -mfx-main: -fx-base-color-focus;
     -mfx-secondary: -fx-base-color-unfocus;
 }
+
+.separator{
+    -fx-background-color:#333333
+}
+
 
 /*
 Botones

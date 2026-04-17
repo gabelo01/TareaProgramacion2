@@ -15,7 +15,7 @@
             <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="99.0" prefWidth="217.0" VBox.vgrow="ALWAYS">
                <children>
                   <ImageView fx:id="imgLogo" fitHeight="45.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="lbCompany" prefHeight="17.0" prefWidth="250.0" text="Nombre de la empresa" HBox.hgrow="ALWAYS">
+                  <Label fx:id="lbCompany" prefHeight="17.0" prefWidth="250.0" styleClass="mfx-text-field" text="Nombre de la empresa" HBox.hgrow="ALWAYS">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -55,6 +55,6 @@
          </BorderPane.margin></VBox>
    </center>
    <top>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="141.0" text="PANEL ADMINISTRADOR" BorderPane.alignment="CENTER" />
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="164.0" styleClass="mfx-text-field" text="PANEL ADMINISTRADOR" BorderPane.alignment="CENTER" />
    </top>
 </BorderPane>
