@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -69,9 +70,18 @@
             </HBox>
 
             <HBox spacing="10">
-               <Button onAction="#onActionBtnNew" styleClass="jfx-btn-nuevo" text="Nuevo" />
-               <Button onAction="#onActionBtnSave" styleClass="jfx-btn-agregar" text="Guardar" />
-               <Button onAction="#onActionBtnDelete" styleClass="jfx-btn-eliminar" text="Eliminar" />
+               <Button onAction="#onActionBtnNew" styleClass="jfx-btn-nuevo" text="Nuevo">
+                  <graphic>
+                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  </graphic></Button>
+               <Button onAction="#onActionBtnSave" styleClass="jfx-btn-agregar" text="Guardar">
+                  <graphic>
+                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  </graphic></Button>
+               <Button onAction="#onActionBtnDelete" styleClass="jfx-btn-eliminar" text="Eliminar">
+                  <graphic>
+                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  </graphic></Button>
             </HBox>
 
          </VBox>

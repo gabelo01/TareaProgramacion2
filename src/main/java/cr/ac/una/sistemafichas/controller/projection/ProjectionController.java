@@ -17,6 +17,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -81,10 +82,7 @@ public class ProjectionController extends Controller {
         startClock();
         startHeaderRefresh();
         startMarquee();
-        TicketService.getInstance().addListener(() -> {
-            Platform.runLater(() -> refreshTickets());
-        });
-        refreshTickets();
+        startDataRefresh();
     }
 
     private void loadHeader() {
@@ -145,17 +143,48 @@ public class ProjectionController extends Controller {
         clockTimeline.play();
     }
 
+    private long lastModified = 0;
+
     private void startDataRefresh() {
         if (refreshTimeline != null) {
             refreshTimeline.stop();
         }
         refreshTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(3), e -> refreshTickets())
+                new KeyFrame(Duration.seconds(2), e -> {
+                    File file = new File("data/Tickets.json");
+                    long modified = file.lastModified();
+                    if (modified != lastModified) {
+                        lastModified = modified;
+                        TicketService.getInstance().load();
+                        refreshTickets();
+                    }
+                })
         );
         refreshTimeline.setCycleCount(Timeline.INDEFINITE);
         refreshTimeline.play();
-        refreshTickets();
     }
+
+//    private void llamarFicha(int numeroTicket, String nombreEstacion) {
+//        Task<Void> task = new Task<Void>() {
+//            @Override
+//            protected Void call() throws Exception {
+//                String texto = "Ticket " + numeroTicket + " pase a la estacion " + nombreEstacion;
+//                String os = System.getProperty("os.name").toLowerCase();
+//                if (os.contains("win")) {
+//                    String script = "Add-Type -AssemblyName System.Speech; "
+//                            + "$s = New-Object System.Speech.Synthesis.SpeechSynthesizer; "
+//                            + "$s.Speak('" + texto + "')";
+//                    new ProcessBuilder("powershell", "-Command", script).start().waitFor();
+//                } else if (os.contains("mac")) {
+//                    new ProcessBuilder("say", texto).start().waitFor();
+//                } else {
+//                    new ProcessBuilder("espeak", texto).start().waitFor();
+//                }
+//                return null;
+//            }
+//        };
+//        new Thread(task).start();
+//    }
 
     private void refreshTickets() {
         TicketService service = TicketService.getInstance();
@@ -173,12 +202,22 @@ public class ProjectionController extends Controller {
         }
 
         Ticket current = service.getLastCalled();
-
-        updateRow(called, 1, lblTicket1, lblStation1);
-        updateRow(called, 2, lblTicket2, lblStation2);
-        updateRow(called, 3, lblTicket3, lblStation3);
-        updateRow(called, 4, lblTicket4, lblStation4);
-
+        if (current != null) {
+            if (lblCurrentTicket != null) {
+                lblCurrentTicket.setText(String.valueOf(current.getNumber()));
+            }
+            if (lblCurrentStation != null) {
+                if (current.getStationName() != null) {
+                    lblCurrentStation.setText(current.getStationName());
+                } else {
+                    lblCurrentStation.setText("---");
+                }
+            }
+        }
+        updateRow(called, 0, lblTicket1, lblStation1);
+        updateRow(called, 1, lblTicket2, lblStation2);
+        updateRow(called, 2, lblTicket3, lblStation3);
+        updateRow(called, 3, lblTicket4, lblStation4);
     }
 
     private void updateRow(List<Ticket> list, int index,
@@ -189,7 +228,11 @@ public class ProjectionController extends Controller {
         if (index < list.size()) {
             Ticket t = list.get(index);
             lblTicket.setText(String.valueOf(t.getNumber()));
-            lblStation.setText(String.valueOf(t.getStationName()));
+            if (t.getStationName() != null) {
+                lblStation.setText(t.getStationName());
+            } else {
+                lblStation.setText("---");
+            }
         } else {
             lblTicket.setText("---");
             lblStation.setText("---");

@@ -81,7 +81,7 @@ public class BranchMaintenanceController extends Controller {
 
     // ──────────────── ACTIONS ────────────────
     @FXML
-    private void btnAddBranch() {
+    private void onActionBtnAddBranch() {
         try {
             String name = txtBranchName.getText().trim();
 
@@ -215,5 +215,7 @@ public class BranchMaintenanceController extends Controller {
         FlowController.getInstance().goView("admin/MaintenanceStationView");
 
     }
+
+    
 
 }

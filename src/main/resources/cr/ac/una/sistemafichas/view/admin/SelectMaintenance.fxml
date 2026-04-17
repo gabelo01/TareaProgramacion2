@@ -10,7 +10,7 @@
 
 <BorderPane prefHeight="560.0" prefWidth="912.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.SelectMaintenanceController">
    <left>
-      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="543.0" prefWidth="241.0" spacing="10.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="543.0" prefWidth="270.0" spacing="10.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="99.0" prefWidth="217.0" VBox.vgrow="ALWAYS">
                <children>
@@ -57,8 +57,14 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="118.0" prefWidth="217.0" spacing="10.0">
                      <children>
-                        <MFXButton onAction="#onActionBtnExit" prefHeight="30.0" text="Cerrar Sesión" HBox.hgrow="ALWAYS" />
-                        <MFXButton fx:id="btnClean" layoutX="73.0" layoutY="88.0" onAction="#onActionBtnClean" prefHeight="30.0" text="Limpiar" HBox.hgrow="ALWAYS" />
+                        <MFXButton onAction="#onActionBtnExit" prefHeight="30.0" text="Cerrar Sesión" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic></MFXButton>
+                        <MFXButton fx:id="btnClean" layoutX="73.0" layoutY="88.0" onAction="#onActionBtnClean" prefHeight="30.0" text="Limpiar" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic></MFXButton>
                      </children>
                      <padding>
                         <Insets bottom="10.0" />
