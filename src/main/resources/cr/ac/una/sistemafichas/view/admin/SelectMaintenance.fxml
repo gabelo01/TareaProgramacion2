@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="560.0" prefWidth="912.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.SelectMaintenanceController">
+<BorderPane prefHeight="560.0" prefWidth="912.0" styleClass="anchor-pane" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.SelectMaintenanceController">
    <left>
-      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="543.0" prefWidth="270.0" spacing="10.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="543.0" prefWidth="270.0" spacing="10.0" style="-fx-background-color: WHITE;" styleClass="vBox" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="99.0" prefWidth="217.0" VBox.vgrow="ALWAYS">
                <children>
                   <ImageView fx:id="imgLogo" fitHeight="45.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="lbCompany" prefHeight="17.0" prefWidth="250.0" styleClass="jfx-titulo-label" text="Nombre " HBox.hgrow="ALWAYS">
+                  <Label fx:id="lbCompany" prefHeight="17.0" prefWidth="250.0" styleClass="jfx-label-text" text="Nombre " HBox.hgrow="ALWAYS">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -27,49 +27,49 @@
             </HBox>
             <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="229.0" onAction="#onActionBtnIndicators" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-indicators" text="Indicadores" VBox.vgrow="ALWAYS">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
             <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="206.0" onAction="#onActionBtnClients" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-clients" text="Registro de Clientes" VBox.vgrow="ALWAYS">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
             <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="297.0" onAction="#onActionBtnEmployees" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-employees" text="Registro Empleados">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
-            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="207.0" onAction="#onActionBtnBranches" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-procedures" text="Sucursales" VBox.vgrow="ALWAYS">
+            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="207.0" onAction="#onActionBtnBranches" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-branches" text="Sucursales" VBox.vgrow="ALWAYS">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
-            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="198.0" onAction="#onActionBtnProcedures" prefHeight="36.0" prefWidth="191.0" text="Trámites" VBox.vgrow="ALWAYS">
+            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="198.0" onAction="#onActionBtnProcedures" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-procedures" text="Trámites" VBox.vgrow="ALWAYS">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
-            <MFXButton alignment="BASELINE_LEFT" layoutX="23.0" layoutY="271.0" onAction="#onActionBtnProceduresForStation" prefHeight="36.0" prefWidth="191.0" text="Estación">
+            <MFXButton alignment="BASELINE_LEFT" layoutX="23.0" layoutY="271.0" onAction="#onActionBtnProceduresForStation" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-station" text="Estación">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
-            <MFXButton alignment="BASELINE_LEFT" onAction="#onActionBtnConfig" prefHeight="36.0" prefWidth="191.0" text="Configuración General" VBox.vgrow="ALWAYS">
+            <MFXButton alignment="BASELINE_LEFT" onAction="#onActionBtnConfig" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-settings" text="Configuración General" VBox.vgrow="ALWAYS">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
-            <MFXButton fx:id="btnClean" onAction="#onActionBtnClean" prefHeight="40.0" prefWidth="142.0" text="Limpiar">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-            </MFXButton>
             <VBox alignment="BOTTOM_LEFT" prefHeight="210.0" prefWidth="217.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="118.0" prefWidth="217.0" spacing="10.0">
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="270.0" spacing="10.0">
                      <children>
-                        <MFXButton onAction="#onActionBtnExit" prefHeight="40.0" prefWidth="142.0" styleClass="jfx-btn-exit" text="Cerrar Sesión" HBox.hgrow="ALWAYS">
+                        <MFXButton onAction="#onActionBtnExit" prefHeight="40.0" prefWidth="142.0" styleClass="jfx-btn-exit" text="Salir" HBox.hgrow="ALWAYS">
                            <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </MFXButton>
+                        <MFXButton fx:id="btnClean" onAction="#onActionBtnClean" prefHeight="40.0" prefWidth="142.0" styleClass="jfx-btn-clean" text="Limpiar">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                            </graphic>
                         </MFXButton>
                      </children>
                      <padding>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </HBox>
                </children>
@@ -78,7 +78,7 @@
       </VBox>
    </left>
    <center>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" styleClass="vBox" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </BorderPane.margin></VBox>

@@ -153,11 +153,6 @@ public class BranchMaintenanceController extends Controller {
         selectedBranch = null;
     }
 
-    @FXML
-    private void onActionBtnBack() {
-        Stage stage = (Stage) txtBranchName.getScene().getWindow();
-        FlowController.getInstance().goViewInStage("admin/SelectMaintenance", stage);
-    }
 
     @FXML
     private void OnActionBtnEditBranch(ActionEvent event) {

@@ -6,30 +6,41 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.LoginAdminController">
+<AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="anchor-pane" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.LoginAdminController">
    <children>
-      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="391.0" prefWidth="624.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="391.0" prefWidth="624.0" spacing="10.0" styleClass="vBox" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
          <children>
-            <Label prefHeight="38.0" prefWidth="215.0" text="ACCESO ADMINISTRADOR">
+            <Label prefHeight="38.0" prefWidth="231.0" styleClass="jfx-titulo-label" text="ACCESO ADMINISTRADOR">
                <VBox.margin>
-                  <Insets bottom="50.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <Label fx:id="lblCompanyName" styleClass="jfx-label" text="Nombre Empresa">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+            <ImageView fx:id="imgLogo" fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
+            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>
-                  <MFXPasswordField fx:id="pswPin" alignment="CENTER" floatMode="BORDER" floatingText="PIN" maxWidth="1.7976931348623157E308" onKeyPressed="#onKeyPressedIngresar" prefHeight="18.0" prefWidth="604.0">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="35.0" right="35.0" top="10.0" />
-                     </VBox.margin>
-                  </MFXPasswordField>
+                  <ImageView fx:id="imgPassword" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+                  <MFXPasswordField fx:id="pswPin" alignment="CENTER" floatingText="PIN" maxWidth="1.7976931348623157E308" onKeyPressed="#onKeyPressedIngresar" prefHeight="18.0" prefWidth="604.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="104.0" prefWidth="624.0">
+               <children>
                   <Label />
-                  <MFXButton fx:id="btnIngresar" onAction="#OnActionBtnIngresar" prefHeight="45.0" prefWidth="234.0" text="Ingresar">
+                  <MFXButton fx:id="btnIngresar" onAction="#OnActionBtnIngresar" prefHeight="45.0" prefWidth="234.0" styleClass="jfx-btn-add" text="Ingresar">
                      <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
@@ -37,16 +48,19 @@
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </MFXButton>
-                  <MFXButton fx:id="btnSalir" layoutX="205.0" layoutY="125.0" onAction="#OnActionBtnSalir" prefHeight="45.0" prefWidth="234.0" text="Salir">
+                  <MFXButton fx:id="btnSalir" layoutX="205.0" layoutY="125.0" onAction="#OnActionBtnSalir" prefHeight="45.0" prefWidth="234.0" styleClass="jfx-btn-exit" text="Salir">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic></MFXButton>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </VBox>
          </children>
       </VBox>
    </children>
    <padding>
-      <Insets top="20.0" />
+      <Insets bottom="20.0" top="20.0" />
    </padding>
 </AnchorPane>

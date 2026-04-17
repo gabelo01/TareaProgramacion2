@@ -250,7 +250,7 @@ public class MaintenanceClientController extends Controller {
             refreshClientes();
             clearClient();
 
-            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente editado", getStage(), "OK");
+            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente editado", getStage(), "Se a editado correctamente");
 
         } catch (Exception ex) {
             Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, null, ex);

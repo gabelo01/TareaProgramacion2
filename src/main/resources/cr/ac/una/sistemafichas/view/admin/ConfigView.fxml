@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="375.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.ConfigController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="375.0" prefWidth="664.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.ConfigController">
    <children>
-      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="375.0" prefWidth="664.0" spacing="20.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="375.0" prefWidth="664.0" spacing="20.0" styleClass="vBox" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
          <children>
             <HBox prefHeight="49.0" prefWidth="642.0">
                <children>
                
-                      <Label styleClass="title" text="Configuración general">
+                      <Label styleClass="jfx-titulo-label" text="Configuración general">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -27,25 +27,25 @@
             </HBox>
          
                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10">
-                 <Label minWidth="150" styleClass="label-field" text="Nombre empresa:" />
-                 <TextField fx:id="txtCompanyName" styleClass="input-field" HBox.hgrow="ALWAYS">
+                 <Label minWidth="150" styleClass="jfx-label" text="Nombre empresa:" />
+                 <TextField fx:id="txtCompanyName" styleClass="text-field" HBox.hgrow="ALWAYS">
                   <HBox.margin>
                      <Insets right="25.0" />
                   </HBox.margin></TextField>
              </HBox>
          
                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10">
-                 <Label minWidth="150" styleClass="label-field" text="PIN administrador:" />
-                 <PasswordField fx:id="txtPin" styleClass="input-field" HBox.hgrow="ALWAYS">
+                 <Label minWidth="150" styleClass="jfx-label" text="PIN administrador:" />
+                 <PasswordField fx:id="txtPin" styleClass="text-field" HBox.hgrow="ALWAYS">
                   <HBox.margin>
                      <Insets right="25.0" />
                   </HBox.margin></PasswordField>
              </HBox>
          
                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10">
-                 <Label minWidth="150" styleClass="label-field" text="Logo (ruta):" />
-                 <TextField fx:id="txtLogo" styleClass="input-field" HBox.hgrow="ALWAYS" />
-               <MFXButton fx:id="btnSelectLogo" onAction="#OnActionBtnSelectLogo" text="Seleccionar">
+                 <Label minWidth="150" styleClass="jfx-label" text="Logo (ruta):" />
+                 <TextField fx:id="txtLogo" styleClass="text-field" HBox.hgrow="ALWAYS" />
+               <MFXButton fx:id="btnSelectLogo" onAction="#OnActionBtnSelectLogo" styleClass="jfx-btn-edit" text="Seleccionar">
                   <HBox.margin>
                      <Insets right="35.0" />
                   </HBox.margin>
@@ -58,7 +58,7 @@
                                <Label fx:id="lblMensaje" styleClass="label-success" visible="false" />
          
                 <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="10">
-               <MFXButton fx:id="btnSave" onAction="#OnActionBtnSave" text="Guardar">
+               <MFXButton fx:id="btnSave" onAction="#OnActionBtnSave" styleClass="jfx-btn-save" text="Guardar">
                   <graphic>
                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                   </graphic></MFXButton>

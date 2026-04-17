@@ -11,34 +11,27 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" minHeight="600.0" minWidth="800.0" spacing="15.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.MaintenanceStationController">
+<VBox alignment="TOP_CENTER" minHeight="600.0" minWidth="800.0" spacing="15.0" styleClass="vBox" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.MaintenanceStationController">
 
    <children>
 
-      <Label text="Mantenimiento de Estaciones">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-
       <HBox spacing="10">
          <Label text="Sucursal:" />
-         <ComboBox fx:id="cmbBranches" prefWidth="250" />
+         <ComboBox fx:id="cmbBranches" prefWidth="250" styleClass="combo-box-popup" />
       </HBox>
 
       <HBox spacing="20" VBox.vgrow="ALWAYS">
 
          <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
             <children>
-               <Label text="Lista de Estaciones" />
-               <ListView fx:id="tblListStations" VBox.vgrow="ALWAYS" />
+               <Label styleClass="jfx-label" text="Lista de Estaciones" />
+               <ListView fx:id="tblListStations" styleClass="list-cell" VBox.vgrow="ALWAYS" />
             </children>
          </VBox>
 
          <VBox spacing="10" HBox.hgrow="ALWAYS">
-            <MFXTextField fx:id="txtName" floatingText="Nombre estacion" prefHeight="43.0" prefWidth="534.0" />
+            <MFXTextField fx:id="txtName" floatingText="Nombre estacion" prefHeight="43.0" prefWidth="534.0" styleClass="mfx-text-field" />
             <HBox maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="534.0" spacing="10.0">
                <children>
                   <CheckBox fx:id="chkPreferential" styleClass="mfx-checkbox" text="Preferencial" />
@@ -54,16 +47,16 @@
 
                <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                   <children>
-                     <Label text="Tramites Disponibles" />
-                     <ListView fx:id="tblListAvailableProcedures" VBox.vgrow="ALWAYS" />
+                     <Label styleClass="jfx-label" text="Tramites Disponibles" />
+                     <ListView fx:id="tblListAvailableProcedures" styleClass="list-cell" VBox.vgrow="ALWAYS" />
                   </children>
                </VBox>
                <Separator orientation="VERTICAL" prefHeight="200.0" />
 
                <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                   <children>
-                     <Label text="Tramites Asignados" />
-                     <ListView fx:id="tblListAsignedProcedures" VBox.vgrow="ALWAYS" />
+                     <Label styleClass="jfx-label" text="Tramites Asignados" />
+                     <ListView fx:id="tblListAsignedProcedures" styleClass="list-cell" VBox.vgrow="ALWAYS" />
                   </children>
                </VBox>
 
@@ -74,11 +67,11 @@
                   <graphic>
                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                   </graphic></Button>
-               <Button onAction="#onActionBtnSave" styleClass="jfx-btn-agregar" text="Guardar">
+               <Button onAction="#onActionBtnSave" styleClass="jfx-btn-save" text="Guardar">
                   <graphic>
                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                   </graphic></Button>
-               <Button onAction="#onActionBtnDelete" styleClass="jfx-btn-eliminar" text="Eliminar">
+               <Button onAction="#onActionBtnDelete" styleClass="jfx-btn-delete" text="Eliminar">
                   <graphic>
                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                   </graphic></Button>

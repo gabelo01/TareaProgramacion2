@@ -10,30 +10,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.MaintenanceEmployeeController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.MaintenanceEmployeeController">
 
     <children>
 
-        <VBox spacing="15" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
-
-            <Label alignment="CENTER" text="Mantenimiento de Empleados">
-                <font>
-                    <Font size="18.0" />
-                </font>
-            </Label>
+        <VBox spacing="15" styleClass="vBox" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
 
             <HBox spacing="20" VBox.vgrow="ALWAYS">
 
                 <VBox spacing="5" HBox.hgrow="ALWAYS">
-                    <Label text="Lista de Empleados" />
-                    <ListView fx:id="tblEmployees" VBox.vgrow="ALWAYS" />
+                    <Label styleClass="jfx-label-text" text="Lista de Empleados" />
+                    <ListView fx:id="tblEmployees" prefHeight="433.0" prefWidth="27.0" styleClass="list-cell" VBox.vgrow="ALWAYS">
+                  <VBox.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </VBox.margin></ListView>
                 </VBox>
 
                 <VBox spacing="10" HBox.hgrow="ALWAYS">
 
-                    <MFXButton onAction="#onNew" text="Nuevo">
+                    <MFXButton onAction="#onNew" styleClass="jfx-btn-add" text="Nuevo">
                   <graphic>
                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                   </graphic></MFXButton>
@@ -46,11 +42,11 @@
                     <ComboBox fx:id="cmbStation" maxWidth="1.7976931348623157E308" promptText="Seleccione estación" />
 
                     <HBox spacing="10">
-                        <MFXButton onAction="#OnActionBtnEditEmployee" text="Editar" HBox.hgrow="ALWAYS">
+                        <MFXButton onAction="#OnActionBtnEditEmployee" styleClass="jfx-btn-edit" text="Editar" HBox.hgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic></MFXButton>
-                        <MFXButton onAction="#onDelete" text="Eliminar" HBox.hgrow="ALWAYS">
+                        <MFXButton onAction="#onDelete" styleClass="jfx-btn-delete" text="Eliminar" HBox.hgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic></MFXButton>
@@ -58,7 +54,7 @@
 
                     <HBox alignment="CENTER_RIGHT">
                         <children>
-                            <MFXButton onAction="#onSave" text="Guardar">
+                            <MFXButton onAction="#onSave" styleClass="jfx-btn-save" text="Guardar">
                         <graphic>
                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                         </graphic></MFXButton>
