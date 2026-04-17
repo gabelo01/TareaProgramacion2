@@ -62,7 +62,7 @@ FXMLLoader loader = new FXMLLoader();
         FlowController.getInstance().goViewInWindow("employee/StationLogin");
         //FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
         //FlowController.getInstance().goViewInWindow("projection/Projection");
-        //FlowController.getInstance().goViewInWindow("kiosk/LoginView");
+        //FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
     }
 
     static void setRoot(String fxml) throws IOException {

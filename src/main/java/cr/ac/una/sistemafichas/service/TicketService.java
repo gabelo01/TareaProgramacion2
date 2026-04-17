@@ -11,7 +11,6 @@ import java.util.Arrays;
 public class TicketService {
 
     private static TicketService instance;
-    
 
     private ObservableList<Ticket> tickets = FXCollections.observableArrayList();
 
@@ -19,6 +18,7 @@ public class TicketService {
 
     private int nextNumber = 1;
     private Ticket lastCalled = null;
+    private java.util.List<Runnable> listeners = new java.util.ArrayList<>();
 
     private TicketService() {
         load();
@@ -35,13 +35,25 @@ public class TicketService {
         return tickets;
     }
 
+    public void addListener(Runnable listener) {
+        listeners.add(listener);
+
+    }
+
+    private void notifyListeners() {
+        for (Runnable l : listeners) {
+            l.run();
+        }
+    }
+    
+
     public void load() {
         try {
             Ticket[] t = JsonUtil.read(PATH, Ticket[].class);
             if (t != null) {
                 tickets.setAll(Arrays.asList(t));
-                nextNumber = tickets.stream().mapToInt(Ticket::getNumber)
-                        .max().orElse(0) + 1;
+                nextNumber = tickets.stream().mapToInt(Ticket::getNumber).max().orElse(0) + 1;
+                lastCalled = tickets.stream() .filter(x -> "called".equals(x.getStatus())).reduce((a, b) -> b).orElse(null);
             }
         } catch (Exception e) {
             System.out.println("Error loading tickets");
@@ -81,16 +93,19 @@ public class TicketService {
                 .filter(t -> t.getStatus().equals("waiting"))
                 .count();
     }
-    
+
     public Ticket getNextWaiting() {
         return tickets.stream().filter(t -> t.getStatus().equals("waiting")).findFirst().orElse(null);
     }
-    
+
     public Ticket getLastCalled() {
         return lastCalled;
+
     }
 
     public void setLastCalled(Ticket ticket) {
         this.lastCalled = ticket;
-    }   
+        notifyListeners();
+    }
+    
 }

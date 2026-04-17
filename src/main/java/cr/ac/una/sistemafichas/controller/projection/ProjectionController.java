@@ -16,6 +16,7 @@ import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -79,8 +80,11 @@ public class ProjectionController extends Controller {
         loadNoticeText();
         startClock();
         startHeaderRefresh();
-        startDataRefresh();
         startMarquee();
+        TicketService.getInstance().addListener(() -> {
+            Platform.runLater(() -> refreshTickets());
+        });
+        refreshTickets();
     }
 
     private void loadHeader() {
@@ -159,41 +163,21 @@ public class ProjectionController extends Controller {
         if (tickets == null) {
             tickets = new ArrayList<>();
         }
-        
-       List<Ticket> called = new ArrayList<>();
 
-for (int i = tickets.size() - 1; i >= 0 && called.size() < 4; i--) {
-    if ("called".equals(tickets.get(i).getStatus())) {
-        called.add(tickets.get(i));
-    }
-}
+        List<Ticket> called = new ArrayList<>();
 
-        if (!called.isEmpty()) {
-            Ticket current = called.get(0);
-            if (lblCurrentTicket != null) {
-                lblCurrentTicket.setText(String.valueOf(current.getNumber()));
-            }
-            if (lblCurrentStation != null) {
-                lblCurrentStation.setText("Estación " + current.getStationName());
-            }
-            if (lblPriorityBadge != null) {
-                lblPriorityBadge.setVisible(current.getPriority());
-            }
-        } else {
-            if (lblCurrentTicket != null) {
-                lblCurrentTicket.setText("---");
-            }
-            if (lblCurrentStation != null) {
-                lblCurrentStation.setText("");
-            }
-            if (lblPriorityBadge != null) {
-                lblPriorityBadge.setVisible(false);
+        for (int i = tickets.size() - 1; i >= 0 && called.size() < 4; i--) {
+            if ("called".equals(tickets.get(i).getStatus())) {
+                called.add(tickets.get(i));
             }
         }
-        updateRow(called, 0, lblTicket1, lblStation1);
-        updateRow(called, 1, lblTicket2, lblStation2);
-        updateRow(called, 2, lblTicket3, lblStation3);
-        updateRow(called, 3, lblTicket4, lblStation4);
+
+        Ticket current = service.getLastCalled();
+
+        updateRow(called, 1, lblTicket1, lblStation1);
+        updateRow(called, 2, lblTicket2, lblStation2);
+        updateRow(called, 3, lblTicket3, lblStation3);
+        updateRow(called, 4, lblTicket4, lblStation4);
 
     }
 
