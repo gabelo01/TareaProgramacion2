@@ -19,34 +19,34 @@ public class App extends Application {
     @Override
 
     public void start(Stage stage) throws Exception {
-FlowController.getInstance().InitializeFlow(stage, null);
-FXMLLoader loader = new FXMLLoader();
+        
+        FXMLLoader loader = new FXMLLoader();
 
-    String mode = getParameters().getRaw().isEmpty()
-            ? "kiosk"
-            : getParameters().getRaw().get(0);
+        String mode = getParameters().getRaw().isEmpty()
+                ? ""
+                : getParameters().getRaw().get(0);
 
-//    switch (mode) {
-//        case "kiosk":
-//            FlowController.getInstance().goMain("kiosk/LoginKioskView");
-//            break;
-//
-//        case "employee":
-//            FlowController.getInstance().goViewInWindow("employee/StationLogin");
-//            break;
-//
-//        case "admin":
-//            FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
-//            break;
-//
-//        case "projection":
-//            FlowController.getInstance().goViewInWindow("projection/Projection");
-//            break;
-//
-//        default:
-//            FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
-//    }
-//    stage.show();
+        switch (mode) {
+            case "kiosk":
+                FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
+                break;
+
+            case "employee":
+                FlowController.getInstance().goViewInWindow("employee/StationLogin");
+                break;
+
+            case "admin":
+                FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
+                break;
+
+            case "projection":
+                FlowController.getInstance().goViewInWindow("projection/Projection");
+                break;
+
+            default:
+                FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
+        }
+        stage.show();
         //FlowController.getInstance().InitializeFlow(stage, null);
         //FXMLLoader loader = new FXMLLoader();
 
@@ -59,7 +59,6 @@ FXMLLoader loader = new FXMLLoader();
         //lowController.getInstance().goViewInWindow("employee/StationLogin");
         //FlowController.getInstance().goViewInWindow("projection/Projection");
 //FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
-        
         //FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
     }
 
@@ -72,7 +71,7 @@ FXMLLoader loader = new FXMLLoader();
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         launch(args);
     }
 
