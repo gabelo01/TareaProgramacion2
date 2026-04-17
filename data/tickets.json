@@ -386,13 +386,14 @@
   },
   {
     "number": 61,
-    "status": "waiting",
+    "status": "called",
     "procedure": {
       "name": "Retiros",
       "active": true
     },
     "priority": false,
     "creationDate": "2026-04-16T21:19:51.745993700",
+    "stationName": "Caja 1",
     "branchName": "Buenos Aires"
   }
 ]

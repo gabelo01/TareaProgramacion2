@@ -67,6 +67,7 @@ public class ProjectionController extends Controller {
     private Timeline refreshTimeline;
     private Timeline headerTimeline;
     private TranslateTransition marquee;
+    private int lastAnnouncedTicket = -1;
 
     private final DateTimeFormatter dateFormatter
             = DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM, yyyy");
@@ -164,27 +165,32 @@ public class ProjectionController extends Controller {
         refreshTimeline.play();
     }
 
-//    private void llamarFicha(int numeroTicket, String nombreEstacion) {
-//        Task<Void> task = new Task<Void>() {
-//            @Override
-//            protected Void call() throws Exception {
-//                String texto = "Ticket " + numeroTicket + " pase a la estacion " + nombreEstacion;
-//                String os = System.getProperty("os.name").toLowerCase();
-//                if (os.contains("win")) {
-//                    String script = "Add-Type -AssemblyName System.Speech; "
-//                            + "$s = New-Object System.Speech.Synthesis.SpeechSynthesizer; "
-//                            + "$s.Speak('" + texto + "')";
-//                    new ProcessBuilder("powershell", "-Command", script).start().waitFor();
-//                } else if (os.contains("mac")) {
-//                    new ProcessBuilder("say", texto).start().waitFor();
-//                } else {
-//                    new ProcessBuilder("espeak", texto).start().waitFor();
-//                }
-//                return null;
-//            }
-//        };
-//        new Thread(task).start();
-//    }
+    private void anunciarTurno(int turno, String destino) {
+        String mensaje = "Turno " + turno + " dirijase a " + destino;
+
+        Thread hilo = new Thread(() -> {
+            try {
+                String sistema = System.getProperty("os.name").toLowerCase();
+
+                if (sistema.contains("win")) {
+                    String comando = "Add-Type -AssemblyName System.Speech; "
+                            + "$voz = New-Object System.Speech.Synthesis.SpeechSynthesizer; "
+                            + "$voz.Speak('" + mensaje + "')";
+                    new ProcessBuilder("powershell", "-Command", comando).start().waitFor();
+
+                } else if (sistema.contains("mac")) {
+                    new ProcessBuilder("say", mensaje).start().waitFor();
+
+                } else {
+                    new ProcessBuilder("espeak", mensaje).start().waitFor();
+                }
+            } catch (Exception e) {
+                System.out.println("Error reproduciendo audio: " + e.getMessage());
+            }
+        });
+        hilo.setDaemon(true);
+        hilo.start();
+    }
 
     private void refreshTickets() {
         TicketService service = TicketService.getInstance();
@@ -211,6 +217,14 @@ public class ProjectionController extends Controller {
                     lblCurrentStation.setText(current.getStationName());
                 } else {
                     lblCurrentStation.setText("---");
+                }
+            }
+            if (current.getNumber() != lastAnnouncedTicket) {
+                lastAnnouncedTicket = current.getNumber();
+                if (current.getStationName() != null) {
+                    anunciarTurno(current.getNumber(), current.getStationName());
+                } else {
+                    anunciarTurno(current.getNumber(), "ventanilla");
                 }
             }
         }
