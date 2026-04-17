@@ -39,7 +39,10 @@
                   <Insets top="-15.0" />
                </VBox.margin>
             </Label>
-            <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#OnActionBtnGuest" prefHeight="60.0" prefWidth="150.0" text="INVITADO" VBox.vgrow="ALWAYS" />
+            <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#OnActionBtnGuest" prefHeight="60.0" prefWidth="0.0" text="INVITADO" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic></MFXButton>
             <Separator prefWidth="200.0" />
       
             <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="15.0">
@@ -48,7 +51,10 @@
                   <MFXTextField fx:id="txtId" floatingText="Ingrese su cédula" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
-            <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#OnActionBtnEnter" prefHeight="42.0" prefWidth="539.0" text="INGRESAR" VBox.vgrow="ALWAYS" />
+            <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#OnActionBtnEnter" prefHeight="42.0" prefWidth="539.0" text="INGRESAR" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic></MFXButton>
       
             <Label fx:id="lblError" alignment="CENTER" maxWidth="1.7976931348623157E308" text="" visible="false" />
       

@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -37,7 +38,7 @@
                     <TableColumn fx:id="colProcedure" prefWidth="200" text="Trámite" />
                     <TableColumn fx:id="colType" prefWidth="120" text="Tipo" />
                     <TableColumn fx:id="colID" prefWidth="150" text="Id de Cliente" />
-                    <TableColumn fx:id="colName" text="Nombre" prefWidth="150"/>
+                    <TableColumn fx:id="colName" prefWidth="150" text="Nombre" />
                 </columns>
             </TableView>
         </VBox>
@@ -46,12 +47,21 @@
     <bottom>
         <HBox alignment="CENTER" prefHeight="56.0" prefWidth="900.0" spacing="10">
             <padding><Insets bottom="15" left="20" right="20" top="10" /></padding>
-            <MFXButton fx:id="btnCallSelected" onAction="#onActionBtnCallSelected" prefHeight="46.0" prefWidth="138.0" text="Llamar Seleccionado" />
+            <MFXButton fx:id="btnCallSelected" onAction="#onActionBtnCallSelected" prefHeight="46.0" prefWidth="138.0" text="Llamar Seleccionado">
+            <graphic>
+               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic></MFXButton>
          <Separator orientation="VERTICAL" prefHeight="200.0" />
             <MFXTextField fx:id="txtTicketNumber" floatingText="Numero de Ticket" prefWidth="150" />
-            <MFXButton fx:id="btnCallByNumber" onAction="#onActionBtnCallByNumber" prefHeight="41.0" prefWidth="127.0" text="Llamar por Ticket" />
+            <MFXButton fx:id="btnCallByNumber" onAction="#onActionBtnCallByNumber" prefHeight="41.0" prefWidth="127.0" text="Llamar por Ticket">
+            <graphic>
+               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic></MFXButton>
          <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <MFXButton onAction="#onActionBtnBack" prefHeight="41.0" prefWidth="112.0" text="Salir" />
+            <MFXButton onAction="#onActionBtnBack" prefHeight="41.0" prefWidth="112.0" text="Salir">
+            <graphic>
+               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+            </graphic></MFXButton>
         </HBox>
     </bottom>
 

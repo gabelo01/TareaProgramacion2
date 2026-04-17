@@ -4,7 +4,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.employee.IndicatorsController">
@@ -20,16 +22,6 @@
             <ListView fx:id="listProcedures" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
         </VBox>
     </center>
-   <bottom>
-         <MFXButton maxWidth="1.7976931348623157E308" onAction="#onActionBtnBack" prefHeight="34.0" prefWidth="84.0" text="Salir" BorderPane.alignment="CENTER_RIGHT">
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </MFXButton>
-   </bottom>
    <top>
       <VBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="500.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -41,5 +33,22 @@
          </padding>
       </VBox>
    </top>
+   <bottom>
+      <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="100.0" BorderPane.alignment="CENTER_RIGHT">
+         <children>
+            <MFXButton onAction="#onActionBtnBack" text="Salir">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </MFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
 
 </BorderPane>
