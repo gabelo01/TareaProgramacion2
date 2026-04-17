@@ -15,7 +15,7 @@
             <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="99.0" prefWidth="217.0" VBox.vgrow="ALWAYS">
                <children>
                   <ImageView fx:id="imgLogo" fitHeight="45.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="lbCompany" prefHeight="17.0" prefWidth="250.0" styleClass="mfx-text-field" text="Nombre de la empresa" HBox.hgrow="ALWAYS">
+                  <Label fx:id="lbCompany" prefHeight="17.0" prefWidth="250.0" styleClass="jfx-titulo-label" text="Nombre " HBox.hgrow="ALWAYS">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -25,19 +25,19 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="229.0" onAction="#onActionBtnIndicators" prefHeight="36.0" prefWidth="191.0" text="Indicadores" VBox.vgrow="ALWAYS">
+            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="229.0" onAction="#onActionBtnIndicators" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-indicators" text="Indicadores" VBox.vgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
-            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="206.0" onAction="#onActionBtnClients" prefHeight="36.0" prefWidth="191.0" text="Registro de Clientes" VBox.vgrow="ALWAYS">
+            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="206.0" onAction="#onActionBtnClients" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-clients" text="Registro de Clientes" VBox.vgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
-            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="297.0" onAction="#onActionBtnEmployees" prefHeight="36.0" prefWidth="191.0" text="Registro Empleados">
+            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="297.0" onAction="#onActionBtnEmployees" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-employees" text="Registro Empleados">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
-            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="207.0" onAction="#onActionBtnBranches" prefHeight="36.0" prefWidth="191.0" text="Sucursales" VBox.vgrow="ALWAYS">
+            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="207.0" onAction="#onActionBtnBranches" prefHeight="36.0" prefWidth="191.0" styleClass="jfx-btn-procedures" text="Sucursales" VBox.vgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
@@ -53,12 +53,20 @@
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                </graphic></MFXButton>
+            <MFXButton fx:id="btnClean" onAction="#onActionBtnClean" prefHeight="40.0" prefWidth="142.0" text="Limpiar">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </MFXButton>
             <VBox alignment="BOTTOM_LEFT" prefHeight="210.0" prefWidth="217.0" VBox.vgrow="ALWAYS">
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="118.0" prefWidth="217.0" spacing="10.0">
                      <children>
-                        <MFXButton onAction="#onActionBtnExit" prefHeight="30.0" text="Cerrar Sesión" HBox.hgrow="ALWAYS" />
-                        <MFXButton fx:id="btnClean" layoutX="73.0" layoutY="88.0" onAction="#onActionBtnClean" prefHeight="30.0" text="Limpiar" HBox.hgrow="ALWAYS" />
+                        <MFXButton onAction="#onActionBtnExit" prefHeight="40.0" prefWidth="142.0" styleClass="jfx-btn-exit" text="Cerrar Sesión" HBox.hgrow="ALWAYS">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic>
+                        </MFXButton>
                      </children>
                      <padding>
                         <Insets bottom="10.0" />
@@ -76,6 +84,6 @@
          </BorderPane.margin></VBox>
    </center>
    <top>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="164.0" styleClass="mfx-text-field" text="PANEL ADMINISTRADOR" BorderPane.alignment="CENTER" />
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="237.0" styleClass="jfx-titulo-label" text="PANEL ADMINISTRADOR" BorderPane.alignment="CENTER" />
    </top>
 </BorderPane>

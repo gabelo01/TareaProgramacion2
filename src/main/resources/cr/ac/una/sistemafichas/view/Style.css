@@ -82,13 +82,13 @@ Botones
 
 .jfx-btn-nuevo > ImageView{
     
-    -fx-image: url("../resources/Save.png");
+    -fx-image: url("../Resources/Save.png");
     
 }
 
-.jfx-btn-nuevo-empleados > ImageView{
+.jfx-btn-employees > ImageView{
     
-    -fx-image: url("../resources/Employees.png");
+    -fx-image: url("../Resources/Employees.png");
     
 }
 
@@ -100,6 +100,87 @@ Botones
     -fx-background-color:#2196f3;
 }
 
+.jfx-btn-eliminar > ImageView{
+    
+    -fx-image: url("../Resources/Cancel.png");
+    
+}
+
+.jfx-btn-client > ImageView{
+    
+    -fx-image: url("../Resources/Clients.png");
+    
+}
+
+.jfx-btn-person > ImageView{
+    
+    -fx-image: url("../Resources/AddPerson.png");
+    
+}
+
+.jfx-btn-exit > ImageView{
+    
+    -fx-image: url("../Resources/Back.png");
+    
+}
+
+.jfx-btn-clean > ImageView{
+    
+    -fx-image: url("../Resources/Clean.png");
+    
+}
+
+.jfx-btn-edit > ImageView{
+    
+    -fx-image: url("../Resources/Edit.png");
+    
+}
+
+.jfx-btn-indicators > ImageView{
+    
+    -fx-image: url("../Resources/Indicators.png");
+    
+}
+
+.jfx-btn-settings > ImageView{
+    
+    -fx-image: url("../Resources/Settings.png");
+    
+}
+
+.jfx-btn-station > ImageView{
+    
+    -fx-image: url("../Resources/Station.png");
+    
+}
+
+.jfx-btn-procedures > ImageView{
+    
+    -fx-image: url("../Resources/Procedures.png");
+    
+}
+
+.jfx-btn-photo > ImageView{
+    
+    -fx-image: url("../Resources/Photo.png");
+    
+}
 
 
+.jfx-btn-branches > ImageView{
+    
+    -fx-image: url("../Resources/Branches.png");
+    
+}
 
+.jfx-btn-clients > ImageView{
+    
+    -fx-image: url("../Resources/Clients.png");
+    
+}
+
+.jfx-btn-station > ImageView{
+    
+    -fx-image: url("../Resources/Staion.png");
+    
+}
