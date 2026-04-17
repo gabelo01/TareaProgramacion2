@@ -53,18 +53,20 @@ FXMLLoader loader = new FXMLLoader();
         //FXMLLoader loader = new FXMLLoader();
 
         //Kiosko
-        //KioskSessionManager.setBranch("Buenos Aires");
-       // FlowController.getInstance().goMain("kiosk/LoginKioskView");
+        
+        KioskSessionManager.setBranch("Buenos Aires");
+        FlowController.getInstance().goMain("kiosk/LoginKioskView");
 
         //Admin
-        FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
-        //FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
-        //employee
-        //lowController.getInstance().goViewInWindow("employee/StationLogin");
-        //FlowController.getInstance().goViewInWindow("projection/Projection");
-//FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
+        //FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
         
-        //FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
+        //employee
+        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
+        
+        //Projection
+        //FlowController.getInstance().goViewInWindow("projection/Projection");
+
+
     }
 
     static void setRoot(String fxml) throws IOException {

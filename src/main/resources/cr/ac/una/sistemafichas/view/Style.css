@@ -89,7 +89,7 @@ generales
 
 }
 .jfx-label-text {
-    -fx-font-size: 15px;
+    -fx-font-size: 12px;
     -fx-padding: 5 0 5 0;
     -fx-text-fill: -fx-base-color-texto;
     -fx-font-weight: bold; 
@@ -97,6 +97,16 @@ generales
    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 4, 0.2, 1, 1);
 }
 
+.jfx-label-ticket {
+    -fx-font-size: 100px;
+    -fx-font-weight: bold;
+    -fx-font-weight: bold;   
+    -fx-text-fill: #0000ff;
+
+    -fx-effect: dropshadow(gaussian, #009999, 10, 0.7, 0, 0)
+               dropshadow(gaussian, #3333ff, 20, 0.5, 0, 0)
+               dropshadow(gaussian, #3300ff, 30, 0.3, 0, 0);
+}
 
 .mfx-button{
     -mfx-button-type:RAISED;
@@ -147,6 +157,57 @@ generales
     -fx-font-weight: bold;
 }
 
+.image-container {
+    -fx-padding: 5;
+    -fx-background-color: white; /* simula borde */
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 2, 2);
+}
+
+.table-view {
+    -fx-background-color: #f4f6f8;
+    -fx-border-color: #d0d7de;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to right, #4facfe, #00c6ff);
+    -fx-background-radius: 10 10 0 0;
+}
+
+.table-view .column-header, 
+.table-view .filler {
+    -fx-size: 40px;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.table-view .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f9fbfc;
+}
+.table-row-cell:hover {
+    -fx-background-color: #e3f2fd;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #4facfe;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: white;
+}
+
 // elementos
 .mfx-checkbox {
     -fx-font-size:15px;
@@ -177,9 +238,11 @@ generales
     -fx-background-color:#333333
 }
 
-/*
-Botones
-*/
+/***********************************************************
+*
+*                                       Botones
+*
+************************************************************/
 
 //nuevo
 .jfx-btn-nuevo > ImageView{
@@ -340,5 +403,44 @@ Botones
     
 }
 
+//Preferencial
+.jfx-btn-preferential > ImageView{
+    
+    -fx-image: url("../Resources/Preferential.png");
+    
+}
+.jfx-btn-preferential, .jfx-btn-preferential:armed, .jfx-btn-preferential:focused{
+    -fx-background-color:#33ff33;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
 
+//Repetor
+.jfx-btn-repeat > ImageView{
+    
+    -fx-image: url("../Resources/repeat.png");
+    
+}
+.jfx-btn-repeat, .jfx-btn-repeat:armed, .jfx-btn-repeat:focused{
+    -fx-background-color:#ccff66;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
 
+//Search
+.jfx-btn-search > ImageView{
+    
+    -fx-image: url("../Resources/Search.png");
+    
+}
+.jfx-btn-search, .jfx-btn-search:armed, .jfx-btn-search:focused{
+    -fx-background-color:#6666ff;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}

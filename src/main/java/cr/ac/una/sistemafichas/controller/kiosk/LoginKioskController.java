@@ -94,6 +94,13 @@ public class LoginKioskController extends Controller implements Initializable{
             if (file.exists() && imgLogo != null) {
                 imgLogo.setImage(new Image(file.toURI().toString()));
             }
+            
+                if (imgUser != null) {
+                    File filePassword = new File("data/images/User.png");
+                if (filePassword.exists()) {
+                    imgUser.setImage(new Image(filePassword.toURI().toString()));
+                }
+            }
         } catch (Exception e) {
             System.out.println("Error cargando logo");
         }
