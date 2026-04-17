@@ -25,13 +25,34 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="229.0" onAction="#onActionBtnIndicators" prefHeight="36.0" prefWidth="191.0" text="Indicadores" VBox.vgrow="ALWAYS" />
-            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="206.0" onAction="#onActionBtnClients" prefHeight="36.0" prefWidth="191.0" text="Registro de Clientes" VBox.vgrow="ALWAYS" />
-            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="297.0" onAction="#onActionBtnEmployees" prefHeight="36.0" prefWidth="191.0" text="Registro Empleados" />
-            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="207.0" onAction="#onActionBtnBranches" prefHeight="36.0" prefWidth="191.0" text="Sucursales" VBox.vgrow="ALWAYS" />
-            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="198.0" onAction="#onActionBtnProcedures" prefHeight="36.0" prefWidth="191.0" text="Trámites" VBox.vgrow="ALWAYS" />
-            <MFXButton alignment="BASELINE_LEFT" layoutX="23.0" layoutY="271.0" onAction="#onActionBtnProceduresForStation" prefHeight="36.0" prefWidth="191.0" text="Estación" />
-            <MFXButton alignment="BASELINE_LEFT" onAction="#onActionBtnConfig" prefHeight="36.0" prefWidth="191.0" text="Configuración General" VBox.vgrow="ALWAYS" />
+            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="229.0" onAction="#onActionBtnIndicators" prefHeight="36.0" prefWidth="191.0" text="Indicadores" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic></MFXButton>
+            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="206.0" onAction="#onActionBtnClients" prefHeight="36.0" prefWidth="191.0" text="Registro de Clientes" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic></MFXButton>
+            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="297.0" onAction="#onActionBtnEmployees" prefHeight="36.0" prefWidth="191.0" text="Registro Empleados">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic></MFXButton>
+            <MFXButton alignment="BASELINE_LEFT" layoutX="24.0" layoutY="207.0" onAction="#onActionBtnBranches" prefHeight="36.0" prefWidth="191.0" text="Sucursales" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic></MFXButton>
+            <MFXButton alignment="BASELINE_LEFT" layoutX="215.0" layoutY="198.0" onAction="#onActionBtnProcedures" prefHeight="36.0" prefWidth="191.0" text="Trámites" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic></MFXButton>
+            <MFXButton alignment="BASELINE_LEFT" layoutX="23.0" layoutY="271.0" onAction="#onActionBtnProceduresForStation" prefHeight="36.0" prefWidth="191.0" text="Estación">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic></MFXButton>
+            <MFXButton alignment="BASELINE_LEFT" onAction="#onActionBtnConfig" prefHeight="36.0" prefWidth="191.0" text="Configuración General" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic></MFXButton>
             <VBox alignment="BOTTOM_LEFT" prefHeight="210.0" prefWidth="217.0" VBox.vgrow="ALWAYS">
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="118.0" prefWidth="217.0" spacing="10.0">
