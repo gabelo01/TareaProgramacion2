@@ -59,9 +59,10 @@ FXMLLoader loader = new FXMLLoader();
         //Admin
         //FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
         //employee
-        FlowController.getInstance().goViewInWindow("employee/StationLogin");
-        //FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
+        //lowController.getInstance().goViewInWindow("employee/StationLogin");
         //FlowController.getInstance().goViewInWindow("projection/Projection");
+//FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
+        
         //FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
     }
 

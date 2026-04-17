@@ -55,7 +55,7 @@ public class ConfigController extends Controller {
     }
 
     @FXML
-    private void btnSave(ActionEvent event) {
+    private void OnActionBtnSave(ActionEvent event) {
         String nombre = txtCompanyName.getText().trim();
         String pin = txtPin.getText().trim();
         String logo = txtLogo.getText().trim();
@@ -73,24 +73,8 @@ public class ConfigController extends Controller {
         hasChanges = false;
     }
 
-    //este metodo es para el programa final ->>>>>//
-    /*@FXML 
-    private void btnSelectLogo(ActionEvent event) { 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Seleccionar logo");
-        fileChooser.getExtensionFilters().add(
-            new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg", "*.gif")
-        );
- 
-        File file = fileChooser.showOpenDialog(getStage());
-        if (file != null) {
-            txtLogo.setText(file.getAbsolutePath());
-        }
-    }*/
-    //////////////////////////////////////////////////////////
-    
     @FXML
-    private void btnSelectLogo(ActionEvent event) { // este metodo es para usarlo nosotros y tener las mismas imagenes
+    private void OnActionBtnSelectLogo(ActionEvent event) { // este metodo es para usarlo nosotros y tener las mismas imagenes
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar logo");
         fileChooser.getExtensionFilters().add(
@@ -116,12 +100,5 @@ public class ConfigController extends Controller {
             }
         }
     }
-
-    private void btnReturn(ActionEvent event) {
-        if (hasChanges && !confirmExit()) {
-            return;
-        }
-        Stage stage = (Stage) txtCompanyName.getScene().getWindow();
-        FlowController.getInstance().goViewInStage("admin/SelectMaintenance", stage);
-    }
+    
 }

@@ -193,6 +193,7 @@ public class StationController extends Controller {
 
         if (t != null) {
             t.setStatus("called"); // Si se encontra se llamamos y se actualiza
+            t.setStationName(station.getName());
             service.save();
             service.setLastCalled(t);
             showCurrentTicket(t);
@@ -247,6 +248,7 @@ public class StationController extends Controller {
 
         if (t != null) {
             t.setStatus("called");
+            t.setStatus(station.getName());
             service.save();
             service.setLastCalled(t);
             showCurrentTicket(t);

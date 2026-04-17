@@ -296,13 +296,104 @@
   },
   {
     "number": 53,
-    "status": "waiting",
+    "status": "called",
     "procedure": {
       "name": "Prestamos",
       "active": true
     },
     "priority": false,
     "creationDate": "2026-04-16T14:26:04.742373200",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 54,
+    "status": "called",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T20:31:29.829239200",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 55,
+    "status": "called",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T20:31:40.041573",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 56,
+    "status": "called",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T20:44:40.216134300",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 57,
+    "status": "called",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T21:00:19.304268400",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 58,
+    "status": "called",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T21:00:26.870976200",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 59,
+    "status": "called",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T21:19:37.892435300",
+    "stationName": "Caja 1",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 60,
+    "status": "called",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T21:19:43.896393700",
+    "stationName": "Caja 2",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 61,
+    "status": "called",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-16T21:19:51.745993700",
+    "stationName": "Caja 1",
     "branchName": "Buenos Aires"
   }
 ]

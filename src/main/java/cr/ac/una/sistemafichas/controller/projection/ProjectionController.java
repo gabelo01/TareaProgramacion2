@@ -17,6 +17,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -66,6 +67,7 @@ public class ProjectionController extends Controller {
     private Timeline refreshTimeline;
     private Timeline headerTimeline;
     private TranslateTransition marquee;
+    private int lastAnnouncedTicket = -1;
 
     private final DateTimeFormatter dateFormatter
             = DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM, yyyy");
@@ -81,10 +83,7 @@ public class ProjectionController extends Controller {
         startClock();
         startHeaderRefresh();
         startMarquee();
-        TicketService.getInstance().addListener(() -> {
-            Platform.runLater(() -> refreshTickets());
-        });
-        refreshTickets();
+        startDataRefresh();
     }
 
     private void loadHeader() {
@@ -145,16 +144,52 @@ public class ProjectionController extends Controller {
         clockTimeline.play();
     }
 
+    private long lastModified = 0;
+
     private void startDataRefresh() {
         if (refreshTimeline != null) {
             refreshTimeline.stop();
         }
         refreshTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(3), e -> refreshTickets())
+                new KeyFrame(Duration.seconds(2), e -> {
+                    File file = new File("data/Tickets.json");
+                    long modified = file.lastModified();
+                    if (modified != lastModified) {
+                        lastModified = modified;
+                        TicketService.getInstance().load();
+                        refreshTickets();
+                    }
+                })
         );
         refreshTimeline.setCycleCount(Timeline.INDEFINITE);
         refreshTimeline.play();
-        refreshTickets();
+    }
+
+    private void anunciarTurno(int turno, String destino) {
+        String mensaje = "Turno " + turno + " dirijase a " + destino;
+
+        Thread hilo = new Thread(() -> {
+            try {
+                String sistema = System.getProperty("os.name").toLowerCase();
+
+                if (sistema.contains("win")) {
+                    String comando = "Add-Type -AssemblyName System.Speech; "
+                            + "$voz = New-Object System.Speech.Synthesis.SpeechSynthesizer; "
+                            + "$voz.Speak('" + mensaje + "')";
+                    new ProcessBuilder("powershell", "-Command", comando).start().waitFor();
+
+                } else if (sistema.contains("mac")) {
+                    new ProcessBuilder("say", mensaje).start().waitFor();
+
+                } else {
+                    new ProcessBuilder("espeak", mensaje).start().waitFor();
+                }
+            } catch (Exception e) {
+                System.out.println("Error reproduciendo audio: " + e.getMessage());
+            }
+        });
+        hilo.setDaemon(true);
+        hilo.start();
     }
 
     private void refreshTickets() {
@@ -173,12 +208,30 @@ public class ProjectionController extends Controller {
         }
 
         Ticket current = service.getLastCalled();
-
-        updateRow(called, 1, lblTicket1, lblStation1);
-        updateRow(called, 2, lblTicket2, lblStation2);
-        updateRow(called, 3, lblTicket3, lblStation3);
-        updateRow(called, 4, lblTicket4, lblStation4);
-
+        if (current != null) {
+            if (lblCurrentTicket != null) {
+                lblCurrentTicket.setText(String.valueOf(current.getNumber()));
+            }
+            if (lblCurrentStation != null) {
+                if (current.getStationName() != null) {
+                    lblCurrentStation.setText(current.getStationName());
+                } else {
+                    lblCurrentStation.setText("---");
+                }
+            }
+            if (current.getNumber() != lastAnnouncedTicket) {
+                lastAnnouncedTicket = current.getNumber();
+                if (current.getStationName() != null) {
+                    anunciarTurno(current.getNumber(), current.getStationName());
+                } else {
+                    anunciarTurno(current.getNumber(), "ventanilla");
+                }
+            }
+        }
+        updateRow(called, 0, lblTicket1, lblStation1);
+        updateRow(called, 1, lblTicket2, lblStation2);
+        updateRow(called, 2, lblTicket3, lblStation3);
+        updateRow(called, 3, lblTicket4, lblStation4);
     }
 
     private void updateRow(List<Ticket> list, int index,
@@ -189,7 +242,11 @@ public class ProjectionController extends Controller {
         if (index < list.size()) {
             Ticket t = list.get(index);
             lblTicket.setText(String.valueOf(t.getNumber()));
-            lblStation.setText(String.valueOf(t.getStationName()));
+            if (t.getStationName() != null) {
+                lblStation.setText(t.getStationName());
+            } else {
+                lblStation.setText("---");
+            }
         } else {
             lblTicket.setText("---");
             lblStation.setText("---");

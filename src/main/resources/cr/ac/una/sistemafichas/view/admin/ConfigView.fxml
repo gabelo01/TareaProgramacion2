@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -44,17 +45,23 @@
                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10">
                  <Label minWidth="150" styleClass="label-field" text="Logo (ruta):" />
                  <TextField fx:id="txtLogo" styleClass="input-field" HBox.hgrow="ALWAYS" />
-               <MFXButton fx:id="btnSelectLogo" onAction="#btnSelectLogo" text="Seleccionar">
+               <MFXButton fx:id="btnSelectLogo" onAction="#OnActionBtnSelectLogo" text="Seleccionar">
                   <HBox.margin>
                      <Insets right="35.0" />
                   </HBox.margin>
+                  <graphic>
+                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  </graphic>
                </MFXButton>
              </HBox>
          
                                <Label fx:id="lblMensaje" styleClass="label-success" visible="false" />
          
                 <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="10">
-               <MFXButton fx:id="btnSave" onAction="#btnSave" text="Guardar" />
+               <MFXButton fx:id="btnSave" onAction="#OnActionBtnSave" text="Guardar">
+                  <graphic>
+                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  </graphic></MFXButton>
              </HBox>
          </children>
          <padding>
