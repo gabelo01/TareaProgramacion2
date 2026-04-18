@@ -54,8 +54,8 @@ FXMLLoader loader = new FXMLLoader();
 
         //Kiosko
         
-        KioskSessionManager.setBranch("Buenos Aires");
-        FlowController.getInstance().goMain("kiosk/LoginKioskView");
+        //KioskSessionManager.setBranch("Buenos Aires");
+        //FlowController.getInstance().goMain("kiosk/LoginKioskView");
 
         //Admin
         //FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
@@ -64,7 +64,7 @@ FXMLLoader loader = new FXMLLoader();
         //FlowController.getInstance().goViewInWindow("employee/StationLogin");
         
         //Projection
-        //FlowController.getInstance().goViewInWindow("projection/Projection");
+        FlowController.getInstance().goViewInWindow("projection/Projection");
 
 
     }

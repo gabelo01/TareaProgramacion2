@@ -86,7 +86,6 @@ generales
     -fx-text-fill:-fx-base-color-labels;
     -fx-font-weight: bold;   
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0.1, 1, 1);
-
 }
 .jfx-label-text {
     -fx-font-size: 12px;
@@ -97,15 +96,44 @@ generales
    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 4, 0.2, 1, 1);
 }
 
+.jfx-label-text-projection {
+    -fx-font-size: 20px;
+    -fx-padding: 5 0 5 0;
+    -fx-text-fill: -fx-base-color-texto;
+    -fx-font-weight: bold; 
+
+   -fx-effect: dropshadow(gaussian, rgba(10, 6, 43, 0.35), 4, 0.2, 1, 1);
+}
 .jfx-label-ticket {
     -fx-font-size: 100px;
-    -fx-font-weight: bold;
     -fx-font-weight: bold;   
     -fx-text-fill: #0000ff;
 
     -fx-effect: dropshadow(gaussian, #009999, 10, 0.7, 0, 0)
                dropshadow(gaussian, #3333ff, 20, 0.5, 0, 0)
                dropshadow(gaussian, #3300ff, 30, 0.3, 0, 0);
+}
+
+.jfx-label-ticket-projection{
+    -fx-font-size: 150px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0000ff;
+    -fx-effect: dropshadow(gaussian, #000000, 10, 0.7, 0, 0)
+               dropshadow(gaussian, #3333ff, 20, 0.5, 0, 0)
+               dropshadow(gaussian, #3300ff, 30, 0.3, 0, 0);
+}
+
+.jfx-label-projection {
+    -fx-font-size: 20px; 
+    -fx-padding: 5 0 5 0;
+    -fx-text-fill: white; 
+    -fx-font-weight: bold;
+
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.6), 4, 0.3, 1, 1);
+}
+
+.jfx-label-projection .text {
+    -fx-fill: white;
 }
 
 .mfx-button{
@@ -140,6 +168,14 @@ generales
 .vBox {
     -fx-background-color:#e9e9e9;
 }
+
+.color-fondo-oscuro {
+    -fx-background-color:#050534;
+}
+.color-fondo-claro {
+    -fx-background-color:#e1e1ff;
+}
+
 
 .combo-box {
     -fx-background-color: #cccccc;
@@ -443,4 +479,14 @@ generales
     -fx-border-width: 0.5px;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
+}
+
+
+//Imagen fondo
+
+.fondo-app {
+    -fx-background-image: url("../Resources/Fondo.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
 }
