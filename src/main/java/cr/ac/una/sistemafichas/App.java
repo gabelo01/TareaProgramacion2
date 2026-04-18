@@ -22,9 +22,9 @@ public class App extends Application {
         
         FXMLLoader loader = new FXMLLoader();
 
-        String mode = getParameters().getRaw().isEmpty()
-                ? ""
-                : getParameters().getRaw().get(0);
+    String mode = getParameters().getRaw().isEmpty()
+            ? "kiosk"
+            : getParameters().getRaw().get(0);
 
         switch (mode) {
             case "kiosk":
@@ -32,6 +32,7 @@ public class App extends Application {
                 break;
 
             case "employee":
+                 KioskSessionManager.setBranch("Buenos Aires");
                 FlowController.getInstance().goViewInWindow("employee/StationLogin");
                 break;
 
@@ -51,15 +52,20 @@ public class App extends Application {
         //FXMLLoader loader = new FXMLLoader();
 
         //Kiosko
-        //KioskSessionManager.setBranch("Buenos Aires");
-        //FlowController.getInstance().goMain("kiosk/LoginKioskView");
+        
+//        KioskSessionManager.setBranch("Buenos Aires");
+//        FlowController.getInstance().goMain("kiosk/LoginKioskView");
+
         //Admin
         //FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
+        
         //employee
-        //lowController.getInstance().goViewInWindow("employee/StationLogin");
+        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
+        
+        //Projection
         //FlowController.getInstance().goViewInWindow("projection/Projection");
-//FlowController.getInstance().goViewInWindow("admin/SelectMaintenance");
-        //FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
+
+
     }
 
     static void setRoot(String fxml) throws IOException {

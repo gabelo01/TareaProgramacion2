@@ -76,6 +76,9 @@ public class StationLoginController extends Controller {
         }
         EmployeeSessionManager.setBranchName(found.getBranchName());
         EmployeeSessionManager.setStationName(found.getStationName());
+        
+        FlowController.getInstance().goMain("employee/StationView");
+        getStage().close();
 
         FlowController.getInstance().goView("employee/StationView");
     }

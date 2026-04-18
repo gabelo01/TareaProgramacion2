@@ -52,7 +52,7 @@
   },
   {
     "number": 13,
-    "status": "waiting",
+    "status": "called",
     "client": {
       "preferential": false,
       "name": "Chori Pan",
@@ -393,6 +393,67 @@
     },
     "priority": false,
     "creationDate": "2026-04-16T21:19:51.745993700",
+    "stationName": "Caja 1",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 62,
+    "status": "called",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-17T14:04:49.071379100",
+    "stationName": "Caja 1",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 63,
+    "status": "called",
+    "client": {
+      "preferential": false,
+      "name": "Luis",
+      "id": "123456789",
+      "age": "2008-03-11",
+      "photoPath": "data\\fotos-clientes\\client_1776460238699.png"
+    },
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-17T15:13:43.690697900",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 64,
+    "status": "called",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-17T15:42:49.656295700",
+    "stationName": "Caja 1",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 65,
+    "status": "called",
+    "client": {
+      "preferential": false,
+      "name": "Luis",
+      "id": "123456789",
+      "age": "2008-03-11",
+      "photoPath": "data\\fotos-clientes\\client_1776460238699.png"
+    },
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-17T15:43:09.962147300",
     "stationName": "Caja 1",
     "branchName": "Buenos Aires"
   }

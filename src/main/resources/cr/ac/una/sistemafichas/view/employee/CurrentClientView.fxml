@@ -7,25 +7,33 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.employee.CurrentClientController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="500.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.employee.CurrentClientController">
 
     <center>
         <VBox alignment="CENTER" spacing="15">
             <padding><Insets bottom="20" left="40" right="40" top="20" /></padding>
-
-            <ImageView fx:id="imgClient" fitHeight="140" fitWidth="140" pickOnBounds="true" preserveRatio="true" />
+         <StackPane prefHeight="150.0" prefWidth="346.0" styleClass="image-container">
+            <children>
+      
+                  <ImageView fx:id="imgClient" fitHeight="140" fitWidth="140" pickOnBounds="true" preserveRatio="true" />
+            </children>
+            <VBox.margin>
+               <Insets left="30.0" right="30.0" />
+            </VBox.margin>
+         </StackPane>
          <Separator prefWidth="200.0" />
          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
             <children>
-               <Label text="Tipo:">
+               <Label styleClass="jfx-label" text="Tipo:">
                   <HBox.margin>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </HBox.margin>
                </Label>
       
-                  <Label fx:id="lblType" text="tipo" />
+                  <Label fx:id="lblType" styleClass="jfx-label-text" text="tipo" />
             </children>
          </HBox>
          <Separator prefWidth="200.0" />
@@ -33,20 +41,20 @@
             <children>
       
                   <HBox alignment="CENTER_LEFT" spacing="10">
-                      <Label text="Nombre:" />
-                      <Label fx:id="lblName" text="nombre" />
+                      <Label styleClass="jfx-label" text="Nombre:" />
+                      <Label fx:id="lblName" styleClass="jfx-label-text" text="nombre" />
                   </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="10">
-                      <Label text="Cédula:" />
-                      <Label fx:id="lblID" text="id" />
+                      <Label styleClass="jfx-label" text="Cédula:" />
+                      <Label fx:id="lblID" styleClass="jfx-label-text" text="id" />
                   </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="10">
-                      <Label text="Tramite:" />
-                      <Label fx:id="lblProcedure" text="tramite" />
+                      <Label styleClass="jfx-label" text="Tramite:" />
+                      <Label fx:id="lblProcedure" styleClass="jfx-label-text" text="tramite" />
                   </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="10">
-                      <Label text="Ticket:" />
-                      <Label fx:id="lblTicketNumber" text="ticket" />
+                      <Label styleClass="jfx-label" text="Ticket:" />
+                      <Label fx:id="lblTicketNumber" styleClass="jfx-label-text" text="ticket" />
                   </HBox>
             </children>
          </VBox>
@@ -54,7 +62,7 @@
         </VBox>
     </center>
    <bottom>
-         <MFXButton fx:id="btnExit" onAction="#onActionBtnBack" prefHeight="33.0" prefWidth="91.0" text="SALIR" BorderPane.alignment="CENTER_RIGHT">
+         <MFXButton fx:id="btnExit" onAction="#onActionBtnBack" prefHeight="40.0" prefWidth="111.0" styleClass="jfx-btn-exit" text="SALIR" BorderPane.alignment="CENTER_RIGHT">
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
@@ -66,7 +74,7 @@
    <top>
       <HBox alignment="CENTER" prefHeight="50.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-               <Label text="Información del Cliente" />
+               <Label styleClass="jfx-titulo-label" text="Información del Cliente" />
          </children>
       </HBox>
    </top>

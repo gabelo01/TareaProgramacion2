@@ -29,8 +29,6 @@ public class SelectMaintenanceController extends Controller {
     @FXML
     private void onActionBtnProcedures(ActionEvent event) {
         FlowController.getInstance().goView("admin/ProceduresMaintenanceView");
-        //Stage stage = (Stage)lbCompany.getScene().getWindow();
-        //FlowController.getInstance().goViewInStage("admin/Procedures", stage);
         
     }
 

@@ -272,7 +272,7 @@ public class StationController extends Controller {
 
     @FXML
     private void onActionBtnExit(ActionEvent event) {
-        FlowController.getInstance().salir();
+     FlowController.getInstance().goViewInWindow("admin/StationLogin");
     }
 
 }

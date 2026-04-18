@@ -3,30 +3,113 @@ generales
 */
 
 *{
-    -fx-base-color-focus:#ff3333;
+    -fx-base-color-focus:#0066ff;
     -fx-base-color-unfocus:#4d4d4d;
     -fx-base-color-etiquetas:#999999;
     -fx-base-color-texto:#000000;
-    -fx-base-color-titulos:#51b6cd;
+    -fx-base-color-titulos:#ffffff;
+    -fx-base-color-labels: #100f0f;
     -fx-base-color-error:#d34336;
     -fx-base-color-id:#00c853;
+    -fx-button-color:#3399ff;
     -mfx-main:-fx-base-color-focus;
     -mfx-purple:-fx-base-color-focus;
+    
 }
 
 .mfx-text-field{
     -mfx-float-mode:BORDER;
     -fx-font-size:14px;
+    -fx-font-weight: bold;
     -fx-pref-heigth:40px;
     -fx-min-heigth:40px;
     -fx-max-heigth:40px;
     -fx-alignment:TOP_LEFT;
-    -fx-text-fill:-fx-base-color-titulos;
+    -fx-text-fill:-fx-base-color-texto;
     -fx-prompt-text-fill:-fx-base-color-etiquetas;
+    
 }
 
 .mfx-text-field .text-field{
     -fx-highlight-fill:-fx-base-color-focus;
+}
+
+.mfx-password-field {
+    -mfx-float-mode: BORDER;
+
+    -fx-font-size: 14px;
+    -fx-pref-height: 40px;
+    -fx-text-fill: black;
+
+    -fx-border-color: #999999;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+
+    -fx-background-color: #ffffff;
+}
+
+.mfx-password-field .text-field {
+    -fx-highlight-fill: -fx-base-color-focus;
+}
+
+
+/*
+Listas
+*/
+.list-view {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #999;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.list-cell:hover {
+    -fx-background-color: #99ccff;
+}
+
+.list-cell {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+/*
+Botones
+*/
+.jfx-titulo-label{
+    -fx-font-size:18px;
+    -fx-padding:5 0 5 0;
+    -fx-text-fill:-fx-base-color-titulos;
+    -fx-font-weight: bold;   
+    -fx-effect: dropshadow(gaussian, -fx-base-color-error, 5, 0.2, 1, 2);
+}
+.jfx-label{
+    -fx-font-size:15px;
+    -fx-padding:5 0 5 0;
+    -fx-text-fill:-fx-base-color-labels;
+    -fx-font-weight: bold;   
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0.1, 1, 1);
+
+}
+.jfx-label-text {
+    -fx-font-size: 12px;
+    -fx-padding: 5 0 5 0;
+    -fx-text-fill: -fx-base-color-texto;
+    -fx-font-weight: bold; 
+
+   -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 4, 0.2, 1, 1);
+}
+
+.jfx-label-ticket {
+    -fx-font-size: 100px;
+    -fx-font-weight: bold;
+    -fx-font-weight: bold;   
+    -fx-text-fill: #0000ff;
+
+    -fx-effect: dropshadow(gaussian, #009999, 10, 0.7, 0, 0)
+               dropshadow(gaussian, #3333ff, 20, 0.5, 0, 0)
+               dropshadow(gaussian, #3300ff, 30, 0.3, 0, 0);
 }
 
 .mfx-button{
@@ -37,14 +120,103 @@ generales
     -fx-font-weight:bold;
     -fx-font-size:14px;
     -fx-aligment:center-left;
+     -fx-background-color:#cccccc
 }
 .mfx-button .mfx-ripple-generator{
     -mfx-ripple-color:white;
 }
 
 .button:hover{
-    -fx-background-color:#ff6d00;
+    -fx-background-color:#ffffff;
 }
+.button{
+    -fx-background-color:-fx-button-color;
+    -fx-border-color: black;
+    -fx-border-width: 0.2px;
+}
+
+
+/*
+Contenedores
+*/
+.anchor-pane {
+    -fx-background-color:#333333 ;
+}
+
+.vBox {
+    -fx-background-color:#e9e9e9;
+}
+
+.combo-box {
+    -fx-background-color: #cccccc;
+    -fx-border-color: #999999;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 5;
+}
+
+.combo-box .list-cell {
+    -fx-font-weight: bold;
+}
+
+.combo-box-popup .list-cell {
+    -fx-font-weight: bold;
+}
+
+.image-container {
+    -fx-padding: 5;
+    -fx-background-color: white; /* simula borde */
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 2, 2);
+}
+
+.table-view {
+    -fx-background-color: #f4f6f8;
+    -fx-border-color: #d0d7de;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to right, #4facfe, #00c6ff);
+    -fx-background-radius: 10 10 0 0;
+}
+
+.table-view .column-header, 
+.table-view .filler {
+    -fx-size: 40px;
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.table-view .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f9fbfc;
+}
+.table-row-cell:hover {
+    -fx-background-color: #e3f2fd;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #4facfe;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: white;
+}
+
+/*
+Elementos
+*/
 .mfx-checkbox {
     -fx-font-size:15px;
     -fx-pref-heigth:25px;
@@ -55,21 +227,265 @@ generales
     -mfx-secondary: -fx-base-color-unfocus;
 }
 
-/*
-Botones
-*/
+.combo-box {
+    -fx-background-color: #cccccc;
+    -fx-border-color: #999999;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 5;
+}
+
+.combo-box .list-cell {
+    -fx-font-weight: bold;
+}
+
+.combo-box-popup .list-cell {
+    -fx-font-weight: bold;
+}
+.separator{
+    -fx-background-color:#333333
+}
+
+/***********************************************************
+*
+*                                       Botones
+*
+************************************************************/
+
+
+.jfx-btn-nuevo > ImageView{
+    
+    -fx-image: url("../Resources/Save.png");
+    
+}
 .jfx-btn-nuevo, .jfx-btn-nuevo:armed, .jfx-btn-nuevo:focused{
-    -fx-background-color:#2196f3;
+    -fx-background-color:#66ccff;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
 }
 
-.jfx-btn-agregar, .jfx-btn-agregar:armed, .jfx-btn-agregar:focused{
-    -fx-background-color:#2196f3;
+/*
+Agregar
+*/
+
+.jfx-btn-add > ImageView {
+    
+    -fx-image: url("../Resources/AddPerson.png");
+    
+}
+.jfx-btn-add, .jfx-btn-add:armed, .jfx-btn-add:focused{
+    -fx-background-color:#00ff00;
 }
 
-.jfx-btn-eliminar, .jfx-btn-eliminar:armed, .jfx-btn-eliminar:focused{
-    -fx-background-color:#2196f3;
+/*
+Eliminar
+*/
+.jfx-btn-delete > ImageView {
+    -fx-image: url("../Resources/Cancel.png");
+}
+.jfx-btn-delete, .jfx-btn-delete:armed, .jfx-btn-delete:focused{
+    -fx-background-color:#ff3333;
 }
 
+.jfx-btn-employees > ImageView{
+    
+    -fx-image: url("../Resources/Employees.png");
+    
+}
 
+/*
+Agregar clientes
+*/
+.jfx-btn-client > ImageView{
+    
+    -fx-image: url("../Resources/Clients.png");
+    
+}
 
+/*
+Imagen de persona
+*/
+.jfx-btn-person > ImageView{
+    
+    -fx-image: url("../Resources/AddPerson.png");
+    
+}
 
+/* 
+Salir
+*/
+.jfx-btn-exit > ImageView{
+    
+    -fx-image: url("../Resources/Back.png");
+    
+}
+.jfx-btn-exit, .jfx-btn-exit:armed, .jfx-btn-exit:focused{
+    -fx-background-color:#ff6666;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/*
+Limpiar
+*/
+.jfx-btn-clean > ImageView{
+    
+    -fx-image: url("../Resources/Clean.png");
+    
+}
+.jfx-btn-clean, .jfx-btn-clean:armed, .jfx-btn-clean:focused{
+    -fx-background-color:#66ff66;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/*
+Editar
+*/
+.jfx-btn-edit > ImageView{
+    
+    -fx-image: url("../Resources/Edit.png");
+    
+}
+
+/*
+Guardar
+*/
+.jfx-btn-save > ImageView{
+    
+    -fx-image: url("../Resources/Save.png");
+    
+}
+
+.jfx-btn-save, .jfx-btn-save:armed, .jfx-btn-save:focused{
+    -fx-background-color:#0066ff;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/*
+Indicadores
+*/
+.jfx-btn-indicators > ImageView{
+    
+    -fx-image: url("../Resources/Indicators.png");
+    
+}
+
+/*
+Ajustes
+*/
+.jfx-btn-settings > ImageView{
+    
+    -fx-image: url("../Resources/Settings.png");
+    
+}
+
+/*
+Sucursales
+*/
+.jfx-btn-branches > ImageView{
+    
+    -fx-image: url("../Resources/Branches.png");
+    
+}
+
+/*
+Estaciones
+*/
+.jfx-btn-station > ImageView{
+    
+    -fx-image: url("../Resources/Station.png");
+    
+}
+
+/*
+Tramites
+*/
+.jfx-btn-procedures > ImageView{
+    
+    -fx-image: url("../Resources/Procedures.png");
+    
+}
+
+/*
+Tomar Foto
+*/
+.jfx-btn-photo > ImageView{
+    
+    -fx-image: url("../Resources/Photo.png");
+    
+}
+
+.jfx-btn-photo, .jfx-btn-photo:armed, .jfx-btn-photo:focused{
+    -fx-background-color:#ffffcc;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/*
+
+*/
+.jfx-btn-clients > ImageView{
+    
+    -fx-image: url("../Resources/Clients.png");
+    
+}
+
+/*
+Preferencial
+*/
+.jfx-btn-preferential > ImageView{
+    
+    -fx-image: url("../Resources/Preferential.png");
+    
+}
+.jfx-btn-preferential, .jfx-btn-preferential:armed, .jfx-btn-preferential:focused{
+    -fx-background-color:#33ff33;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/*
+Repetir
+*/
+.jfx-btn-repeat > ImageView{
+    
+    -fx-image: url("../Resources/repeat.png");
+    
+}
+.jfx-btn-repeat, .jfx-btn-repeat:armed, .jfx-btn-repeat:focused{
+    -fx-background-color:#ccff66;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/*
+Buscar
+*/
+.jfx-btn-search > ImageView{
+    
+    -fx-image: url("../Resources/Search.png");
+    
+}
+.jfx-btn-search, .jfx-btn-search:armed, .jfx-btn-search:focused{
+    -fx-background-color:#6666ff;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}

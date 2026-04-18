@@ -7,11 +7,15 @@ import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -28,12 +32,48 @@ public class LoginAdminController extends Controller implements Initializable{
     private MFXButton btnSalir;
     @FXML
     private AnchorPane root;
+    @FXML
+    private Label lblCompanyName;
+    @FXML
+    private ImageView imgLogo;
+    @FXML
+    private ImageView imgPassword;
 
     @Override
     public void initialize() {
+        loadHeader();
         pswPin.delegateSetTextFormatter(Formato.getInstance().integerFormat());
         pswPin.clear();
     }
+    
+    
+    private void loadHeader() {
+        CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
+        if (config == null){
+            return;
+        }
+
+        if (lblCompanyName != null){
+            lblCompanyName.setText(config.getCompanyName());
+        }
+
+        try {
+            File file = new File(config.getLogoPath());
+            if (file.exists() && imgLogo != null) {
+                imgLogo.setImage(new Image(file.toURI().toString()));
+            }
+            
+           if (imgPassword != null) {
+                File filePassword = new File("data/images/Password.png");
+                if (filePassword.exists()) {
+                imgPassword.setImage(new Image(filePassword.toURI().toString()));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargando logo");
+        }
+    }
+    
     @FXML
     private void  OnActionBtnIngresar() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
@@ -58,7 +98,7 @@ public class LoginAdminController extends Controller implements Initializable{
     @FXML
     private void OnActionBtnSalir(ActionEvent event) {
         pswPin.clear();
-        FlowController.getInstance().salir();
+        getStage().close();
     }
 
     @FXML
