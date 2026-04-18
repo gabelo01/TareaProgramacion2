@@ -15,6 +15,16 @@
     "priority": false,
     "creationDate": "2026-04-08T08:10",
     "branchName": "Buenos Aires"
+  },
+  {
+    "number": 25,
+    "status": "waiting",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-17T21:18:11.480881",
+    "branchName": "Buenos Aires"
   }
-  
 ]
