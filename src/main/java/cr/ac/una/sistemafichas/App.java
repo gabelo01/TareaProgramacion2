@@ -19,20 +19,24 @@ public class App extends Application {
     @Override
 
     public void start(Stage stage) throws Exception {
-        
+        FlowController.getInstance().InitializeFlow(stage, null);
         FXMLLoader loader = new FXMLLoader();
 
-    String mode = getParameters().getRaw().isEmpty()
-            ? "kiosk"
-            : getParameters().getRaw().get(0);
+        String mode;
+
+if (getParameters().getRaw().isEmpty()) {
+    mode = "projection";// cambiar el nombre del mode para abrir una pantalla en especifico
+} else {
+    mode = getParameters().getRaw().get(0);
+}
 
         switch (mode) {
             case "kiosk":
-                FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
+                FlowController.getInstance().goMain("kiosk/LoginKioskView");
                 break;
 
             case "employee":
-                 KioskSessionManager.setBranch("Buenos Aires");
+                KioskSessionManager.setBranch("Buenos Aires");
                 FlowController.getInstance().goViewInWindow("employee/StationLogin");
                 break;
 
@@ -47,25 +51,8 @@ public class App extends Application {
             default:
                 FlowController.getInstance().goViewInWindow("kiosk/LoginKioskView");
         }
-        stage.show();
-        //FlowController.getInstance().InitializeFlow(stage, null);
-        //FXMLLoader loader = new FXMLLoader();
-
-        //Kiosko
+       
         
-//        KioskSessionManager.setBranch("Buenos Aires");
-//        FlowController.getInstance().goMain("kiosk/LoginKioskView");
-
-        //Admin
-        //FlowController.getInstance().goViewInWindow("admin/LoginAdminView");
-        
-        //employee
-        //FlowController.getInstance().goViewInWindow("employee/StationLogin");
-        
-        //Projection
-        //FlowController.getInstance().goViewInWindow("projection/Projection");
-
-
     }
 
     static void setRoot(String fxml) throws IOException {

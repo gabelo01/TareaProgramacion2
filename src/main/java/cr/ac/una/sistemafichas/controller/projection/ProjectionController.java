@@ -60,7 +60,6 @@ public class ProjectionController extends Controller {
     private Label lblStation4;
 
     private static final String CONFIG_PATH = "data/config.json";
-    private static final String TICKETS_PATH = "data/tickets.json";
     private static final String BRANCHES_PATH = "data/branches.json";
 
     private Timeline clockTimeline;
@@ -106,8 +105,11 @@ public class ProjectionController extends Controller {
 
     private void startHeaderRefresh() {
         headerTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(30), e -> loadHeader())
-        );
+            new KeyFrame(Duration.seconds(30), e -> {
+                loadHeader();
+                loadNoticeText();
+            })
+    );
         headerTimeline.setCycleCount(Timeline.INDEFINITE);
         headerTimeline.play();
     }
@@ -165,24 +167,26 @@ public class ProjectionController extends Controller {
         refreshTimeline.play();
     }
 
-    private void anunciarTurno(int turno, String destino) {
-        String mensaje = "Turno " + turno + " dirijase a " + destino;
+    private void announceShift(int turno, String destino) {
+        String message = "Ticket numero" + turno + " dirijase a " + destino;
 
         Thread hilo = new Thread(() -> {
             try {
-                String sistema = System.getProperty("os.name").toLowerCase();
+                String system = System.getProperty("os.name").toLowerCase();
 
-                if (sistema.contains("win")) {
-                    String comando = "Add-Type -AssemblyName System.Speech; "
+                if (system.contains("win")) {
+                    String command = "Add-Type -AssemblyName System.Speech; "
                             + "$voz = New-Object System.Speech.Synthesis.SpeechSynthesizer; "
-                            + "$voz.Speak('" + mensaje + "')";
-                    new ProcessBuilder("powershell", "-Command", comando).start().waitFor();
+                            + "$cultura = [Sistem.Globalisation.CultureInfo]:: GetCultureInfo('es.ES');"
+                            + "$voz.SelectVoiceByHinds([Sistem.Speech.Synthesis.VoiceGender]::NotSet,[Sistem.Speech.Synthesis.VoiceAge]::NotSet,0,$cultura);"
+                            + "$voz.Speak('" + message + "')";
+                    new ProcessBuilder("powershell", "-Command", command).start().waitFor();
 
-                } else if (sistema.contains("mac")) {
-                    new ProcessBuilder("say", mensaje).start().waitFor();
+                } else if (system.contains("mac")) {
+                    new ProcessBuilder("say", message).start().waitFor();
 
                 } else {
-                    new ProcessBuilder("espeak", mensaje).start().waitFor();
+                    new ProcessBuilder("espeak", message).start().waitFor();
                 }
             } catch (Exception e) {
                 System.out.println("Error reproduciendo audio: " + e.getMessage());
@@ -222,9 +226,9 @@ public class ProjectionController extends Controller {
             if (current.getNumber() != lastAnnouncedTicket) {
                 lastAnnouncedTicket = current.getNumber();
                 if (current.getStationName() != null) {
-                    anunciarTurno(current.getNumber(), current.getStationName());
+                    announceShift(current.getNumber(), current.getStationName());
                 } else {
-                    anunciarTurno(current.getNumber(), "ventanilla");
+                    announceShift(current.getNumber(), "ventanilla");
                 }
             }
         }

@@ -272,5 +272,10 @@ public class MaintenanceClientController extends Controller {
         }
     }
 
+    @FXML
+    private void onActionBtnNuevo(ActionEvent event) {
+    clearClient();
+    }
+
 
 }

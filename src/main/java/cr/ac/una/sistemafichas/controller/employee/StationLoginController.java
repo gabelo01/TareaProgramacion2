@@ -79,8 +79,6 @@ public class StationLoginController extends Controller {
         
         FlowController.getInstance().goMain("employee/StationView");
         getStage().close();
-
-        FlowController.getInstance().goView("employee/StationView");
     }
 
     @FXML

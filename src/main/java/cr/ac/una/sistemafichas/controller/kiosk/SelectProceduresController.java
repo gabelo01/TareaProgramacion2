@@ -30,14 +30,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
 public class SelectProceduresController extends Controller {
 
-    @FXML private MFXButton btnGetTicket;
-    @FXML private MFXButton btnPreferential;
+    private MFXButton btnPreferential;
     @FXML private Label lblName;
     @FXML private Label lblClientInfo;
     @FXML private ImageView imgLogo;
@@ -205,12 +205,6 @@ public class SelectProceduresController extends Controller {
 
         FlowController.getInstance().goView("kiosk/LoginKioskView");
     }
-
-    @FXML
-    private void OnActionBtnPreferential(ActionEvent event) {
-        FlowController.getInstance().goView("kiosk/Preferential");
-    }
-
     @FXML
     private void OnActionBtnCancel(ActionEvent event) {
         preferentialOverride = false;
@@ -235,5 +229,10 @@ public class SelectProceduresController extends Controller {
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.show();
+    }
+
+    @FXML
+    private void OnClickedImage(MouseEvent event) {
+        FlowController.getInstance().goViewInWindowModal("kiosk/Preferential",this.getStage(),false);
     }
 }

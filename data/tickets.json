@@ -9,391 +9,22 @@
       "age": "78"
     },
     "procedure": {
-      "name": "Retiro",
+      "name": "Prestamo",
       "active": false
     },
     "priority": false,
     "creationDate": "2026-04-08T08:10",
-    "branchName": "Central"
+    "branchName": "Buenos Aires"
   },
   {
-    "number": 32,
-    "status": "called",
-    "client": {
-      "preferential": false,
-      "name": "Maria Lopez",
-      "id": "202220222",
-      "age": "22"
-    },
-    "procedure": {
-      "name": "Depósito",
-      "active": false
-    },
-    "priority": true,
-    "creationDate": "2026-04-08T08:12",
-    "branchName": "Central"
-  },
-  {
-    "number": 33,
-    "status": "called",
-    "client": {
-      "preferential": false,
-      "name": "Marco Segura",
-      "id": "293298321",
-      "age": "45"
-    },
-    "procedure": {
-      "name": "Depósito",
-      "active": false
-    },
-    "priority": true,
-    "creationDate": "2026-04-08T08:12",
-    "branchName": "Central"
-  },
-  {
-    "number": 13,
-    "status": "called",
-    "client": {
-      "preferential": false,
-      "name": "Chori Pan",
-      "id": "110298321",
-      "age": "22"
-    },
-    "procedure": {
-      "name": "Retiro",
-      "active": false
-    },
-    "priority": true,
-    "creationDate": "2026-04-08T08:12",
-    "branchName": "Central"
-  },
-  {
-    "number": 34,
-    "status": "called",
-    "client": {
-      "preferential": false,
-      "name": "Alonso Fonseca",
-      "id": "114293221",
-      "age": "34"
-    },
-    "procedure": {
-      "name": "Retiro",
-      "active": false
-    },
-    "priority": true,
-    "creationDate": "2026-04-08T08:12",
-    "branchName": "Central"
-  },
-  {
-    "number": 35,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-11T10:02:19.838473500",
-    "branchName": "Central"
-  },
-  {
-    "number": 36,
-    "status": "called",
-    "client": {
-      "preferential": false,
-      "name": "anddy",
-      "id": "119830836",
-      "age": "2006-12-14"
-    },
+    "number": 25,
+    "status": "waiting",
     "procedure": {
       "name": "Prestamos",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-11T10:03:55.045520800",
-    "branchName": "Central"
-  },
-  {
-    "number": 37,
-    "status": "called",
-    "procedure": {
-      "name": "Creditos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-11T10:05:00.313625400",
-    "branchName": "Central"
-  },
-  {
-    "number": 38,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-11T10:26:45.448825",
-    "branchName": "Central"
-  },
-  {
-    "number": 39,
-    "status": "called",
-    "client": {
-      "preferential": true,
-      "name": "anddy",
-      "id": "119830836",
-      "age": "2006-12-14"
-    },
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": true,
-    "creationDate": "2026-04-11T11:01:39.242471700",
-    "branchName": "Central"
-  },
-  {
-    "number": 40,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-11T11:02:55.753449300",
-    "branchName": "Central"
-  },
-  {
-    "number": 41,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": true,
-    "creationDate": "2026-04-11T11:14:51.635231300",
-    "branchName": "Central"
-  },
-  {
-    "number": 42,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-15T15:20:55.396103500",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 43,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-15T19:04:00.776813300",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 44,
-    "status": "called",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-15T19:11:45.873756100",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 45,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T00:27:30.417531300",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 46,
-    "status": "called",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T00:27:43.513683900",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 47,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": true,
-    "creationDate": "2026-04-16T00:28:34.321953700",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 48,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T01:25:43.289986300",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 49,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T11:28:17.760879400",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 50,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T13:29:12.372105100",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 51,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T13:29:19.543569300",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 52,
-    "status": "called",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T14:25:57.914359",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 53,
-    "status": "called",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T14:26:04.742373200",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 54,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T20:31:29.829239200",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 55,
-    "status": "called",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T20:31:40.041573",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 56,
-    "status": "called",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T20:44:40.216134300",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 57,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T21:00:19.304268400",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 58,
-    "status": "called",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T21:00:26.870976200",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 59,
-    "status": "called",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T21:19:37.892435300",
-    "stationName": "Caja 1",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 60,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T21:19:43.896393700",
-    "stationName": "Caja 2",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 61,
-    "status": "called",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-16T21:19:51.745993700",
-    "stationName": "Caja 1",
+    "creationDate": "2026-04-17T21:18:11.480881",
     "branchName": "Buenos Aires"
   },
   {
@@ -455,6 +86,23 @@
     "priority": false,
     "creationDate": "2026-04-17T15:43:09.962147300",
     "stationName": "Caja 1",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 66,
+    "status": "waiting",
+    "client": {
+      "preferential": false,
+      "name": "Rodrigo Jara",
+      "id": "1234567",
+      "age": "2000-06-07"
+    },
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-18T10:47:49.648119500",
     "branchName": "Buenos Aires"
   }
 ]

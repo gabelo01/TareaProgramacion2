@@ -1,6 +1,7 @@
 [
   {
     "name": "Buenos Aires",
+    "noticeText": "buenas tardes",
     "stations": [
       {
         "name": "Caja 1",

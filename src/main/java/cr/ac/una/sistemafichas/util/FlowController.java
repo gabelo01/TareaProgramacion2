@@ -173,7 +173,7 @@ public class FlowController { //singlenton una sola instancia
         Stage stage = new Stage();
 
         
-         try {  // este lo agregue para poder meter la imagen en la ventana desde el logo path que esta en el json de config
+         try { //Poner la imagen de logo de config
             CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
             if (config != null && config.getLogoPath() != null) {
                 File file = new File(config.getLogoPath());
@@ -206,7 +206,19 @@ public class FlowController { //singlenton una sola instancia
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-        stage.getIcons().add(new Image("data/images/LogoLiga.png")); // DUDAS
+        try { // Poner la imagen de logo de config
+            CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
+            if (config != null && config.getLogoPath() != null) {
+                File file = new File(config.getLogoPath());
+                if (file.exists()) {
+                    stage.getIcons().add(new Image(file.toURI().toString()));
+                } else {
+                    System.out.println("Logo no encontrado en: " + config.getLogoPath());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargando logo: " + e.getMessage());
+        }
         stage.setTitle(controller.getNombreVista());
         stage.setResizable(resizable);
         stage.setOnHidden((WindowEvent event) -> {

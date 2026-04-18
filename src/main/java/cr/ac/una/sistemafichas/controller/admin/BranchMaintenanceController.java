@@ -38,6 +38,8 @@ public class BranchMaintenanceController extends Controller {
 
     private List<Branch> branches;
     private Branch selectedBranch;
+    @FXML
+    private MFXTextField txtNoticeText;
 
     // ──────────────── INIT ────────────────
     @Override
@@ -75,6 +77,12 @@ public class BranchMaintenanceController extends Controller {
             if (newVal != null) {
                 txtBranchName.setText(newVal.getName());
                 chkActiveBranch.setSelected(newVal.isActive());
+                txtNoticeText.setText(newVal.getName());
+                if(newVal.getNoticeText()!=null){
+                    txtNoticeText.setText(newVal.getNoticeText());
+                }else{
+                    txtNoticeText.setText("");
+                }
             }
         });
     }
@@ -83,7 +91,9 @@ public class BranchMaintenanceController extends Controller {
     @FXML
     private void onActionBtnAddBranch() {
         try {
+            String noticeText =txtNoticeText.getText().trim();
             String name = txtBranchName.getText().trim();
+            
 
             if (name.isEmpty()) {
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Nombre vacio", "Ingrese un nombre de sucursal.");
@@ -97,8 +107,10 @@ public class BranchMaintenanceController extends Controller {
                 }
             }
 
-            Branch b = new Branch(name, "", "", new ArrayList<>(), true);
+            Branch b = new Branch(name, "",noticeText , new ArrayList<>(), true);
+            b.setNoticeText(txtNoticeText.getText().trim());
             branches.add(b);
+            
             JsonUtil.write(BRANCHES_PATH, branches);
             refreshBranches();
             clearBranch();
@@ -149,6 +161,7 @@ public class BranchMaintenanceController extends Controller {
 
     private void clearBranch() {
         txtBranchName.clear();
+        txtNoticeText.clear();
         chkActiveBranch.setSelected(false);
         selectedBranch = null;
     }
@@ -182,6 +195,7 @@ public class BranchMaintenanceController extends Controller {
             for (Station s : selectedBranch.getStations()) {
                 s.setBranchName(name);
             }
+            selectedBranch.setNoticeText(txtNoticeText.getText().trim());
             JsonUtil.write(BRANCHES_PATH, branches);
             refreshBranches();
             Notifications.create()
@@ -208,7 +222,6 @@ public class BranchMaintenanceController extends Controller {
         }
         EmployeeSessionManager.setBranchName(selectedBranch.getName());
         FlowController.getInstance().goView("admin/MaintenanceStationView");
-
     }
 
     
