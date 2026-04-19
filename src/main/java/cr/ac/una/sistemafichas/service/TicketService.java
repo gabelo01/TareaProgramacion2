@@ -68,7 +68,7 @@ public class TicketService {
 
     public Ticket generateTicket(Ticket ticket) {
 
-        load();
+        load(); 
 
         ticket.setNumber(nextNumber++);
         ticket.setStatus("waiting");
