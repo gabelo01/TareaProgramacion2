@@ -39,7 +39,6 @@ public class IndicatorsController extends Controller {
             total += count;
             listProcedures.getItems().add(procName + " :  " + count );
         }
-
         lblTotal.setText("Total Esperando: " + total);
     }
 

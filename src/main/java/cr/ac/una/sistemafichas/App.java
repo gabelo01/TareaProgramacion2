@@ -1,6 +1,5 @@
 package cr.ac.una.sistemafichas;
 
-import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import javafx.application.Application;
