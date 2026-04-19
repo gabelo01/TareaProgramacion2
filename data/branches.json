@@ -9,6 +9,7 @@
         "branchName": "Buenos Aires",
         "procedureNames": [
           "Retiros",
+          "Creditos",
           "Prestamos"
         ],
         "active": true

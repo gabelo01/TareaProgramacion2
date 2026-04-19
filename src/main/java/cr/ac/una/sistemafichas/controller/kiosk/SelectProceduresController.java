@@ -34,16 +34,21 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
 public class SelectProceduresController extends Controller {
-    
-    @FXML private Label lblName;
-    @FXML private Label lblClientInfo;
-    @FXML private ImageView imgLogo;
-    @FXML private VBox vboxProcedures;
+
+    @FXML
+    private Label lblName;
+    @FXML
+    private Label lblClientInfo;
+    @FXML
+    private ImageView imgLogo;
+    @FXML
+    private VBox vboxProcedures;
 
     private static final String CONFIG_PATH = "data/config.json";
     private static final String PROC_PATH = "data/procedures.json";
 
     private static boolean preferentialOverride = false;
+    private javafx.animation.Timeline refreshTimeline;
 
     private String selectedProcedure = null;
 
@@ -60,11 +65,15 @@ public class SelectProceduresController extends Controller {
         loadHeader();
         loadProcedures();
         loadClientInfo();
+
+        startAutoRefresh();
     }
 
     private void loadHeader() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
-        if (config == null) return;
+        if (config == null) {
+            return;
+        }
 
         lblName.setText(config.getCompanyName());
 
@@ -76,7 +85,7 @@ public class SelectProceduresController extends Controller {
             if (imgPreferential != null) {
                 File filePreferential = new File("data/images/Preferential.png");
                 if (filePreferential.exists()) {
-                imgPreferential.setImage(new Image(filePreferential.toURI().toString()));
+                    imgPreferential.setImage(new Image(filePreferential.toURI().toString()));
                 }
             }
         } catch (Exception e) {
@@ -84,8 +93,24 @@ public class SelectProceduresController extends Controller {
         }
     }
 
+    private void startAutoRefresh() {
+
+        if (refreshTimeline != null) {
+            refreshTimeline.stop();
+        }
+
+        refreshTimeline = new javafx.animation.Timeline(
+                new javafx.animation.KeyFrame(javafx.util.Duration.seconds(5), e -> {
+                    loadProcedures();
+                })
+        );
+
+        refreshTimeline.setCycleCount(javafx.animation.Timeline.INDEFINITE);
+        refreshTimeline.play();
+    }
+
     private void loadProcedures() {
-        if (vboxProcedures == null){
+        if (vboxProcedures == null) {
             return;
         }
 
@@ -93,15 +118,15 @@ public class SelectProceduresController extends Controller {
 
         String branchName = KioskSessionManager.getBranch();
 
-
         if (branchName == null) {
             branchName = "Buenos Aires";
             KioskSessionManager.setBranch(branchName);
         }
 
-        Type branchType = new TypeToken<List<Branch>>(){}.getType();
+        Type branchType = new TypeToken<List<Branch>>() {
+        }.getType();
         List<Branch> branches = JsonUtil.read("data/branches.json", branchType);
-        if (branches == null){
+        if (branches == null) {
             return;
         }
 
@@ -111,14 +136,19 @@ public class SelectProceduresController extends Controller {
                 .findFirst()
                 .orElse(null);
 
-        if (current == null || current.getStations() == null) return;
+        if (current == null || current.getStations() == null) {
+            return;
+        }
 
-        Type procType = new TypeToken<List<Procedure>>(){}.getType();
+        Type procType = new TypeToken<List<Procedure>>() {
+        }.getType();
         List<Procedure> allProcedures = JsonUtil.read(PROC_PATH, procType);
-        if (allProcedures == null) return;
+        if (allProcedures == null) {
+            return;
+        }
 
         List<String> availableProcedures = current.getStations().stream().filter(st -> st.isActive()) //solo tramites de estaciones activas
-                                                       .flatMap(st -> st.getProcedureNames().stream()).distinct().toList();
+                .flatMap(st -> st.getProcedureNames().stream()).distinct().toList();
 
         List<String> filtered = allProcedures.stream()
                 .filter(Procedure::isActive)
@@ -134,14 +164,18 @@ public class SelectProceduresController extends Controller {
             btn.setPrefHeight(50);
 
             btn.setStyle(
-                    "-fx-font-size: 16px;" +
-                    "-fx-background-radius: 10;" +
-                    "-fx-padding: 10;"
+                    "-fx-font-size: 16px;"
+                    + "-fx-background-radius: 10;"
+                    + "-fx-padding: 10;"
             );
 
             btn.setOnAction(e -> seleccionarProcedimiento(procName));
 
             vboxProcedures.getChildren().add(btn);
+        }
+
+        if (selectedProcedure != null && !filtered.contains(selectedProcedure)) {
+            selectedProcedure = null; // limpiar por si selección es inválida, que admin quite tramite 
         }
     }
 
@@ -203,7 +237,7 @@ public class SelectProceduresController extends Controller {
         PdfUtil.generateTicketPdf(ticket, config);
 
         Notifications.create().title("PDF").text("Ticket #" + ticket.getNumber() + " generado.")
-               .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
+                .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
         //showAlert("Ticket #" + ticket.getNumber() + " generado.");
 
         preferentialOverride = false;
@@ -211,8 +245,9 @@ public class SelectProceduresController extends Controller {
         KioskSessionManager.clearClient();
 
         FlowController.getInstance().goView("kiosk/LoginKioskView");
-        
+
     }
+
     @FXML
     private void OnActionBtnCancel(ActionEvent event) {
         preferentialOverride = false;
@@ -221,7 +256,9 @@ public class SelectProceduresController extends Controller {
     }
 
     private boolean isClientPreferential(Client client) {
-        if (client == null) return false;
+        if (client == null) {
+            return false;
+        }
 
         try {
             LocalDate birth = LocalDate.parse(client.getAge());

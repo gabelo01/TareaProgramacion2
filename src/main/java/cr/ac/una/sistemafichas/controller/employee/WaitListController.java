@@ -3,6 +3,7 @@ package cr.ac.una.sistemafichas.controller.employee;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.service.TicketService;
+import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -20,16 +21,26 @@ import javafx.stage.Stage;
 
 public class WaitListController extends Controller {
 
-    @FXML private TableView<Ticket> tblTickets;
-    @FXML private TableColumn<Ticket, Integer> colNumber;
-    @FXML private TableColumn<Ticket, String> colProcedure;
-    @FXML private TableColumn<Ticket, String> colType;
-    @FXML private TableColumn<Ticket, String> colID;
-    @FXML private TableColumn<Ticket, String> colName;
-    @FXML private MFXTextField txtSearchName;
-    @FXML private MFXTextField txtSearchID;
-    @FXML private CheckBox chkPreferential;
-    @FXML private MFXTextField txtTicketNumber;
+    @FXML
+    private TableView<Ticket> tblTickets;
+    @FXML
+    private TableColumn<Ticket, Integer> colNumber;
+    @FXML
+    private TableColumn<Ticket, String> colProcedure;
+    @FXML
+    private TableColumn<Ticket, String> colType;
+    @FXML
+    private TableColumn<Ticket, String> colID;
+    @FXML
+    private TableColumn<Ticket, String> colName;
+    @FXML
+    private MFXTextField txtSearchName;
+    @FXML
+    private MFXTextField txtSearchID;
+    @FXML
+    private CheckBox chkPreferential;
+    @FXML
+    private MFXTextField txtTicketNumber;
 
     private FilteredList<Ticket> filteredTickets;
     @FXML
@@ -46,12 +57,12 @@ public class WaitListController extends Controller {
 
     private void setupColumns() {
         colNumber.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getNumber()).asObject());
-        colProcedure.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getProcedure() != null? data.getValue().getProcedure().getName() : " "));
-        colType.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getPriority() ? "Preferencial" : "Normal"));
-        colID.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getClient() != null? data.getValue().getClient().getId(): "Sin Registrar"));
-        colName.setCellValueFactory(data ->new SimpleStringProperty(data.getValue().getClient() != null? data.getValue().getClient().getName(): "Sin Registrar"
-    )
-);
+        colProcedure.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProcedure() != null ? data.getValue().getProcedure().getName() : " "));
+        colType.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPriority() ? "Preferencial" : "Normal"));
+        colID.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getClient() != null ? data.getValue().getClient().getId() : "Sin Registrar"));
+        colName.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getClient() != null ? data.getValue().getClient().getName() : "Sin Registrar"
+        )
+        );
     }
 
     private void loadTickets() {
@@ -71,19 +82,23 @@ public class WaitListController extends Controller {
 
     private void applyFilters() {
         filteredTickets.setPredicate(ticket -> {
-            if (ticket == null) return false;
-            if (!"waiting".equals(ticket.getStatus())) return false;
+            if (ticket == null) {
+                return false;
+            }
+            if (!"waiting".equals(ticket.getStatus())) {
+                return false;
+            }
 
             String name = txtSearchName.getText();
-            String id   = txtSearchID.getText();
+            String id = txtSearchID.getText();
 
-            boolean matchName = name == null || name.isEmpty() ||
-                (ticket.getClient() != null &&
-                 ticket.getClient().getName().toLowerCase().contains(name.toLowerCase()));
+            boolean matchName = name == null || name.isEmpty()
+                    || (ticket.getClient() != null
+                    && ticket.getClient().getName().toLowerCase().contains(name.toLowerCase()));
 
-            boolean matchID = id == null || id.isEmpty() ||
-                (ticket.getClient() != null &&
-                 ticket.getClient().getId().toLowerCase().contains(id.toLowerCase()));
+            boolean matchID = id == null || id.isEmpty()
+                    || (ticket.getClient() != null
+                    && ticket.getClient().getId().toLowerCase().contains(id.toLowerCase()));
 
             boolean matchPref = !chkPreferential.isSelected() || ticket.getPriority();
 
@@ -106,8 +121,8 @@ public class WaitListController extends Controller {
         try {
             int num = Integer.parseInt(txtTicketNumber.getText().trim());
             Ticket t = TicketService.getInstance().getTickets().stream()
-                .filter(x -> x.getNumber() == num && "waiting".equals(x.getStatus()))
-                .findFirst().orElse(null);
+                    .filter(x -> x.getNumber() == num && "waiting".equals(x.getStatus()))
+                    .findFirst().orElse(null);
             if (t != null) {
                 callTicket(t);
             } else {
@@ -120,8 +135,9 @@ public class WaitListController extends Controller {
 
     private void callTicket(Ticket t) {
         t.setStatus("called");
+        t.setStationName(EmployeeSessionManager.getStationName()); // ← agrega esto
+        t.setBranchName(EmployeeSessionManager.getBranchName());   // ← y esto
         TicketService.getInstance().save();
-        TicketService.getInstance().setLastCalled(t);
         
         getStage().close();
     }

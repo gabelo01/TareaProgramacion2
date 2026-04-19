@@ -133,16 +133,40 @@ public class StationController extends Controller {
         }
 
         refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
-            TicketService.getInstance().load();
+
+            TicketService service = TicketService.getInstance();
+            service.load(); 
+
             updateWaitingCount();
+            loadStation();
+
+            Ticket last = service.getLastCalled();
+            if (last != null) {
+                showCurrentTicket(last);
+            }
+
         }));
+
         refreshTimeline.setCycleCount(Timeline.INDEFINITE);
         refreshTimeline.play();
     }
 
     private void updateWaitingCount() {
-        long count = TicketService.getInstance().getWaitingCount();
-        lblWaitingCount.setText("" + count);
+        com.google.gson.reflect.TypeToken<java.util.List<cr.ac.una.sistemafichas.model.Ticket>> token
+                = new com.google.gson.reflect.TypeToken<java.util.List<cr.ac.una.sistemafichas.model.Ticket>>() {
+        };
+        java.util.List<cr.ac.una.sistemafichas.model.Ticket> tickets
+                = JsonUtil.read("data/tickets.json", token.getType());
+
+        if (tickets == null) {
+            lblWaitingCount.setText("0");
+            return;
+        }
+
+        long count = tickets.stream()
+                .filter(t -> "waiting".equals(t.getStatus()))
+                .count();
+        lblWaitingCount.setText(String.valueOf(count));
     }
 
     public void showCurrentTicket(Ticket t) {
@@ -159,7 +183,7 @@ public class StationController extends Controller {
 
     @FXML
     private void onActionBtnNext() {
-
+        loadStation();
         if (station == null || station.getProcedureNames() == null) {
             showAlert("Estación no configurada.");
             return;
@@ -171,6 +195,8 @@ public class StationController extends Controller {
         }
 
         TicketService service = TicketService.getInstance();
+        service.load();
+
         Ticket t = null;
 
         if (station.isPreferential()) { // Si la estación es preferencial, buscamos primero preferenciales
@@ -195,7 +221,7 @@ public class StationController extends Controller {
             t.setStatus("called"); // Si se encontra se llamamos y se actualiza
             t.setStationName(station.getName());
             service.save();
-            service.setLastCalled(t);
+
             showCurrentTicket(t);
             updateWaitingCount();
         } else {
@@ -231,7 +257,7 @@ public class StationController extends Controller {
 
     @FXML
     private void onActionBtnPreferential() {
-
+        loadStation();
         if (station == null || station.getProcedureNames() == null) {
             showAlert("Estación no configurada.");
             return;
@@ -243,14 +269,15 @@ public class StationController extends Controller {
         }
 
         TicketService service = TicketService.getInstance();
+        service.load();
         Ticket t = service.getTickets().stream().filter(x -> "waiting".equals(x.getStatus())).filter(x -> x.getPriority()).filter(x -> x.getProcedure() != null)
                 .filter(x -> station.getProcedureNames().contains(x.getProcedure().getName())).findFirst().orElse(null);
 
         if (t != null) {
             t.setStatus("called");
-            t.setStatus(station.getName());
+            t.setStationName(station.getName());
             service.save();
-            service.setLastCalled(t);
+
             showCurrentTicket(t);
             updateWaitingCount();
         } else {
@@ -272,13 +299,12 @@ public class StationController extends Controller {
 
     @FXML
     private void onActionBtnExit(ActionEvent event) {
-     
-        boolean confirmar = new Mensaje().showConfirmation("Salir",getStage(),"¿Está seguro que desea cerrar esta ventana?");
+
+        boolean confirmar = new Mensaje().showConfirmation("Salir", getStage(), "¿Está seguro que desea cerrar esta ventana?");
 
         if (confirmar) {
             FlowController.getInstance().salir();
         }
-     }
-    
+    }
 
 }

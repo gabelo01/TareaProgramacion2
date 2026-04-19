@@ -2,6 +2,7 @@ package cr.ac.una.sistemafichas.controller.employee;
 
 import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.controller.Controller;
+import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Employee;
 import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
@@ -9,6 +10,7 @@ import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import java.io.File;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -16,6 +18,9 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -30,12 +35,48 @@ public class StationLoginController extends Controller {
     private MFXButton btnSalir;
 
     private static final String EMPLOYEE_PATH = "data/employees.json";
+    private static final String CONFIG_PATH = "data/config.json";
+    @FXML
+    private Label lblCompanyName;
+    @FXML
+    private ImageView imgLogo;
+    @FXML
+    private ImageView imgPassword;
 
     @Override
     public void initialize() {
         pswPin.delegateSetTextFormatter(Formato.getInstance().integerFormat());
         if (pswPin != null) {
             pswPin.clear();
+        }
+        loadHeader();
+    }
+    
+        private void loadHeader() {
+      
+        CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
+        if (config == null){
+            return;
+        }
+
+        if (lblCompanyName != null){
+            lblCompanyName.setText(config.getCompanyName());
+        }
+
+        try {
+            File file = new File(config.getLogoPath());
+            if (file.exists() && imgLogo != null) {
+                imgLogo.setImage(new Image(file.toURI().toString()));
+            }
+            
+           if (imgPassword != null) {
+                File filePassword = new File("data/images/Password.png");
+                if (filePassword.exists()) {
+                imgPassword.setImage(new Image(filePassword.toURI().toString()));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error cargando imgLogo o imgPassword");
         }
     }
 
