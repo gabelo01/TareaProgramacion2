@@ -187,11 +187,18 @@ public class SelectProceduresController extends Controller {
         if (client != null) {
             lblClientInfo.setText("Bienvenido: " + client.getName());
 
-            if (client.isPreferential() || isClientPreferential(client)) {
-                imgPreferential.setVisible(false);
+            boolean isPreferencial = client.isPreferential() || isClientPreferential(client);
+
+            if (imgPreferential != null) {
+                imgPreferential.setVisible(!isPreferencial); // muestra boton si no es preferencial
             }
+
         } else {
             lblClientInfo.setText("Invitado");
+
+            if (imgPreferential != null) {
+                imgPreferential.setVisible(true); // invitado puede usar preferencial siempre
+            }
         }
     }
 
