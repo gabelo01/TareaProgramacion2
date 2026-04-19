@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import cr.ac.una.sistemafichas.service.CamaraService;
 import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import java.io.IOException;
 
@@ -25,7 +24,7 @@ public class App extends Application {
         String mode;
 
 if (getParameters().getRaw().isEmpty()) {
-    mode = "projection";// cambiar el nombre del mode para abrir una pantalla en especifico
+    mode = "kiosk";// cambiar el nombre del mode para abrir una pantalla en especifico
 } else {
     mode = getParameters().getRaw().get(0);
 }

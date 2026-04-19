@@ -16,13 +16,10 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 
 import java.io.File;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
-import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -197,19 +194,18 @@ public class SelectProceduresController extends Controller {
 
         Notifications.create().title("PDF").text("Ticket #" + ticket.getNumber() + " generado.")
                .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
-        //showAlert("Ticket #" + ticket.getNumber() + " generado.");
 
         preferentialOverride = false;
 
         KioskSessionManager.clearClient();
 
-        FlowController.getInstance().goView("kiosk/LoginKioskView");
+        FlowController.getInstance().goMain("kiosk/LoginKioskView");
     }
     @FXML
     private void OnActionBtnCancel(ActionEvent event) {
         preferentialOverride = false;
         KioskSessionManager.clearClient();
-        FlowController.getInstance().goView("kiosk/LoginKioskView");
+        FlowController.getInstance().goMain("kiosk/LoginKioskView");
     }
 
     private boolean isClientPreferential(Client client) {
