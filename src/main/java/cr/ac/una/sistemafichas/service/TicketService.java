@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class TicketService {
 
@@ -104,10 +105,15 @@ public class TicketService {
     }
 
     public Ticket getLastCalled() {
-        return tickets.stream()
-                .filter(t -> "called".equals(t.getStatus()))
-                .reduce((a, b) -> b)
-                .orElse(null);
+        List<Ticket> tickets = getTickets();
+
+        for (int i = tickets.size() - 1; i >= 0; i--) {
+            if ("called".equals(tickets.get(i).getStatus())) {
+                return tickets.get(i);
+            }
+        }
+
+        return null;
     }
 
 }

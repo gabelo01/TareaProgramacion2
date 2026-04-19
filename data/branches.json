@@ -8,9 +8,8 @@
         "preferential": true,
         "branchName": "Buenos Aires",
         "procedureNames": [
-          "Retiros",
-          "Creditos",
-          "Prestamos"
+          "Prestamos",
+          "Creditos"
         ],
         "active": true
       },
@@ -19,8 +18,8 @@
         "preferential": false,
         "branchName": "Buenos Aires",
         "procedureNames": [
-          "Prestamos",
-          "Creditos"
+          "Retiros",
+          "Cobros"
         ],
         "active": true
       }

@@ -1,71 +1,86 @@
 package cr.ac.una.sistemafichas.model;
 
 public class Ticket {
+
     private int number;
-    private String status;                            // "waiting", "called", "attended"
-    private Client client;                             // puede ser null si no se identificó
+    private String status; // "waiting", "called", "attended"
+    private Client client;
     private Procedure procedure;
     private boolean priority;
-    private String creationDate; //Anddy: propare lo de date en String, con LocalDate me esta dando fallos
-    private String stationName;  // para indicadores y proyección
-    private String branchName;  // para indicadores por sucursal
-    
-    public Ticket(){}
-  
-    public Ticket(int number, String status, Client client, Procedure procedure, boolean priority, String creationDate, String stationName, String branchName){
-    this.number=number;
-    this.status=status;
-    this.client=client;
-    this.procedure=procedure;
-    this.priority=priority;
-    this.creationDate=creationDate;
-    this.stationName=stationName;
-    this.branchName= branchName;
-    
+    private String creationDate;
+    private String stationName;
+    private String branchName;
+
+    private String callTime;
+
+    public Ticket() {
     }
-    
-    public int getNumber(){
+
+    public Ticket(int number, String status, Client client, Procedure procedure,
+            boolean priority, String creationDate, String stationName, String branchName) {
+        this.number = number;
+        this.status = status;
+        this.client = client;
+        this.procedure = procedure;
+        this.priority = priority;
+        this.creationDate = creationDate;
+        this.stationName = stationName;
+        this.branchName = branchName;
+    }
+
+    public int getNumber() {
         return number;
     }
-    public String getStatus(){
+
+    public String getStatus() {
         return status;
     }
-    public Client getClient(){
+
+    public Client getClient() {
         return client;
     }
-    public Procedure getProcedure(){
+
+    public Procedure getProcedure() {
         return procedure;
     }
-    public boolean getPriority(){
+
+    public boolean getPriority() {
         return priority;
     }
-    public String getCreationDate(){
+
+    public String getCreationDate() {
         return creationDate;
     }
-    public void setNumber(int number){
-        this.number=number;
+
+    public void setNumber(int number) {
+        this.number = number;
     }
-    public void setStatus(String status){
-        this.status=status;
+
+    public void setStatus(String status) {
+        this.status = status;
     }
-    public void setClient(Client client){
-        this.client=client;
+
+    public void setClient(Client client) {
+        this.client = client;
     }
-    public void setProcedure(Procedure procedure){
-        this.procedure=procedure;
+
+    public void setProcedure(Procedure procedure) {
+        this.procedure = procedure;
     }
-    public void setPriority(boolean priority){
-        this.priority=priority;
+
+    public void setPriority(boolean priority) {
+        this.priority = priority;
     }
-    public void setCreationDate(String creationDate){
-        this.creationDate=creationDate;
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getStationName() {
         return stationName;
     }
 
-    public void setStationName ( String stationName) {
+    public void setStationName(String stationName) {
         this.stationName = stationName;
     }
 
@@ -76,6 +91,13 @@ public class Ticket {
     public void setBranchName(String branchName) {
         this.branchName = branchName;
     }
-    
-    
+
+
+    public String getCallTime() {
+        return callTime;
+    }
+
+    public void setCallTime(String callTime) {
+        this.callTime = callTime;
+    }
 }
