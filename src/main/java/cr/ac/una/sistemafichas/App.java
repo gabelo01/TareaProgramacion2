@@ -24,19 +24,20 @@ public class App extends Application {
 
         String mode;
 
-if (getParameters().getRaw().isEmpty()) {
-    mode = "projection";// cambiar el nombre del mode para abrir una pantalla en especifico
-} else {
-    mode = getParameters().getRaw().get(0);
-}
+    if (getParameters().getRaw().isEmpty()) {
+        mode = "kiosk";// cambiar el nombre del mode para abrir una pantalla en especifico
+    } else {
+        mode = getParameters().getRaw().get(0);
+    }
 
         switch (mode) {
-            case "kiosk":
+            case "kiosk": 
+                KioskSessionManager.setBranch("Buenos Aires");
                 FlowController.getInstance().goMain("kiosk/LoginKioskView");
                 break;
 
             case "employee":
-                KioskSessionManager.setBranch("Buenos Aires");
+               
                 FlowController.getInstance().goViewInWindow("employee/StationLogin");
                 break;
 

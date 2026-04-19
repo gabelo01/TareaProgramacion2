@@ -94,8 +94,7 @@ private void loadHeader() {
 
         if (found != null) {
             KioskSessionManager.setCurrentClient(found);
-            
-            FlowController.getInstance().goMain("kiosk/SelectProcedures");
+            FlowController.getInstance().goView("kiosk/SelectProcedures");
             
         } else {
             showError("Cédula no encontrada. Use el botón Invitado.");
@@ -106,7 +105,7 @@ private void loadHeader() {
     private void OnActionBtnGuest(ActionEvent event) {
 
        KioskSessionManager.clearClient();
-        FlowController.getInstance().goMain("kiosk/SelectProcedures");
+        FlowController.getInstance().goView("kiosk/SelectProcedures");
     }
 
     private void showError(String msg) {
