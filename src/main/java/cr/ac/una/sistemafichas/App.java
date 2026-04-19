@@ -10,7 +10,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import java.io.IOException;
-
+import cr.ac.una.sistemafichas.model.ConfigLocal;
+        
 public class App extends Application {
 
     private static Scene scene;
@@ -19,23 +20,31 @@ public class App extends Application {
 
     public void start(Stage stage) throws Exception {
         FlowController.getInstance().InitializeFlow(stage, null);
-        FXMLLoader loader = new FXMLLoader();
-
+        stage.hide();
+        
+        ConfigLocal configLocal=JsonUtil.read("config-local.json", ConfigLocal.class);
+        if(configLocal != null && configLocal.getDataPath()!=null){
+            JsonUtil.setDataPath(configLocal.getDataPath());
+        }
+        if(configLocal!=null && configLocal.getBranchName()!=null){
+            KioskSessionManager.setBranch(configLocal.getBranchName());
+        }
+        
         String mode;
 
-if (getParameters().getRaw().isEmpty()) {
-    mode = "kiosk";// cambiar el nombre del mode para abrir una pantalla en especifico
-} else {
-    mode = getParameters().getRaw().get(0);
-}
+    if (getParameters().getRaw().isEmpty()) {
+        mode = "projection";// cambiar el nombre del mode para abrir una pantalla en especifico
+    } else {
+        mode = getParameters().getRaw().get(0);
+    }
 
         switch (mode) {
-            case "kiosk":
+            case "kiosk": 
                 FlowController.getInstance().goMain("kiosk/LoginKioskView");
                 break;
 
             case "employee":
-                KioskSessionManager.setBranch("Buenos Aires");
+               
                 FlowController.getInstance().goViewInWindow("employee/StationLogin");
                 break;
 

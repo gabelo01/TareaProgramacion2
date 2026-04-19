@@ -6,7 +6,7 @@ public class Ticket {
     private Client client;                             // puede ser null si no se identificó
     private Procedure procedure;
     private boolean priority;
-    private String creationDate; //Anddy: propare lo de date en String, con LocalDate me esta dando fallos
+    private String creationDate; 
     private String stationName;  // para indicadores y proyección
     private String branchName;  // para indicadores por sucursal
     

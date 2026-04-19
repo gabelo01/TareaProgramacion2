@@ -1,7 +1,7 @@
 [
   {
     "name": "Buenos Aires",
-    "noticeText": "buenas tardes",
+    "noticeText": "Dia Martes 21 nuestras instalaciones permaneceran cerradas",
     "stations": [
       {
         "name": "Caja 1",
@@ -28,6 +28,7 @@
   },
   {
     "name": "Cajón",
+    "noticeText": "Telefono 7865 4350",
     "stations": [
       {
         "name": "Caja 1",

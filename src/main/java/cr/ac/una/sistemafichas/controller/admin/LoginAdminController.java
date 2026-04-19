@@ -5,6 +5,7 @@ import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
+import cr.ac.una.sistemafichas.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import java.io.File;
@@ -95,10 +96,15 @@ public class LoginAdminController extends Controller implements Initializable{
             pswPin.setFloatingText("PIN incorrecto, intente de nuevo");
         }
     }
-    @FXML
+   @FXML
     private void OnActionBtnSalir(ActionEvent event) {
-        pswPin.clear();
-        getStage().close();
+
+        boolean confirmar = new Mensaje().showConfirmation("Salir",getStage(),"¿Está seguro que desea cerrar esta ventana?");
+
+     if (confirmar) {
+            pswPin.clear();
+            getStage().close();
+        }
     }
 
     @FXML

@@ -4,6 +4,7 @@ import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
+import cr.ac.una.sistemafichas.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -79,8 +80,12 @@ public class SelectMaintenanceController extends Controller {
 
     @FXML
     private void onActionBtnExit(ActionEvent event) {
-        //FlowController.getInstance().goViewReplace("admin/LoginAdminView");
-        FlowController.getInstance().goViewInWindow(CONFIG_PATH);
+
+        boolean confirmar = new Mensaje().showConfirmation("Salir",getStage(),"¿Está seguro que desea salir?");
+
+        if (confirmar) {
+            FlowController.getInstance().salir();
+        }
     }
 
     @FXML

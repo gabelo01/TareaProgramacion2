@@ -13,7 +13,6 @@ import cr.ac.una.sistemafichas.util.JsonUtil;
 import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import cr.ac.una.sistemafichas.util.PdfUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
-
 import java.io.File;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
@@ -33,8 +32,7 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
 public class SelectProceduresController extends Controller {
-
-    private MFXButton btnPreferential;
+    
     @FXML private Label lblName;
     @FXML private Label lblClientInfo;
     @FXML private ImageView imgLogo;
@@ -50,6 +48,10 @@ public class SelectProceduresController extends Controller {
     public static void setPreferentialOverride(boolean value) {
         preferentialOverride = value;
     }
+    @FXML
+    private ImageView imgPreferential;
+    @FXML
+    private MFXButton btnGetTicket;
 
     @Override
     public void initialize() {
@@ -68,6 +70,12 @@ public class SelectProceduresController extends Controller {
             File file = new File(config.getLogoPath());
             if (file.exists()) {
                 imgLogo.setImage(new Image(file.toURI().toString()));
+            }
+            if (imgPreferential != null) {
+                File filePreferential = new File("data/images/Preferential.png");
+                if (filePreferential.exists()) {
+                imgPreferential.setImage(new Image(filePreferential.toURI().toString()));
+                }
             }
         } catch (Exception e) {
             System.out.println("Error cargando logo");
@@ -146,7 +154,7 @@ public class SelectProceduresController extends Controller {
             lblClientInfo.setText("Bienvenido: " + client.getName());
 
             if (client.isPreferential() || isClientPreferential(client)) {
-                btnPreferential.setVisible(false);
+                imgPreferential.setVisible(false);
             }
         } else {
             lblClientInfo.setText("Invitado");
@@ -199,7 +207,8 @@ public class SelectProceduresController extends Controller {
 
         KioskSessionManager.clearClient();
 
-        FlowController.getInstance().goMain("kiosk/LoginKioskView");
+        FlowController.getInstance().goView("kiosk/LoginKioskView");
+        
     }
     @FXML
     private void OnActionBtnCancel(ActionEvent event) {
@@ -229,6 +238,6 @@ public class SelectProceduresController extends Controller {
 
     @FXML
     private void OnClickedImage(MouseEvent event) {
-        FlowController.getInstance().goViewInWindowModal("kiosk/Preferential",this.getStage(),false);
+        FlowController.getInstance().goView("kiosk/Preferential");
     }
 }

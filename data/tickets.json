@@ -18,13 +18,14 @@
   },
   {
     "number": 25,
-    "status": "waiting",
+    "status": "called",
     "procedure": {
       "name": "Prestamos",
       "active": true
     },
     "priority": false,
     "creationDate": "2026-04-17T21:18:11.480881",
+    "stationName": "Caja 1",
     "branchName": "Buenos Aires"
   },
   {
@@ -90,7 +91,7 @@
   },
   {
     "number": 66,
-    "status": "waiting",
+    "status": "called",
     "client": {
       "preferential": false,
       "name": "Rodrigo Jara",
@@ -103,28 +104,95 @@
     },
     "priority": false,
     "creationDate": "2026-04-18T10:47:49.648119500",
+    "stationName": "Caja 1",
     "branchName": "Buenos Aires"
   },
   {
     "number": 67,
     "status": "waiting",
     "procedure": {
-      "name": "Retiros",
+      "name": "Prestamos",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-18T19:39:45.177661700",
+    "creationDate": "2026-04-18T19:27:17.556735800",
     "branchName": "Buenos Aires"
   },
   {
     "number": 68,
     "status": "waiting",
     "procedure": {
+      "name": "Creditos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-18T19:27:23.248128500",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 69,
+    "status": "waiting",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-18T19:27:34.675125200",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 70,
+    "status": "waiting",
+    "procedure": {
       "name": "Prestamos",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-18T19:40:43.330470500",
+    "creationDate": "2026-04-18T19:33:04.163623400",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 71,
+    "status": "waiting",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-18T19:46:41.793466500",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 72,
+    "status": "waiting",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-18T19:49:22.609379100",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 73,
+    "status": "waiting",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-18T20:08:38.924769100",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 74,
+    "status": "waiting",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-18T20:25:53.693640100",
     "branchName": "Buenos Aires"
   }
 ]

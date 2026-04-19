@@ -272,7 +272,13 @@ public class StationController extends Controller {
 
     @FXML
     private void onActionBtnExit(ActionEvent event) {
-     FlowController.getInstance().salir();
-    }
+     
+        boolean confirmar = new Mensaje().showConfirmation("Salir",getStage(),"¿Está seguro que desea cerrar esta ventana?");
+
+        if (confirmar) {
+            FlowController.getInstance().salir();
+        }
+     }
+    
 
 }

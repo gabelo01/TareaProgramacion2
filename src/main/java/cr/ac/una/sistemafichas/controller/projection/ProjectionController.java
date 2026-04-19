@@ -154,7 +154,7 @@ public class ProjectionController extends Controller {
         }
         refreshTimeline = new Timeline(
                 new KeyFrame(Duration.seconds(2), e -> {
-                    File file = new File("data/Tickets.json");
+                    File file = new File(JsonUtil.getDataPath() + "tickets.json");
                     long modified = file.lastModified();
                     if (modified != lastModified) {
                         lastModified = modified;
