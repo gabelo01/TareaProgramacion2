@@ -60,10 +60,12 @@ public class StationController extends Controller {
         clearCurrentTicket();
         updateWaitingCount();
 
-        Ticket last = TicketService.getInstance().getLastCalled();
+        Ticket last = getLastCalledByStation();
         if (last != null) {
             showCurrentTicket(last);
         }
+
+        listen();
     }
 
     private void loadHeader() {
@@ -203,14 +205,18 @@ public class StationController extends Controller {
     @FXML
     private void onActionBtnNext() {
 
-        reloadStationState(); // asegura cambios recientes
+        reloadStationState();
 
         if (!isStationValid()) {
             return;
         }
 
         TicketService service = TicketService.getInstance();
-        service.load();
+
+        Ticket last = getLastCalledByStation();// limpiar último ticket de esta estación
+        if (last != null) {
+            last.setStatus("attended");
+        }
 
         Ticket t = service.getTickets().stream()
                 .filter(ticket -> "waiting".equals(ticket.getStatus()))
@@ -226,6 +232,7 @@ public class StationController extends Controller {
             t.setCallTime(LocalDateTime.now().toString());
 
             service.save();
+            service.notifyAll_();
 
             showCurrentTicket(t);
             updateWaitingCount();
@@ -243,12 +250,16 @@ public class StationController extends Controller {
             return;
         }
 
-        TicketService service = TicketService.getInstance();
-        service.load();
-
         if (!station.isPreferential()) {
             showAlert("Esta estación no atiende preferenciales.");
             return;
+        }
+
+        TicketService service = TicketService.getInstance();
+
+        Ticket last = getLastCalledByStation();  // limpiar último
+        if (last != null) {
+            last.setStatus("attended");
         }
 
         Ticket t = service.getTickets().stream()
@@ -266,6 +277,7 @@ public class StationController extends Controller {
             t.setCallTime(LocalDateTime.now().toString());
 
             service.save();
+            service.notifyAll_();
 
             showCurrentTicket(t);
             updateWaitingCount();
@@ -276,11 +288,13 @@ public class StationController extends Controller {
 
     @FXML
     private void onActionBtnRepeat() {
-        Ticket last = TicketService.getInstance().getLastCalled();
+
+        Ticket last = getLastCalledByStation();
+
         if (last != null) {
             showCurrentTicket(last);
         } else {
-            showAlert("No hay ticket llamado.");
+            showAlert("No hay ticket llamado en esta estación.");
         }
     }
 
@@ -320,5 +334,37 @@ public class StationController extends Controller {
     @FXML
     private void onActionBtnRegisterClient(ActionEvent event) {
         FlowController.getInstance().goViewInWindow("admin/MaintenanceClientView");
+    }
+
+    private void listen() {
+
+        TicketService.getInstance().addListener(() -> {
+            javafx.application.Platform.runLater(() -> {
+
+                Ticket last = getLastCalledByStation();
+
+                if (last != null) {
+                    showCurrentTicket(last);
+                }
+
+                updateWaitingCount();
+            });
+        });
+    }
+
+    private Ticket getLastCalledByStation() {
+
+        if (station == null) {
+            return null;
+        }
+
+        return TicketService.getInstance().getTickets().stream()
+                .filter(t -> "called".equals(t.getStatus()))
+                .filter(t -> station.getName().equals(t.getStationName()))
+                .filter(t -> t.getCallTime() != null)
+                .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
+                .compareTo(LocalDateTime.parse(a.getCallTime())))
+                .findFirst()
+                .orElse(null);
     }
 }
