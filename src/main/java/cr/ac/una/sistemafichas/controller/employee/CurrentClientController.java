@@ -3,9 +3,11 @@ package cr.ac.una.sistemafichas.controller.employee;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.service.TicketService;
+import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.File;
+import java.time.LocalDateTime;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,22 +15,41 @@ import javafx.scene.image.ImageView;
 
 public class CurrentClientController extends Controller {
 
-    @FXML private ImageView imgClient;
-    @FXML private Label lblName;
-    @FXML private Label lblID;
-    @FXML private Label lblProcedure;
-    @FXML private Label lblTicketNumber;
-    @FXML private Label lblType;
+    @FXML
+    private ImageView imgClient;
+    @FXML
+    private Label lblName;
+    @FXML
+    private Label lblID;
+    @FXML
+    private Label lblProcedure;
+    @FXML
+    private Label lblTicketNumber;
+    @FXML
+    private Label lblType;
     @FXML
     private MFXButton btnExit;
 
     @Override
     public void initialize() {
         loadCurrentClient();
+        listen();
     }
 
     private void loadCurrentClient() {
-        Ticket t = TicketService.getInstance().getLastCalled();
+
+        String stationName = EmployeeSessionManager.getStationName();
+
+        Ticket t = TicketService.getInstance().getTickets().stream()
+                .filter(x -> "called".equals(x.getStatus()))
+                .filter(x -> stationName != null && stationName.equals(x.getStationName()))
+                .filter(x -> x.getCallTime() != null)
+                .sorted((a, b)
+                        -> LocalDateTime.parse(b.getCallTime())
+                        .compareTo(LocalDateTime.parse(a.getCallTime()))
+                )
+                .findFirst()
+                .orElse(null);
 
         if (t == null) {
             lblName.setText("Ningun Cliente ha sido llamado");
@@ -41,19 +62,18 @@ public class CurrentClientController extends Controller {
         }
 
         lblTicketNumber.setText(String.valueOf(t.getNumber()));
-        lblProcedure.setText(t.getProcedure() != null ? t.getProcedure().getName() : "Tramite es Nulo");
-        lblType.setText(t.getPriority() ? " Preferencial" : " Normal");
+        lblProcedure.setText(
+                t.getProcedure() != null ? t.getProcedure().getName() : "Tramite es Nulo"
+        );
+        lblType.setText(t.getPriority() ? "Preferencial" : "Normal");
 
         if (t.getClient() != null) {
             lblName.setText(t.getClient().getName());
             lblID.setText(t.getClient().getId());
+
             try {
                 File photo = new File(t.getClient().getPhoto());
-                if (photo.exists()) {
-                    imgClient.setImage(new Image(photo.toURI().toString()));
-                } else {
-                    imgClient.setImage(null);
-                }
+                imgClient.setImage(photo.exists() ? new Image(photo.toURI().toString()) : null);
             } catch (Exception e) {
                 imgClient.setImage(null);
             }
@@ -66,8 +86,16 @@ public class CurrentClientController extends Controller {
 
     @FXML
     private void onActionBtnBack() {
-        if(getStage()!=null){
+        if (getStage() != null) {
             getStage().close();
         }
+    }
+
+    private void listen() {
+        TicketService.getInstance().addListener(() -> {
+            javafx.application.Platform.runLater(() -> {
+                loadCurrentClient();
+            });
+        });
     }
 }

@@ -190,16 +190,11 @@ public class ProjectionController extends Controller {
             tickets = new ArrayList<>();
         }
 
-        List<Ticket> called = tickets.stream() //solo llamados
+        List<Ticket> called = tickets.stream()
                 .filter(t -> "called".equals(t.getStatus()))
-                .filter(t-> t.getBranchName().equals(KioskSessionManager.getBranch()))
-                .sorted((a, b) -> {
-                    if (a.getCallTime() == null || b.getCallTime() == null) {
-                        return 0;
-                    }
-                    return LocalDateTime.parse(b.getCallTime())
-                            .compareTo(LocalDateTime.parse(a.getCallTime()));
-                })
+                .filter(t -> t.getCallTime() != null)
+                .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
+                .compareTo(LocalDateTime.parse(a.getCallTime())))
                 .toList();
 
         if (!called.isEmpty()) {
@@ -213,12 +208,17 @@ public class ProjectionController extends Controller {
 
             lblPriorityBadge.setVisible(current.getPriority());
 
-            if (current.getNumber() != lastAnnouncedTicket) {
+            // evitar repetir anuncios por mismo callTime
+            if (current.getCallTime() != null
+                    && !current.getCallTime().equals(String.valueOf(lastAnnouncedTicket))) {
+
                 lastAnnouncedTicket = current.getNumber();
 
                 announceShift(
                         current.getNumber(),
-                        current.getStationName() != null ? current.getStationName() : "ventanilla"
+                        current.getStationName() != null
+                        ? current.getStationName()
+                        : "ventanilla"
                 );
             }
 

@@ -65,11 +65,12 @@ public class TicketService {
 
     public void save() {
         JsonUtil.write(PATH, tickets);
+         notifyListeners();
     }
 
     public Ticket generateTicket(Ticket ticket) {
 
-        load(); 
+        load();
 
         ticket.setNumber(nextNumber++);
         ticket.setStatus("waiting");
@@ -116,6 +117,10 @@ public class TicketService {
         }
 
         return null;
+    }
+
+    public void notifyAll_() {
+        notifyListeners();
     }
 
 }

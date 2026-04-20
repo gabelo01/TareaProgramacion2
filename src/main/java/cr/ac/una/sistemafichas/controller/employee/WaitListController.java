@@ -166,13 +166,30 @@ public class WaitListController extends Controller {
 
     private void callTicket(Ticket t) {
 
-        t.setStatus("called");
-        t.setStationName(EmployeeSessionManager.getStationName());
-        t.setBranchName(EmployeeSessionManager.getBranchName());
+        TicketService service = TicketService.getInstance();
 
+        String stationName = EmployeeSessionManager.getStationName();
+
+        Ticket last = service.getTickets().stream() // limpiar SOLO el último ticket llamado de esta estación
+                .filter(x -> "called".equals(x.getStatus()))
+                .filter(x -> stationName.equals(x.getStationName()))
+                .filter(x -> x.getCallTime() != null)
+                .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
+                .compareTo(LocalDateTime.parse(a.getCallTime())))
+                .findFirst()
+                .orElse(null);
+
+        if (last != null) {
+            last.setStatus("attended");
+        }
+
+        t.setStatus("called");// llamar nuevo
+        t.setStationName(stationName);
+        t.setBranchName(EmployeeSessionManager.getBranchName());
         t.setCallTime(LocalDateTime.now().toString());
 
-        TicketService.getInstance().save();
+        service.save();
+        service.notifyAll_();
 
         getStage().close();
     }
