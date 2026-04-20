@@ -12,6 +12,8 @@ import java.util.List;
 public class TicketService {
 
     private static TicketService instance;
+    
+    private Ticket lastTicket;
 
     private ObservableList<Ticket> tickets = FXCollections.observableArrayList();
 
@@ -64,7 +66,7 @@ public class TicketService {
 
     public void save() {
         JsonUtil.write(PATH, tickets);
-         notifyListeners();
+        notifyListeners();
     }
 
     public Ticket generateTicket(Ticket ticket) {
@@ -119,6 +121,14 @@ public class TicketService {
 
     public void notifyAll_() {
         notifyListeners();
+    }
+
+    public void setLastTicket(Ticket t) {
+        this.lastTicket = t;
+    }
+
+    public Ticket getLastTicket() {
+        return lastTicket;
     }
 
 }
