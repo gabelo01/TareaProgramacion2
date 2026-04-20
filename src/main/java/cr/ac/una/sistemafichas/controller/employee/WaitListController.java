@@ -133,6 +133,7 @@ public class WaitListController extends Controller {
 
             String name = txtSearchName.getText();
             String id = txtSearchID.getText();
+            String procedure = txtSearchProcedure.getText();
 
             boolean matchName = name == null || name.isBlank()
                     || (ticket.getClient() != null
@@ -144,8 +145,10 @@ public class WaitListController extends Controller {
 
             boolean matchPref = !chkPreferential.isSelected()
                     || ticket.getPriority();
+            boolean matchProcedure = procedure == null || procedure.isBlank()
+                    || (ticket.getProcedure()!=null && ticket.getProcedure().getName().toLowerCase().contains(procedure.toLowerCase()));
 
-            return matchName && matchID && matchPref;
+            return matchName && matchID && matchPref && matchProcedure;
         });
     }
 

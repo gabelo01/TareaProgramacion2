@@ -1,6 +1,7 @@
 package cr.ac.una.sistemafichas.controller.employee;
 
 import com.google.gson.reflect.TypeToken;
+import static com.itextpdf.kernel.pdf.PdfName.a;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
@@ -45,7 +46,6 @@ public class StationController extends Controller {
     private static final String CONFIG_PATH = "data/config.json";
 
     private Station station;
-    private String branch = KioskSessionManager.getBranch();
     private Timeline clockTimeline;
     private Timeline refreshTimeline;
 
@@ -210,15 +210,17 @@ public class StationController extends Controller {
         if (!isStationValid()) {
             return;
         }
-
+        String branch = EmployeeSessionManager.getBranchName();
         TicketService service = TicketService.getInstance();
         service.load();
-
+        service.load();
         Ticket t = service.getTickets().stream()
                 .filter(ticket -> "waiting".equals(ticket.getStatus()))
+                .filter(ticket -> ticket.getBranchName() != null)
+                .filter(ticket -> ticket.getBranchName().equalsIgnoreCase(branch))
                 .filter(ticket -> ticket.getProcedure() != null)
-                .filter(ticket -> station.getProcedureNames().contains(ticket.getProcedure().getName()))
-                .filter(ticket -> branch.equalsIgnoreCase(ticket.getBranchName()))
+                .filter(ticket -> ticket.getProcedure() != null && station.getProcedureNames().stream().anyMatch(p -> p.trim().equalsIgnoreCase(ticket.getProcedure().getName().trim())))
+                .sorted((a, b) -> Integer.compare(a.getNumber(), b.getNumber()))
                 .findFirst()
                 .orElse(null);
 
@@ -253,27 +255,21 @@ public class StationController extends Controller {
             return;
         }
 
-        Ticket t = service.getTickets().stream()
-                .filter(x -> "waiting".equals(x.getStatus()))
-                .filter(x -> x.getPriority())
-                .filter(x -> x.getProcedure() != null)
-                .filter(x -> station.getProcedureNames()
-                .contains(x.getProcedure().getName()))
-                .findFirst()
-                .orElse(null);
 
-        if (t != null) {
-            t.setStatus("called");
-            t.setStationName(station.getName());
-            t.setCallTime(LocalDateTime.now().toString());
-
-            service.save();
-
-            showCurrentTicket(t);
-            updateWaitingCount();
-        } else {
-            showAlert("No hay tickets preferenciales.");
-        }
+//
+//Ticket t = ordered.isEmpty() ? null : ordered.get(0);
+//        if (t != null) {
+//            t.setStatus("called");
+//            t.setStationName(station.getName());
+//            t.setCallTime(LocalDateTime.now().toString());
+//
+//            service.save();
+//
+//            showCurrentTicket(t);
+//            updateWaitingCount();
+//        } else {
+//            showAlert("No hay tickets preferenciales.");
+//        }
     }
 
     @FXML
