@@ -9,45 +9,49 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="500.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.employee.IndicatorsController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            prefHeight="500.0" prefWidth="500.0"
+            stylesheets="@../Style.css"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cr.ac.una.sistemafichas.controller.employee.IndicatorsController">
 
-    <center>
-        <VBox spacing="10" styleClass="vBox">
-            <padding><Insets bottom="10" left="20" right="20" top="10" /></padding>
-         <Label styleClass="jfx-label-text" text="Cantidad de Trámites para atender por Tipo:">
-            <VBox.margin>
-               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </VBox.margin>
-         </Label>
-            <ListView fx:id="listProcedures" maxHeight="1.7976931348623157E308" styleClass="list-cell" VBox.vgrow="ALWAYS" />
-        </VBox>
-    </center>
    <top>
-      <VBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="500.0" spacing="10.0" styleClass="vBox" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="47.0" prefWidth="500.0" spacing="10.0"
+            styleClass="anchor-pane" BorderPane.alignment="CENTER">
          <children>
-               <Label styleClass="jfx-titulo-label" text="Indicadores " />
-               <Label fx:id="lblTotal" styleClass="jfx-label" text="Total esperando: 0" />
+            <Label styleClass="jfx-titulo-label" text="Indicadores"/>
+            <Label fx:id="lblTotal" styleClass="jfx-label" text="Total esperando: 0"/>
          </children>
          <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
          </padding>
       </VBox>
    </top>
+
+   <center>
+      <VBox spacing="10" styleClass="vBox">
+         <padding><Insets bottom="10" left="20" right="20" top="10"/></padding>
+         <Label styleClass="jfx-label-text" text="Cantidad de trámites pendientes por tipo:">
+            <VBox.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/></VBox.margin>
+         </Label>
+         <ListView fx:id="listProcedures" maxHeight="1.7976931348623157E308"
+                   styleClass="list-view" VBox.vgrow="ALWAYS"/>
+      </VBox>
+   </center>
+
    <bottom>
-      <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="100.0" styleClass="anchor-pane" BorderPane.alignment="CENTER_RIGHT">
+      <HBox alignment="CENTER_RIGHT" prefHeight="50.0"
+            styleClass="anchor-pane" BorderPane.alignment="CENTER_RIGHT">
          <children>
             <MFXButton onAction="#onActionBtnBack" styleClass="jfx-btn-exit" text="Salir">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true"/>
                </graphic>
-               <HBox.margin>
-                  <Insets top="5.0" />
-               </HBox.margin>
+               <HBox.margin><Insets top="5.0"/></HBox.margin>
             </MFXButton>
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
+         <BorderPane.margin><Insets/></BorderPane.margin>
       </HBox>
    </bottom>
 

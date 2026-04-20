@@ -3,301 +3,312 @@
 <?import io.github.palexdev.materialfx.controls.MFXListView?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.IndicatorsController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../Style.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.IndicatorsController">
+   <top>
+      <Label styleClass="jfx-titulo-label" text="Top de cada sección" BorderPane.alignment="BOTTOM_CENTER">
+         <BorderPane.margin><Insets bottom="2.0" top="10.0" /></BorderPane.margin>
+      </Label>
+   </top>
    <center>
-      <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="150.0" tabMinHeight="30.0" tabMinWidth="110.0">
          <tabs>
+
+            <!-- ══════════════════ TAB CLIENTES ══════════════════ -->
             <Tab text="Top Clientes">
                <content>
                   <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <content>
-                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="vBox">
                            <children>
                               <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <top>
-                                    <StackPane maxWidth="1.7976931348623157E308" prefHeight="50.0" BorderPane.alignment="CENTER">
+                                    <VBox maxWidth="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label text="Filtrar por:" StackPane.alignment="TOP_CENTER" />
-                                          <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" spacing="20.0" StackPane.alignment="BOTTOM_CENTER">
+                                          <Label styleClass="jfx-label" text="Filtrar por:" />
+                                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
                                              <children>
-                                                <ToggleButton minWidth="52.0" mnemonicParsing="false" onAction="#OnActionFilterDates" text="Fechas" />
-                                                <ToggleButton minWidth="60.0" mnemonicParsing="false" onAction="#OnActionFilterBranches" text="Sucursal" />
-                                                <ToggleButton minWidth="44.0" mnemonicParsing="false" onAction="#OnActionFilterStations" text="Cajas" />
-                                                <ToggleButton minWidth="61.33" mnemonicParsing="false" onAction="#OnActionFilterProcedures" text="Trámites" />
-                                                <ToggleButton minWidth="89.33" mnemonicParsing="false" onAction="#OnActionFilterPreferential" text="Preferenciales" />
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="60.0" styleClass="jfx-label-text" text="Nombre:" />
+                                                   <TextField fx:id="tfC_Name" maxWidth="1.7976931348623157E308" promptText="Buscar por nombre..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="52.0" styleClass="jfx-label-text" text="Cédula:" />
+                                                   <TextField fx:id="tfC_Id" maxWidth="1.7976931348623157E308" promptText="Buscar por cédula..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="58.0" styleClass="jfx-label-text" text="Trámite:" />
+                                                   <TextField fx:id="tfC_Procedure" maxWidth="1.7976931348623157E308" promptText="Filtrar por trámite..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
                                              </children>
-                                             <padding>
-                                                <Insets bottom="10.0" top="20.0" />
-                                             </padding>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="15.0">
+                                             <children>
+                                                <Label styleClass="jfx-label-text" text="Desde:" />
+                                                <DatePicker fx:id="dpC_DateFrom" prefWidth="145.0" />
+                                                <Label styleClass="jfx-label-text" text="Hasta:" />
+                                                <DatePicker fx:id="dpC_DateTo" prefWidth="145.0" />
+                                                <ToggleButton fx:id="toggleC_Preferential" minHeight="30.0" onAction="#OnActionFilterPreferential" text="⭐ Solo Preferenciales" />
+                                             </children>
                                           </HBox>
                                        </children>
-                                    </StackPane>
+                                       <padding><Insets bottom="10.0" top="10.0" /></padding>
+                                    </VBox>
                                  </top>
                                  <center>
-                                    <MFXListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" BorderPane.alignment="CENTER" />
+                                    <MFXListView fx:id="listTopClients" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="380.0" BorderPane.alignment="CENTER" />
                                  </center>
-                                 <VBox.margin>
-                                    <Insets left="2.0" />
-                                 </VBox.margin>
+                                 <VBox.margin><Insets left="2.0" /></VBox.margin>
                               </BorderPane>
-                              <Label alignment="TOP_CENTER" text="Gráficos">
-                                 <VBox.margin>
-                                    <Insets bottom="-10.0" top="40.0" />
-                                 </VBox.margin>
+                              <Label styleClass="jfx-label" text="Top 3 Clientes — Trámites realizados">
+                                 <VBox.margin><Insets bottom="-5.0" top="20.0" /></VBox.margin>
                               </Label>
-                              <LineChart maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <xAxis>
-                                    <CategoryAxis side="BOTTOM" />
-                                 </xAxis>
-                                 <yAxis>
-                                    <NumberAxis side="LEFT" />
-                                 </yAxis>
-                              </LineChart>
+                              <BarChart fx:id="barChartClients" animated="false" maxWidth="1.7976931348623157E308" prefHeight="240.0">
+                                 <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+                                 <yAxis><NumberAxis side="LEFT" /></yAxis>
+                              </BarChart>
                            </children>
                         </VBox>
                      </content>
-                     <padding>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
-                     </padding>
+                     <padding><Insets bottom="30.0" left="30.0" right="30.0" top="20.0" /></padding>
                   </MFXScrollPane>
                </content>
             </Tab>
+
+            <!-- ══════════════════ TAB SUCURSALES ══════════════════ -->
             <Tab text="Top Sucursales">
                <content>
                   <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <content>
-                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="vBox">
                            <children>
                               <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <top>
-                                    <StackPane maxWidth="1.7976931348623157E308" prefHeight="50.0" BorderPane.alignment="CENTER">
+                                    <VBox maxWidth="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label text="Filtrar por:" StackPane.alignment="TOP_CENTER" />
-                                          <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" spacing="15.0" StackPane.alignment="BOTTOM_CENTER">
+                                          <Label styleClass="jfx-label" text="Filtrar por:" />
+                                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
                                              <children>
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterDates" text="Fechas" />
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterStations" text="Cajas" />
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterProcedures" text="Trámites" />
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterPreferential" text="Preferenciales" />
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="58.0" styleClass="jfx-label-text" text="Sucursal:" />
+                                                   <TextField fx:id="tfS_Branch" maxWidth="1.7976931348623157E308" promptText="Buscar sucursal..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
+                                                <ToggleButton fx:id="toggleS_Stations" minHeight="30.0" onAction="#OnActionFilterStations" text="Con Cajas" />
+                                                <ToggleButton fx:id="toggleS_Procedures" minHeight="30.0" onAction="#OnActionFilterProcedures" text="Con Trámites" />
+                                                <ToggleButton fx:id="toggleS_Preferential" minHeight="30.0" onAction="#OnActionFilterPreferential" text="⭐ Preferencial" />
                                              </children>
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
-                                             </padding>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="15.0">
+                                             <children>
+                                                <Label styleClass="jfx-label-text" text="Desde:" />
+                                                <DatePicker fx:id="dpS_DateFrom" prefWidth="145.0" />
+                                                <Label styleClass="jfx-label-text" text="Hasta:" />
+                                                <DatePicker fx:id="dpS_DateTo" prefWidth="145.0" />
+                                             </children>
                                           </HBox>
                                        </children>
-                                    </StackPane>
+                                       <padding><Insets bottom="10.0" top="10.0" /></padding>
+                                    </VBox>
                                  </top>
                                  <center>
-                                    <MFXListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" BorderPane.alignment="CENTER" />
+                                    <MFXListView fx:id="listTopBranches" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="380.0" BorderPane.alignment="CENTER" />
                                  </center>
-                                 <VBox.margin>
-                                    <Insets left="2.0" />
-                                 </VBox.margin>
+                                 <VBox.margin><Insets left="2.0" /></VBox.margin>
                               </BorderPane>
-                              <Label alignment="TOP_CENTER" text="Gráficos">
-                                 <VBox.margin>
-                                    <Insets bottom="-10.0" top="40.0" />
-                                 </VBox.margin>
+                              <Label styleClass="jfx-label" text="Top 3 Sucursales — Tickets atendidos">
+                                 <VBox.margin><Insets bottom="-5.0" top="20.0" /></VBox.margin>
                               </Label>
-                              <LineChart maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <xAxis>
-                                    <CategoryAxis side="BOTTOM" />
-                                 </xAxis>
-                                 <yAxis>
-                                    <NumberAxis side="LEFT" />
-                                 </yAxis>
-                              </LineChart>
+                              <BarChart fx:id="barChartBranches" animated="false" maxWidth="1.7976931348623157E308" prefHeight="240.0">
+                                 <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+                                 <yAxis><NumberAxis side="LEFT" /></yAxis>
+                              </BarChart>
                            </children>
                         </VBox>
                      </content>
-                     <padding>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
-                     </padding>
+                     <padding><Insets bottom="30.0" left="30.0" right="30.0" top="20.0" /></padding>
                   </MFXScrollPane>
                </content>
             </Tab>
+
+            <!-- ══════════════════ TAB CAJAS ══════════════════ -->
             <Tab text="Top Cajas">
                <content>
                   <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <content>
-                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="vBox">
                            <children>
                               <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <top>
-                                    <StackPane maxWidth="1.7976931348623157E308" prefHeight="50.0" BorderPane.alignment="CENTER">
+                                    <VBox maxWidth="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label text="Filtrar por:" StackPane.alignment="TOP_CENTER" />
-                                          <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" spacing="15.0" StackPane.alignment="BOTTOM_CENTER">
+                                          <Label styleClass="jfx-label" text="Filtrar por:" />
+                                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
                                              <children>
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterDates" text="Fechas" />
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterBranches" text="Sucursal" />
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterProcedures" text="Trámites" />
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterPreferential" text="Preferenciales" />
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="38.0" styleClass="jfx-label-text" text="Caja:" />
+                                                   <TextField fx:id="tfCJ_Station" maxWidth="1.7976931348623157E308" promptText="Buscar caja..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="58.0" styleClass="jfx-label-text" text="Sucursal:" />
+                                                   <TextField fx:id="tfCJ_Branch" maxWidth="1.7976931348623157E308" promptText="Filtrar por sucursal..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="58.0" styleClass="jfx-label-text" text="Trámite:" />
+                                                   <TextField fx:id="tfCJ_Procedure" maxWidth="1.7976931348623157E308" promptText="Filtrar por trámite..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
+                                                <ToggleButton fx:id="toggleCJ_Preferential" minHeight="30.0" onAction="#OnActionFilterPreferential" text="⭐ Preferencial" />
                                              </children>
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
-                                             </padding>
                                           </HBox>
                                        </children>
-                                    </StackPane>
+                                       <padding><Insets bottom="10.0" top="10.0" /></padding>
+                                    </VBox>
                                  </top>
                                  <center>
-                                    <MFXListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" BorderPane.alignment="CENTER" />
+                                    <MFXListView fx:id="listTopStations" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="380.0" BorderPane.alignment="CENTER" />
                                  </center>
-                                 <VBox.margin>
-                                    <Insets left="2.0" />
-                                 </VBox.margin>
+                                 <VBox.margin><Insets left="2.0" /></VBox.margin>
                               </BorderPane>
-                              <Label alignment="TOP_CENTER" text="Gráficos">
-                                 <VBox.margin>
-                                    <Insets bottom="-10.0" top="40.0" />
-                                 </VBox.margin>
+                              <Label styleClass="jfx-label" text="Top 3 Cajas — Trámites asignados">
+                                 <VBox.margin><Insets bottom="-5.0" top="20.0" /></VBox.margin>
                               </Label>
-                              <LineChart maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <xAxis>
-                                    <CategoryAxis side="BOTTOM" />
-                                 </xAxis>
-                                 <yAxis>
-                                    <NumberAxis side="LEFT" />
-                                 </yAxis>
-                              </LineChart>
+                              <BarChart fx:id="barChartStations" animated="false" maxWidth="1.7976931348623157E308" prefHeight="240.0">
+                                 <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+                                 <yAxis><NumberAxis side="LEFT" /></yAxis>
+                              </BarChart>
                            </children>
                         </VBox>
                      </content>
-                     <padding>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
-                     </padding>
+                     <padding><Insets bottom="30.0" left="30.0" right="30.0" top="20.0" /></padding>
                   </MFXScrollPane>
                </content>
             </Tab>
+
+            <!-- ══════════════════ TAB TRÁMITES ══════════════════ -->
             <Tab text="Top Trámites">
                <content>
                   <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <content>
-                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="vBox">
                            <children>
                               <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <top>
-                                    <StackPane maxWidth="1.7976931348623157E308" prefHeight="50.0" BorderPane.alignment="CENTER">
+                                    <VBox maxWidth="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label text="Filtrar por:" StackPane.alignment="TOP_CENTER" />
-                                          <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" spacing="15.0" StackPane.alignment="BOTTOM_CENTER">
+                                          <Label styleClass="jfx-label" text="Filtrar por:" />
+                                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
                                              <children>
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterDates" text="Fechas" />
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterBranches" text="Sucursal" />
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterStations" text="Cajas" />
-                                                <ToggleButton mnemonicParsing="false" onAction="#OnActionFilterPreferential" text="Preferenciales" />
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="58.0" styleClass="jfx-label-text" text="Trámite:" />
+                                                   <TextField fx:id="tfT_Procedure" maxWidth="1.7976931348623157E308" promptText="Buscar trámite..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="58.0" styleClass="jfx-label-text" text="Sucursal:" />
+                                                   <TextField fx:id="tfT_Branch" maxWidth="1.7976931348623157E308" promptText="Filtrar por sucursal..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
+                                                <ToggleButton fx:id="toggleT_Active" minHeight="30.0" onAction="#OnActionFilterPreferential" text="Solo Activos" />
                                              </children>
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
-                                             </padding>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="15.0">
+                                             <children>
+                                                <Label styleClass="jfx-label-text" text="Desde:" />
+                                                <DatePicker fx:id="dpT_DateFrom" prefWidth="145.0" />
+                                                <Label styleClass="jfx-label-text" text="Hasta:" />
+                                                <DatePicker fx:id="dpT_DateTo" prefWidth="145.0" />
+                                             </children>
                                           </HBox>
                                        </children>
-                                    </StackPane>
+                                       <padding><Insets bottom="10.0" top="10.0" /></padding>
+                                    </VBox>
                                  </top>
                                  <center>
-                                    <MFXListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" BorderPane.alignment="CENTER" />
+                                    <MFXListView fx:id="listTopProcedures" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="380.0" BorderPane.alignment="CENTER" />
                                  </center>
-                                 <VBox.margin>
-                                    <Insets left="2.0" />
-                                 </VBox.margin>
+                                 <VBox.margin><Insets left="2.0" /></VBox.margin>
                               </BorderPane>
-                              <Label alignment="TOP_CENTER" text="Gráficos">
-                                 <VBox.margin>
-                                    <Insets bottom="-10.0" top="40.0" />
-                                 </VBox.margin>
+                              <Label styleClass="jfx-label" text="Top 3 Trámites — Tickets generados">
+                                 <VBox.margin><Insets bottom="-5.0" top="20.0" /></VBox.margin>
                               </Label>
-                              <LineChart maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <xAxis>
-                                    <CategoryAxis side="BOTTOM" />
-                                 </xAxis>
-                                 <yAxis>
-                                    <NumberAxis side="LEFT" />
-                                 </yAxis>
-                              </LineChart>
+                              <BarChart fx:id="barChartProcedures" animated="false" maxWidth="1.7976931348623157E308" prefHeight="240.0">
+                                 <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+                                 <yAxis><NumberAxis side="LEFT" /></yAxis>
+                              </BarChart>
                            </children>
                         </VBox>
                      </content>
-                     <padding>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
-                     </padding>
+                     <padding><Insets bottom="30.0" left="30.0" right="30.0" top="20.0" /></padding>
                   </MFXScrollPane>
                </content>
             </Tab>
+
+            <!-- ══════════════════ TAB PREFERENCIALES ══════════════════ -->
             <Tab text="Top Preferenciales">
                <content>
                   <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <content>
-                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="vBox">
                            <children>
                               <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <top>
-                                    <StackPane maxWidth="1.7976931348623157E308" prefHeight="50.0" BorderPane.alignment="CENTER">
+                                    <VBox maxWidth="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label text="Filtrar por:" StackPane.alignment="TOP_CENTER" />
-                                          <HBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" prefHeight="50.0" spacing="20.0" StackPane.alignment="BOTTOM_CENTER">
+                                          <Label styleClass="jfx-label" text="Filtrar por:" />
+                                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
                                              <children>
-                                                <ToggleButton minWidth="52.0" mnemonicParsing="false" onAction="#OnActionFilterDates" text="Fechas" />
-                                                <ToggleButton minWidth="60.0" mnemonicParsing="false" onAction="#OnActionFilterBranches" text="Sucursal" />
-                                                <ToggleButton minWidth="44.0" mnemonicParsing="false" onAction="#OnActionFilterStations" text="Cajas" />
-                                                <ToggleButton minWidth="61.33" mnemonicParsing="false" onAction="#OnActionFilterProcedures" text="Trámites" />
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="58.0" styleClass="jfx-label-text" text="Sucursal:" />
+                                                   <TextField fx:id="tfP_Branch" maxWidth="1.7976931348623157E308" promptText="Filtrar por sucursal..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" spacing="5.0" HBox.hgrow="ALWAYS">
+                                                   <Label minWidth="58.0" styleClass="jfx-label-text" text="Trámite:" />
+                                                   <TextField fx:id="tfP_Procedure" maxWidth="1.7976931348623157E308" promptText="Filtrar por trámite..." HBox.hgrow="ALWAYS" />
+                                                </HBox>
                                              </children>
-                                             <padding>
-                                                <Insets bottom="10.0" top="20.0" />
-                                             </padding>
+                                          </HBox>
+                                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="15.0">
+                                             <children>
+                                                <Label styleClass="jfx-label-text" text="Desde:" />
+                                                <DatePicker fx:id="dpP_DateFrom" prefWidth="145.0" />
+                                                <Label styleClass="jfx-label-text" text="Hasta:" />
+                                                <DatePicker fx:id="dpP_DateTo" prefWidth="145.0" />
+                                             </children>
                                           </HBox>
                                        </children>
-                                    </StackPane>
+                                       <padding><Insets bottom="10.0" top="10.0" /></padding>
+                                    </VBox>
                                  </top>
                                  <center>
-                                    <MFXListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" BorderPane.alignment="CENTER" />
+                                    <MFXListView fx:id="listTopPreferentials" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="380.0" BorderPane.alignment="CENTER" />
                                  </center>
-                                 <VBox.margin>
-                                    <Insets left="2.0" />
-                                 </VBox.margin>
+                                 <VBox.margin><Insets left="2.0" /></VBox.margin>
                               </BorderPane>
-                              <Label alignment="TOP_CENTER" text="Gráficos">
-                                 <VBox.margin>
-                                    <Insets bottom="-10.0" top="40.0" />
-                                 </VBox.margin>
+                              <Label styleClass="jfx-label" text="Top 3 Clientes Preferenciales — Trámites realizados">
+                                 <VBox.margin><Insets bottom="-5.0" top="20.0" /></VBox.margin>
                               </Label>
-                              <LineChart maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                 <xAxis>
-                                    <CategoryAxis side="BOTTOM" />
-                                 </xAxis>
-                                 <yAxis>
-                                    <NumberAxis side="LEFT" />
-                                 </yAxis>
-                              </LineChart>
+                              <BarChart fx:id="barChartPreferentials" animated="false" maxWidth="1.7976931348623157E308" prefHeight="240.0">
+                                 <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
+                                 <yAxis><NumberAxis side="LEFT" /></yAxis>
+                              </BarChart>
                            </children>
                         </VBox>
                      </content>
-                     <padding>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
-                     </padding>
+                     <padding><Insets bottom="30.0" left="30.0" right="30.0" top="20.0" /></padding>
                   </MFXScrollPane>
                </content>
             </Tab>
+
          </tabs>
       </TabPane>
    </center>
-   <top>
-      <Label text="Top de cada sección" BorderPane.alignment="BOTTOM_CENTER">
-         <BorderPane.margin>
-            <Insets bottom="2.0" top="10.0" />
-         </BorderPane.margin>
-      </Label>
-   </top>
 </BorderPane>

@@ -6,6 +6,7 @@ import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.Client;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Procedure;
+import cr.ac.una.sistemafichas.model.Station;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.service.TicketService;
 import cr.ac.una.sistemafichas.util.FlowController;
@@ -45,9 +46,10 @@ public class SelectProceduresController extends Controller {
     private VBox vboxProcedures;
 
     private static final String CONFIG_PATH = "data/config.json";
-    private static final String PROC_PATH = "data/procedures.json";
+    private static final String PROC_PATH   = "data/procedures.json";
 
     private static boolean preferentialOverride = false;
+
     private javafx.animation.Timeline refreshTimeline;
 
     private String selectedProcedure = null;
@@ -71,14 +73,15 @@ public class SelectProceduresController extends Controller {
 
     private void loadHeader() {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
+
         if (config == null) {
             return;
         }
 
         lblName.setText(config.getCompanyName());
-
         try {
             File file = new File(config.getLogoPath());
+
             if (file.exists()) {
                 imgLogo.setImage(new Image(file.toURI().toString()));
             }
@@ -132,9 +135,9 @@ public class SelectProceduresController extends Controller {
 
         final String finalBranchName = branchName;
         Branch current = branches.stream()
-                .filter(b -> b.getName().equalsIgnoreCase(finalBranchName))
-                .findFirst()
-                .orElse(null);
+            .filter(b -> b.getName().equalsIgnoreCase(finalBranchName))
+            .findFirst()
+            .orElse(null);
 
         if (current == null || current.getStations() == null) {
             return;
@@ -146,31 +149,27 @@ public class SelectProceduresController extends Controller {
         if (allProcedures == null) {
             return;
         }
-
+        
         List<String> availableProcedures = current.getStations().stream().filter(st -> st.isActive()) //solo tramites de estaciones activas
                 .flatMap(st -> st.getProcedureNames().stream()).distinct().toList();
 
         List<String> filtered = allProcedures.stream()
-                .filter(Procedure::isActive)
-                .map(Procedure::getName)
-                .filter(availableProcedures::contains)
-                .toList();
+            .filter(Procedure::isActive)
+            .map(Procedure::getName)
+            .filter(availableProcedures::contains)
+            .toList();
 
-        //crear botones de los tramites
         for (String procName : filtered) {
             MFXButton btn = new MFXButton(procName);
-
             btn.setMaxWidth(Double.MAX_VALUE);
             btn.setPrefHeight(50);
-
             btn.setStyle(
+
                     "-fx-font-size: 16px;"
                     + "-fx-background-radius: 10;"
                     + "-fx-padding: 10;"
             );
-
-            btn.setOnAction(e -> seleccionarProcedimiento(procName));
-
+            btn.setOnAction(e -> selectedProcedure = procName);
             vboxProcedures.getChildren().add(btn);
         }
 
@@ -179,13 +178,8 @@ public class SelectProceduresController extends Controller {
         }
     }
 
-    private void seleccionarProcedimiento(String procName) {
-        selectedProcedure = procName;
-    }
-
     private void loadClientInfo() {
         Client client = KioskSessionManager.getCurrentClient();
-
         if (client != null) {
             lblClientInfo.setText("Bienvenido: " + client.getName());
 
@@ -206,32 +200,30 @@ public class SelectProceduresController extends Controller {
 
     @FXML
     private void OnActionBtnGetTicket(ActionEvent event) {
-
-        String selected = selectedProcedure;
-
-        if (selected == null) {
+        if (selectedProcedure == null) {
             showAlert("Seleccione un trámite.");
             return;
         }
 
         Client client = KioskSessionManager.getCurrentClient();
-
         boolean isPriority = false;
 
-        if (client != null) {
-            if (client.isPreferential() || isClientPreferential(client)) {
-                isPriority = true;
-            }
+        if (client != null && (client.isPreferential() || isClientPreferential(client))) {
+            isPriority = true;
         }
-
         if (preferentialOverride) {
             isPriority = true;
         }
 
-        Procedure procedure = new Procedure(selected, true);
+        String branchName = KioskSessionManager.getBranch();
+
+        String assignedStation = resolveStation(branchName, selectedProcedure);
+
+        Procedure procedure = new Procedure(selectedProcedure, true);
 
         Ticket ticket = new Ticket();
-        ticket.setBranchName(KioskSessionManager.getBranch());
+        ticket.setBranchName(branchName);
+        ticket.setStationName(assignedStation);
         ticket.setProcedure(procedure);
         ticket.setClient(client);
         ticket.setPriority(isPriority);
@@ -248,9 +240,7 @@ public class SelectProceduresController extends Controller {
         //showAlert("Ticket #" + ticket.getNumber() + " generado.");
 
         preferentialOverride = false;
-
         KioskSessionManager.clearClient();
-
         FlowController.getInstance().goView("kiosk/LoginKioskView");
 
     }
@@ -263,17 +253,36 @@ public class SelectProceduresController extends Controller {
     }
 
     private boolean isClientPreferential(Client client) {
+
         if (client == null) {
             return false;
         }
 
         try {
             LocalDate birth = LocalDate.parse(client.getAge());
-            int age = Period.between(birth, LocalDate.now()).getYears();
-            return age >= 65;
+            return Period.between(birth, LocalDate.now()).getYears() >= 65;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private String resolveStation(String branchName, String procedureName) {
+        if (branchName == null || procedureName == null) return null;
+        Type branchType = new TypeToken<List<Branch>>() {}.getType();
+        List<Branch> branches = JsonUtil.read("data/branches.json", branchType);
+        if (branches == null) return null;
+        return branches.stream()
+            .filter(b -> b.getName().equalsIgnoreCase(branchName))
+            .findFirst()
+            .map(Branch::getStations)
+            .filter(stations -> stations != null)
+            .flatMap(stations -> stations.stream()
+                .filter(Station::isActive)
+                .filter(st -> st.getProcedureNames() != null
+                    && st.getProcedureNames().contains(procedureName))
+                .map(Station::getName)
+                .findFirst())
+            .orElse(null);
     }
 
     private void showAlert(String msg) {
@@ -282,7 +291,6 @@ public class SelectProceduresController extends Controller {
         alert.setContentText(msg);
         alert.show();
     }
-
     @FXML
     private void OnClickedImage(MouseEvent event) {
         FlowController.getInstance().goView("kiosk/Preferential");
