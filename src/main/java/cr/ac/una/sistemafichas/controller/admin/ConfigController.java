@@ -2,9 +2,7 @@ package cr.ac.una.sistemafichas.controller.admin;
 
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
-import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
-import cr.ac.una.sistemafichas.util.ThemeManager;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.File;
 import javafx.event.ActionEvent;
@@ -12,34 +10,28 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class ConfigController extends Controller {
 
-    @FXML private TextField    txtCompanyName;
+    @FXML private TextField     txtCompanyName;
     @FXML private PasswordField txtPin;
-    @FXML private TextField    txtLogo;
-    @FXML private MFXButton    btnSelectLogo;
-    private Label        lblMensaje;
-    @FXML private MFXButton    btnSave;
-    private ToggleButton toggleDarkMode;
+    @FXML private TextField     txtLogo;
+    @FXML private MFXButton     btnSelectLogo;
+    @FXML private Label         lblMensaje;
+    @FXML private MFXButton     btnSave;
 
     private static final String CONFIG_PATH = "data/config.json";
     private boolean hasChanges = false;
 
     @Override
     public void initialize() {
-        lblMensaje.setVisible(false);
+        if (lblMensaje != null) lblMensaje.setVisible(false);
         loadData();
 
         txtCompanyName.textProperty().addListener((obs, old, nuevo) -> hasChanges = true);
         txtPin.textProperty().addListener((obs, old, nuevo) -> hasChanges = true);
         txtLogo.textProperty().addListener((obs, old, nuevo) -> hasChanges = true);
-
-        toggleDarkMode.setSelected(ThemeManager.getInstance().isDarkMode());
-        toggleDarkMode.setText(ThemeManager.getInstance().isDarkMode() ? "🌙 Modo oscuro" : "☀️ Modo claro");
     }
 
     private void loadData() {
@@ -91,5 +83,4 @@ public class ConfigController extends Controller {
             }
         }
     }
-
 }

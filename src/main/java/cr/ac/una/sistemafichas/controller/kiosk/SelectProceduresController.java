@@ -266,6 +266,25 @@ public class SelectProceduresController extends Controller {
         }
     }
 
+    private String resolveStation(String branchName, String procedureName) {
+        if (branchName == null || procedureName == null) return null;
+        Type branchType = new TypeToken<List<Branch>>() {}.getType();
+        List<Branch> branches = JsonUtil.read("data/branches.json", branchType);
+        if (branches == null) return null;
+        return branches.stream()
+            .filter(b -> b.getName().equalsIgnoreCase(branchName))
+            .findFirst()
+            .map(Branch::getStations)
+            .filter(stations -> stations != null)
+            .flatMap(stations -> stations.stream()
+                .filter(Station::isActive)
+                .filter(st -> st.getProcedureNames() != null
+                    && st.getProcedureNames().contains(procedureName))
+                .map(Station::getName)
+                .findFirst())
+            .orElse(null);
+    }
+
     private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);

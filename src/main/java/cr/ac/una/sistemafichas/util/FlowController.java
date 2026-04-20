@@ -82,7 +82,6 @@ public class FlowController {
         try {
             Scene scene = new Scene(FXMLLoader.load(App.class.getResource("view/PrincipalView.fxml"), this.idioma));
             MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
-            ThemeManager.getInstance().registerScene(scene);
             this.mainStage.setScene(scene);
             this.mainStage.show();
         } catch (IOException ex) {
@@ -95,7 +94,6 @@ public class FlowController {
         try {
             Scene scene = new Scene(FXMLLoader.load(App.class.getResource("view/" + nameView + ".fxml"), this.idioma));
             MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
-            ThemeManager.getInstance().registerScene(scene);
 
             CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
             if (config != null && config.getLogoPath() != null) {
@@ -152,7 +150,6 @@ public class FlowController {
         controller.setStage(stage);
         stage.getScene().setRoot(loader.getRoot());
         MFXThemeManager.addOn(stage.getScene(), Themes.DEFAULT, Themes.LEGACY);
-        ThemeManager.getInstance().registerScene(stage.getScene());
     }
 
     public void goViewInWindow(String viewName) {
@@ -161,8 +158,7 @@ public class FlowController {
         controller.initialize();
         Stage stage = new Stage();
 
-        
-         try { 
+        try {
             CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
             if (config != null && config.getLogoPath() != null) {
                 File file = new File(config.getLogoPath());
@@ -174,7 +170,6 @@ public class FlowController {
 
         stage.setTitle(controller.getNombreVista());
         stage.setOnHidden((WindowEvent event) -> {
-            ThemeManager.getInstance().unregisterScene(stage.getScene());
             controller.getStage().getScene().setRoot(new Pane());
             controller.setStage(null);
         });
@@ -182,7 +177,6 @@ public class FlowController {
         Parent root = loader.getRoot();
         Scene scene = new Scene(root);
         MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
-        ThemeManager.getInstance().registerScene(scene);
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
@@ -194,7 +188,7 @@ public class FlowController {
         controller.initialize();
         Stage stage = new Stage();
 
-        try { // Poner la imagen de logo de config
+        try {
             CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
             if (config != null && config.getLogoPath() != null) {
                 File file = new File(config.getLogoPath());
@@ -207,10 +201,10 @@ public class FlowController {
         } catch (Exception e) {
             System.out.println("Error cargando logo: " + e.getMessage());
         }
+
         stage.setTitle(controller.getNombreVista());
         stage.setResizable(resizable);
         stage.setOnHidden((WindowEvent event) -> {
-            ThemeManager.getInstance().unregisterScene(stage.getScene());
             controller.getStage().getScene().setRoot(new Pane());
             controller.setStage(null);
         });
@@ -218,7 +212,6 @@ public class FlowController {
         Parent root = loader.getRoot();
         Scene scene = new Scene(root);
         MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
-        ThemeManager.getInstance().registerScene(scene);
         stage.setScene(scene);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(parentStage);
