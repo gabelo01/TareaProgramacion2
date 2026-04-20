@@ -22,16 +22,15 @@ import io.github.palexdev.materialfx.css.themes.Themes;
 import java.io.File;
 import javafx.scene.layout.HBox;
 
-public class FlowController { //singlenton una sola instancia
+public class FlowController {
 
     private static FlowController INSTANCE = null;
     private static Stage mainStage;
 
-    private static ResourceBundle idioma; //para manejar diferentes idiomas en la interfaz
-    private static HashMap<String, FXMLLoader> loaders = new HashMap<>(); //almacenar todas las vistas FXML que vamos cargando
+    private static ResourceBundle idioma;
+    private static HashMap<String, FXMLLoader> loaders = new HashMap<>();
 
-    private FlowController() {
-    }
+    private FlowController() {}
 
     private static void createInstance() {
         if (INSTANCE == null) {
@@ -44,9 +43,7 @@ public class FlowController { //singlenton una sola instancia
     }
 
     public static FlowController getInstance() {
-        if (INSTANCE == null) {
-            createInstance();
-        }
+        if (INSTANCE == null) createInstance();
         return INSTANCE;
     }
 
@@ -67,12 +64,13 @@ public class FlowController { //singlenton una sola instancia
             synchronized (FlowController.class) {
                 if (loader == null) {
                     try {
-                        loader = new FXMLLoader(App.class.getResource("view/" + name + ".fxml"), this.idioma); //tener en cuenta el nombre de la vista
-                        loader.load(); // lo carga, ejecuta el codigo en el metodo initialize de los controles
-                        loaders.put(name, loader); // se guarda en hashMap la vista
+                        loader = new FXMLLoader(App.class.getResource("view/" + name + ".fxml"), this.idioma);
+                        loader.load();
+                        loaders.put(name, loader);
                     } catch (Exception ex) {
                         loader = null;
-                        java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Creando loader [" + name + "].", ex);
+                        java.util.logging.Logger.getLogger(FlowController.class.getName())
+                            .log(Level.SEVERE, "Creando loader [" + name + "].", ex);
                     }
                 }
             }
@@ -80,33 +78,36 @@ public class FlowController { //singlenton una sola instancia
         return loader;
     }
 
-    public void goMain() { //para mandar a llamar la pantalla principal del sistema
+    public void goMain() {
         try {
-            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/PrincipalView.fxml"), this.idioma)));
-            MFXThemeManager.addOn(this.mainStage.getScene(), Themes.DEFAULT, Themes.LEGACY);
+            Scene scene = new Scene(FXMLLoader.load(App.class.getResource("view/PrincipalView.fxml"), this.idioma));
+            MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
+            ThemeManager.getInstance().registerScene(scene);
+            this.mainStage.setScene(scene);
             this.mainStage.show();
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
+            java.util.logging.Logger.getLogger(FlowController.class.getName())
+                .log(Level.SEVERE, "Error inicializando la vista base.", ex);
         }
     }
-    
-        public void goMain(String NameView) { //para mandar a llamar la pantalla principal del sistema
+
+    public void goMain(String nameView) {
         try {
-            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("view/"+NameView+".fxml"), this.idioma)));
-            MFXThemeManager.addOn(this.mainStage.getScene(), Themes.DEFAULT, Themes.LEGACY);
-                    
+            Scene scene = new Scene(FXMLLoader.load(App.class.getResource("view/" + nameView + ".fxml"), this.idioma));
+            MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
+            ThemeManager.getInstance().registerScene(scene);
+
             CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
             if (config != null && config.getLogoPath() != null) {
                 File file = new File(config.getLogoPath());
-                if (file.exists()) {
-                    mainStage.getIcons().add(new Image(file.toURI().toString()));
-                } else {
-                    System.out.println("Logo no encontrado en: " + config.getLogoPath());
-                }
+                if (file.exists()) mainStage.getIcons().add(new Image(file.toURI().toString()));
             }
+
+            this.mainStage.setScene(scene);
             this.mainStage.show();
         } catch (IOException ex) {
-            java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
+            java.util.logging.Logger.getLogger(FlowController.class.getName())
+                .log(Level.SEVERE, "Error inicializando la vista base.", ex);
         }
     }
 
@@ -121,7 +122,6 @@ public class FlowController { //singlenton una sola instancia
     public void goView(String viewName, String location, String accion) {
         FXMLLoader loader = getLoader(viewName);
         Controller controller = loader.getController();
-        //controller.setAccion(accion);
         controller.initialize();
         Stage stage = controller.getStage();
         if (stage == null) {
@@ -130,65 +130,50 @@ public class FlowController { //singlenton una sola instancia
         }
         switch (location) {
             case "Center":
-                
                 BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
-                VBox vBox = (VBox)borderPane.getCenter();
+                VBox vBox = (VBox) borderPane.getCenter();
                 vBox.getChildren().clear();
                 vBox.getChildren().add(loader.getRoot());
-                        
-                /*VBox vBox = ((VBox) ((BorderPane) stage.getScene().getRoot()).getCenter());
-                vBox.getChildren().clear();
-                vBox.getChildren().add(loader.getRoot());*/
                 break;
             case "Top":
                 BorderPane borderPane2 = (BorderPane) stage.getScene().getRoot();
-                HBox hBox = (HBox)borderPane2.getTop();
+                HBox hBox = (HBox) borderPane2.getTop();
                 hBox.getChildren().clear();
                 hBox.getChildren().add(loader.getRoot());
-                break;
-            case "Bottom":
-                break;
-            case "Right":
-                break;
-            case "Left":
                 break;
             default:
                 break;
         }
     }
 
-    public void goViewInStage(String viewName, Stage stage) { //mostrar en una ventana en especifico o stage especifico
+    public void goViewInStage(String viewName, Stage stage) {
         FXMLLoader loader = getLoader(viewName);
         Controller controller = loader.getController();
         controller.setStage(stage);
         stage.getScene().setRoot(loader.getRoot());
         MFXThemeManager.addOn(stage.getScene(), Themes.DEFAULT, Themes.LEGACY);
-        
+        ThemeManager.getInstance().registerScene(stage.getScene());
     }
 
-    public void goViewInWindow(String viewName) { //abre en nueva ventana
-        FXMLLoader loader = getLoader(viewName); //get loader busca en hashMap si existe y abre
-        Controller controller = loader.getController();// obtiene el controller de ese loader 
+    public void goViewInWindow(String viewName) {
+        FXMLLoader loader = getLoader(viewName);
+        Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
 
-        
-         try {  // este lo agregue para poder meter la imagen en la ventana desde el logo path que esta en el json de config
+        try {
             CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
             if (config != null && config.getLogoPath() != null) {
                 File file = new File(config.getLogoPath());
-                if (file.exists()) {
-                    stage.getIcons().add(new Image(file.toURI().toString()));
-                } else {
-                    System.out.println("Logo no encontrado en: " + config.getLogoPath());
-                }
+                if (file.exists()) stage.getIcons().add(new Image(file.toURI().toString()));
             }
         } catch (Exception e) {
             System.out.println("Error cargando logo: " + e.getMessage());
         }
-         
+
         stage.setTitle(controller.getNombreVista());
         stage.setOnHidden((WindowEvent event) -> {
+            ThemeManager.getInstance().unregisterScene(stage.getScene());
             controller.getStage().getScene().setRoot(new Pane());
             controller.setStage(null);
         });
@@ -196,6 +181,7 @@ public class FlowController { //singlenton una sola instancia
         Parent root = loader.getRoot();
         Scene scene = new Scene(root);
         MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
+        ThemeManager.getInstance().registerScene(scene);
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();
@@ -206,10 +192,11 @@ public class FlowController { //singlenton una sola instancia
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-        stage.getIcons().add(new Image("data/images/LogoLiga.png")); // DUDAS
+        stage.getIcons().add(new Image("data/images/LogoLiga.png"));
         stage.setTitle(controller.getNombreVista());
         stage.setResizable(resizable);
         stage.setOnHidden((WindowEvent event) -> {
+            ThemeManager.getInstance().unregisterScene(stage.getScene());
             controller.getStage().getScene().setRoot(new Pane());
             controller.setStage(null);
         });
@@ -217,46 +204,36 @@ public class FlowController { //singlenton una sola instancia
         Parent root = loader.getRoot();
         Scene scene = new Scene(root);
         MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
+        ThemeManager.getInstance().registerScene(scene);
         stage.setScene(scene);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(parentStage);
         stage.centerOnScreen();
         stage.showAndWait();
-
     }
-    
-    /***************
-     * 
-     * Nuevos metodos
-     * 
-     **************/
-    
-     private Stage getMainStage() {
+
+    private Stage getMainStage() {
         if (mainStage != null) return mainStage;
-        mainStage = Stage.getWindows()
-                    .stream()
-                    .filter(w -> w instanceof Stage && w.isShowing())
-                    .map(w -> (Stage) w)
-                    .findFirst()
-                    .orElse(null);
+        mainStage = Stage.getWindows().stream()
+            .filter(w -> w instanceof Stage && w.isShowing())
+            .map(w -> (Stage) w)
+            .findFirst()
+            .orElse(null);
         return mainStage;
     }
-     
-     /////////////////////////////////////
 
-     
     public Controller getController(String viewName) {
         return getLoader(viewName).getController();
     }
-    
-    public void limpiarLoader(String view){
+
+    public void limpiarLoader(String view) {
         this.loaders.remove(view);
     }
 
     public static void setIdioma(ResourceBundle idioma) {
         FlowController.idioma = idioma;
     }
-    
+
     public void initialize() {
         this.loaders.clear();
     }
@@ -264,6 +241,4 @@ public class FlowController { //singlenton una sola instancia
     public void salir() {
         this.mainStage.close();
     }
-    
 }
-
