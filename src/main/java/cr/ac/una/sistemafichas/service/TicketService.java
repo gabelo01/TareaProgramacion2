@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class TicketService {
 
@@ -17,7 +18,7 @@ public class TicketService {
     private final String PATH = "data/tickets.json";
 
     private int nextNumber = 1;
-    private Ticket lastCalled = null;
+
     private java.util.List<Runnable> listeners = new java.util.ArrayList<>();
 
     private TicketService() {
@@ -45,15 +46,16 @@ public class TicketService {
             l.run();
         }
     }
-    
 
     public void load() {
         try {
             Ticket[] t = JsonUtil.read(PATH, Ticket[].class);
             if (t != null) {
                 tickets.setAll(Arrays.asList(t));
-                nextNumber = tickets.stream().mapToInt(Ticket::getNumber).max().orElse(0) + 1;
-                lastCalled = tickets.stream() .filter(x -> "called".equals(x.getStatus())).reduce((a, b) -> b).orElse(null);
+                nextNumber = tickets.stream()
+                        .mapToInt(Ticket::getNumber)
+                        .max()
+                        .orElse(0) + 1;
             }
         } catch (Exception e) {
             System.out.println("Error loading tickets");
@@ -65,10 +67,14 @@ public class TicketService {
     }
 
     public Ticket generateTicket(Ticket ticket) {
+
+        load(); 
+
         ticket.setNumber(nextNumber++);
         ticket.setStatus("waiting");
 
         tickets.add(ticket);
+
         save();
 
         return ticket;
@@ -99,13 +105,15 @@ public class TicketService {
     }
 
     public Ticket getLastCalled() {
-        return lastCalled;
+        List<Ticket> tickets = getTickets();
 
+        for (int i = tickets.size() - 1; i >= 0; i--) {
+            if ("called".equals(tickets.get(i).getStatus())) {
+                return tickets.get(i);
+            }
+        }
+
+        return null;
     }
 
-    public void setLastCalled(Ticket ticket) {
-        this.lastCalled = ticket;
-        notifyListeners();
-    }
-    
 }

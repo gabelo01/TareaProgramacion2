@@ -6,7 +6,6 @@ import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import com.google.gson.reflect.TypeToken;
-import cr.ac.una.sistemafichas.service.TicketService;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -16,8 +15,6 @@ import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -58,6 +55,8 @@ public class ProjectionController extends Controller {
     private Label lblTicket4;
     @FXML
     private Label lblStation4;
+    @FXML
+    private Label lblLastCalls;
 
     private static final String CONFIG_PATH = "data/config.json";
     private static final String TICKETS_PATH = "data/tickets.json";
@@ -68,13 +67,12 @@ public class ProjectionController extends Controller {
     private Timeline headerTimeline;
     private TranslateTransition marquee;
     private int lastAnnouncedTicket = -1;
+    private long lastModified = 0;
 
     private final DateTimeFormatter dateFormatter
             = DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM, yyyy");
     private final DateTimeFormatter timeFormatter
             = DateTimeFormatter.ofPattern("HH:mm:ss");
-    @FXML
-    private Label lblLastCalls;
 
     @Override
     public void initialize() {
@@ -84,6 +82,8 @@ public class ProjectionController extends Controller {
         startHeaderRefresh();
         startMarquee();
         startDataRefresh();
+
+        refreshTickets();
     }
 
     private void loadHeader() {
@@ -105,9 +105,10 @@ public class ProjectionController extends Controller {
     }
 
     private void startHeaderRefresh() {
-        headerTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(30), e -> loadHeader())
-        );
+        headerTimeline = new Timeline(new KeyFrame(Duration.seconds(30), e -> {
+            loadHeader();
+            loadNoticeText();
+        }));
         headerTimeline.setCycleCount(Timeline.INDEFINITE);
         headerTimeline.play();
     }
@@ -144,90 +145,76 @@ public class ProjectionController extends Controller {
         clockTimeline.play();
     }
 
-    private long lastModified = 0;
-
     private void startDataRefresh() {
         if (refreshTimeline != null) {
             refreshTimeline.stop();
         }
-        refreshTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(2), e -> {
-                    File file = new File("data/Tickets.json");
-                    long modified = file.lastModified();
-                    if (modified != lastModified) {
-                        lastModified = modified;
-                        TicketService.getInstance().load();
-                        refreshTickets();
-                    }
-                })
-        );
+
+        refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
+            File file = new File(TICKETS_PATH);
+            long modified = file.lastModified();
+
+            if (modified != lastModified) {
+                lastModified = modified;
+                refreshTickets();
+            }
+        }));
+
         refreshTimeline.setCycleCount(Timeline.INDEFINITE);
         refreshTimeline.play();
-    }
 
-    private void anunciarTurno(int turno, String destino) {
-        String mensaje = "Turno " + turno + " dirijase a " + destino;
-
-        Thread hilo = new Thread(() -> {
-            try {
-                String sistema = System.getProperty("os.name").toLowerCase();
-
-                if (sistema.contains("win")) {
-                    String comando = "Add-Type -AssemblyName System.Speech; "
-                            + "$voz = New-Object System.Speech.Synthesis.SpeechSynthesizer; "
-                            + "$voz.Speak('" + mensaje + "')";
-                    new ProcessBuilder("powershell", "-Command", comando).start().waitFor();
-
-                } else if (sistema.contains("mac")) {
-                    new ProcessBuilder("say", mensaje).start().waitFor();
-
-                } else {
-                    new ProcessBuilder("espeak", mensaje).start().waitFor();
-                }
-            } catch (Exception e) {
-                System.out.println("Error reproduciendo audio: " + e.getMessage());
-            }
-        });
-        hilo.setDaemon(true);
-        hilo.start();
+        refreshTickets();
     }
 
     private void refreshTickets() {
-        TicketService service = TicketService.getInstance();
-        List<Ticket> tickets = service.getTickets();
+
+        Type type = new TypeToken<List<Ticket>>() {
+        }.getType();
+        List<Ticket> tickets = JsonUtil.read(TICKETS_PATH, type);
+
         if (tickets == null) {
             tickets = new ArrayList<>();
         }
 
-        List<Ticket> called = new ArrayList<>();
+        List<Ticket> called = tickets.stream() //solo llamados
+                .filter(t -> "called".equals(t.getStatus()))
+                .sorted((a, b) -> {
+                    if (a.getCallTime() == null || b.getCallTime() == null) {
+                        return 0;
+                    }
+                    return LocalDateTime.parse(b.getCallTime())
+                            .compareTo(LocalDateTime.parse(a.getCallTime()));
+                })
+                .toList();
 
-        for (int i = tickets.size() - 1; i >= 0 && called.size() < 4; i--) {
-            if ("called".equals(tickets.get(i).getStatus())) {
-                called.add(tickets.get(i));
-            }
-        }
+        if (!called.isEmpty()) {
 
-        Ticket current = service.getLastCalled();
-        if (current != null) {
-            if (lblCurrentTicket != null) {
-                lblCurrentTicket.setText(String.valueOf(current.getNumber()));
-            }
-            if (lblCurrentStation != null) {
-                if (current.getStationName() != null) {
-                    lblCurrentStation.setText(current.getStationName());
-                } else {
-                    lblCurrentStation.setText("---");
-                }
-            }
+            Ticket current = called.get(0);
+
+            lblCurrentTicket.setText(String.valueOf(current.getNumber()));
+            lblCurrentStation.setText(
+                    current.getStationName() != null ? current.getStationName() : "---"
+            );
+
+            lblPriorityBadge.setVisible(current.getPriority());
+
             if (current.getNumber() != lastAnnouncedTicket) {
                 lastAnnouncedTicket = current.getNumber();
-                if (current.getStationName() != null) {
-                    anunciarTurno(current.getNumber(), current.getStationName());
-                } else {
-                    anunciarTurno(current.getNumber(), "ventanilla");
-                }
+
+                announceShift(
+                        current.getNumber(),
+                        current.getStationName() != null ? current.getStationName() : "ventanilla"
+                );
             }
+
+        } else {
+            lblCurrentTicket.setText("---");
+            lblCurrentStation.setText("---");
+            lblPriorityBadge.setVisible(false);
+
+            lastAnnouncedTicket = -1;
         }
+
         updateRow(called, 0, lblTicket1, lblStation1);
         updateRow(called, 1, lblTicket2, lblStation2);
         updateRow(called, 2, lblTicket3, lblStation3);
@@ -242,15 +229,65 @@ public class ProjectionController extends Controller {
         if (index < list.size()) {
             Ticket t = list.get(index);
             lblTicket.setText(String.valueOf(t.getNumber()));
-            if (t.getStationName() != null) {
-                lblStation.setText(t.getStationName());
-            } else {
-                lblStation.setText("---");
-            }
+            lblStation.setText(t.getStationName() != null ? t.getStationName() : "---");
         } else {
             lblTicket.setText("---");
             lblStation.setText("---");
         }
+    }
+
+//    private void announceShift(int turno, String destino) {
+//        String message = "Ticket numero " + turno + " dirijase a " + destino;
+//        Thread hilo = new Thread(() -> {
+//            try {
+//                String system = System.getProperty("os.name").toLowerCase();
+//                if (system.contains("win")) {
+//                    String command = "Add-Type -AssemblyName System.Speech; "
+//                            + "$voz = New-Object System.Speech.Synthesis.SpeechSynthesizer; "
+//                            + "$voz.Speak('" + message + "')";
+//                    new ProcessBuilder("powershell", "-Command", command).start().waitFor();
+//                } else if (system.contains("mac")) {
+//                    new ProcessBuilder("say", message).start().waitFor();
+//                } else {
+//                    new ProcessBuilder("espeak", message).start().waitFor();
+//                }
+//            } catch (Exception e) {
+//                System.out.println("Error reproduciendo audio: " + e.getMessage());
+//            }
+//        });
+//        hilo.setDaemon(true);
+//        hilo.start();
+//    }
+    private void announceShift(int turno, String destino) {   //se supone que este mete el español en los 3 sistemas operativos
+        String message = "Ticket numero " + turno + " dirijase a " + destino;
+
+        Thread hilo = new Thread(() -> {
+            try {
+                String system = System.getProperty("os.name").toLowerCase();
+
+                if (system.contains("win")) {
+                    String command = "Add-Type -AssemblyName System.Speech; "
+                            + "$voz = New-Object System.Speech.Synthesis.SpeechSynthesizer; "
+                            + "$voz.SelectVoiceByHints([System.Speech.Synthesis.VoiceGender]::Female, "
+                            + "[System.Speech.Synthesis.VoiceAge]::Adult, 0, "
+                            + "[System.Globalization.CultureInfo]'es-ES'); "
+                            + "$voz.Speak('" + message + "')";
+                    new ProcessBuilder("powershell", "-Command", command).start().waitFor();
+
+                } else if (system.contains("mac")) {
+                    new ProcessBuilder("say", "-v", "Monica", message).start().waitFor();
+
+                } else {
+                    new ProcessBuilder("espeak", "-v", "es", message).start().waitFor();
+                }
+
+            } catch (Exception e) {
+                System.out.println("Error reproduciendo audio: " + e.getMessage());
+            }
+        });
+
+        hilo.setDaemon(true);
+        hilo.start();
     }
 
     private void startMarquee() {

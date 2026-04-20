@@ -19,7 +19,7 @@
     <top>
         <HBox alignment="TOP_CENTER" spacing="15">
             <padding><Insets bottom="10" left="20" right="20" top="10" /></padding>
-            <Label styleClass="jfx-label" text="LISTA DE ESPERA PARA SER ATENDIDOS" />
+            <Label styleClass="jfx-label" text="LISTA DE CLIENTES EN ESPERA PARA SER ATENDIDOS" />
         </HBox>
     </top>
 

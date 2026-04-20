@@ -118,12 +118,12 @@ public class MaintenanceEmployeeController extends Controller {
     }
 
     @FXML
-    private void onNew() {
+    private void onActionBtnNew() {
         clear();
     }
 
     @FXML
-    private void onSave() {
+    private void onActionBtnSave() {
         try {
 
             if (txtName.getText().trim().isEmpty()|| txtId.getText().trim().isEmpty()|| txtPin.getText().trim().isEmpty()
@@ -172,7 +172,7 @@ public class MaintenanceEmployeeController extends Controller {
     }
 
     @FXML
-    private void onDelete() {
+    private void onActionBtnDelete() {
         if (selected == null) return;
 
         employees.remove(selected);
@@ -193,6 +193,6 @@ public class MaintenanceEmployeeController extends Controller {
 
     @FXML
     private void OnActionBtnEditEmployee(ActionEvent event) {
-        onSave();
+        
     }
 }

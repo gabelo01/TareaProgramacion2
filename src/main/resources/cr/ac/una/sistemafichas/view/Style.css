@@ -1,9 +1,11 @@
-/*
-generales
-*/
+/***********************
+*
+*           Generales
+*
+************************/
 
 *{
-    -fx-base-color-focus:#0066ff;
+    -fx-base-color-focus:#217edc;
     -fx-base-color-unfocus:#4d4d4d;
     -fx-base-color-etiquetas:#999999;
     -fx-base-color-texto:#000000;
@@ -41,7 +43,7 @@ generales
     -fx-pref-height: 40px;
     -fx-text-fill: black;
 
-    -fx-border-color: #999999;
+    -fx-border-color: #0066ff;
     -fx-border-width: 1.5px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
@@ -54,7 +56,12 @@ generales
 }
 
 
-// Listas
+/**********************
+*       
+*            Listas
+*
+**********************/
+
 .list-view {
     -fx-background-color: #f5f5f5;
     -fx-border-color: #999;
@@ -72,7 +79,11 @@ generales
     -fx-font-weight: bold;
 }
 
-//textos
+/************************
+*
+*           Tipos Textos
+*
+*************************/
 .jfx-titulo-label{
     -fx-font-size:18px;
     -fx-padding:5 0 5 0;
@@ -104,6 +115,7 @@ generales
 
    -fx-effect: dropshadow(gaussian, rgba(10, 6, 43, 0.35), 4, 0.2, 1, 1);
 }
+
 .jfx-label-ticket {
     -fx-font-size: 100px;
     -fx-font-weight: bold;   
@@ -115,12 +127,12 @@ generales
 }
 
 .jfx-label-ticket-projection{
-    -fx-font-size: 150px;
+    -fx-font-size: 175px;
     -fx-font-weight: bold;
-    -fx-text-fill: #0000ff;
+    -fx-text-fill: #ffffff;
     -fx-effect: dropshadow(gaussian, #000000, 10, 0.7, 0, 0)
-               dropshadow(gaussian, #3333ff, 20, 0.5, 0, 0)
-               dropshadow(gaussian, #3300ff, 30, 0.3, 0, 0);
+               dropshadow(gaussian, #000000, 20, 0.5, 0, 0)
+               dropshadow(gaussian, #000000, 30, 0.3, 0, 0);
 }
 
 .jfx-label-projection {
@@ -136,31 +148,14 @@ generales
     -fx-fill: white;
 }
 
-.mfx-button{
-    -mfx-button-type:RAISED;
-    -fx-opacity:0.8;
-    -fx-content-display:left;
-    -fx-text-fill:black;
-    -fx-font-weight:bold;
-    -fx-font-size:14px;
-    -fx-aligment:center-left;
-     -fx-background-color:#cccccc
-}
-.mfx-button .mfx-ripple-generator{
-    -mfx-ripple-color:white;
-}
-
-.button:hover{
-    -fx-background-color:#ffffff;
-}
-.button{
-    -fx-background-color:-fx-button-color;
-    -fx-border-color: black;
-    -fx-border-width: 0.2px;
-}
 
 
-// contenedores
+/****************************
+*
+*       Contenedores y elementos
+*
+****************************/
+
 .anchor-pane {
     -fx-background-color:#333333 ;
 }
@@ -168,14 +163,6 @@ generales
 .vBox {
     -fx-background-color:#e9e9e9;
 }
-
-.color-fondo-oscuro {
-    -fx-background-color:#050534;
-}
-.color-fondo-claro {
-    -fx-background-color:#e1e1ff;
-}
-
 
 .combo-box {
     -fx-background-color: #cccccc;
@@ -212,8 +199,7 @@ generales
     -fx-background-radius: 10 10 0 0;
 }
 
-.table-view .column-header, 
-.table-view .filler {
+.table-view .column-header, .table-view .filler {
     -fx-size: 40px;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
@@ -232,6 +218,7 @@ generales
 .table-row-cell:odd {
     -fx-background-color: #f9fbfc;
 }
+
 .table-row-cell:hover {
     -fx-background-color: #e3f2fd;
 }
@@ -244,7 +231,7 @@ generales
     -fx-fill: white;
 }
 
-// elementos
+
 .mfx-checkbox {
     -fx-font-size:15px;
     -fx-pref-heigth:25px;
@@ -270,6 +257,7 @@ generales
 .combo-box-popup .list-cell {
     -fx-font-weight: bold;
 }
+
 .separator{
     -fx-background-color:#333333
 }
@@ -279,13 +267,37 @@ generales
 *                                       Botones
 *
 ************************************************************/
+.mfx-button{
+    -mfx-button-type:RAISED;
+    -fx-opacity:0.8;
+    -fx-content-display:left;
+    -fx-text-fill:black;
+    -fx-font-weight:bold;
+    -fx-font-size:14px;
+    -fx-aligment:center-left;
+     -fx-background-color:#cccccc
+}
+.mfx-button .mfx-ripple-generator{
+    -mfx-ripple-color:white;
+}
 
-//nuevo
+.button:hover{
+    -fx-background-color:#ffffff;
+}
+
+.button{
+    -fx-background-color:-fx-button-color;
+    -fx-border-color: black;
+    -fx-border-width: 0.2px;
+}
+
+
 .jfx-btn-nuevo > ImageView{
     
     -fx-image: url("../Resources/Save.png");
     
 }
+
 .jfx-btn-nuevo, .jfx-btn-nuevo:armed, .jfx-btn-nuevo:focused{
     -fx-background-color:#66ccff;
     -fx-border-color: black;
@@ -294,7 +306,10 @@ generales
     -fx-background-radius: 10px;
 }
 
-//agregar
+/*
+Agregar
+*/
+
 .jfx-btn-add > ImageView {
     
     -fx-image: url("../Resources/AddPerson.png");
@@ -304,13 +319,21 @@ generales
     -fx-background-color:#00ff00;
 }
 
-//eliminar
+/*
+Eliminar
+*/
+
 .jfx-btn-delete > ImageView {
     -fx-image: url("../Resources/Cancel.png");
 }
+
 .jfx-btn-delete, .jfx-btn-delete:armed, .jfx-btn-delete:focused{
     -fx-background-color:#ff3333;
 }
+
+/*
+Empleados
+*/
 
 .jfx-btn-employees > ImageView{
     
@@ -318,26 +341,36 @@ generales
     
 }
 
-// agregar cliente
+/*
+Agregar cliente
+*/
+
 .jfx-btn-client > ImageView{
     
     -fx-image: url("../Resources/Clients.png");
     
 }
 
-//agregar persona
+/*
+Agregar persona
+*/
+
 .jfx-btn-person > ImageView{
     
     -fx-image: url("../Resources/AddPerson.png");
     
 }
 
-//salir
+/*
+Salir
+*/
+
 .jfx-btn-exit > ImageView{
     
     -fx-image: url("../Resources/Back.png");
     
 }
+
 .jfx-btn-exit, .jfx-btn-exit:armed, .jfx-btn-exit:focused{
     -fx-background-color:#ff6666;
     -fx-border-color: black;
@@ -346,12 +379,16 @@ generales
     -fx-background-radius: 10px;
 }
 
-//limpiar
+/*
+Limpiar
+*/
+
 .jfx-btn-clean > ImageView{
     
     -fx-image: url("../Resources/Clean.png");
     
 }
+
 .jfx-btn-clean, .jfx-btn-clean:armed, .jfx-btn-clean:focused{
     -fx-background-color:#66ff66;
     -fx-border-color: black;
@@ -360,14 +397,20 @@ generales
     -fx-background-radius: 10px;
 }
 
-//editar
+/*
+Editar
+*/
+
 .jfx-btn-edit > ImageView{
     
     -fx-image: url("../Resources/Edit.png");
     
 }
 
-// guardar
+/*
+Guardar
+*/
+
 .jfx-btn-save > ImageView{
     
     -fx-image: url("../Resources/Save.png");
@@ -382,42 +425,60 @@ generales
     -fx-background-radius: 10px;
 }
 
-//indicadores
+/*
+Indicadores
+*/
+
 .jfx-btn-indicators > ImageView{
     
     -fx-image: url("../Resources/Indicators.png");
     
 }
 
-//ajustes
+/*
+Ajustes
+*/
+
 .jfx-btn-settings > ImageView{
     
     -fx-image: url("../Resources/Settings.png");
     
 }
 
-//sucursales
+/*
+Sucursales
+*/
+
 .jfx-btn-branches > ImageView{
     
     -fx-image: url("../Resources/Branches.png");
     
 }
 
-//staciones
+/*
+Estaciones
+*/
+
 .jfx-btn-station > ImageView{
     
     -fx-image: url("../Resources/Station.png");
     
 }
 
-//tramites
+/*
+Tramites
+*/
+
 .jfx-btn-procedures > ImageView{
     
     -fx-image: url("../Resources/Procedures.png");
     
 }
 
-// tomar foto
+/*
+Tomar Foto
+*/
+
 .jfx-btn-photo > ImageView{
     
     -fx-image: url("../Resources/Photo.png");
@@ -432,19 +493,26 @@ generales
     -fx-background-radius: 10px;
 }
 
-//clientes
+/*
+Clientes
+*/
+
 .jfx-btn-clients > ImageView{
     
     -fx-image: url("../Resources/Clients.png");
     
 }
 
-//Preferencial
+/*
+Preferencial
+*/
+
 .jfx-btn-preferential > ImageView{
     
     -fx-image: url("../Resources/Preferential.png");
     
 }
+
 .jfx-btn-preferential, .jfx-btn-preferential:armed, .jfx-btn-preferential:focused{
     -fx-background-color:#33ff33;
     -fx-border-color: black;
@@ -453,12 +521,16 @@ generales
     -fx-background-radius: 10px;
 }
 
-//Repetor
+/*
+Repetir
+*/
+
 .jfx-btn-repeat > ImageView{
     
     -fx-image: url("../Resources/repeat.png");
     
 }
+
 .jfx-btn-repeat, .jfx-btn-repeat:armed, .jfx-btn-repeat:focused{
     -fx-background-color:#ccff66;
     -fx-border-color: black;
@@ -467,12 +539,16 @@ generales
     -fx-background-radius: 10px;
 }
 
-//Search
+/*
+Repetir
+*/
+
 .jfx-btn-search > ImageView{
     
     -fx-image: url("../Resources/Search.png");
     
 }
+
 .jfx-btn-search, .jfx-btn-search:armed, .jfx-btn-search:focused{
     -fx-background-color:#6666ff;
     -fx-border-color: black;
@@ -481,12 +557,43 @@ generales
     -fx-background-radius: 10px;
 }
 
+.jfx-btn-employees > ImageView{
+    
+    -fx-image: url("../Resources/Employees.png");
+    
+}
 
-//Imagen fondo
+/*
+Imagen Fondo Projection
+*/
 
 .fondo-app {
-    -fx-background-image: url("../Resources/Fondo.png");
+    -fx-background-image: url("../Resources/Fondo1.png");
     -fx-background-size: cover;
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
+}
+
+.fondo-numero-ficha {
+    -fx-background-image: url("../Resources/FondoFicha.png");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+
+
+/***************************
+*
+*             Colores
+*
+****************************/
+
+.color-fondo-oscuro {
+    -fx-background-color:#000022;
+}
+.color-fondo-claro {
+    -fx-background-color:#ffffff;
+}
+.color-fondo-negro {
+    -fx-background-color:#000000;
 }
