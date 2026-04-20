@@ -4,6 +4,7 @@ import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.service.TicketService;
 import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
+import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -40,6 +41,8 @@ public class WaitListController extends Controller {
     private MFXTextField txtSearchName;
     @FXML
     private MFXTextField txtSearchID;
+    @FXML
+    private MFXTextField txtSearchProcedure;
     @FXML
     private CheckBox chkPreferential;
 
@@ -96,11 +99,12 @@ public class WaitListController extends Controller {
 
     private void loadTickets() {
         TicketService.getInstance().load();
-
+        String branch = KioskSessionManager.getBranch();
         ObservableList<Ticket> all = TicketService.getInstance().getTickets();
 
-        filteredTickets = new FilteredList<>(all,
-                t -> "waiting".equals(t.getStatus())
+        filteredTickets = new FilteredList<>(all, t
+                -> "waiting".equals(t.getStatus())
+                && (branch == null || branch.equalsIgnoreCase(t.getBranchName()))
         );
 
         SortedList<Ticket> sorted = new SortedList<>(filteredTickets);
@@ -112,14 +116,19 @@ public class WaitListController extends Controller {
     private void setupFilters() {
         txtSearchName.textProperty().addListener((obs, o, n) -> applyFilters());
         txtSearchID.textProperty().addListener((obs, o, n) -> applyFilters());
+        txtSearchProcedure.textProperty().addListener((obs,o,n)->applyFilters());
         chkPreferential.selectedProperty().addListener((obs, o, n) -> applyFilters());
     }
 
     private void applyFilters() {
+        String branch = KioskSessionManager.getBranch();
         filteredTickets.setPredicate(ticket -> {
 
             if (ticket == null || !"waiting".equals(ticket.getStatus())) {
                 return false;
+            }
+            if(branch != null && !branch.equalsIgnoreCase(ticket.getBranchName())){
+               return false;
             }
 
             String name = txtSearchName.getText();

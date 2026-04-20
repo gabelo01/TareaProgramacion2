@@ -20,13 +20,6 @@
   },
   {
     "preferential": false,
-    "name": "Isaac",
-    "id": "12345678",
-    "age": "2002-03-11",
-    "photoPath": "data\\fotos-clientes\\client_1776460238699.png"
-  },
-  {
-    "preferential": false,
     "name": "Luis",
     "id": "123456789",
     "age": "2008-03-11",
@@ -38,5 +31,11 @@
     "id": "1234",
     "age": "2007-01-16",
     "photoPath": "data\\fotos-clientes\\client_1776623389783.png"
+  },
+  {
+    "preferential": false,
+    "name": "Openhaimer",
+    "id": "12345",
+    "age": "1953-01-12"
   }
 ]
