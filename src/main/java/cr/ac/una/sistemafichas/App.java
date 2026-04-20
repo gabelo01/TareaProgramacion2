@@ -1,6 +1,5 @@
 package cr.ac.una.sistemafichas;
 
-import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import javafx.application.Application;
@@ -8,10 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import cr.ac.una.sistemafichas.service.CamaraService;
 import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import java.io.IOException;
-
+import cr.ac.una.sistemafichas.model.ConfigLocal;
+        
 public class App extends Application {
 
     private static Scene scene;
@@ -20,8 +19,16 @@ public class App extends Application {
 
     public void start(Stage stage) throws Exception {
         FlowController.getInstance().InitializeFlow(stage, null);
-        FXMLLoader loader = new FXMLLoader();
-
+        stage.hide();
+        
+        ConfigLocal configLocal=JsonUtil.read("config-local.json", ConfigLocal.class);
+        if(configLocal != null && configLocal.getDataPath()!=null){
+            JsonUtil.setDataPath(configLocal.getDataPath());
+        }
+        if(configLocal!=null && configLocal.getBranchName()!=null){
+            KioskSessionManager.setBranch(configLocal.getBranchName());
+        }
+        
         String mode;
 
     if (getParameters().getRaw().isEmpty()) {
@@ -32,7 +39,6 @@ public class App extends Application {
 
         switch (mode) {
             case "kiosk": 
-                KioskSessionManager.setBranch("Buenos Aires");
                 FlowController.getInstance().goMain("kiosk/LoginKioskView");
                 break;
 

@@ -1,6 +1,7 @@
 package cr.ac.una.sistemafichas.controller.employee;
 
 import com.google.gson.reflect.TypeToken;
+import static com.itextpdf.kernel.pdf.PdfName.a;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
@@ -10,6 +11,7 @@ import cr.ac.una.sistemafichas.service.TicketService;
 import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
+import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import cr.ac.una.sistemafichas.util.Mensaje;
 import java.io.File;
 import java.lang.reflect.Type;
@@ -210,7 +212,7 @@ public class StationController extends Controller {
         if (!isStationValid()) {
             return;
         }
-
+        String branch = EmployeeSessionManager.getBranchName();
         TicketService service = TicketService.getInstance();
 
         Ticket last = getLastCalledByStation();// limpiar último ticket de esta estación
@@ -220,9 +222,11 @@ public class StationController extends Controller {
 
         Ticket t = service.getTickets().stream()
                 .filter(ticket -> "waiting".equals(ticket.getStatus()))
+                .filter(ticket -> ticket.getBranchName() != null)
+                .filter(ticket -> ticket.getBranchName().equalsIgnoreCase(branch))
                 .filter(ticket -> ticket.getProcedure() != null)
-                .filter(ticket -> station.getProcedureNames()
-                .contains(ticket.getProcedure().getName()))
+                .filter(ticket -> ticket.getProcedure() != null && station.getProcedureNames().stream().anyMatch(p -> p.trim().equalsIgnoreCase(ticket.getProcedure().getName().trim())))
+                .sorted((a, b) -> Integer.compare(a.getNumber(), b.getNumber()))
                 .findFirst()
                 .orElse(null);
 

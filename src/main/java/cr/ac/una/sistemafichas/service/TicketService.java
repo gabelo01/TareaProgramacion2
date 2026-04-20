@@ -1,6 +1,7 @@
 package cr.ac.una.sistemafichas.service;
 
 import cr.ac.una.sistemafichas.model.Ticket;
+import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 
 import javafx.collections.FXCollections;
@@ -86,6 +87,7 @@ public class TicketService {
     public Ticket callNext() {
         Ticket t = tickets.stream()
                 .filter(x -> x.getStatus().equals("waiting"))
+                .filter(x-> x.getBranchName().equals(EmployeeSessionManager.getBranchName()))
                 .findFirst()
                 .orElse(null);
 

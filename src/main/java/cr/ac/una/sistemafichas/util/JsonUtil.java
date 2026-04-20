@@ -17,13 +17,29 @@ public class JsonUtil {
     
     private static final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).setPrettyPrinting().create();
 
+    private static String dataPath ="data/";
+    public static void setDataPath(String path){
+        dataPath = path;
+    }
+    public static String getDataPath(){
+        return dataPath;
+    }
+    private static String resolvePath(String filePath){
+        if(filePath==null){
+            return null;
+        }
+        if(Paths.get(filePath).isAbsolute()){
+            return filePath;
+        }
+        return filePath.replace("data/",dataPath);
+    }
     public static <T> T read(String filePath, Class<T> tipo) {
         
         if (filePath == null){
             return null;
         }
         
-        try (Reader reader = new FileReader(filePath)) {
+        try (Reader reader = new FileReader(resolvePath(filePath))){
             return gson.fromJson(reader, tipo);
         } catch (IOException e) {
             System.err.println("Error leyendo JSON: " + filePath);
@@ -33,8 +49,9 @@ public class JsonUtil {
 
     public static void write(String filePath, Object objeto) {
         try {
-            Files.createDirectories(Paths.get(filePath).getParent());
-            try (Writer writer = new FileWriter(filePath)) {gson.toJson(objeto, writer);
+            String resolved = resolvePath(filePath);
+            Files.createDirectories(Paths.get(resolved).getParent());
+            try (Writer writer = new FileWriter(resolved)) {gson.toJson(objeto, writer);
             }
         } catch (IOException e) {
             System.err.println("Error escribiendo JSON: " + filePath);

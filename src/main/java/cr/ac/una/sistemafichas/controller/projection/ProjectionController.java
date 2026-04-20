@@ -6,6 +6,7 @@ import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import com.google.gson.reflect.TypeToken;
+import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -162,7 +163,20 @@ public class ProjectionController extends Controller {
 
         refreshTimeline.setCycleCount(Timeline.INDEFINITE);
         refreshTimeline.play();
-
+        initTickets();
+    }
+    private void initTickets(){
+        Type type = new TypeToken<List<Ticket>>(){}.getType();
+        List<Ticket> tickets= JsonUtil.read(TICKETS_PATH, type);
+        if(tickets == null){
+            tickets = new ArrayList<>();
+        }
+        for(int i = tickets.size() -1;i>=0;i--){
+            if("called".equals(tickets.get(i).getStatus())){
+                lastAnnouncedTicket = tickets.get(i).getNumber();
+                break;
+            }
+        }
         refreshTickets();
     }
 
@@ -237,29 +251,8 @@ public class ProjectionController extends Controller {
         }
     }
 
-//    private void announceShift(int turno, String destino) {
-//        String message = "Ticket numero " + turno + " dirijase a " + destino;
-//        Thread hilo = new Thread(() -> {
-//            try {
-//                String system = System.getProperty("os.name").toLowerCase();
-//                if (system.contains("win")) {
-//                    String command = "Add-Type -AssemblyName System.Speech; "
-//                            + "$voz = New-Object System.Speech.Synthesis.SpeechSynthesizer; "
-//                            + "$voz.Speak('" + message + "')";
-//                    new ProcessBuilder("powershell", "-Command", command).start().waitFor();
-//                } else if (system.contains("mac")) {
-//                    new ProcessBuilder("say", message).start().waitFor();
-//                } else {
-//                    new ProcessBuilder("espeak", message).start().waitFor();
-//                }
-//            } catch (Exception e) {
-//                System.out.println("Error reproduciendo audio: " + e.getMessage());
-//            }
-//        });
-//        hilo.setDaemon(true);
-//        hilo.start();
-//    }
-    private void announceShift(int turno, String destino) {   //se supone que este mete el español en los 3 sistemas operativos
+
+    private void announceShift(int turno, String destino) {
         String message = "Ticket numero " + turno + " dirijase a " + destino;
 
         Thread hilo = new Thread(() -> {

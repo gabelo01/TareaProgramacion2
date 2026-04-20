@@ -14,14 +14,12 @@ import cr.ac.una.sistemafichas.util.JsonUtil;
 import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import cr.ac.una.sistemafichas.util.PdfUtil;
 import io.github.palexdev.materialfx.controls.MFXButton;
-
 import java.io.File;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -236,12 +234,8 @@ public class SelectProceduresController extends Controller {
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         PdfUtil.generateTicketPdf(ticket, config);
 
-        Notifications.create()
-                .title("PDF")
-                .text("Ticket #" + ticket.getNumber() + " generado.")
-                .position(Pos.BOTTOM_RIGHT)
-                .hideAfter(Duration.seconds(2))
-                .showInformation();
+        Notifications.create().title("PDF").text("Ticket #" + ticket.getNumber() + " generado.")
+               .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
 
         preferentialOverride = false;
         KioskSessionManager.clearClient();
@@ -253,7 +247,7 @@ public class SelectProceduresController extends Controller {
     private void OnActionBtnCancel(ActionEvent event) {
         preferentialOverride = false;
         KioskSessionManager.clearClient();
-        FlowController.getInstance().goView("kiosk/LoginKioskView");
+        FlowController.getInstance().goMain("kiosk/LoginKioskView");
     }
 
     private boolean isClientPreferential(Client client) {

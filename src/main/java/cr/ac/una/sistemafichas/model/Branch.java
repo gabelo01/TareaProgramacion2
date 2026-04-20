@@ -9,7 +9,6 @@ public class Branch {
  private List<Station> stations;
  private boolean active;
  
- 
  public Branch() {}
    
 public Branch(String name, String direction, String noticeText, List<Station> stations, boolean active){

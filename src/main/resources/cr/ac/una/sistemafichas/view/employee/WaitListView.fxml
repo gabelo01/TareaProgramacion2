@@ -27,10 +27,9 @@
         <VBox spacing="10">
             <padding><Insets bottom="10" left="20" right="20" top="10" /></padding>
             <HBox alignment="CENTER_LEFT" spacing="15">
-                <Label styleClass="jfx-label-text" text="Nombre" />
                 <MFXTextField fx:id="txtSearchName" floatingText="Filtrar Por Nombre" prefWidth="180" styleClass="mfx-text-field" />
-                <Label styleClass="jfx-label-text" text="ID:" />
                 <MFXTextField fx:id="txtSearchID" floatingText="Filtrar Por Cédula" prefWidth="180" styleClass="mfx-text-field" />
+            <MFXTextField fx:id="txtSearchProcedure" floatingText="Filtrar Por Tramite" prefWidth="180.0" />
                 <CheckBox fx:id="chkPreferential" styleClass="mfx-checkbox" text="Solamente Mostrar Preferenciales " />
             </HBox>
             <TableView fx:id="tblTickets" maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS">
