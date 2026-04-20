@@ -302,4 +302,25 @@ public class StationController extends Controller {
         a.setContentText(msg);
         a.showAndWait();
     }
+
+    @FXML
+    private void onActionBtnListCurrentClient() {
+        FlowController.getInstance().limpiarLoader("employee/WaitListView");
+        FlowController.getInstance().goViewInWindow("employee/WaitListView");
+    }
+
+    @FXML
+    private void onActionBtnIndicators(ActionEvent event) {
+        FlowController.getInstance().goViewInWindow("employee/IndicatorsView");
+    }
+
+    @FXML
+    private void onActionBtnClient(ActionEvent event) {
+        FlowController.getInstance().goViewInWindow("employee/CurrentClientView");
+    }
+
+    @FXML
+    private void onActionBtnRegisterClient(ActionEvent event) {
+        FlowController.getInstance().goViewInWindow("admin/MaintenanceClientView");
+    }
 }

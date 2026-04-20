@@ -39,7 +39,7 @@
             <VBox alignment="CENTER" prefHeight="478.0" prefWidth="547.0" spacing="15" styleClass="color-fondo-claro" HBox.hgrow="ALWAYS">
                 <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
                 <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10">
-                    <Label fx:id="lblPriorityBadge" text="PREFERENTIAL" visible="false" />
+                    <Label fx:id="lblPriorityBadge" styleClass="jfx-label-text-projection" text="PREFERENTIAL" visible="false" />
                     <Pane HBox.hgrow="ALWAYS" />
                 </HBox>
                 <Label styleClass="jfx-label-text-projection" text="TICKET" />
