@@ -1,7 +1,6 @@
 package cr.ac.una.sistemafichas.controller.employee;
 
 import com.google.gson.reflect.TypeToken;
-import static com.itextpdf.kernel.pdf.PdfName.a;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
@@ -11,7 +10,6 @@ import cr.ac.una.sistemafichas.service.TicketService;
 import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
-import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import cr.ac.una.sistemafichas.util.Mensaje;
 import java.io.File;
 import java.lang.reflect.Type;

@@ -6,7 +6,6 @@ import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import com.google.gson.reflect.TypeToken;
-import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -191,11 +190,10 @@ public class ProjectionController extends Controller {
         }
 
         List<Ticket> called = tickets.stream()
-                .filter(t -> "called".equals(t.getStatus()))
-                .filter(t -> t.getCallTime() != null)
-                .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
+        .filter(t -> t.getCallTime() != null)
+        .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
                 .compareTo(LocalDateTime.parse(a.getCallTime())))
-                .toList();
+        .toList();
 
         if (!called.isEmpty()) {
 
