@@ -16,6 +16,9 @@
     -fx-button-color:#3399ff;
     -mfx-main:-fx-base-color-focus;
     -mfx-purple:-fx-base-color-focus;
+    -fx-base-color-oscuro:#000022;
+    -fx-base-color-claro: #cde0fd;
+    
     
 }
 
@@ -261,6 +264,7 @@
 .separator{
     -fx-background-color:#333333
 }
+
 
 /***********************************************************
 *
@@ -514,7 +518,7 @@ Preferencial
 }
 
 .jfx-btn-preferential, .jfx-btn-preferential:armed, .jfx-btn-preferential:focused{
-    -fx-background-color:#33ff33;
+    -fx-background-color:#0099ff;
     -fx-border-color: black;
     -fx-border-width: 0.5px;
     -fx-border-radius: 10px;
@@ -538,9 +542,25 @@ Repetir
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
 }
+/*
+  Siguiente
+*/
+.jfx-btn-next > ImageView{
+    
+    -fx-image: url("../Resources/Station.png");
+    
+}
+
+.jfx-btn-next, .jfx-btn-next:armed, .jfx-btn-next:focused{
+    -fx-background-color:#00cc00;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
 
 /*
-Repetir
+Search
 */
 
 .jfx-btn-search > ImageView{
@@ -550,16 +570,54 @@ Repetir
 }
 
 .jfx-btn-search, .jfx-btn-search:armed, .jfx-btn-search:focused{
-    -fx-background-color:#6666ff;
+    -fx-background-color:#3399ff;
     -fx-border-color: black;
     -fx-border-width: 0.5px;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
 }
 
+/*
+  Current clent
+*/
+.jfx-btn-currentClient > ImageView{
+    
+    -fx-image: url("../Resources/Photo.png");
+    
+}
+
+.jfx-btn-currentClient, .jfx-btn-currentClient:armed, .jfx-btn-currentClient:focused{
+    -fx-background-color:#66ff00;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
 .jfx-btn-employees > ImageView{
     
-    -fx-image: url("../Resources/Employees.png");
+    -fx-image: url("../Resources/AddPerson.png");
+    
+}
+
+/*
+  wait list clent
+*/
+.jfx-btn-waitList > ImageView{
+    
+    -fx-image: url("../Resources/Station.png");
+    
+}
+
+.jfx-btn-waitList, .jfx-btn-waitList:armed, .jfx-btn-waitList:focused{
+    -fx-background-color:#ffff99;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+.jfx-btn-employees > ImageView{
+    
+    -fx-image: url("../Resources/Clients.png");
     
 }
 
@@ -584,16 +642,148 @@ Imagen Fondo Projection
 
 /***************************
 *
+*        TabPane
+*
+****************************/
+
+.tab-pane {
+    -fx-background-color: #e9e9e9;
+}
+
+.tab-pane .tab-header-area {
+    -fx-background-color: #333333;
+    -fx-padding: 5 10 0 10;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: #333333;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #555555;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 5 15 5 15;
+    -fx-cursor: hand;
+}
+
+.tab-pane .tab .tab-label {
+    -fx-text-fill: #cccccc;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #217edc;
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: white;
+}
+
+.tab-pane .tab:hover {
+    -fx-background-color: #3399ff;
+}
+
+.tab-pane .tab:hover .tab-label {
+    -fx-text-fill: white;
+}
+
+
+/***************************
+*
+*        BarChart Indicadores
+*
+****************************/
+
+.chart {
+    -fx-background-color: #f4f6f8;
+    -fx-padding: 10;
+}
+
+.chart-plot-background {
+    -fx-background-color: #ffffff;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: #dddddd;
+}
+
+.chart-horizontal-grid-lines {
+    -fx-stroke: #dddddd;
+}
+
+.axis-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.chart-bar {
+    -fx-bar-fill: #217edc;
+    -fx-background-radius: 5 5 0 0;
+}
+
+.default-color0.chart-bar { -fx-bar-fill: #217edc; }
+.default-color1.chart-bar { -fx-bar-fill: #00c853; }
+.default-color2.chart-bar { -fx-bar-fill: #ff6633; }
+
+/***************************
+*
+*        ToggleButton Indicadores
+*
+****************************/
+
+.toggle-button {
+    -fx-background-color: #cccccc;
+    -fx-border-color: #999999;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #217edc;
+    -fx-text-fill: white;
+    -fx-border-color: #0055aa;
+}
+
+.toggle-button:hover {
+    -fx-background-color: #aaaaaa;
+}
+
+/***************************
+*
+*        DatePicker Indicadores
+*
+****************************/
+
+.date-picker {
+    -fx-background-color: white;
+    -fx-border-color: #999999;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+}
+
+/***************************
+*
 *             Colores
 *
 ****************************/
 
 .color-fondo-oscuro {
-    -fx-background-color:#000022;
+    -fx-background-color:-fx-base-color-oscuro;
 }
 .color-fondo-claro {
-    -fx-background-color:#ffffff;
+    -fx-background-color:-fx-base-color-claro;
 }
 .color-fondo-negro {
     -fx-background-color:#000000;
 }
+
+
+

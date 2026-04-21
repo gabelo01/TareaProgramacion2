@@ -32,27 +32,23 @@ import cr.ac.una.sistemafichas.util.Validador;
 
 public class MaintenanceClientController extends Controller {
 
-    @FXML 
+    @FXML
     private ListView<Client> listClients;
-    @FXML 
+    @FXML
     private MFXTextField txtClientName;
-    @FXML 
+    @FXML
     private MFXTextField txtClientId;
-    @FXML 
+    @FXML
     private MFXTextField txtClientAge;
     @FXML
     private ImageView imgClient;
 
-    
     private static final String CLIENTS_PATH = "data/clients.json";
 
     private List<Client> client;
     private Client selectedClient;
     private List<Node> requeridos = new ArrayList<>();
     private String tempPhotoPath;
-
-
-
 
     @Override
     public void initialize() {
@@ -67,9 +63,12 @@ public class MaintenanceClientController extends Controller {
     }
 
     private void loadData() {
-        Type clientListType = new TypeToken<List<Client>>(){}.getType();
+        Type clientListType = new TypeToken<List<Client>>() {
+        }.getType();
         client = JsonUtil.read(CLIENTS_PATH, clientListType);
-        if (client == null) client = new ArrayList<>();
+        if (client == null) {
+            client = new ArrayList<>();
+        }
         refreshClientes();
     }
 
@@ -98,7 +97,7 @@ public class MaintenanceClientController extends Controller {
             }
         });
     }
-    
+
     private void clearClient() {
         txtClientName.clear();
         txtClientId.clear();
@@ -119,8 +118,8 @@ public class MaintenanceClientController extends Controller {
         }
 
         String name = txtClientName.getText().trim();
-        String id   = txtClientId.getText().trim();
-        String age  = txtClientAge.getText().trim();
+        String id = txtClientId.getText().trim();
+        String age = txtClientAge.getText().trim();
 
         Client nuevo = new Client(name, id, age, tempPhotoPath, false);
 
@@ -163,21 +162,25 @@ public class MaintenanceClientController extends Controller {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar Cliente", getStage(), "Ocurrió un error eliminando el cliente.");
         }
     }
-    
+
     @FXML
     private void OnActionBtnAddPhoto(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar Foto");
         fileChooser.getExtensionFilters().add(
-            new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg", "*.gif")
+                new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
 
         File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile == null) return;
+        if (selectedFile == null) {
+            return;
+        }
 
         try {
             File folder = new File("data/fotos-clientes");
-            if (!folder.exists()) folder.mkdirs();
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
 
             String fileName = "client_" + System.currentTimeMillis() + ".png";
             File destinationFile = new File(folder, fileName);
@@ -190,21 +193,20 @@ public class MaintenanceClientController extends Controller {
 
             tempPhotoPath = destinationFile.getPath(); // guardar temporal
 
-      
             if (selectedClient != null) {   //guardar directo si esta editando
-            selectedClient.setPhoto(tempPhotoPath);
+                selectedClient.setPhoto(tempPhotoPath);
 
                 JsonUtil.write(CLIENTS_PATH, client);
 
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Foto guardada", "Se actualizó la foto del cliente");
             }
 
-         } catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-   @FXML
+
+    @FXML
     private void OnActionBtnEditClient(ActionEvent event) {
         try {
             if (selectedClient == null) {
@@ -219,13 +221,13 @@ public class MaintenanceClientController extends Controller {
             }
 
             String name = txtClientName.getText().trim();
-            String id   = txtClientId.getText().trim();
-            String age  = txtClientAge.getText().trim();
+            String id = txtClientId.getText().trim();
+            String age = txtClientAge.getText().trim();
 
             Client temp = new Client(name, id, age, null, false);
             if (!temp.isValidBirthDate()) {
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Fecha inválida",
-                    "Ingrese la fecha en formato YYYY-MM-DD.");
+                        "Ingrese la fecha en formato YYYY-MM-DD.");
                 return;
             }
 
@@ -241,7 +243,6 @@ public class MaintenanceClientController extends Controller {
             selectedClient.setId(id);
             selectedClient.setAge(age);
 
-            
             if (tempPhotoPath != null) { // actualizar foto si cambio
                 selectedClient.setPhoto(tempPhotoPath);
             }
@@ -256,7 +257,7 @@ public class MaintenanceClientController extends Controller {
             Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void OnActionBtnOpenCamera(ActionEvent event) {
         try {
@@ -274,8 +275,32 @@ public class MaintenanceClientController extends Controller {
 
     @FXML
     private void onActionBtnNuevo(ActionEvent event) {
-    clearClient();
+        clearClient();
     }
 
+    @FXML
+    private void OnActionBtnScanID(ActionEvent event) {
 
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/cr/ac/una/sistemafichas/view/admin/CameraIdView.fxml")
+            );
+
+            Parent root = loader.load();
+
+            CameraIdController controller = loader.getController();
+
+            controller.setOnDataCaptured((id, name) -> {
+                txtClientId.setText(id);
+            });
+
+            Stage stage = new Stage();
+            stage.setTitle("Escanear Cedula");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

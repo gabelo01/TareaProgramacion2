@@ -11,17 +11,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.employee.StationController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="450.0" minWidth="561.0" prefHeight="450.0" prefWidth="561.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.employee.StationController">
    <center>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="468.0" prefWidth="800">
-         <VBox alignment="CENTER" layoutY="36.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="559.0" prefWidth="790.0" styleClass="vBox" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="468.0" prefWidth="800" styleClass="color-fondo-claro">
+         <VBox alignment="CENTER" layoutY="36.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="559.0" prefWidth="790.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
             <children>
                <Separator prefWidth="200.0" />
                <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="84.0" prefWidth="790.0" spacing="10.0">
                   <children>
 
-                            <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnNext" prefHeight="40.0" prefWidth="123.0" styleClass="jfx-btn-station" text="Siguiente">
+                            <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnNext" prefHeight="40.0" prefWidth="123.0" styleClass="jfx-btn-next" text="Siguiente">
                         <graphic>
                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                         </graphic>
@@ -56,9 +55,9 @@
                <Separator prefWidth="200.0" />
                <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                   <children>
-                     <Label styleClass="jfx-label-text" text="Total Clientes en espera:" />
+                     <Label styleClass="jfx-label-text-projection" text="Total Clientes en espera:" />
       
-                            <Label fx:id="lblWaitingCount" prefHeight="25.0" prefWidth="121.0" styleClass="jfx-label" text="Número Clientes" />
+                            <Label fx:id="lblWaitingCount" prefHeight="40.0" prefWidth="170.0" styleClass="jfx-label" text="Número Clientes" />
                   </children>
                </HBox>
             </children>
@@ -67,7 +66,7 @@
             </AnchorPane>
    </center>
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="800.0" spacing="10.0" BorderPane.alignment="CENTER_LEFT">
+      <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="800.0" spacing="10.0" styleClass="color-fondo-claro" BorderPane.alignment="CENTER_LEFT">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="245.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                <children>
@@ -81,8 +80,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="212.0" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label prefHeight="37.0" prefWidth="82.0" styleClass="jfx-titulo-label" text="Estación:" HBox.hgrow="ALWAYS" />
-                   <Label fx:id="lblStationName" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="118.0" style="-fx-font-size: 14px;" styleClass="jfx-label" text="estación" HBox.hgrow="ALWAYS" />
+                   <Label fx:id="lblStationName" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="118.0" styleClass="jfx-label-text" text="Estación / sucursal" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="76.0" prefWidth="132.0" spacing="5.0" styleClass="jfx-label-text" HBox.hgrow="NEVER">
@@ -95,12 +93,12 @@
       </HBox>
    </top>
    <bottom>
-      <VBox>
+      <VBox styleClass="color-fondo-oscuro">
          <children>
-            <HBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="64.0" prefWidth="800.0" spacing="10.0">
+            <HBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="600.0" spacing="10.0">
                <children>
                
-                        <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnListCurrentClient" prefHeight="43.0" prefWidth="191.0" styleClass="jfx-btn-clients" text="Clientes en Espera">
+                              <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnListCurrentClient" prefHeight="43.0" prefWidth="191.0" styleClass="jfx-btn-waitList" text="Clientes en Espera">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -110,25 +108,25 @@
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </MFXButton>
-                  <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnClient" styleClass="jfx-btn-person" text="Cliente Actual">
+                  <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnClient" styleClass="jfx-btn-currentClient" text="Cliente Actual">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </MFXButton>
                </children>
                <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="750.0" spacing="10.0">
                <children>
-                  <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegisterClient" styleClass="jfx-btn-employees" text="Registrar Cliente">
+                  <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegisterClient" styleClass="jfx-btn-person" text="Registrar Cliente">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </MFXButton>
                
-                               <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnExit" prefHeight="40.0" prefWidth="115.0" styleClass="jfx-btn-exit" text="Salir">
+                                     <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnExit" prefHeight="40.0" prefWidth="115.0" styleClass="jfx-btn-exit" text="Salir">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -138,7 +136,7 @@
                   </MFXButton>
                </children>
                <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="5.0" />
                </padding>
             </HBox>
          </children>

@@ -15,13 +15,11 @@
       
               <Label styleClass="jfx-label" text="Su ticket es:" />
       
-              <Label fx:id="lblNumber" styleClass="jfx-label-ticket-projection" text="#" />
+              <Label fx:id="lblNumber" prefHeight="187.0" prefWidth="104.0" styleClass="jfx-label-ticket-projection" text="#" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Label text="Tramite:" />
             
                     <Label fx:id="lblProcedure" styleClass="jfx-label-text" text="Tramite" />
-                  <Label text="Tipo:" />
             
                     <Label fx:id="lblType" styleClass="jfx-label-text" text="Tipo" />
                </children>
@@ -29,7 +27,7 @@
       
               <Label styleClass="jfx-label" text="Gracias por visitarnos" />
       
-              <ImageView fx:id="imgLogo" fitHeight="97.0" fitWidth="200" preserveRatio="true">
+              <ImageView fx:id="imgLogo" fitHeight="129.0" fitWidth="200" preserveRatio="true">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>

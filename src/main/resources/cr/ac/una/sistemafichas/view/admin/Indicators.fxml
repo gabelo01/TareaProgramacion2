@@ -17,11 +17,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../Style.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.IndicatorsController">
-   <top>
-      <Label styleClass="jfx-titulo-label" text="Top de cada sección" BorderPane.alignment="BOTTOM_CENTER">
-         <BorderPane.margin><Insets bottom="2.0" top="10.0" /></BorderPane.margin>
-      </Label>
-   </top>
    <center>
       <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="150.0" tabMinHeight="30.0" tabMinWidth="110.0">
          <tabs>

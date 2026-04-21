@@ -199,5 +199,29 @@
     "stationName": "Caja 1",
     "branchName": "Buenos Aires",
     "callTime": "2026-04-20T14:02:22.531587900"
+  },
+  {
+    "number": 14,
+    "status": "waiting",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-20T14:09:28.786913600",
+    "stationName": "Caja 1",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 15,
+    "status": "waiting",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-20T14:09:43.978344700",
+    "stationName": "Caja 1",
+    "branchName": "Buenos Aires"
   }
 ]
