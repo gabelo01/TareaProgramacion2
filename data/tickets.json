@@ -182,7 +182,7 @@
   },
   {
     "number": 13,
-    "status": "called",
+    "status": "attended",
     "client": {
       "preferential": false,
       "name": "Yuli",
@@ -202,7 +202,7 @@
   },
   {
     "number": 14,
-    "status": "waiting",
+    "status": "attended",
     "procedure": {
       "name": "Prestamos",
       "active": true
@@ -210,11 +210,12 @@
     "priority": false,
     "creationDate": "2026-04-20T14:09:28.786913600",
     "stationName": "Caja 1",
-    "branchName": "Buenos Aires"
+    "branchName": "Buenos Aires",
+    "callTime": "2026-04-20T21:49:02.375189200"
   },
   {
     "number": 15,
-    "status": "waiting",
+    "status": "attended",
     "procedure": {
       "name": "Prestamos",
       "active": true
@@ -222,6 +223,56 @@
     "priority": false,
     "creationDate": "2026-04-20T14:09:43.978344700",
     "stationName": "Caja 1",
+    "branchName": "Buenos Aires",
+    "callTime": "2026-04-20T21:54:47.860623700"
+  },
+  {
+    "number": 16,
+    "status": "waiting",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-20T21:37:31.564642300",
+    "stationName": "Caja 2",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 17,
+    "status": "called",
+    "procedure": {
+      "name": "Prestamos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-20T22:01:07.340097100",
+    "stationName": "Caja 1",
+    "branchName": "Buenos Aires",
+    "callTime": "2026-04-20T22:01:23.025732900"
+  },
+  {
+    "number": 18,
+    "status": "waiting",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-20T23:17:53.560749900",
+    "stationName": "Caja 2",
+    "branchName": "Buenos Aires"
+  },
+  {
+    "number": 19,
+    "status": "waiting",
+    "procedure": {
+      "name": "Retiros",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-20T23:18:08.316296900",
+    "stationName": "Caja 2",
     "branchName": "Buenos Aires"
   }
 ]
