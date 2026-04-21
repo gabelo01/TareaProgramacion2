@@ -27,7 +27,7 @@
   },
   {
     "number": 3,
-    "status": "called",
+    "status": "attended",
     "procedure": {
       "name": "Creditos",
       "active": true
@@ -36,7 +36,7 @@
     "creationDate": "2026-04-21T08:39:50.234080",
     "stationName": "Caja 1",
     "branchName": "Buenos Aires",
-    "callTime": "2026-04-21T08:48:29.909865300"
+    "callTime": "2026-04-21T08:52:59.260962300"
   },
   {
     "number": 4,
@@ -53,7 +53,7 @@
   },
   {
     "number": 5,
-    "status": "called",
+    "status": "attended",
     "procedure": {
       "name": "Retiros",
       "active": true
@@ -66,19 +66,20 @@
   },
   {
     "number": 6,
-    "status": "waiting",
+    "status": "attended",
     "procedure": {
       "name": "Creditos",
       "active": true
     },
     "priority": false,
     "creationDate": "2026-04-21T08:40:20.355024700",
-    "stationName": "Caja 1",
-    "branchName": "Buenos Aires"
+    "stationName": "Caja 2",
+    "branchName": "Buenos Aires",
+    "callTime": "2026-04-21T08:52:54.181688800"
   },
   {
     "number": 7,
-    "status": "waiting",
+    "status": "attended",
     "procedure": {
       "name": "Retiros",
       "active": true
@@ -86,11 +87,12 @@
     "priority": false,
     "creationDate": "2026-04-21T08:40:28.361694100",
     "stationName": "Caja 2",
-    "branchName": "Buenos Aires"
+    "branchName": "Buenos Aires",
+    "callTime": "2026-04-21T08:52:44.371703"
   },
   {
     "number": 8,
-    "status": "waiting",
+    "status": "called",
     "procedure": {
       "name": "Prestamos",
       "active": true
@@ -98,6 +100,20 @@
     "priority": false,
     "creationDate": "2026-04-21T08:40:36.726092300",
     "stationName": "Caja 1",
-    "branchName": "Buenos Aires"
+    "branchName": "Buenos Aires",
+    "callTime": "2026-04-21T08:53:22.934880"
+  },
+  {
+    "number": 9,
+    "status": "called",
+    "procedure": {
+      "name": "Creditos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-21T08:51:31.375309900",
+    "stationName": "Caja 2",
+    "branchName": "Buenos Aires",
+    "callTime": "2026-04-21T08:53:36.301149600"
   }
 ]

@@ -103,12 +103,12 @@
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </MFXButton>
-                  <MFXButton layoutX="172.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnIndicators" prefHeight="43.0" prefWidth="185.0" styleClass="jfx-btn-procedures" text="Tramites en Espera">
+                  <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnClient" styleClass="jfx-btn-currentClient" text="Cliente Actual">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </MFXButton>
-                  <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnClient" styleClass="jfx-btn-currentClient" text="Cliente Actual">
+                  <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegisterClient" styleClass="jfx-btn-person" text="Registrar Cliente">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -118,13 +118,8 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="23.0" prefWidth="750.0" spacing="10.0">
+            <HBox alignment="TOP_RIGHT" prefHeight="23.0" prefWidth="750.0" spacing="10.0">
                <children>
-                  <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnRegisterClient" styleClass="jfx-btn-person" text="Registrar Cliente">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </MFXButton>
                
                                      <MFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#onActionBtnExit" prefHeight="40.0" prefWidth="115.0" styleClass="jfx-btn-exit" text="Salir">
                      <HBox.margin>
@@ -136,7 +131,7 @@
                   </MFXButton>
                </children>
                <padding>
-                  <Insets bottom="5.0" />
+                  <Insets bottom="5.0" right="20.0" />
                </padding>
             </HBox>
          </children>

@@ -329,11 +329,6 @@ public class StationController extends Controller {
     }
 
     @FXML
-    private void onActionBtnIndicators(ActionEvent event) {
-        FlowController.getInstance().goViewInWindow("employee/IndicatorsView");
-    }
-
-    @FXML
     private void onActionBtnClient(ActionEvent event) {
         FlowController.getInstance().goViewInWindow("employee/CurrentClientView");
     }
