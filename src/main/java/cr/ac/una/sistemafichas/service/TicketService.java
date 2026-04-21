@@ -13,8 +13,6 @@ import java.util.List;
 public class TicketService {
 
     private static TicketService instance;
-    
-    private Ticket lastTicket;
 
     private ObservableList<Ticket> tickets = FXCollections.observableArrayList();
 
@@ -87,7 +85,7 @@ public class TicketService {
     public Ticket callNext() {
         Ticket t = tickets.stream()
                 .filter(x -> x.getStatus().equals("waiting"))
-                .filter(x-> x.getBranchName().equals(EmployeeSessionManager.getBranchName()))
+                .filter(x -> x.getBranchName().equals(EmployeeSessionManager.getBranchName()))
                 .findFirst()
                 .orElse(null);
 
@@ -125,12 +123,12 @@ public class TicketService {
         notifyListeners();
     }
 
-    public void setLastTicket(Ticket t) {
-        this.lastTicket = t;
-    }
+    public Ticket getLatestTicket() {
+        load();
 
-    public Ticket getLastTicket() {
-        return lastTicket;
+        return tickets.stream()
+                .filter(t -> t.getNumber() > 0)
+                .max((a, b) -> Integer.compare(a.getNumber(), b.getNumber()))
+                .orElse(null);
     }
-
 }

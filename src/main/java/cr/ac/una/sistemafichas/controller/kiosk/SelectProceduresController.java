@@ -228,9 +228,7 @@ public class SelectProceduresController extends Controller {
         ticket.setStatus("waiting");
 
         TicketService.getInstance().generateTicket(ticket);
-
-        TicketService.getInstance().setLastTicket(ticket);
-
+        
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         PdfUtil.generateTicketPdf(ticket, config);
 
