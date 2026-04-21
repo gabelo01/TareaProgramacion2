@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -81,6 +82,7 @@
                                                    </graphic>
                                                 </MFXButton>
                                                 <MFXButton onAction="#OnActionBtnScanID" text="Scanear ID" />
+                                                <MFXCheckbox fx:id="chkPreferencial" text="Preferencial" />
                                              </children>
                                           </HBox>
                                           <MFXTextField fx:id="txtClientName" floatMode="BORDER" floatingText="Nombre" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="431.0" VBox.vgrow="ALWAYS">
@@ -110,7 +112,7 @@
                               </HBox>
                               <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="200.0" spacing="5.0">
                                  <children>
-                                    <MFXButton onAction="#OnActionBtnEditClient" styleClass="jfx-btn-edit" text="Editar Cliente">
+                                    <MFXButton onAction="#OnActionBtnEditClient" styleClass="jfx-btn-edit" text="Guardar Cambio">
                                        <graphic>
                                           <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
                                        </graphic></MFXButton>

@@ -30,6 +30,10 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import cr.ac.una.sistemafichas.util.Validador;
 
+import io.github.palexdev.materialfx.controls.MFXCheckbox;
+import java.time.LocalDate;
+import java.time.Period;
+
 public class MaintenanceClientController extends Controller {
 
     @FXML
@@ -42,6 +46,8 @@ public class MaintenanceClientController extends Controller {
     private MFXTextField txtClientAge;
     @FXML
     private ImageView imgClient;
+    @FXML
+    private MFXCheckbox chkPreferencial;
 
     private static final String CLIENTS_PATH = "data/clients.json";
 
@@ -78,11 +84,14 @@ public class MaintenanceClientController extends Controller {
 
     private void setupSelection() {
         listClients.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+
             if (newValue != null) {
+
                 selectedClient = newValue;
+
                 txtClientName.setText(newValue.getName());
                 txtClientId.setText(newValue.getId());
-                txtClientAge.setText(newValue.getAge()); // age ya es String
+                txtClientAge.setText(newValue.getAge());
 
                 if (newValue.getPhoto() != null) {
                     File file = new File(newValue.getPhoto());
@@ -94,6 +103,19 @@ public class MaintenanceClientController extends Controller {
                 } else {
                     imgClient.setImage(null);
                 }
+
+                int age = calculateAge(newValue.getAge());
+
+                if (age >= 65) {
+                    chkPreferencial.setSelected(true);
+                    chkPreferencial.setDisable(true);
+                } else {
+                    chkPreferencial.setDisable(false);
+                    chkPreferencial.setSelected(newValue.isPreferential());
+                }
+
+            } else {
+                clearClient();
             }
         });
     }
@@ -103,8 +125,12 @@ public class MaintenanceClientController extends Controller {
         txtClientId.clear();
         txtClientAge.clear();
         imgClient.setImage(null);
+
         selectedClient = null;
-        tempPhotoPath = null; // limpiar
+        tempPhotoPath = null;
+
+        chkPreferencial.setSelected(false);
+        chkPreferencial.setDisable(false);
     }
 
     @FXML
@@ -113,32 +139,45 @@ public class MaintenanceClientController extends Controller {
         String invalidos = Validador.validarRequeridos(requeridos);
 
         if (!invalidos.isBlank()) {
-            new Mensaje().show(Alert.AlertType.INFORMATION, "Campos vacios", "Llene todos los campos");
+            new Mensaje().show(Alert.AlertType.INFORMATION, "Empty fields", "Please fill all fields");
             return;
         }
 
         String name = txtClientName.getText().trim();
         String id = txtClientId.getText().trim();
-        String age = txtClientAge.getText().trim();
+        String birthDate = txtClientAge.getText().trim();
 
-        Client nuevo = new Client(name, id, age, tempPhotoPath, false);
-
+        // duplicate check
         for (Client c : client) {
             if (c.getId().equalsIgnoreCase(id)) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "Cliente existente", "El cliente ya existe.");
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Client exists", "Client already exists.");
                 return;
             }
         }
 
-        client.add(nuevo);
+        // calculate age
+        int age = 0;
+        try {
+            LocalDate date = LocalDate.parse(birthDate);
+            age = Period.between(date, LocalDate.now()).getYears();
+        } catch (Exception e) {
+            new Mensaje().show(Alert.AlertType.INFORMATION, "Invalid date", "Use format YYYY-MM-DD");
+            return;
+        }
+
+        boolean isPreferential = (age >= 65) || chkPreferencial.isSelected();
+
+        Client newClient = new Client(name, id, birthDate, tempPhotoPath, isPreferential);
+
+        client.add(newClient);
         JsonUtil.write(CLIENTS_PATH, client);
 
         refreshClientes();
         clearClient();
 
-        tempPhotoPath = null; // para limpiar
+        tempPhotoPath = null;
 
-        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente agregado", getStage(), "Exito");
+        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Client added", getStage(), "Success");
     }
 
     @FXML
@@ -208,42 +247,51 @@ public class MaintenanceClientController extends Controller {
 
     @FXML
     private void OnActionBtnEditClient(ActionEvent event) {
+
         try {
             if (selectedClient == null) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "Sin selección", "Seleccione un cliente para editar.");
+                new Mensaje().show(Alert.AlertType.INFORMATION, "No selection", "Select a client to edit.");
                 return;
             }
 
             String invalidos = Validador.validarRequeridos(requeridos);
             if (!invalidos.isBlank()) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "Campos vacíos", "Llene todos los campos.");
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Empty fields", "Please fill all fields.");
                 return;
             }
 
             String name = txtClientName.getText().trim();
             String id = txtClientId.getText().trim();
-            String age = txtClientAge.getText().trim();
+            String birthDate = txtClientAge.getText().trim();
 
-            Client temp = new Client(name, id, age, null, false);
-            if (!temp.isValidBirthDate()) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "Fecha inválida",
-                        "Ingrese la fecha en formato YYYY-MM-DD.");
-                return;
-            }
-
-            // Validar ID duplicado
+            // duplicate ID check
             for (Client c : client) {
-                if (c.getId().equalsIgnoreCase(id) && !c.getId().equalsIgnoreCase(selectedClient.getId())) {
-                    new Mensaje().show(Alert.AlertType.INFORMATION, "ID duplicado", "Ya existe otro cliente con ese ID.");
+                if (c.getId().equalsIgnoreCase(id)
+                        && !c.getId().equalsIgnoreCase(selectedClient.getId())) {
+                    new Mensaje().show(Alert.AlertType.INFORMATION, "Duplicate ID", "Another client already uses this ID.");
                     return;
                 }
             }
 
-            selectedClient.setName(name);// actualiza todo
-            selectedClient.setId(id);
-            selectedClient.setAge(age);
+            // calculate age
+            int age = 0;
+            try {
+                LocalDate date = LocalDate.parse(birthDate);
+                age = Period.between(date, LocalDate.now()).getYears();
+            } catch (Exception e) {
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Invalid date", "Use format YYYY-MM-DD");
+                return;
+            }
 
-            if (tempPhotoPath != null) { // actualizar foto si cambio
+            boolean isPreferential = (age >= 65) || chkPreferencial.isSelected();
+
+            // update client
+            selectedClient.setName(name);
+            selectedClient.setId(id);
+            selectedClient.setAge(birthDate);
+            selectedClient.setPreferential(isPreferential);
+
+            if (tempPhotoPath != null) {
                 selectedClient.setPhoto(tempPhotoPath);
             }
 
@@ -251,10 +299,14 @@ public class MaintenanceClientController extends Controller {
             refreshClientes();
             clearClient();
 
-            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente editado", getStage(), "Se a editado correctamente");
+            new Mensaje().showModal(Alert.AlertType.INFORMATION,
+                    "Client updated",
+                    getStage(),
+                    "Updated successfully");
 
         } catch (Exception ex) {
-            Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MaintenanceClientController.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
     }
 
@@ -301,6 +353,15 @@ public class MaintenanceClientController extends Controller {
 
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    private int calculateAge(String birthDateText) {
+        try {
+            LocalDate birthDate = LocalDate.parse(birthDateText);
+            return Period.between(birthDate, LocalDate.now()).getYears();
+        } catch (Exception e) {
+            return 0;
         }
     }
 }

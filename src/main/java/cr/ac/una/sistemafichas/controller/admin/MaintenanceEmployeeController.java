@@ -24,13 +24,19 @@ import org.controlsfx.control.Notifications;
 
 public class MaintenanceEmployeeController extends Controller {
 
-    @FXML private ListView<Employee> tblEmployees;
-    @FXML private MFXTextField txtName;
-    @FXML private MFXTextField txtId;
-    @FXML private MFXTextField txtPin;
+    @FXML
+    private ListView<Employee> tblEmployees;
+    @FXML
+    private MFXTextField txtName;
+    @FXML
+    private MFXTextField txtId;
+    @FXML
+    private MFXTextField txtPin;
 
-    @FXML private ComboBox<String> cmbBranch;
-    @FXML private ComboBox<String> cmbStation;
+    @FXML
+    private ComboBox<String> cmbBranch;
+    @FXML
+    private ComboBox<String> cmbStation;
 
     private static final String PATH = "data/employees.json";
     private static final String BRANCH_PATH = "data/branches.json";
@@ -50,7 +56,8 @@ public class MaintenanceEmployeeController extends Controller {
     }
 
     private void load() {
-        Type type = new TypeToken<List<Employee>>(){}.getType();
+        Type type = new TypeToken<List<Employee>>() {
+        }.getType();
         employees = JsonUtil.read(PATH, type);
 
         if (employees == null) {
@@ -61,10 +68,13 @@ public class MaintenanceEmployeeController extends Controller {
     }
 
     private void loadBranches() {
-        Type type = new TypeToken<List<Branch>>(){}.getType();
+        Type type = new TypeToken<List<Branch>>() {
+        }.getType();
         branches = JsonUtil.read(BRANCH_PATH, type);
 
-        if (branches == null) branches = new ArrayList<>();
+        if (branches == null) {
+            branches = new ArrayList<>();
+        }
 
         cmbBranch.getItems().setAll(
                 branches.stream().map(Branch::getName).toList()
@@ -126,8 +136,8 @@ public class MaintenanceEmployeeController extends Controller {
     private void onActionBtnSave() {
         try {
 
-            if (txtName.getText().trim().isEmpty()|| txtId.getText().trim().isEmpty()|| txtPin.getText().trim().isEmpty()
-                                                               || cmbBranch.getValue() == null|| cmbStation.getValue() == null) {
+            if (txtName.getText().trim().isEmpty() || txtId.getText().trim().isEmpty() || txtPin.getText().trim().isEmpty()
+                    || cmbBranch.getValue() == null || cmbStation.getValue() == null) {
 
                 new Mensaje().showConfirmation("Campos incompletos", getStage(), "Todos los campos deben estar llenos");
                 return;
@@ -173,7 +183,9 @@ public class MaintenanceEmployeeController extends Controller {
 
     @FXML
     private void onActionBtnDelete() {
-        if (selected == null) return;
+        if (selected == null) {
+            return;
+        }
 
         employees.remove(selected);
         JsonUtil.write(PATH, employees);
@@ -191,8 +203,4 @@ public class MaintenanceEmployeeController extends Controller {
         selected = null;
     }
 
-    @FXML
-    private void OnActionBtnEditEmployee(ActionEvent event) {
-        
-    }
 }

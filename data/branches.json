@@ -1,7 +1,7 @@
 [
   {
     "name": "Buenos Aires",
-    "noticeText": "Dia Martes 21 nuestras instalaciones permaneceran cerradas",
+    "noticeText": "Dia Martes 21 nuestras instalaciones permaneceran cerradas por clases",
     "stations": [
       {
         "name": "Caja 1",
@@ -27,13 +27,13 @@
     "active": true
   },
   {
-    "name": "Cajón",
+    "name": "Cajon",
     "noticeText": "Telefono 7865 4350",
     "stations": [
       {
         "name": "Caja 1",
         "preferential": true,
-        "branchName": "Cajón",
+        "branchName": "Cajon",
         "procedureNames": [
           "Prestamos"
         ],
@@ -42,7 +42,7 @@
       {
         "name": "Caja 2",
         "preferential": false,
-        "branchName": "Cajón",
+        "branchName": "Cajon",
         "procedureNames": [
           "Retiros"
         ],

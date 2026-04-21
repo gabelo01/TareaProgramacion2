@@ -17,14 +17,14 @@
     "name": "Carlos Ruiz",
     "id": "789",
     "pin": "1234",
-    "branchName": "Cajón",
+    "branchName": "Cajon",
     "stationName": "Caja 1"
   },
   {
     "name": "Salvatierra",
     "id": "12345",
     "pin": "12",
-    "branchName": "Cajón",
+    "branchName": "Cajon",
     "stationName": "Caja 2"
   }
 ]

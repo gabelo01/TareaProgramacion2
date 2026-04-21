@@ -52,7 +52,7 @@
                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                         </graphic>
                      </MFXButton>
-                     <MFXButton maxWidth="1.7976931348623157E308" onAction="#OnActionBtnEditBranch" prefHeight="40.0" prefWidth="160.0" styleClass="jfx-btn-edit" text="Editar Sucursal">
+                     <MFXButton maxWidth="1.7976931348623157E308" onAction="#OnActionBtnEditBranch" prefHeight="40.0" prefWidth="160.0" styleClass="jfx-btn-edit" text="Guardar Cambios">
                         <graphic>
                            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                         </graphic>

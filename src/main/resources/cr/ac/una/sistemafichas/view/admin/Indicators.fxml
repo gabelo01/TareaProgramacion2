@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXListView?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
@@ -12,11 +13,12 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../Style.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.IndicatorsController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="color-fondo-oscuro" stylesheets="@../Style.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.IndicatorsController">
    <center>
       <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="150.0" tabMinHeight="30.0" tabMinWidth="110.0">
          <tabs>
@@ -30,7 +32,7 @@
                            <children>
                               <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <top>
-                                    <VBox maxWidth="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
+                                    <VBox fx:id="filClients" spacing="5.0" styleClass="vBox">
                                        <children>
                                           <Label styleClass="jfx-label" text="Filtrar por:" />
                                           <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
@@ -59,7 +61,6 @@
                                              </children>
                                           </HBox>
                                        </children>
-                                       <padding><Insets bottom="10.0" top="10.0" /></padding>
                                     </VBox>
                                  </top>
                                  <center>
@@ -85,13 +86,13 @@
             <!-- ══════════════════ TAB SUCURSALES ══════════════════ -->
             <Tab text="Top Sucursales">
                <content>
-                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="color-fondo-claro">
                      <content>
                         <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="vBox">
                            <children>
                               <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <top>
-                                    <VBox maxWidth="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
+                                    <VBox fx:id="filBranches" maxWidth="1.7976931348623157E308" spacing="8.0" styleClass="vBox" BorderPane.alignment="CENTER">
                                        <children>
                                           <Label styleClass="jfx-label" text="Filtrar por:" />
                                           <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
@@ -140,13 +141,13 @@
             <!-- ══════════════════ TAB CAJAS ══════════════════ -->
             <Tab text="Top Cajas">
                <content>
-                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="color-fondo-claro">
                      <content>
                         <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="vBox">
                            <children>
                               <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <top>
-                                    <VBox maxWidth="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
+                                    <VBox fx:id="filStation" maxWidth="1.7976931348623157E308" spacing="8.0" styleClass="vBox" BorderPane.alignment="CENTER">
                                        <children>
                                           <Label styleClass="jfx-label" text="Filtrar por:" />
                                           <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
@@ -193,13 +194,13 @@
             <!-- ══════════════════ TAB TRÁMITES ══════════════════ -->
             <Tab text="Top Trámites">
                <content>
-                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="color-fondo-claro">
                      <content>
                         <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="vBox">
                            <children>
                               <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <top>
-                                    <VBox maxWidth="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
+                                    <VBox fx:id="filProcedures" maxWidth="1.7976931348623157E308" spacing="8.0" styleClass="vBox" BorderPane.alignment="CENTER">
                                        <children>
                                           <Label styleClass="jfx-label" text="Filtrar por:" />
                                           <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
@@ -250,13 +251,13 @@
             <!-- ══════════════════ TAB PREFERENCIALES ══════════════════ -->
             <Tab text="Top Preferenciales">
                <content>
-                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="color-fondo-claro">
                      <content>
                         <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="vBox">
                            <children>
                               <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <top>
-                                    <VBox maxWidth="1.7976931348623157E308" spacing="8.0" BorderPane.alignment="CENTER">
+                                    <VBox fx:id="filPreferenciales" maxWidth="1.7976931348623157E308" spacing="8.0" styleClass="vBox" BorderPane.alignment="CENTER">
                                        <children>
                                           <Label styleClass="jfx-label" text="Filtrar por:" />
                                           <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10.0">
@@ -306,4 +307,14 @@
          </tabs>
       </TabPane>
    </center>
+   <top>
+      <MFXButton onAction="#OnActionBtnFilter" styleClass="jfx-btn-filter" text="Filtros" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
+      </MFXButton>
+   </top>
 </BorderPane>
