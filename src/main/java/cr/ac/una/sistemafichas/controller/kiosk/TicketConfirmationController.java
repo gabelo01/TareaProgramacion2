@@ -35,22 +35,29 @@ public class TicketConfirmationController extends Controller {
     public void initialize() {
         loadLogo();
 
-        Ticket t = TicketService.getInstance().getLastTicket();
+        javafx.application.Platform.runLater(() -> {
 
-        if (t != null) {
+            Ticket t = TicketService.getInstance().getLatestTicket();
+
+            System.out.println("LATEST TICKET = " + (t != null ? t.getNumber() : "NULL"));
+
+            if (t == null) {
+                lblNumber.setText("SIN TICKET");
+                lblProcedure.setText("No hay datos");
+                lblType.setText("");
+                return;
+            }
+
             setTicket(t);
-        }
+        });
     }
 
     public void setTicket(Ticket t) {
-        if (t == null) {
-            return;
-        }
 
         lblNumber.setText(String.valueOf(t.getNumber()));
 
         lblProcedure.setText(
-                t.getProcedure() != null
+                (t.getProcedure() != null && t.getProcedure().getName() != null)
                 ? "Trámite: " + t.getProcedure().getName()
                 : "Trámite no definido"
         );
@@ -82,14 +89,12 @@ public class TicketConfirmationController extends Controller {
 
     private void playAnimation() {
 
-        // Animación de escala (zoom)
         ScaleTransition scale = new ScaleTransition(Duration.seconds(0.5), lblNumber);
         scale.setFromX(0.3);
         scale.setToX(1);
         scale.setFromY(0.3);
         scale.setToY(1);
 
-        // Animación de fade (aparecer)
         FadeTransition fade = new FadeTransition(Duration.seconds(0.5), lblNumber);
         fade.setFromValue(0);
         fade.setToValue(1);
@@ -99,12 +104,11 @@ public class TicketConfirmationController extends Controller {
     }
 
     private void autoClose() {
-
         PauseTransition pause = new PauseTransition(Duration.seconds(5));
-        System.out.println("AUTO CLOSE EJECUTADO");
-        pause.setOnFinished(e -> {
-            FlowController.getInstance().goView("kiosk/LoginKioskView");
-        });
+
+        pause.setOnFinished(e
+                -> FlowController.getInstance().goView("kiosk/LoginKioskView")
+        );
 
         pause.play();
     }
