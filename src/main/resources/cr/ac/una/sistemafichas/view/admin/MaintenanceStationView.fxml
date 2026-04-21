@@ -63,11 +63,11 @@
             </HBox>
 
             <HBox spacing="10">
-               <Button onAction="#onActionBtnNew" styleClass="jfx-btn-nuevo" text="Nuevo">
+               <Button onAction="#onActionBtnNew" styleClass="jfx-btn-clean" text="Limpiar">
                   <graphic>
                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                   </graphic></Button>
-               <Button onAction="#onActionBtnSave" styleClass="jfx-btn-save" text="Guardar">
+               <Button onAction="#onActionBtnSave" styleClass="jfx-btn-save" text="Guardar Cambios">
                   <graphic>
                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                   </graphic></Button>

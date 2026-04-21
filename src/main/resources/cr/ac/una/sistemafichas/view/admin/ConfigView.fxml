@@ -16,9 +16,9 @@
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="430.0" prefWidth="664.0" spacing="20.0" styleClass="vBox" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
          <children>
 
-            <HBox prefHeight="49.0" prefWidth="642.0">
+            <HBox alignment="CENTER" prefHeight="49.0" prefWidth="642.0" styleClass="color-fondo-oscuro">
                <children>
-                  <Label styleClass="jfx-titulo-label" text="Configuración general">
+                  <Label styleClass="jfx-label-projection" text="Configuración general">
                      <font><Font size="15.0" /></font>
                   </Label>
                </children>
@@ -26,7 +26,7 @@
 
             <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" spacing="10">
                <Label minWidth="150" styleClass="jfx-label" text="Nombre empresa:" />
-               <TextField fx:id="txtCompanyName" styleClass="text-field" HBox.hgrow="ALWAYS">
+               <TextField fx:id="txtCompanyName" HBox.hgrow="ALWAYS">
                   <HBox.margin><Insets right="25.0" /></HBox.margin>
                </TextField>
             </HBox>

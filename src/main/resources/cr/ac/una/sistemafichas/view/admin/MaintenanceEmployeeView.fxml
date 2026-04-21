@@ -42,24 +42,18 @@
                     <ComboBox fx:id="cmbStation" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="300.0" promptText="Seleccione estación" />
 
                     <HBox spacing="10">
-                        <MFXButton onAction="#OnActionBtnEditEmployee" styleClass="jfx-btn-edit" text="Editar" HBox.hgrow="ALWAYS">
+                         <MFXButton onAction="#onActionBtnSave" styleClass="jfx-btn-save" text="Guardar">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic></MFXButton>
+                     </graphic>
+                  </MFXButton>
                         <MFXButton onAction="#onActionBtnDelete" styleClass="jfx-btn-delete" text="Eliminar" HBox.hgrow="ALWAYS">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic></MFXButton>
                     </HBox>
 
-                    <HBox alignment="CENTER_RIGHT">
-                        <children>
-                            <MFXButton onAction="#onActionBtnSave" styleClass="jfx-btn-save" text="Guardar">
-                        <graphic>
-                           <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                        </graphic></MFXButton>
-                        </children>
-                    </HBox>
+                    <HBox alignment="CENTER_RIGHT" />
 
                     <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />

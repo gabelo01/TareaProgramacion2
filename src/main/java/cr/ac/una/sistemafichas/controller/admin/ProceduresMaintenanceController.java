@@ -163,21 +163,15 @@ public class ProceduresMaintenanceController extends Controller {
     }
 
     @FXML
-    private void btnBack() {
-        Stage stage = (Stage) txtProcedureName.getScene().getWindow();
-        FlowController.getInstance().goViewInStage("admin/SelectMaintenance",stage);
-    }
-
-    @FXML
     private void OnActionBtnEditProcedure(ActionEvent event) {
         try {
             if (selectedProcedure == null) {
-            Notifications.create()
-                    .title("Trámite no seleccionado")
-                    .text("No hay un trámite seleccionado que se pueda editar")
-                    .position(Pos.BOTTOM_RIGHT)
-                    .hideAfter(Duration.seconds(2))
-                    .showError();
+                Notifications.create()
+                        .title("Trámite no seleccionado")
+                        .text("No hay un trámite seleccionado que se pueda editar")
+                        .position(Pos.BOTTOM_RIGHT)
+                        .hideAfter(Duration.seconds(2))
+                        .showError();
                 return;
             }
 
