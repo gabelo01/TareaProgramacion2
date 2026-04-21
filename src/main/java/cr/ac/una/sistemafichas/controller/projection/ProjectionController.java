@@ -66,8 +66,7 @@ public class ProjectionController extends Controller {
     private Timeline refreshTimeline;
     private Timeline headerTimeline;
     private TranslateTransition marquee;
-    private int lastAnnouncedTicket = -1;
-    private long lastModified = 0;
+    private String lastCallTime = null;
 
     private final DateTimeFormatter dateFormatter
             = DateTimeFormatter.ofPattern("EEEE dd 'de' MMMM, yyyy");
@@ -151,31 +150,25 @@ public class ProjectionController extends Controller {
         }
 
         refreshTimeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
-            File file = new File(TICKETS_PATH);
-            long modified = file.lastModified();
-
-            if (modified != lastModified) {
-                lastModified = modified;
-                refreshTickets();
-            }
+            refreshTickets();
         }));
 
+        initTickets();
         refreshTimeline.setCycleCount(Timeline.INDEFINITE);
         refreshTimeline.play();
-        initTickets();
     }
-    private void initTickets(){
-        Type type = new TypeToken<List<Ticket>>(){}.getType();
-        List<Ticket> tickets= JsonUtil.read(TICKETS_PATH, type);
-        if(tickets == null){
+
+    private void initTickets() {
+        Type type = new TypeToken<List<Ticket>>() {
+        }.getType();
+        List<Ticket> tickets = JsonUtil.read(TICKETS_PATH, type);
+        if (tickets == null) {
             tickets = new ArrayList<>();
         }
-        for(int i = tickets.size() -1;i>=0;i--){
-            if("called".equals(tickets.get(i).getStatus())){
-                lastAnnouncedTicket = tickets.get(i).getNumber();
-                break;
-            }
-        }
+        tickets.stream().filter(t -> t.getCallTime() != null)
+                .max((a, b) -> LocalDateTime.parse(a.getCallTime())
+                .compareTo(LocalDateTime.parse(b.getCallTime())))
+                .ifPresent(t -> lastCallTime = t.getCallTime());
         refreshTickets();
     }
 
@@ -188,57 +181,55 @@ public class ProjectionController extends Controller {
         if (tickets == null) {
             tickets = new ArrayList<>();
         }
-
-        List<Ticket> called = tickets.stream()
-        .filter(t -> t.getCallTime() != null)
-        .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
+        List<Ticket> history = tickets.stream()
+                .filter(t -> {
+                    try {
+                        LocalDateTime.parse(t.getCallTime());
+                        return true;
+                    } catch (Exception e) {
+                        return false;
+                    }
+                })
+                .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
                 .compareTo(LocalDateTime.parse(a.getCallTime())))
-        .toList();
-
-        if (!called.isEmpty()) {
-
-            Ticket current = called.get(0);
-
+                .toList();
+        if (!history.isEmpty()) {
+            Ticket current = history.get(0);
             lblCurrentTicket.setText(String.valueOf(current.getNumber()));
-            lblCurrentStation.setText(
-                    current.getStationName() != null ? current.getStationName() : "---"
+            lblCurrentStation.setText(current.getStationName() != null ? current.getStationName() : "---"
             );
 
             lblPriorityBadge.setVisible(current.getPriority());
 
-            // evitar repetir anuncios por mismo callTime
             if (current.getCallTime() != null
-                    && !current.getCallTime().equals(String.valueOf(lastAnnouncedTicket))) {
+                    && !current.getCallTime().equals(lastCallTime)) {
 
-                lastAnnouncedTicket = current.getNumber();
+                lastCallTime = current.getCallTime();
 
                 announceShift(
                         current.getNumber(),
                         current.getStationName() != null
                         ? current.getStationName()
-                        : "ventanilla"
+                        : "Estacion"
                 );
             }
-
         } else {
             lblCurrentTicket.setText("---");
             lblCurrentStation.setText("---");
             lblPriorityBadge.setVisible(false);
 
-            lastAnnouncedTicket = -1;
+            lastCallTime = null;
         }
 
-        updateRow(called, 0, lblTicket1, lblStation1);
-        updateRow(called, 1, lblTicket2, lblStation2);
-        updateRow(called, 2, lblTicket3, lblStation3);
-        updateRow(called, 3, lblTicket4, lblStation4);
+        updateRow(history, 1, lblTicket1, lblStation1);
+        updateRow(history, 2, lblTicket2, lblStation2);
+        updateRow(history, 3, lblTicket3, lblStation3);
+        updateRow(history, 4, lblTicket4, lblStation4);
     }
 
     private void updateRow(List<Ticket> list, int index,
             Label lblTicket, Label lblStation) {
-        if (lblTicket == null || lblStation == null) {
-            return;
-        }
+
         if (index < list.size()) {
             Ticket t = list.get(index);
             lblTicket.setText(String.valueOf(t.getNumber()));
@@ -248,7 +239,6 @@ public class ProjectionController extends Controller {
             lblStation.setText("---");
         }
     }
-
 
     private void announceShift(int turno, String destino) {
         String message = "Ticket numero " + turno + " dirijase a " + destino;

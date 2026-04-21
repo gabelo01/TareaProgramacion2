@@ -21,7 +21,7 @@ public class App extends Application {
         FlowController.getInstance().InitializeFlow(stage, null);
         stage.hide();
         
-        ConfigLocal configLocal=JsonUtil.read("config-local.json", ConfigLocal.class);
+        ConfigLocal configLocal=JsonUtil.read("configLocal.json", ConfigLocal.class);
         if(configLocal != null && configLocal.getDataPath()!=null){
             JsonUtil.setDataPath(configLocal.getDataPath());
         }

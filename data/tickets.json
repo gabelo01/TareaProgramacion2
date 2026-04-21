@@ -3,276 +3,101 @@
     "number": 1,
     "status": "attended",
     "procedure": {
-      "name": "Prestamos",
+      "name": "Retiros",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-20T11:59:39.527452900",
-    "stationName": "Caja 1",
+    "creationDate": "2026-04-21T08:39:26.707494400",
+    "stationName": "Caja 2",
     "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T12:00:46.257478600"
+    "callTime": "2026-04-21T08:41:27.657532800"
   },
   {
     "number": 2,
     "status": "attended",
     "procedure": {
-      "name": "Creditos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-20T11:59:48.179155300",
-    "stationName": "Caja 1",
-    "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T12:01:46.574743900"
-  },
-  {
-    "number": 3,
-    "status": "attended",
-    "client": {
-      "preferential": false,
-      "name": "Luis",
-      "id": "123456789",
-      "age": "2008-03-11",
-      "photoPath": "data\\fotos-clientes\\client_1776460238699.png"
-    },
-    "procedure": {
       "name": "Prestamos",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-20T11:59:55.632943100",
+    "creationDate": "2026-04-21T08:39:37.591620800",
     "stationName": "Caja 1",
     "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T12:01:53.255900200"
+    "callTime": "2026-04-21T08:40:52.479764900"
+  },
+  {
+    "number": 3,
+    "status": "called",
+    "procedure": {
+      "name": "Creditos",
+      "active": true
+    },
+    "priority": false,
+    "creationDate": "2026-04-21T08:39:50.234080",
+    "stationName": "Caja 1",
+    "branchName": "Buenos Aires",
+    "callTime": "2026-04-21T08:48:29.909865300"
   },
   {
     "number": 4,
     "status": "attended",
-    "client": {
-      "preferential": false,
-      "name": "Yuli",
-      "id": "1234",
-      "age": "2007-01-16",
-      "photoPath": "data\\fotos-clientes\\client_1776623389783.png"
-    },
     "procedure": {
-      "name": "Creditos",
+      "name": "Prestamos",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-20T12:00:03.480468400",
-    "stationName": "Caja 1",
+    "creationDate": "2026-04-21T08:39:59.435966500",
+    "stationName": "Caja 2",
     "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T12:01:21.940573600"
+    "callTime": "2026-04-21T08:41:55.507968600"
   },
   {
     "number": 5,
-    "status": "attended",
-    "client": {
-      "preferential": true,
-      "name": "Anddy",
-      "id": "119830836",
-      "age": "2006-12-14",
-      "photoPath": "data\\fotos-clientes\\client_1776308789803.png"
-    },
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": true,
-    "creationDate": "2026-04-20T12:00:15.947725300",
-    "stationName": "Caja 1",
-    "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T12:02:35.543741900"
-  },
-  {
-    "number": 6,
-    "status": "attended",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-20T12:00:24.135720100",
-    "stationName": "Caja 1",
-    "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T12:02:23.978041800"
-  },
-  {
-    "number": 7,
-    "status": "attended",
-    "procedure": {
-      "name": "Cobros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-20T12:00:28.375268500",
-    "stationName": "Caja 2",
-    "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T12:00:55.410163"
-  },
-  {
-    "number": 8,
     "status": "called",
     "procedure": {
       "name": "Retiros",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-20T12:00:31.915634300",
+    "creationDate": "2026-04-21T08:40:08.849650900",
     "stationName": "Caja 2",
     "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T12:02:43.026973700"
+    "callTime": "2026-04-21T08:42:07.874560"
   },
   {
-    "number": 9,
+    "number": 6,
     "status": "waiting",
-    "client": {
-      "preferential": true,
-      "name": "Anddy",
-      "id": "119830836",
-      "age": "2006-12-14",
-      "photoPath": "data\\fotos-clientes\\client_1776308789803.png"
-    },
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": true,
-    "creationDate": "2026-04-20T12:03:28.960256700",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 10,
-    "status": "attended",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-20T13:35:14.511941900",
-    "stationName": "Caja 1",
-    "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T13:56:49.519705500"
-  },
-  {
-    "number": 11,
-    "status": "attended",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-20T13:43:01.162606900",
-    "stationName": "Caja 1",
-    "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T13:56:56.479320800"
-  },
-  {
-    "number": 12,
-    "status": "waiting",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-20T13:43:16.961084",
-    "stationName": "Caja 2",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 13,
-    "status": "attended",
-    "client": {
-      "preferential": false,
-      "name": "Yuli",
-      "id": "1234",
-      "age": "2007-01-16",
-      "photoPath": "data\\fotos-clientes\\client_1776623389783.png"
-    },
     "procedure": {
       "name": "Creditos",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-20T13:43:35.473636600",
+    "creationDate": "2026-04-21T08:40:20.355024700",
     "stationName": "Caja 1",
-    "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T14:02:22.531587900"
+    "branchName": "Buenos Aires"
   },
   {
-    "number": 14,
-    "status": "attended",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-20T14:09:28.786913600",
-    "stationName": "Caja 1",
-    "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T21:49:02.375189200"
-  },
-  {
-    "number": 15,
-    "status": "attended",
-    "procedure": {
-      "name": "Prestamos",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-20T14:09:43.978344700",
-    "stationName": "Caja 1",
-    "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T21:54:47.860623700"
-  },
-  {
-    "number": 16,
+    "number": 7,
     "status": "waiting",
     "procedure": {
       "name": "Retiros",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-20T21:37:31.564642300",
+    "creationDate": "2026-04-21T08:40:28.361694100",
     "stationName": "Caja 2",
     "branchName": "Buenos Aires"
   },
   {
-    "number": 17,
-    "status": "called",
+    "number": 8,
+    "status": "waiting",
     "procedure": {
       "name": "Prestamos",
       "active": true
     },
     "priority": false,
-    "creationDate": "2026-04-20T22:01:07.340097100",
+    "creationDate": "2026-04-21T08:40:36.726092300",
     "stationName": "Caja 1",
-    "branchName": "Buenos Aires",
-    "callTime": "2026-04-20T22:01:23.025732900"
-  },
-  {
-    "number": 18,
-    "status": "waiting",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-20T23:17:53.560749900",
-    "stationName": "Caja 2",
-    "branchName": "Buenos Aires"
-  },
-  {
-    "number": 19,
-    "status": "waiting",
-    "procedure": {
-      "name": "Retiros",
-      "active": true
-    },
-    "priority": false,
-    "creationDate": "2026-04-20T23:18:08.316296900",
-    "stationName": "Caja 2",
     "branchName": "Buenos Aires"
   }
 ]

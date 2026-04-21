@@ -294,6 +294,11 @@ public class StationController extends Controller {
         Ticket last = getLastCalledByStation();
 
         if (last != null) {
+            last.setCallTime(LocalDateTime.now().toString());
+            
+            TicketService.getInstance().save();
+            TicketService.getInstance().notifyAll_();
+            
             showCurrentTicket(last);
         } else {
             showAlert("No hay ticket llamado en esta estación.");
