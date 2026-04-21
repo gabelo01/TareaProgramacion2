@@ -36,38 +36,27 @@ public class TicketConfirmationController extends Controller {
         loadLogo();
 
         javafx.application.Platform.runLater(() -> {
-
             Ticket t = TicketService.getInstance().getLatestTicket();
-
-            System.out.println("LATEST TICKET = " + (t != null ? t.getNumber() : "NULL"));
-
-            if (t == null) {
-                lblNumber.setText("SIN TICKET");
-                lblProcedure.setText("No hay datos");
-                lblType.setText("");
-                return;
+            if (t != null) {
+                setTicket(t);
             }
-
-            setTicket(t);
         });
     }
 
     public void setTicket(Ticket t) {
-
-        lblNumber.setText(String.valueOf(t.getNumber()));
-
-        lblProcedure.setText(
-                (t.getProcedure() != null && t.getProcedure().getName() != null)
-                ? "Trámite: " + t.getProcedure().getName()
-                : "Trámite no definido"
-        );
-
-        lblType.setText(
-                t.getPriority() ? "Tipo: Preferencial" : "Tipo: Normal"
-        );
-
-        playAnimation();
-        autoClose();
+        javafx.application.Platform.runLater(() -> {
+            lblNumber.setText(String.valueOf(t.getNumber()));
+            lblProcedure.setText(
+                    (t.getProcedure() != null && t.getProcedure().getName() != null)
+                    ? "Trámite: " + t.getProcedure().getName()
+                    : "Trámite no definido"
+            );
+            lblType.setText(
+                    t.getPriority() ? "Tipo: Preferencial" : "Tipo: Normal"
+            );
+            playAnimation();
+            autoClose();
+        });
     }
 
     private void loadLogo() {

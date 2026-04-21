@@ -41,7 +41,7 @@
                 <Label styleClass="jfx-label-text-projection" text="TICKET" />
             <VBox alignment="CENTER" prefHeight="269.0" prefWidth="489.0" styleClass="color-fondo-oscuro">
                <children>
-                      <Label fx:id="lblCurrentTicket" prefHeight="205.0" prefWidth="104.0" styleClass="jfx-label-ticket-projection" text="#">
+                      <Label fx:id="lblCurrentTicket" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="255.0" prefWidth="300.0" styleClass="jfx-label-ticket-projection" text="#">
                      <font>
                         <Font size="52.0" />
                      </font>

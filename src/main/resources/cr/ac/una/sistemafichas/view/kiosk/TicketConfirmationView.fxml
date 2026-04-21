@@ -15,7 +15,7 @@
       
               <Label styleClass="jfx-label" text="Su ticket es:" />
       
-              <Label fx:id="lblNumber" prefHeight="187.0" prefWidth="104.0" styleClass="jfx-label-ticket-projection" text="#" />
+              <Label fx:id="lblNumber" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="187.0" prefWidth="200.0" styleClass="jfx-label-ticket-projection" text="#" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
             
