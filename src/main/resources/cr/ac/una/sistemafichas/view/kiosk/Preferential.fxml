@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.kiosk.PreferentialController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" styleClass="color-fondo-oscuro" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.kiosk.PreferentialController">
    <children>
-      <VBox alignment="CENTER" layoutX="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="594.0" spacing="35.0" styleClass="vBox" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <VBox alignment="CENTER" layoutX="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="594.0" spacing="35.0" styleClass="color-fondo-claro" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="285.0" styleClass="jfx-titulo-label" text=" CLIENTE PREFERENCIAL" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="285.0" styleClass="jfx-label-text-projection" text=" CLIENTE PREFERENCIAL" />
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="146.0" styleClass="jfx-label" text="INGRESE PIN" />
             <MFXPasswordField fx:id="pswPin" minHeight="30.0" prefHeight="30.0" prefWidth="450.0" styleClass="mfx-password-field" VBox.vgrow="ALWAYS" />
             <MFXButton onAction="#OnActionBtnGetFichaPreferential" styleClass="jfx-btn-edit" text="ACTIVAR ">

@@ -18,7 +18,7 @@
          </padding>
       
                      <top>
-            <VBox prefHeight="88.0" prefWidth="569.0" styleClass="vBox" BorderPane.alignment="CENTER">
+            <VBox prefHeight="88.0" prefWidth="569.0" styleClass="color-fondo-verde-claro" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="10.0">
                      <children>
@@ -72,7 +72,7 @@
                <children>
                   <VBox alignment="CENTER">
                      <children>
-                        <Label styleClass="jfx-label-text" text="Luego de seleccionar un tramite presione el botón" />
+                        <Label styleClass="jfx-label-text" text="Luego de seleccionar un tramite presione Obtener Ticket" />
                         <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="78.0" prefWidth="570.0" spacing="10.0">
                            <children>
                               <MFXButton fx:id="btnGetTicket" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#OnActionBtnGetTicket" prefHeight="74.0" prefWidth="218.0" styleClass="jfx-btn-preferential" text="OBTENER TICKET">

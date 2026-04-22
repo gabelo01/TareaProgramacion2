@@ -16,7 +16,7 @@
     -fx-button-color:#3399ff;
     -mfx-main:-fx-base-color-focus;
     -mfx-purple:-fx-base-color-focus;
-    -fx-base-color-oscuro:#000022;
+    -fx-base-color-oscuro:#012030;
     -fx-base-color-claro: #cde0fd;
     
     
@@ -151,7 +151,14 @@
     -fx-fill: white;
 }
 
+.jfx-label-text-warning {
+    -fx-font-size: 12px;
+    -fx-padding: 5 0 5 0;
+    -fx-text-fill: red;
+    -fx-font-weight: bold; 
 
+   -fx-effect: dropshadow(gaussian, rgba(102, 102, 102, 1), 4, 0.2, 1, 1);
+}
 
 /****************************
 *
@@ -674,6 +681,65 @@ Imagen Fondo Projection
     -fx-background-repeat: no-repeat;
 }
 
+/*
+  invitado
+*/
+.jfx-btn-invitado > ImageView{
+    -fx-image: url("../Resources/Photo.png");
+}
+
+.jfx-btn-invitado, .jfx-btn-invitado:armed, .jfx-btn-invitado:focused{
+
+    -fx-background-color:#9AEBA3;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Arial";
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 8, 0.3, 0, 3);
+
+    -fx-cursor: hand;
+}
+
+.jfx-btn-invitado:hover{
+    -fx-background-color: #7EDC8F;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0.4, 0, 4);
+}
+
+/*
+  ingresar
+*/
+.jfx-btn-ingresar > ImageView{
+    -fx-image: url("../Resources/AddPerson.png");
+}
+
+.jfx-btn-ingresar, .jfx-btn-ingresar:armed, .jfx-btn-ingresar:focused{
+
+    -fx-background-color:#45C4B0;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI", "Arial";
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 8, 0.3, 0, 3);
+
+    -fx-cursor: hand;
+}
+
+.jfx-btn-ingresar:hover{
+    -fx-background-color: #2FB7A0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0.4, 0, 4);
+}
 
 /***************************
 *
@@ -820,5 +886,6 @@ Imagen Fondo Projection
     -fx-background-color:#000000;
 }
 
-
-
+.color-fondo-verde-claro {
+    -fx-background-color:#e9ffd4;
+}
