@@ -28,39 +28,6 @@
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
-        <executions>
-          <execution>
-            <id>default-cli</id>
-          </execution>
-          <execution>
-            <id>debug</id>
-            <configuration>
-              <options>
-                <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8000</option>
-              </options>
-            </configuration>
-          </execution>
-          <execution>
-            <id>ide-debug</id>
-            <configuration>
-              <options>
-                <option>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</option>
-              </options>
-            </configuration>
-          </execution>
-          <execution>
-            <id>ide-profile</id>
-            <configuration>
-              <options>
-                <option>${profiler.jvmargs.arg1}</option>
-                <option>${profiler.jvmargs.arg2}</option>
-                <option>${profiler.jvmargs.arg3}</option>
-                <option>${profiler.jvmargs.arg4}</option>
-                <option>${profiler.jvmargs.arg5}</option>
-              </options>
-            </configuration>
-          </execution>
-        </executions>
         <configuration>
           <mainClass>cr.ac.una.sistemafichas.App</mainClass>
         </configuration>
@@ -75,6 +42,7 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <finalName>SistemaFichas</finalName>
               <transformers>
                 <transformer>
                   <mainClass>cr.ac.una.sistemafichas.App</mainClass>
@@ -98,6 +66,7 @@
   </build>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <javafx.version>25.0.2</javafx.version>
     <maven.compiler.target>25</maven.compiler.target>
     <maven.compiler.source>25</maven.compiler.source>
   </properties>
