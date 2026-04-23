@@ -12,5 +12,19 @@
     "pin": "12345",
     "branchName": "Buenos Aires",
     "stationName": "Caja 2"
+  },
+  {
+    "name": "Moises Ramires",
+    "id": "12",
+    "pin": "1111",
+    "branchName": "Cajon",
+    "stationName": "Caja 1"
+  },
+  {
+    "name": "Fernanda Matamoros",
+    "id": "13",
+    "pin": "2222",
+    "branchName": "Cajon",
+    "stationName": "Caja 2"
   }
 ]

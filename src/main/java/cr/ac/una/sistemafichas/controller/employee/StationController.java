@@ -165,9 +165,10 @@ public class StationController extends Controller {
             lblWaitingCount.setText("0");
             return;
         }
-
+        String branchName = (String) AppContext.getInstance().get("branch");
         long count = tickets.stream()
                 .filter(t -> "waiting".equals(t.getStatus()))
+                .filter(t -> branchName!=null && t.getBranchName()!= null && branchName.equalsIgnoreCase((t.getBranchName())))
                 .count();
 
         lblWaitingCount.setText(String.valueOf(count));
@@ -361,14 +362,16 @@ public class StationController extends Controller {
         if (station == null) {
             return null;
         }
-
+        String branchName = (String) AppContext.getInstance().get("branch");
+        
         return TicketService.getInstance().getTickets().stream()
-                .filter(t -> "called".equals(t.getStatus()))
-                .filter(t -> station.getName().equals(t.getStationName()))
-                .filter(t -> t.getCallTime() != null)
-                .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
-                .compareTo(LocalDateTime.parse(a.getCallTime())))
-                .findFirst()
-                .orElse(null);
+        .filter(t -> "called".equals(t.getStatus()))
+        .filter(t -> station.getName().equals(t.getStationName()))
+        .filter(t -> branchName != null && t.getBranchName() != null && branchName.equalsIgnoreCase(t.getBranchName()))
+        .filter(t -> t.getCallTime() != null)
+        .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
+        .compareTo(LocalDateTime.parse(a.getCallTime())))
+        .findFirst()
+        .orElse(null);
     }
 }
