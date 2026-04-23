@@ -37,19 +37,21 @@ public class CurrentClientController extends Controller {
     }
 
     private void loadCurrentClient() {
-
+        
+        String branchName = EmployeeSessionManager.getBranchName();
         String stationName = EmployeeSessionManager.getStationName();
 
         Ticket t = TicketService.getInstance().getTickets().stream()
-                .filter(x -> "called".equals(x.getStatus()))
-                .filter(x -> stationName != null && stationName.equals(x.getStationName()))
-                .filter(x -> x.getCallTime() != null)
-                .sorted((a, b)
-                        -> LocalDateTime.parse(b.getCallTime())
-                        .compareTo(LocalDateTime.parse(a.getCallTime()))
-                )
-                .findFirst()
-                .orElse(null);
+        .filter(x -> "called".equals(x.getStatus()))
+        .filter(x -> branchName != null && branchName.equals(x.getBranchName()))
+        .filter(x -> stationName != null && stationName.equals(x.getStationName()))
+        .filter(x -> x.getCallTime() != null)
+        .sorted((a, b)
+                -> LocalDateTime.parse(b.getCallTime())
+                .compareTo(LocalDateTime.parse(a.getCallTime()))
+        )
+        .findFirst()
+        .orElse(null);
 
         if (t == null) {
             lblName.setText("Ningun Cliente ha sido llamado");

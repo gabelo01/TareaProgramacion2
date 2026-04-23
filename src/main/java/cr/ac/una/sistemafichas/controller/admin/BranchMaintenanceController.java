@@ -35,7 +35,7 @@ public class BranchMaintenanceController extends Controller {
     @FXML
     private MFXTextField txtNoticeText;
 
-    private static final String BRANCHES_PATH = "data/branches.json";
+    private static final String BRANCHES_PATH = "branches.json";
 
     private List<Branch> branches;
     private Branch selectedBranch;
@@ -151,7 +151,7 @@ public class BranchMaintenanceController extends Controller {
             }
 
             if (new Mensaje().showConfirmation("Eliminar Tramite", getStage(),
-                    "¿Esta seguro que desea eliminar el cliente?")) {
+                    "¿Esta seguro que desea eliminar la sucursal?")) {
 
                 branches.remove(selectedBranch);
 

@@ -49,7 +49,7 @@ public class MaintenanceClientController extends Controller {
     @FXML
     private MFXCheckbox chkPreferencial;
 
-    private static final String CLIENTS_PATH = "data/clients.json";
+    private static final String CLIENTS_PATH = "clients.json";
 
     private List<Client> client;
     private Client selectedClient;
@@ -94,7 +94,7 @@ public class MaintenanceClientController extends Controller {
                 txtClientAge.setText(newValue.getAge());
 
                 if (newValue.getPhoto() != null) {
-                    File file = new File(newValue.getPhoto());
+                    File file = new File(JsonUtil.getDataPath() + newValue.getPhoto());
                     if (file.exists()) {
                         imgClient.setImage(new Image(file.toURI().toString()));
                     } else {
@@ -216,7 +216,7 @@ public class MaintenanceClientController extends Controller {
         }
 
         try {
-            File folder = new File("data/fotos-clientes");
+            File folder = new File(JsonUtil.getDataPath() + "fotos-clientes");
             if (!folder.exists()) {
                 folder.mkdirs();
             }

@@ -31,18 +31,21 @@ public class JsonUtil {
         if(Paths.get(filePath).isAbsolute()){
             return filePath;
         }
-        return filePath.replace("data/",dataPath);
+        if (filePath.equalsIgnoreCase("configLocal.json")) {
+        return filePath;
+    }
+        return dataPath + filePath;
     }
     public static <T> T read(String filePath, Class<T> tipo) {
         
         if (filePath == null){
             return null;
         }
-        
+
         try (Reader reader = new FileReader(resolvePath(filePath))){
             return gson.fromJson(reader, tipo);
         } catch (IOException e) {
-            System.err.println("Error leyendo JSON: " + filePath);
+             System.err.println("Error leyendo JSON " + filePath);
         return null;
         }
     }
@@ -54,7 +57,7 @@ public class JsonUtil {
             try (Writer writer = new FileWriter(resolved)) {gson.toJson(objeto, writer);
             }
         } catch (IOException e) {
-            System.err.println("Error escribiendo JSON: " + filePath);
+            System.err.println("Error escribiendo JSON: " + resolvePath(filePath));
             e.printStackTrace();
         }
     }
@@ -63,10 +66,11 @@ public class JsonUtil {
         if (filePath == null){
             return null;
         }
-        try (Reader reader = new FileReader(filePath)) {
+        try (Reader reader = new FileReader(resolvePath(filePath))) {
             return gson.fromJson(reader, tipo);
         } catch (IOException e) {
-            System.err.println("Error leyendo JSON: " + filePath);
+            System.err.println("Error leyendo JSON: " + resolvePath(filePath));
+            e.printStackTrace();
             return null;
         }
     }

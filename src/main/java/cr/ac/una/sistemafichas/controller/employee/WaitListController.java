@@ -3,6 +3,7 @@ package cr.ac.una.sistemafichas.controller.employee;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.service.TicketService;
+import cr.ac.una.sistemafichas.util.AppContext;
 import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -99,12 +100,12 @@ public class WaitListController extends Controller {
 
     private void loadTickets() {
         TicketService.getInstance().load();
-        String branch = KioskSessionManager.getBranch();
+        String branch = (String) AppContext.getInstance().get("branch");
         ObservableList<Ticket> all = TicketService.getInstance().getTickets();
 
         filteredTickets = new FilteredList<>(all, t
                 -> "waiting".equals(t.getStatus())
-                && (branch == null || branch.equalsIgnoreCase(t.getBranchName()))
+                && (branch != null && t.getBranchName() != null && branch.equalsIgnoreCase(t.getBranchName()))
         );
 
         SortedList<Ticket> sorted = new SortedList<>(filteredTickets);
@@ -116,19 +117,19 @@ public class WaitListController extends Controller {
     private void setupFilters() {
         txtSearchName.textProperty().addListener((obs, o, n) -> applyFilters());
         txtSearchID.textProperty().addListener((obs, o, n) -> applyFilters());
-        txtSearchProcedure.textProperty().addListener((obs,o,n)->applyFilters());
+        txtSearchProcedure.textProperty().addListener((obs, o, n) -> applyFilters());
         chkPreferential.selectedProperty().addListener((obs, o, n) -> applyFilters());
     }
 
     private void applyFilters() {
-        String branch = KioskSessionManager.getBranch();
+        String branch = (String) AppContext.getInstance().get("branch");
         filteredTickets.setPredicate(ticket -> {
 
             if (ticket == null || !"waiting".equals(ticket.getStatus())) {
                 return false;
             }
-            if(branch != null && !branch.equalsIgnoreCase(ticket.getBranchName())){
-               return false;
+            if (branch != null && !branch.equalsIgnoreCase(ticket.getBranchName())) {
+                return false;
             }
 
             String name = txtSearchName.getText();
@@ -146,7 +147,7 @@ public class WaitListController extends Controller {
             boolean matchPref = !chkPreferential.isSelected()
                     || ticket.getPriority();
             boolean matchProcedure = procedure == null || procedure.isBlank()
-                    || (ticket.getProcedure()!=null && ticket.getProcedure().getName().toLowerCase().contains(procedure.toLowerCase()));
+                    || (ticket.getProcedure() != null && ticket.getProcedure().getName().toLowerCase().contains(procedure.toLowerCase()));
 
             return matchName && matchID && matchPref && matchProcedure;
         });
@@ -167,11 +168,12 @@ public class WaitListController extends Controller {
     private void callTicket(Ticket t) {
 
         TicketService service = TicketService.getInstance();
-
+        String branch = EmployeeSessionManager.getBranchName();
         String stationName = EmployeeSessionManager.getStationName();
 
         Ticket last = service.getTickets().stream() // limpiar SOLO el último ticket llamado de esta estación
                 .filter(x -> "called".equals(x.getStatus()))
+                .filter(x -> branch != null && x.getBranchName() != null && branch.equalsIgnoreCase(x.getBranchName()))
                 .filter(x -> stationName.equals(x.getStationName()))
                 .filter(x -> x.getCallTime() != null)
                 .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
@@ -185,7 +187,6 @@ public class WaitListController extends Controller {
 
         t.setStatus("called");// llamar nuevo
         t.setStationName(stationName);
-        t.setBranchName(EmployeeSessionManager.getBranchName());
         t.setCallTime(LocalDateTime.now().toString());
 
         service.save();
@@ -211,10 +212,12 @@ public class WaitListController extends Controller {
 
         try {
             int num = Integer.parseInt(txtTicketNumber.getText().trim());
-
+            String branch = (String) AppContext.getInstance().get("branch");
+            
             Ticket t = TicketService.getInstance().getTickets().stream()
                     .filter(x -> x.getNumber() == num)
                     .filter(x -> "waiting".equals(x.getStatus()))
+                    .filter(x -> branch != null && x.getBranchName() != null && branch.equalsIgnoreCase(x.getBranchName()))
                     .findFirst()
                     .orElse(null);
 

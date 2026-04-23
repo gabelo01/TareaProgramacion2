@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Employee;
+import cr.ac.una.sistemafichas.util.AppContext;
 import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.Formato;
@@ -34,8 +35,8 @@ public class StationLoginController extends Controller {
     @FXML
     private MFXButton btnSalir;
 
-    private static final String EMPLOYEE_PATH = "data/employees.json";
-    private static final String CONFIG_PATH = "data/config.json";
+    private static final String EMPLOYEE_PATH = "employees.json";
+    private static final String CONFIG_PATH = "config.json";
     @FXML
     private Label lblCompanyName;
     @FXML
@@ -51,15 +52,15 @@ public class StationLoginController extends Controller {
         }
         loadHeader();
     }
-    
-        private void loadHeader() {
-      
+
+    private void loadHeader() {
+
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
-        if (config == null){
+        if (config == null) {
             return;
         }
 
-        if (lblCompanyName != null){
+        if (lblCompanyName != null) {
             lblCompanyName.setText(config.getCompanyName());
         }
 
@@ -68,11 +69,11 @@ public class StationLoginController extends Controller {
             if (file.exists() && imgLogo != null) {
                 imgLogo.setImage(new Image(file.toURI().toString()));
             }
-            
-           if (imgPassword != null) {
-                File filePassword = new File("data/images/Password.png");
+
+            if (imgPassword != null) {
+                File filePassword = new File(JsonUtil.getDataPath() +"images/Password.png");
                 if (filePassword.exists()) {
-                imgPassword.setImage(new Image(filePassword.toURI().toString()));
+                    imgPassword.setImage(new Image(filePassword.toURI().toString()));
                 }
             }
         } catch (Exception e) {
@@ -115,9 +116,19 @@ public class StationLoginController extends Controller {
             showAlert("PIN incorrecto");
             return;
         }
+        String currentBranch = (String) AppContext.getInstance().get("branch");
+
+        if (currentBranch != null
+                && found.getBranchName() != null
+                && !found.getBranchName().equalsIgnoreCase(currentBranch)) {
+
+            showAlert("Este empleado no pertenece a esta sucursal");
+            return;
+        }
+        
         EmployeeSessionManager.setBranchName(found.getBranchName());
         EmployeeSessionManager.setStationName(found.getStationName());
-        
+
         FlowController.getInstance().goMain("employee/StationView");
         getStage().close();
     }

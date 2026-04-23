@@ -58,9 +58,9 @@ public class ProjectionController extends Controller {
     @FXML
     private Label lblLastCalls;
 
-    private static final String CONFIG_PATH = "data/config.json";
-    private static final String TICKETS_PATH = "data/tickets.json";
-    private static final String BRANCHES_PATH = "data/branches.json";
+    private static final String CONFIG_PATH = "config.json";
+    private static final String TICKETS_PATH = "tickets.json";
+    private static final String BRANCHES_PATH = "branches.json";
 
     private Timeline clockTimeline;
     private Timeline refreshTimeline;

@@ -21,7 +21,7 @@ public class ConfigController extends Controller {
     @FXML private Label         lblMensaje;
     @FXML private MFXButton     btnSave;
 
-    private static final String CONFIG_PATH = "data/config.json";
+    private static final String CONFIG_PATH = "config.json";
     private boolean hasChanges = false;
 
     @Override
@@ -70,14 +70,14 @@ public class ConfigController extends Controller {
         File file = fileChooser.showOpenDialog(getStage());
         if (file != null) {
             try {
-                File destDir = new File("data/images");
+                File destDir = new File("JsonUtil.getDataPath() + images");
                 destDir.mkdirs();
                 File dest = new File(destDir, file.getName());
                 java.nio.file.Files.copy(
                     file.toPath(), dest.toPath(),
                     java.nio.file.StandardCopyOption.REPLACE_EXISTING
                 );
-                txtLogo.setText("data/images/" + file.getName());
+                txtLogo.setText("images/" + file.getName());
             } catch (Exception e) {
                 System.err.println("Error copiando imagen: " + e.getMessage());
             }

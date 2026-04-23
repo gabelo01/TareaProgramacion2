@@ -1,33 +1,24 @@
 package cr.ac.una.sistemafichas.controller.admin;
 
 import cr.ac.una.sistemafichas.controller.Controller;
-import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Procedure;
-import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.Mensaje;
-import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import org.controlsfx.control.Notifications;
 import javafx.util.Duration;
 import javafx.geometry.Pos;
-import javafx.stage.Stage;
 
 public class ProceduresMaintenanceController extends Controller {
 
@@ -38,13 +29,11 @@ public class ProceduresMaintenanceController extends Controller {
     @FXML
     private ListView<Procedure> listProcedures;
 
-    private static final String PROCEDURES_PATH = "data/procedures.json";
-    private static final String CONFIG_PATH = "data/config.json";
+    private static final String PROCEDURES_PATH = "procedures.json";
 
     private List<Procedure> procedures;
     private Procedure selectedProcedure;
 
-    private List<Node> requeridos = new ArrayList();
 
     @Override
     public void initialize() {

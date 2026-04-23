@@ -9,21 +9,22 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.stage.Stage;
 
 public class PreferentialController extends Controller {
 
-    @FXML 
+    @FXML
     private MFXPasswordField pswPin;
+    @FXML
     private Label lblError;
-    
-    private static final String CONFIG_PATH = "data/config.json";
+
+    private static final String CONFIG_PATH = "config.json";
 
     @Override
     public void initialize() {
         pswPin.delegateSetTextFormatter(Formato.getInstance().integerFormat());
-        if (pswPin != null) pswPin.clear();
+        if (pswPin != null) {
+            pswPin.clear();
+        }
         if (lblError != null) {
             lblError.setVisible(false);
             lblError.setText("");
@@ -49,6 +50,10 @@ public class PreferentialController extends Controller {
         }
 
         String pin = pswPin.getText();
+        if (pin == null || pin.isBlank()) {
+            showError("Ingrese el PIN.");
+            return;
+        }
 
         if (pin != null && pin.equals(config.getAdminPin())) {
             SelectProceduresController.setPreferentialOverride(true); //activa linea de Bolean preferential o priority y luego vuelve a select procedures view

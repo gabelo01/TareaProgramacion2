@@ -29,7 +29,7 @@ public class TicketConfirmationController extends Controller {
     @FXML
     private ImageView imgLogo;
 
-    private static final String CONFIG_PATH = "data/config.json";
+    private static final String CONFIG_PATH = "config.json";
 
     @Override
     public void initialize() {

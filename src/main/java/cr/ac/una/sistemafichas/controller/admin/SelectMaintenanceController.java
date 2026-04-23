@@ -18,7 +18,7 @@ public class SelectMaintenanceController extends Controller {
 
     @FXML private Label lbCompany;
     @FXML private ImageView imgLogo;
-    private static final String CONFIG_PATH = "data/config.json";
+    private static final String CONFIG_PATH = "config.json";
     @FXML
     private MFXButton btnClean;
 

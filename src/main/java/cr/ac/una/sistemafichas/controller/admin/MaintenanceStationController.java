@@ -5,7 +5,6 @@ import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Branch;
 import cr.ac.una.sistemafichas.model.Procedure;
 import cr.ac.una.sistemafichas.model.Station;
-import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import cr.ac.una.sistemafichas.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -37,8 +36,8 @@ public class MaintenanceStationController extends Controller {
     @FXML 
     private ListView<Station> tblListStations;
 
-    private static final String BRANCH_PATH = "data/branches.json";
-    private static final String PROCEDURES_PATH = "data/procedures.json";
+    private static final String BRANCH_PATH = "branches.json";
+    private static final String PROCEDURES_PATH = "procedures.json";
 
     private List<Procedure> allProcedures = new ArrayList<>();
     private List<Branch> branches = new ArrayList<>();

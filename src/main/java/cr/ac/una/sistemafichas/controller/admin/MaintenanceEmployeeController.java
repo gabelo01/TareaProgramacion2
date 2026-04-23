@@ -9,14 +9,12 @@ import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import cr.ac.una.sistemafichas.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.util.Duration;
@@ -38,8 +36,8 @@ public class MaintenanceEmployeeController extends Controller {
     @FXML
     private ComboBox<String> cmbStation;
 
-    private static final String PATH = "data/employees.json";
-    private static final String BRANCH_PATH = "data/branches.json";
+    private static final String PATH = "employees.json";
+    private static final String BRANCH_PATH = "branches.json";
 
     private List<Employee> employees = new ArrayList<>();
     private List<Branch> branches = new ArrayList<>();
@@ -139,7 +137,7 @@ public class MaintenanceEmployeeController extends Controller {
             if (txtName.getText().trim().isEmpty() || txtId.getText().trim().isEmpty() || txtPin.getText().trim().isEmpty()
                     || cmbBranch.getValue() == null || cmbStation.getValue() == null) {
 
-                new Mensaje().showConfirmation("Campos incompletos", getStage(), "Todos los campos deben estar llenos");
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Campos Incompletos", "Todos los campos deben estar llenos");
                 return;
             }
 
