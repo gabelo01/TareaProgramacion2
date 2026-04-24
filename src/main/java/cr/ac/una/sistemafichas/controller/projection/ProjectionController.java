@@ -6,6 +6,7 @@ import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import com.google.gson.reflect.TypeToken;
+import cr.ac.una.sistemafichas.util.AppContext;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
@@ -58,9 +59,9 @@ public class ProjectionController extends Controller {
     @FXML
     private Label lblLastCalls;
 
-    private static final String CONFIG_PATH = "data/config.json";
-    private static final String TICKETS_PATH = "data/tickets.json";
-    private static final String BRANCHES_PATH = "data/branches.json";
+    private static final String CONFIG_PATH = "config.json";
+    private static final String TICKETS_PATH = "tickets.json";
+    private static final String BRANCHES_PATH = "branches.json";
 
     private Timeline clockTimeline;
     private Timeline refreshTimeline;
@@ -181,7 +182,9 @@ public class ProjectionController extends Controller {
         if (tickets == null) {
             tickets = new ArrayList<>();
         }
+        String branchName = (String) AppContext.getInstance().get("branch");
         List<Ticket> history = tickets.stream()
+                .filter(t -> branchName != null && t.getBranchName() != null && branchName.equalsIgnoreCase(t.getBranchName()))
                 .filter(t -> {
                     try {
                         LocalDateTime.parse(t.getCallTime());

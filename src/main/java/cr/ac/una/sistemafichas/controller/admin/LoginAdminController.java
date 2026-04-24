@@ -9,11 +9,8 @@ import cr.ac.una.sistemafichas.util.Mensaje;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,12 +19,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class LoginAdminController extends Controller implements Initializable{
+public class LoginAdminController extends Controller{
 
     @FXML private MFXPasswordField pswPin;
     @FXML private MFXButton btnIngresar;
 
-    private static final String CONFIG_PATH = "data/config.json";
+    private static final String CONFIG_PATH = "config.json";
 
     @FXML
     private MFXButton btnSalir;
@@ -65,7 +62,7 @@ public class LoginAdminController extends Controller implements Initializable{
             }
             
            if (imgPassword != null) {
-                File filePassword = new File("data/images/Password.png");
+                File filePassword = new File(JsonUtil.getDataPath() + "images/Password.png");
                 if (filePassword.exists()) {
                 imgPassword.setImage(new Image(filePassword.toURI().toString()));
                 }
@@ -113,12 +110,4 @@ public class LoginAdminController extends Controller implements Initializable{
             OnActionBtnIngresar();
         }
     }   
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-    }
-
-
- 
 }

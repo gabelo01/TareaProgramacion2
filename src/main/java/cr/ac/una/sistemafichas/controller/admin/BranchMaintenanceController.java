@@ -31,7 +31,7 @@ public class BranchMaintenanceController extends Controller {
     @FXML private MFXTextField      txtNoticeText;
     @FXML private TextField         tfS_Branch;
 
-    private static final String BRANCHES_PATH = "data/branches.json";
+    private static final String BRANCHES_PATH = "branches.json";
 
     private List<Branch> branches    = new ArrayList<>();
     private List<Branch> allBranches = new ArrayList<>();
@@ -124,7 +124,9 @@ public class BranchMaintenanceController extends Controller {
                     .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showError();
                 return;
             }
+
             if (new Mensaje().showConfirmation("Eliminar Sucursal", getStage(), "¿Esta seguro que desea eliminar la sucursal?")) {
+
                 branches.remove(selectedBranch);
                 JsonUtil.write(BRANCHES_PATH, branches);
                 selectedBranch = null;

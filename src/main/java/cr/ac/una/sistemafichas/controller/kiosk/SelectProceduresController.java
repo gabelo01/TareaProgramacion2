@@ -9,6 +9,7 @@ import cr.ac.una.sistemafichas.model.Procedure;
 import cr.ac.una.sistemafichas.model.Station;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.service.TicketService;
+import cr.ac.una.sistemafichas.util.AppContext;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import cr.ac.una.sistemafichas.util.KioskSessionManager;
@@ -43,8 +44,8 @@ public class SelectProceduresController extends Controller {
     @FXML
     private VBox vboxProcedures;
 
-    private static final String CONFIG_PATH = "data/config.json";
-    private static final String PROC_PATH = "data/procedures.json";
+    private static final String CONFIG_PATH = "config.json";
+    private static final String PROC_PATH = "procedures.json";
 
     private static boolean preferentialOverride = false;
 
@@ -84,7 +85,7 @@ public class SelectProceduresController extends Controller {
                 imgLogo.setImage(new Image(file.toURI().toString()));
             }
             if (imgPreferential != null) {
-                File filePreferential = new File("data/images/Preferential.png");
+                File filePreferential = new File("images/Preferential.png");
                 if (filePreferential.exists()) {
                     imgPreferential.setImage(new Image(filePreferential.toURI().toString()));
                 }
@@ -117,16 +118,16 @@ public class SelectProceduresController extends Controller {
 
         vboxProcedures.getChildren().clear();
 
-        String branchName = KioskSessionManager.getBranch();
-
+        String branchName = (String) AppContext.getInstance().get("branch");
+System.out.println(AppContext.getInstance().get("branch"));
         if (branchName == null) {
-            branchName = "Buenos Aires";
-            KioskSessionManager.setBranch(branchName);
+            showAlert("Sucursal no configurada");
+            return;
         }
 
         Type branchType = new TypeToken<List<Branch>>() {
         }.getType();
-        List<Branch> branches = JsonUtil.read("data/branches.json", branchType);
+        List<Branch> branches = JsonUtil.read("branches.json", branchType);
         if (branches == null) {
             return;
         }
@@ -213,7 +214,7 @@ public class SelectProceduresController extends Controller {
             isPriority = true;
         }
 
-        String branchName = KioskSessionManager.getBranch();
+       String branchName = (String) AppContext.getInstance().get("branch");
         String assignedStation = resolveStation(branchName, selectedProcedure);
 
         Procedure procedure = new Procedure(selectedProcedure, true);
@@ -228,12 +229,12 @@ public class SelectProceduresController extends Controller {
         ticket.setStatus("waiting");
 
         TicketService.getInstance().generateTicket(ticket);
-        
+
         CompanyConfig config = JsonUtil.read(CONFIG_PATH, CompanyConfig.class);
         PdfUtil.generateTicketPdf(ticket, config);
 
         Notifications.create().title("PDF").text("Ticket #" + ticket.getNumber() + " generado.")
-               .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
+                .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
 
         preferentialOverride = false;
         KioskSessionManager.clearClient();
@@ -268,7 +269,7 @@ public class SelectProceduresController extends Controller {
         }
         Type branchType = new TypeToken<List<Branch>>() {
         }.getType();
-        List<Branch> branches = JsonUtil.read("data/branches.json", branchType);
+        List<Branch> branches = JsonUtil.read("branches.json", branchType);
         if (branches == null) {
             return null;
         }

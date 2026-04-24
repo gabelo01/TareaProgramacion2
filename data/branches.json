@@ -1,32 +1,5 @@
 [
   {
-    "name": "Buenos Aires",
-    "noticeText": "Dia Martes 21 nuestras instalaciones permaneceran cerradas por clases",
-    "stations": [
-      {
-        "name": "Caja 1",
-        "preferential": true,
-        "branchName": "Buenos Aires",
-        "procedureNames": [
-          "Prestamos",
-          "Creditos"
-        ],
-        "active": true
-      },
-      {
-        "name": "Caja 2",
-        "preferential": false,
-        "branchName": "Buenos Aires",
-        "procedureNames": [
-          "Retiros",
-          "Cobros"
-        ],
-        "active": true
-      }
-    ],
-    "active": true
-  },
-  {
     "name": "Cajon",
     "noticeText": "Telefono 7865 4350",
     "stations": [
@@ -45,6 +18,34 @@
         "branchName": "Cajon",
         "procedureNames": [
           "Retiros"
+        ],
+        "active": true
+      }
+    ],
+    "active": true
+  },
+  {
+    "name": "Buenos Aires",
+    "direction": "",
+    "noticeText": "La sucursal estara cerrada por covid-19",
+    "stations": [
+      {
+        "name": "Caja 1",
+        "preferential": false,
+        "branchName": "Buenos Aires",
+        "procedureNames": [
+          "Retiros",
+          "Prestamo"
+        ],
+        "active": true
+      },
+      {
+        "name": "Caja 2",
+        "preferential": false,
+        "branchName": "Buenos Aires",
+        "procedureNames": [
+          "Cobro",
+          "Afiliacion"
         ],
         "active": true
       }

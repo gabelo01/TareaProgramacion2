@@ -26,8 +26,8 @@ public class LoginKioskController extends Controller implements Initializable{
     @FXML private MFXTextField txtId;
     @FXML private Label lblError;
 
-    private static final String CLIENTS_PATH = "data/clients.json";
-    private static final String CONFIG_PATH = "data/config.json";
+    private static final String CLIENTS_PATH = "clients.json";
+    private static final String CONFIG_PATH = "config.json";
     
     @FXML private BorderPane root;
     @FXML private Label lblSaludation;
@@ -60,7 +60,7 @@ private void loadHeader() {
             }
             
                 if (imgUser != null) {
-                    File filePassword = new File("data/images/User.png");
+                    File filePassword = new File(JsonUtil.getDataPath() + "images/User.png");
                 if (filePassword.exists()) {
                     imgUser.setImage(new Image(filePassword.toURI().toString()));
                 }
@@ -88,7 +88,7 @@ private void loadHeader() {
         }
 
         Client found = clients.stream()
-                .filter(c -> c.getId().equals(id))
+                .filter(c -> c.getId().trim().equals(id))
                 .findFirst()
                 .orElse(null);
 

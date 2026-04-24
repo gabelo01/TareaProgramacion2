@@ -95,7 +95,7 @@ public class FlowController {
             Scene scene = new Scene(FXMLLoader.load(App.class.getResource("view/" + nameView + ".fxml"), this.idioma));
             MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);
 
-            CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
+            CompanyConfig config = JsonUtil.read("config.json", CompanyConfig.class);
             if (config != null && config.getLogoPath() != null) {
                 File file = new File(config.getLogoPath());
                 if (file.exists()) mainStage.getIcons().add(new Image(file.toURI().toString()));
@@ -159,7 +159,7 @@ public class FlowController {
         Stage stage = new Stage();
 
         try {
-            CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
+            CompanyConfig config = JsonUtil.read("config.json", CompanyConfig.class);
             if (config != null && config.getLogoPath() != null) {
                 File file = new File(config.getLogoPath());
                 if (file.exists()) stage.getIcons().add(new Image(file.toURI().toString()));
@@ -189,7 +189,7 @@ public class FlowController {
         Stage stage = new Stage();
 
         try {
-            CompanyConfig config = JsonUtil.read("data/config.json", CompanyConfig.class);
+            CompanyConfig config = JsonUtil.read("config.json", CompanyConfig.class);
             if (config != null && config.getLogoPath() != null) {
                 File file = new File(config.getLogoPath());
                 if (file.exists()) {

@@ -4,15 +4,15 @@
     "active": true
   },
   {
-    "name": "Prestamos",
+    "name": "Cobro",
     "active": true
   },
   {
-    "name": "Creditos",
+    "name": "Prestamo",
     "active": true
   },
   {
-    "name": "Cobros",
-    "active": false
+    "name": "Afiliacion",
+    "active": true
   }
 ]

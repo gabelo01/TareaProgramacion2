@@ -1,12 +1,11 @@
 package cr.ac.una.sistemafichas.service;
 
 import cr.ac.una.sistemafichas.model.Ticket;
-import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
+import cr.ac.una.sistemafichas.util.AppContext;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class TicketService {
 
     private ObservableList<Ticket> tickets = FXCollections.observableArrayList();
 
-    private final String PATH = "data/tickets.json";
+    private final String PATH = "tickets.json";
 
     private int nextNumber = 1;
 
@@ -24,6 +23,10 @@ public class TicketService {
 
     private TicketService() {
         load();
+    }
+
+    private String getBranch() {
+        return (String) AppContext.getInstance().get("branch");
     }
 
     public static TicketService getInstance() {
@@ -50,22 +53,44 @@ public class TicketService {
 
     public void load() {
         try {
-            Ticket[] t = JsonUtil.read(PATH, Ticket[].class);
-            if (t != null) {
-                tickets.setAll(Arrays.asList(t));
+            Ticket[] array = JsonUtil.read(PATH, Ticket[].class);
+
+            if (array != null) {
+                tickets.setAll(Arrays.asList(array));
+
                 nextNumber = tickets.stream()
                         .mapToInt(Ticket::getNumber)
                         .max()
                         .orElse(0) + 1;
             }
+
         } catch (Exception e) {
             System.out.println("Error loading tickets");
         }
     }
 
     public void save() {
-        JsonUtil.write(PATH, tickets);
-        notifyListeners();
+        try {
+            Ticket[] existing = JsonUtil.read(PATH, Ticket[].class);
+
+            List<Ticket> all = existing != null
+                    ? new java.util.ArrayList<>(Arrays.asList(existing))
+                    : new java.util.ArrayList<>();
+
+            String branch = getBranch();
+
+            all.removeIf(t -> branch != null
+                    && branch.equalsIgnoreCase(t.getBranchName()));
+
+            all.addAll(tickets);
+
+            JsonUtil.write(PATH, all);
+
+            notifyListeners();
+
+        } catch (Exception e) {
+            System.out.println("Error saving tickets");
+        }
     }
 
     public Ticket generateTicket(Ticket ticket) {
@@ -83,9 +108,13 @@ public class TicketService {
     }
 
     public Ticket callNext() {
+        String branch = getBranch();
+
         Ticket t = tickets.stream()
-                .filter(x -> x.getStatus().equals("waiting"))
-                .filter(x -> x.getBranchName().equals(EmployeeSessionManager.getBranchName()))
+                .filter(x -> "waiting".equals(x.getStatus()))
+                .filter(x -> branch != null
+                && x.getBranchName() != null
+                && branch.equalsIgnoreCase(x.getBranchName()))
                 .findFirst()
                 .orElse(null);
 
@@ -98,21 +127,41 @@ public class TicketService {
     }
 
     public long getWaitingCount() {
+        String branch = getBranch();
+
         return tickets.stream()
-                .filter(t -> t.getStatus().equals("waiting"))
+                .filter(t -> "waiting".equals(t.getStatus()))
+                .filter(t -> branch != null
+                && t.getBranchName() != null
+                && branch.equalsIgnoreCase(t.getBranchName()))
                 .count();
     }
 
     public Ticket getNextWaiting() {
-        return tickets.stream().filter(t -> t.getStatus().equals("waiting")).findFirst().orElse(null);
+        String branch = getBranch();
+
+        return tickets.stream()
+                .filter(t -> "waiting".equals(t.getStatus()))
+                .filter(t -> branch != null
+                && t.getBranchName() != null
+                && branch.equalsIgnoreCase(t.getBranchName()))
+                .findFirst()
+                .orElse(null);
     }
 
     public Ticket getLastCalled() {
-        List<Ticket> tickets = getTickets();
+        String branch = getBranch();
 
-        for (int i = tickets.size() - 1; i >= 0; i--) {
-            if ("called".equals(tickets.get(i).getStatus())) {
-                return tickets.get(i);
+        List<Ticket> list = getTickets();
+
+        for (int i = list.size() - 1; i >= 0; i--) {
+            Ticket t = list.get(i);
+
+            if ("called".equals(t.getStatus())
+                    && branch != null
+                    && t.getBranchName() != null
+                    && branch.equalsIgnoreCase(t.getBranchName())) {
+                return t;
             }
         }
 
@@ -126,8 +175,13 @@ public class TicketService {
     public Ticket getLatestTicket() {
         load();
 
+        String branch = getBranch();
+
         return tickets.stream()
                 .filter(t -> t.getNumber() > 0)
+                .filter(t -> branch != null
+                && t.getBranchName() != null
+                && branch.equalsIgnoreCase(t.getBranchName()))
                 .max((a, b) -> Integer.compare(a.getNumber(), b.getNumber()))
                 .orElse(null);
     }

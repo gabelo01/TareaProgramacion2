@@ -2,7 +2,6 @@ package cr.ac.una.sistemafichas.controller.admin;
 
 import cr.ac.una.sistemafichas.controller.Controller;
 import cr.ac.una.sistemafichas.model.Procedure;
-import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;

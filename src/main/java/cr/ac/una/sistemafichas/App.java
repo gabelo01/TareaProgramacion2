@@ -7,9 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import cr.ac.una.sistemafichas.util.KioskSessionManager;
 import java.io.IOException;
 import cr.ac.una.sistemafichas.model.ConfigLocal;
+import cr.ac.una.sistemafichas.util.AppContext;
         
 public class App extends Application {
 
@@ -26,7 +26,7 @@ public class App extends Application {
             JsonUtil.setDataPath(configLocal.getDataPath());
         }
         if(configLocal!=null && configLocal.getBranchName()!=null){
-            KioskSessionManager.setBranch(configLocal.getBranchName());
+          AppContext.getInstance().set("branch",configLocal.getBranchName());
         }
         
         String mode;

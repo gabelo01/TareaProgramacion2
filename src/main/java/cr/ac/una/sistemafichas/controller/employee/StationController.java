@@ -7,6 +7,7 @@ import cr.ac.una.sistemafichas.model.CompanyConfig;
 import cr.ac.una.sistemafichas.model.Station;
 import cr.ac.una.sistemafichas.model.Ticket;
 import cr.ac.una.sistemafichas.service.TicketService;
+import cr.ac.una.sistemafichas.util.AppContext;
 import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.FlowController;
 import cr.ac.una.sistemafichas.util.JsonUtil;
@@ -41,7 +42,7 @@ public class StationController extends Controller {
     @FXML
     private Label lblWaitingCount;
 
-    private static final String CONFIG_PATH = "data/config.json";
+    private static final String CONFIG_PATH = "config.json";
 
     private Station station;
     private Timeline clockTimeline;
@@ -88,7 +89,7 @@ public class StationController extends Controller {
 
     private void loadStation() {
         String stationName = EmployeeSessionManager.getStationName();
-        String branchName = EmployeeSessionManager.getBranchName();
+        String branchName = (String) AppContext.getInstance().get("branch");
 
         if (stationName == null || branchName == null) {
             lblStationName.setText("Sin estación asignada");
@@ -97,7 +98,7 @@ public class StationController extends Controller {
 
         Type type = new TypeToken<List<Branch>>() {
         }.getType();
-        List<Branch> branches = JsonUtil.read("data/branches.json", type);
+        List<Branch> branches = JsonUtil.read("branches.json", type);
 
         if (branches == null) {
             return;
@@ -164,9 +165,10 @@ public class StationController extends Controller {
             lblWaitingCount.setText("0");
             return;
         }
-
+        String branchName = (String) AppContext.getInstance().get("branch");
         long count = tickets.stream()
                 .filter(t -> "waiting".equals(t.getStatus()))
+                .filter(t -> branchName!=null && t.getBranchName()!= null && branchName.equalsIgnoreCase((t.getBranchName())))
                 .count();
 
         lblWaitingCount.setText(String.valueOf(count));
@@ -210,7 +212,7 @@ public class StationController extends Controller {
         if (!isStationValid()) {
             return;
         }
-        String branch = EmployeeSessionManager.getBranchName();
+        String branchName = (String) AppContext.getInstance().get("branch");
         TicketService service = TicketService.getInstance();
 
         Ticket last = getLastCalledByStation();// limpiar último ticket de esta estación
@@ -221,7 +223,7 @@ public class StationController extends Controller {
         Ticket t = service.getTickets().stream()
                 .filter(ticket -> "waiting".equals(ticket.getStatus()))
                 .filter(ticket -> ticket.getBranchName() != null)
-                .filter(ticket -> ticket.getBranchName().equalsIgnoreCase(branch))
+                .filter(ticket -> ticket.getBranchName().equalsIgnoreCase(branchName))
                 .filter(ticket -> ticket.getProcedure() != null)
                 .filter(ticket -> ticket.getProcedure() != null && station.getProcedureNames().stream().anyMatch(p -> p.trim().equalsIgnoreCase(ticket.getProcedure().getName().trim())))
                 .sorted((a, b) -> Integer.compare(a.getNumber(), b.getNumber()))
@@ -263,16 +265,17 @@ public class StationController extends Controller {
         if (last != null) {
             last.setStatus("attended");
         }
+        String branch = EmployeeSessionManager.getBranchName();
 
         Ticket t = service.getTickets().stream()
                 .filter(x -> "waiting".equals(x.getStatus()))
                 .filter(x -> x.getPriority())
                 .filter(x -> x.getProcedure() != null)
-                .filter(x -> station.getProcedureNames()
-                .contains(x.getProcedure().getName()))
+                .filter(x -> branch != null && x.getBranchName() != null && branch.equalsIgnoreCase(x.getBranchName()))
+                .filter(x -> station.getProcedureNames() != null && x.getProcedure() != null && station.getProcedureNames().contains(x.getProcedure().getName()))
+                .sorted((a, b) -> Integer.compare(a.getNumber(), b.getNumber()))
                 .findFirst()
                 .orElse(null);
-
         if (t != null) {
             t.setStatus("called");
             t.setStationName(station.getName());
@@ -295,10 +298,10 @@ public class StationController extends Controller {
 
         if (last != null) {
             last.setCallTime(LocalDateTime.now().toString());
-            
+
             TicketService.getInstance().save();
             TicketService.getInstance().notifyAll_();
-            
+
             showCurrentTicket(last);
         } else {
             showAlert("No hay ticket llamado en esta estación.");
@@ -359,14 +362,16 @@ public class StationController extends Controller {
         if (station == null) {
             return null;
         }
-
+        String branchName = (String) AppContext.getInstance().get("branch");
+        
         return TicketService.getInstance().getTickets().stream()
-                .filter(t -> "called".equals(t.getStatus()))
-                .filter(t -> station.getName().equals(t.getStationName()))
-                .filter(t -> t.getCallTime() != null)
-                .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
-                .compareTo(LocalDateTime.parse(a.getCallTime())))
-                .findFirst()
-                .orElse(null);
+        .filter(t -> "called".equals(t.getStatus()))
+        .filter(t -> station.getName().equals(t.getStationName()))
+        .filter(t -> branchName != null && t.getBranchName() != null && branchName.equalsIgnoreCase(t.getBranchName()))
+        .filter(t -> t.getCallTime() != null)
+        .sorted((a, b) -> LocalDateTime.parse(b.getCallTime())
+        .compareTo(LocalDateTime.parse(a.getCallTime())))
+        .findFirst()
+        .orElse(null);
     }
 }

@@ -48,7 +48,7 @@ public class MaintenanceClientController extends Controller {
     @FXML private TextField           tfC_Name;
     @FXML private TextField           tfC_Id;
 
-    private static final String CLIENTS_PATH = "data/clients.json";
+    private static final String CLIENTS_PATH = "clients.json";
 
     private List<Client> client;
     private List<Client> allClients = new ArrayList<>();
@@ -124,6 +124,7 @@ public class MaintenanceClientController extends Controller {
                 if (newValue.getPhoto() != null) {
                     File file = new File(newValue.getPhoto());
                     imgClient.setImage(file.exists() ? new Image(file.toURI().toString()) : null);
+
                 } else {
                     imgClient.setImage(null);
                 }

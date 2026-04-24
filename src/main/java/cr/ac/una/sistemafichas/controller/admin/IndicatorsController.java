@@ -164,22 +164,22 @@ public class IndicatorsController extends Controller {
     private void loadData() {
         Type clientType = new TypeToken<List<Client>>() {
         }.getType();
-        List<Client> c = JsonUtil.read("data/clients.json", clientType);
+        List<Client> c = JsonUtil.read("clients.json", clientType);
         allClients = (c != null) ? c : new ArrayList<>();
 
         Type branchType = new TypeToken<List<Branch>>() {
         }.getType();
-        List<Branch> b = JsonUtil.read("data/branches.json", branchType);
+        List<Branch> b = JsonUtil.read("branches.json", branchType);
         allBranches = (b != null) ? b : new ArrayList<>();
 
         Type ticketType = new TypeToken<List<Ticket>>() {
         }.getType();
-        List<Ticket> t = JsonUtil.read("data/tickets.json", ticketType);
+        List<Ticket> t = JsonUtil.read("tickets.json", ticketType);
         allTickets = (t != null) ? t : new ArrayList<>();
 
         Type procType = new TypeToken<List<Procedure>>() {
         }.getType();
-        List<Procedure> p = JsonUtil.read("data/procedures.json", procType);
+        List<Procedure> p = JsonUtil.read("procedures.json", procType);
         allProcedures = (p != null) ? p : new ArrayList<>();
     }
 
@@ -362,7 +362,7 @@ public class IndicatorsController extends Controller {
         if (f.branch != null) {
             result = result.stream()
                     .filter(st -> st.getBranchName() != null
-                    && st.getBranchName().toLowerCase().contains(f.branch))
+                    && st.getBranchName().toLowerCase().contains(f.branch.toLowerCase()))
                     .collect(Collectors.toList());
         }
 
@@ -471,7 +471,7 @@ public class IndicatorsController extends Controller {
         return allTickets.stream()
                 .filter(tk -> tk.getClient() != null)
                 .filter(tk -> branch == null || (tk.getBranchName() != null
-                && tk.getBranchName().toLowerCase().contains(branch)))
+                && tk.getBranchName().toLowerCase().contains(branch.toLowerCase())))
                 .filter(tk -> procedure == null || (tk.getProcedure() != null
                 && tk.getProcedure().getName() != null
                 && tk.getProcedure().getName().toLowerCase().contains(procedure)))
@@ -493,7 +493,7 @@ public class IndicatorsController extends Controller {
         return allTickets.stream()
                 .filter(tk -> tk.getProcedure() != null && tk.getProcedure().getName() != null
                 && tk.getBranchName() != null
-                && tk.getBranchName().toLowerCase().contains(branch))
+                && tk.getBranchName().toLowerCase().contains(branch.toLowerCase()))
                 .map(tk -> tk.getProcedure().getName())
                 .collect(Collectors.toSet());
     }
