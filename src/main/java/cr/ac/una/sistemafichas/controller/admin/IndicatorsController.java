@@ -58,6 +58,7 @@ public class IndicatorsController extends Controller {
     private TextField tfC_Name;
     @FXML
     private TextField tfC_Id;
+    @FXML
     private TextField tfC_Branch;
     @FXML
     private TextField tfC_Procedure;

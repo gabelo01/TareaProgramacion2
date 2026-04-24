@@ -8,16 +8,15 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import com.google.gson.reflect.TypeToken;
 import cr.ac.una.sistemafichas.model.Station;
-import cr.ac.una.sistemafichas.util.EmployeeSessionManager;
 import cr.ac.una.sistemafichas.util.Formato;
 import cr.ac.una.sistemafichas.util.Mensaje;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -26,27 +25,24 @@ import org.controlsfx.control.Notifications;
 
 public class BranchMaintenanceController extends Controller {
 
-    @FXML
-    private MFXTextField txtBranchName;
-    @FXML
-    private CheckBox chkActiveBranch;
-    @FXML
-    private ListView<Branch> tblListBranches;
-    @FXML
-    private MFXTextField txtNoticeText;
+    @FXML private MFXTextField      txtBranchName;
+    @FXML private CheckBox          chkActiveBranch;
+    @FXML private ListView<Branch>  tblListBranches;
+    @FXML private MFXTextField      txtNoticeText;
+    @FXML private TextField         tfS_Branch;
 
     private static final String BRANCHES_PATH = "data/branches.json";
 
-    private List<Branch> branches;
-    private Branch selectedBranch;
+    private List<Branch> branches    = new ArrayList<>();
+    private List<Branch> allBranches = new ArrayList<>();
+    private Branch       selectedBranch;
 
     @Override
     public void initialize() {
         loadData();
         setupSelection();
-
+        setupFilterListeners();
         txtBranchName.delegateSetTextFormatter(Formato.getInstance().letrasFormat(30));
-
         chkActiveBranch.selectedProperty().addListener((obs, oldVal, newVal) -> {
             if (selectedBranch != null) {
                 selectedBranch.setActive(newVal);
@@ -55,32 +51,26 @@ public class BranchMaintenanceController extends Controller {
         });
     }
 
-    private void loadData() {
-        Type branchListType = new TypeToken<List<Branch>>() {
-        }.getType();
-
-        branches = JsonUtil.read(BRANCHES_PATH, branchListType);
-
-        if (branches == null) {
-            branches = new ArrayList<>();
-        }
-
-        refreshBranches();
+    private void setupFilterListeners() {
+        if (tfS_Branch != null) tfS_Branch.textProperty().addListener((obs, ov, nv) -> applyFilter());
     }
 
-    private void refreshBranches() {
-        Branch oldSelected = selectedBranch;
+    private void applyFilter() {
+        String filter = tfS_Branch != null ? tfS_Branch.getText().trim().toLowerCase() : "";
+        List<Branch> result = filter.isEmpty()
+            ? new ArrayList<>(allBranches)
+            : allBranches.stream()
+                .filter(b -> b.getName() != null && b.getName().toLowerCase().contains(filter))
+                .collect(Collectors.toList());
+        tblListBranches.getItems().setAll(result);
+    }
 
-        tblListBranches.getItems().setAll(branches);
-
-        if (oldSelected != null) {
-            for (Branch b : branches) {
-                if (b.getName().equals(oldSelected.getName())) {
-                    tblListBranches.getSelectionModel().select(b);
-                    break;
-                }
-            }
-        }
+    private void loadData() {
+        Type branchListType = new TypeToken<List<Branch>>() {}.getType();
+        allBranches = JsonUtil.read(BRANCHES_PATH, branchListType);
+        if (allBranches == null) allBranches = new ArrayList<>();
+        branches = allBranches;
+        tblListBranches.getItems().setAll(allBranches);
     }
 
     private void setupSelection() {
@@ -91,11 +81,7 @@ public class BranchMaintenanceController extends Controller {
     }
 
     private void loadBranch(Branch b) {
-        if (b == null) {
-            clearBranch();
-            return;
-        }
-
+        if (b == null) { clearBranch(); return; }
         txtBranchName.setText(b.getName());
         chkActiveBranch.setSelected(b.isActive());
         txtNoticeText.setText(b.getNoticeText() != null ? b.getNoticeText() : "");
@@ -105,13 +91,12 @@ public class BranchMaintenanceController extends Controller {
     private void onActionBtnAddBranch() {
         try {
             String noticeText = txtNoticeText.getText().trim();
-            String name = txtBranchName.getText().trim();
+            String name       = txtBranchName.getText().trim();
 
             if (name.isEmpty()) {
                 new Mensaje().show(Alert.AlertType.INFORMATION, "Nombre vacio", "Ingrese un nombre de sucursal.");
                 return;
             }
-
             for (Branch b : branches) {
                 if (b.getName().equalsIgnoreCase(name)) {
                     new Mensaje().show(Alert.AlertType.INFORMATION, "Sucursal existente", "La sucursal ya existe.");
@@ -121,19 +106,13 @@ public class BranchMaintenanceController extends Controller {
 
             Branch b = new Branch(name, "", noticeText, new ArrayList<>(), true);
             branches.add(b);
-
             JsonUtil.write(BRANCHES_PATH, branches);
-            refreshBranches();
+            applyFilter();
             clearBranch();
-
-            new Mensaje().showModal(Alert.AlertType.INFORMATION,
-                    "Sucursal guardada",
-                    getStage(),
-                    "La sucursal se guardo correctamente");
-
+            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Sucursal guardada", getStage(), "La sucursal se guardo correctamente");
         } catch (Exception e) {
-            Logger.getLogger(BranchMaintenanceController.class.getName())
-                    .log(Level.SEVERE, "Error agregando la sucursal", e);
+            java.util.logging.Logger.getLogger(BranchMaintenanceController.class.getName())
+                .log(java.util.logging.Level.SEVERE, "Error agregando la sucursal", e);
         }
     }
 
@@ -141,42 +120,22 @@ public class BranchMaintenanceController extends Controller {
     private void btnDeleteBranch() {
         try {
             if (selectedBranch == null) {
-                Notifications.create()
-                        .title("Sucursal no seleccionada")
-                        .text("No hay ninguna sucursal seleccionada que se pueda eliminar")
-                        .position(Pos.BOTTOM_RIGHT)
-                        .hideAfter(Duration.seconds(2))
-                        .showError();
+                Notifications.create().title("Sucursal no seleccionada").text("No hay ninguna sucursal seleccionada que se pueda eliminar")
+                    .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showError();
                 return;
             }
-
-            if (new Mensaje().showConfirmation("Eliminar Tramite", getStage(),
-                    "¿Esta seguro que desea eliminar el cliente?")) {
-
+            if (new Mensaje().showConfirmation("Eliminar Sucursal", getStage(), "¿Esta seguro que desea eliminar la sucursal?")) {
                 branches.remove(selectedBranch);
-
                 JsonUtil.write(BRANCHES_PATH, branches);
-
                 selectedBranch = null;
-
-                refreshBranches();
+                applyFilter();
                 clearBranch();
-
-                Notifications.create()
-                        .title("Eliminado correctamente")
-                        .text("La sucursal ha sido eliminada correctamente")
-                        .position(Pos.BOTTOM_RIGHT)
-                        .hideAfter(Duration.seconds(2))
-                        .showInformation();
+                Notifications.create().title("Eliminado correctamente").text("La sucursal ha sido eliminada correctamente")
+                    .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
             }
-
         } catch (Exception ex) {
-            Notifications.create()
-                    .title("ERROR")
-                    .text("Hubo un error al eliminar la sucursal")
-                    .position(Pos.BOTTOM_RIGHT)
-                    .hideAfter(Duration.seconds(2))
-                    .showError();
+            Notifications.create().title("ERROR").text("Hubo un error al eliminar la sucursal")
+                .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showError();
         }
     }
 
@@ -184,27 +143,16 @@ public class BranchMaintenanceController extends Controller {
     private void OnActionBtnEditBranch(ActionEvent event) {
         try {
             if (selectedBranch == null) {
-                Notifications.create()
-                        .title("Sucursal no seleccionada")
-                        .text("No hay una sucursal seleccionada que se pueda editar")
-                        .position(Pos.BOTTOM_RIGHT)
-                        .hideAfter(Duration.seconds(2))
-                        .showError();
+                Notifications.create().title("Sucursal no seleccionada").text("No hay una sucursal seleccionada que se pueda editar")
+                    .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showError();
                 return;
             }
-
             String name = txtBranchName.getText().trim();
-
             if (name.isEmpty()) {
-                Notifications.create()
-                        .title("Nombre inválido")
-                        .text("El nombre no puede estar vacío")
-                        .position(Pos.BOTTOM_RIGHT)
-                        .hideAfter(Duration.seconds(2))
-                        .showError();
+                Notifications.create().title("Nombre inválido").text("El nombre no puede estar vacío")
+                    .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showError();
                 return;
             }
-
             selectedBranch.setName(name);
             selectedBranch.setActive(chkActiveBranch.isSelected());
             selectedBranch.setNoticeText(txtNoticeText.getText().trim());
@@ -212,24 +160,13 @@ public class BranchMaintenanceController extends Controller {
             for (Station s : selectedBranch.getStations()) {
                 s.setBranchName(name);
             }
-
             JsonUtil.write(BRANCHES_PATH, branches);
-            refreshBranches();
-
-            Notifications.create()
-                    .title("Editado correctamente")
-                    .text("La sucursal ha sido editada correctamente")
-                    .position(Pos.BOTTOM_RIGHT)
-                    .hideAfter(Duration.seconds(2))
-                    .showInformation();
-
+            applyFilter();
+            Notifications.create().title("Editado correctamente").text("La sucursal ha sido editada correctamente")
+                .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
         } catch (Exception ex) {
-            Notifications.create()
-                    .title("ERROR")
-                    .text("Hubo un error al editar la sucursal")
-                    .position(Pos.BOTTOM_RIGHT)
-                    .hideAfter(Duration.seconds(2))
-                    .showError();
+            Notifications.create().title("ERROR").text("Hubo un error al editar la sucursal")
+                .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showError();
         }
     }
 

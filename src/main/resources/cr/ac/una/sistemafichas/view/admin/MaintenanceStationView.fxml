@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -32,6 +33,12 @@
 
          <VBox spacing="10" HBox.hgrow="ALWAYS">
             <MFXTextField fx:id="txtName" floatingText="Nombre estacion" prefHeight="43.0" prefWidth="534.0" styleClass="mfx-text-field" />
+            <HBox alignment="CENTER_LEFT" spacing="5.0">
+               <children>
+                  <Label minWidth="38.0" styleClass="jfx-label-text" text="Estación" />
+                  <TextField fx:id="tfCJ_Station" maxWidth="1.7976931348623157E308" promptText="Buscar estación..." HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
             <HBox maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="534.0" spacing="10.0">
                <children>
                   <CheckBox fx:id="chkPreferential" styleClass="mfx-checkbox" text="Preferencial" />
