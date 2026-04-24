@@ -39,3 +39,8 @@ The launchers use the Maven and Java bundled with NetBeans:
 
 If NetBeans is installed in a different location, update the
 MAVEN_HOME and JAVA_HOME lines inside each .bat file.
+
+
+Password admin:1234
+
+Employees pin: 1111, 2222, 1234

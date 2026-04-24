@@ -22,8 +22,8 @@
 
 /************************
 *
-*        Inputs
-*
+*        poner texto
+
 ************************/
 
 .mfx-text-field {
@@ -70,7 +70,7 @@
 
 /**********************
 *
-*        Listas
+*        Lista
 *
 **********************/
 
@@ -134,8 +134,8 @@
     -fx-font-weight: bold;
     -fx-text-fill: #0000ff;
     -fx-effect: dropshadow(gaussian, #009999, 10, 0.7, 0, 0)
-                dropshadow(gaussian, #3333ff, 20, 0.5, 0, 0)
-                dropshadow(gaussian, #3300ff, 30, 0.3, 0, 0);
+        dropshadow(gaussian, #3333ff, 20, 0.5, 0, 0)
+        dropshadow(gaussian, #3300ff, 30, 0.3, 0, 0);
 }
 
 .jfx-label-ticket-projection {
@@ -143,8 +143,8 @@
     -fx-font-weight: bold;
     -fx-text-fill: #ffffff;
     -fx-effect: dropshadow(gaussian, #000000, 10, 0.7, 0, 0)
-                dropshadow(gaussian, #000000, 20, 0.5, 0, 0)
-                dropshadow(gaussian, #000000, 30, 0.3, 0, 0);
+        dropshadow(gaussian, #000000, 20, 0.5, 0, 0)
+        dropshadow(gaussian, #000000, 30, 0.3, 0, 0);
 }
 
 .jfx-label-projection {
@@ -309,7 +309,7 @@
 
 /***********************************************************
 *
-*        Botones — Estilos específicos
+*        Botones Estilos específicos
 *
 ************************************************************/
 
@@ -529,52 +529,87 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0.4, 0, 4);
 }
 
-/* Imágenes de botones */
-.jfx-btn-nuevo > ImageView     { -fx-image: url("../Resources/Save.png"); }
-.jfx-btn-add > ImageView       { -fx-image: url("../Resources/AddPerson.png"); }
-.jfx-btn-delete > ImageView    { -fx-image: url("../Resources/Cancel.png"); }
-.jfx-btn-employees > ImageView { -fx-image: url("../Resources/Employees.png"); }
-.jfx-btn-client > ImageView    { -fx-image: url("../Resources/Clients.png"); }
-.jfx-btn-person > ImageView    { -fx-image: url("../Resources/AddPerson.png"); }
-.jfx-btn-exit > ImageView      { -fx-image: url("../Resources/Back.png"); }
-.jfx-btn-clean > ImageView     { -fx-image: url("../Resources/Clean.png"); }
-.jfx-btn-save > ImageView      { -fx-image: url("../Resources/Save.png"); }
-.jfx-btn-indicators > ImageView{ -fx-image: url("../Resources/Indicators.png"); }
-.jfx-btn-settings > ImageView  { -fx-image: url("../Resources/Settings.png"); }
-.jfx-btn-branches > ImageView  { -fx-image: url("../Resources/Branches.png"); }
-.jfx-btn-station > ImageView   { -fx-image: url("../Resources/Station.png"); }
-.jfx-btn-procedures > ImageView{ -fx-image: url("../Resources/Procedures.png"); }
-.jfx-btn-photo > ImageView     { -fx-image: url("../Resources/Photo.png"); }
-.jfx-btn-clients > ImageView   { -fx-image: url("../Resources/Clients.png"); }
-.jfx-btn-preferential > ImageView { -fx-image: url("../Resources/Preferential.png"); }
-.jfx-btn-repeat > ImageView    { -fx-image: url("../Resources/repeat.png"); }
-.jfx-btn-next > ImageView      { -fx-image: url("../Resources/Station.png"); }
-.jfx-btn-search > ImageView    { -fx-image: url("../Resources/Search.png"); }
-.jfx-btn-currentClient > ImageView { -fx-image: url("../Resources/Photo.png"); }
-.jfx-btn-waitList > ImageView  { -fx-image: url("../Resources/Station.png"); }
-.jfx-btn-filter > ImageView    { -fx-image: url("../Resources/filter.png"); }
-.jfx-btn-invitado > ImageView  { -fx-image: url("../Resources/Photo.png"); }
-.jfx-btn-ingresar > ImageView  { -fx-image: url("../Resources/AddPerson.png"); }
-
-/***************************
+/***********************
 *
-*        Fondos
+* Imágenes de botones
 *
-****************************/
-
-.fondo-app {
-    -fx-background-image: url("../Resources/Fondo1.png");
-    -fx-background-size: cover;
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
+************************/
+.jfx-btn-nuevo > ImageView     {
+    -fx-image: url("../Resources/Save.png");
+}
+.jfx-btn-add > ImageView       {
+    -fx-image: url("../Resources/AddPerson.png");
+}
+.jfx-btn-delete > ImageView    {
+    -fx-image: url("../Resources/Cancel.png");
+}
+.jfx-btn-employees > ImageView {
+    -fx-image: url("../Resources/Employees.png");
+}
+.jfx-btn-client > ImageView    {
+    -fx-image: url("../Resources/Clients.png");
+}
+.jfx-btn-person > ImageView    {
+    -fx-image: url("../Resources/AddPerson.png");
+}
+.jfx-btn-exit > ImageView      {
+    -fx-image: url("../Resources/Back.png");
+}
+.jfx-btn-clean > ImageView     {
+    -fx-image: url("../Resources/Clean.png");
+}
+.jfx-btn-save > ImageView      {
+    -fx-image: url("../Resources/Save.png");
+}
+.jfx-btn-indicators > ImageView{
+    -fx-image: url("../Resources/Indicators.png");
+}
+.jfx-btn-settings > ImageView  {
+    -fx-image: url("../Resources/Settings.png");
+}
+.jfx-btn-branches > ImageView  {
+    -fx-image: url("../Resources/Branches.png");
+}
+.jfx-btn-station > ImageView   {
+    -fx-image: url("../Resources/Station.png");
+}
+.jfx-btn-procedures > ImageView{
+    -fx-image: url("../Resources/Procedures.png");
+}
+.jfx-btn-photo > ImageView     {
+    -fx-image: url("../Resources/Photo.png");
+}
+.jfx-btn-clients > ImageView   {
+    -fx-image: url("../Resources/Clients.png");
+}
+.jfx-btn-preferential > ImageView {
+    -fx-image: url("../Resources/Preferential.png");
+}
+.jfx-btn-repeat > ImageView    {
+    -fx-image: url("../Resources/repeat.png");
+}
+.jfx-btn-next > ImageView      {
+    -fx-image: url("../Resources/Station.png");
+}
+.jfx-btn-search > ImageView    {
+    -fx-image: url("../Resources/Search.png");
+}
+.jfx-btn-currentClient > ImageView {
+    -fx-image: url("../Resources/Photo.png");
+}
+.jfx-btn-waitList > ImageView  {
+    -fx-image: url("../Resources/Station.png");
+}
+.jfx-btn-filter > ImageView    {
+    -fx-image: url("../Resources/filter.png");
+}
+.jfx-btn-invitado > ImageView  {
+    -fx-image: url("../Resources/Photo.png");
+}
+.jfx-btn-ingresar > ImageView  {
+    -fx-image: url("../Resources/AddPerson.png");
 }
 
-.fondo-numero-ficha {
-    -fx-background-image: url("../Resources/FondoFicha.png");
-    -fx-background-size: cover;
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
-}
 
 /***************************
 *
@@ -624,6 +659,7 @@
     -fx-text-fill: white;
 }
 
+
 /***************************
 *
 *        BarChart
@@ -657,9 +693,15 @@
     -fx-background-radius: 5 5 0 0;
 }
 
-.default-color0.chart-bar { -fx-bar-fill: #217edc; }
-.default-color1.chart-bar { -fx-bar-fill: #00c853; }
-.default-color2.chart-bar { -fx-bar-fill: #ff6633; }
+.default-color0.chart-bar {
+    -fx-bar-fill: #217edc;
+}
+.default-color1.chart-bar {
+    -fx-bar-fill: #00c853;
+}
+.default-color2.chart-bar {
+    -fx-bar-fill: #ff6633;
+}
 
 /***************************
 *
@@ -689,7 +731,7 @@
 
 /***************************
 *
-*        DatePicker
+*        Date Picker
 *
 ****************************/
 
@@ -708,11 +750,19 @@
 
 /***************************
 *
-*        Colores utilitarios
+*        Colores 
 *
 ****************************/
 
-.color-fondo-oscuro  { -fx-background-color: -fx-base-color-oscuro; }
-.color-fondo-claro   { -fx-background-color: -fx-base-color-claro; }
-.color-fondo-negro   { -fx-background-color: #000000; }
-.color-fondo-verde-claro { -fx-background-color: #e9ffd4; }
+.color-fondo-oscuro  {
+    -fx-background-color: -fx-base-color-oscuro;
+}
+.color-fondo-claro   {
+    -fx-background-color: -fx-base-color-claro;
+}
+.color-fondo-negro   {
+    -fx-background-color: #000000;
+}
+.color-fondo-verde-claro {
+    -fx-background-color: #e9ffd4;
+}
