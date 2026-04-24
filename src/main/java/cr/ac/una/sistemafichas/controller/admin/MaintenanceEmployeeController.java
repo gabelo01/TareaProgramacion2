@@ -33,8 +33,8 @@ public class MaintenanceEmployeeController extends Controller {
     @FXML private ComboBox<String>   cmbStation;
     @FXML private TextField          tfC_Name;
 
-    private static final String PATH        = "data/employees.json";
-    private static final String BRANCH_PATH = "data/branches.json";
+    private static final String PATH        = "employees.json";
+    private static final String BRANCH_PATH = "branches.json";
 
     private List<Employee> employees = new ArrayList<>();
     private List<Employee> allEmployees = new ArrayList<>();

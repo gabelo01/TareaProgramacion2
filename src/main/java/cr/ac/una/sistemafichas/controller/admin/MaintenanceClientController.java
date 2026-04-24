@@ -76,7 +76,7 @@ public class MaintenanceClientController extends Controller {
 
     private void loadData() {
         Type clientType = new TypeToken<List<Client>>() {}.getType();
-        List<Client> c  = JsonUtil.read("data/clients.json", clientType);
+        List<Client> c  = JsonUtil.read("clients.json", clientType);
         allClients       = (c != null) ? c : new ArrayList<>();
         client           = allClients;
         refreshClients();

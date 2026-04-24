@@ -31,8 +31,8 @@ public class MaintenanceStationController extends Controller {
     @FXML private ListView<Station>   tblListStations;
     @FXML private TextField           tfCJ_Station;
 
-    private static final String BRANCH_PATH     = "data/branches.json";
-    private static final String PROCEDURES_PATH  = "data/procedures.json";
+    private static final String BRANCH_PATH     = "branches.json";
+    private static final String PROCEDURES_PATH  = "procedures.json";
 
     private List<Procedure> allProcedures = new ArrayList<>();
     private List<Branch>    branches      = new ArrayList<>();

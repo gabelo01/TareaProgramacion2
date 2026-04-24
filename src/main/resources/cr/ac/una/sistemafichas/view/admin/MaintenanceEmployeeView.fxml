@@ -12,68 +12,72 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="@../Style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sistemafichas.controller.admin.MaintenanceEmployeeController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            prefHeight="520.0" prefWidth="800.0"
+            stylesheets="@../Style.css"
+            xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="cr.ac.una.sistemafichas.controller.admin.MaintenanceEmployeeController">
+   <children>
+      <VBox spacing="15" styleClass="vBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10"
+            AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+         <children>
+            <HBox spacing="20" VBox.vgrow="ALWAYS" maxHeight="1.7976931348623157E308">
+               <children>
+                  <!-- LEFT: filter + list -->
+                  <VBox spacing="8" HBox.hgrow="ALWAYS" maxHeight="1.7976931348623157E308" minWidth="220.0" maxWidth="300.0">
+                     <children>
+                        <Label styleClass="jfx-label" text="Lista de Empleados"/>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                           <children>
+                              <Label minWidth="60.0" styleClass="jfx-label-text" text="Nombre:"/>
+                              <TextField fx:id="tfC_Name" maxWidth="1.7976931348623157E308"
+                                         promptText="Buscar por nombre..." HBox.hgrow="ALWAYS"/>
+                           </children>
+                        </HBox>
+                        <ListView fx:id="tblEmployees" maxHeight="1.7976931348623157E308"
+                                  maxWidth="1.7976931348623157E308" styleClass="list-cell"
+                                  VBox.vgrow="ALWAYS">
+                           <VBox.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/></VBox.margin>
+                        </ListView>
+                     </children>
+                  </VBox>
 
-    <children>
-
-        <VBox spacing="15" styleClass="vBox" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
-
-            <HBox spacing="20" VBox.vgrow="ALWAYS">
-
-                <VBox spacing="5" HBox.hgrow="ALWAYS">
-                    <Label styleClass="jfx-label-text" text="Lista de Empleados" />
-                    <ListView fx:id="tblEmployees" prefHeight="433.0" prefWidth="27.0" styleClass="list-cell" VBox.vgrow="ALWAYS">
-                  <VBox.margin>
-                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                  </VBox.margin></ListView>
-                </VBox>
-
-                <VBox spacing="10" HBox.hgrow="ALWAYS">
-               <HBox alignment="CENTER_LEFT" spacing="5.0">
-                  <children>
-                     <Label minWidth="60.0" styleClass="jfx-label-text" text="Nombre:" />
-                     <TextField fx:id="tfC_Name" maxWidth="1.7976931348623157E308" promptText="Buscar por nombre..." HBox.hgrow="ALWAYS" />
-                  </children>
-                  <VBox.margin>
-                     <Insets top="20.0" />
-                  </VBox.margin>
-               </HBox>
-
-                    <MFXButton onAction="#onActionBtnNew" styleClass="jfx-btn-add" text="Nuevo">
-                  <graphic>
-                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                  </graphic></MFXButton>
-
-                    <MFXTextField fx:id="txtName" floatingText="Nombre" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="300.0" />
-                    <MFXTextField fx:id="txtId" floatingText="ID" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="300.0" />
-                    <MFXTextField fx:id="txtPin" floatingText="PIN" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="300.0" />
-
-                    <ComboBox fx:id="cmbBranch" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="300.0" promptText="Seleccione sucursal" />
-                    <ComboBox fx:id="cmbStation" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="300.0" promptText="Seleccione estación" />
-
-                    <HBox spacing="10">
-                         <MFXButton onAction="#onActionBtnSave" styleClass="jfx-btn-save" text="Guardar">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </MFXButton>
-                        <MFXButton onAction="#onActionBtnDelete" styleClass="jfx-btn-delete" text="Eliminar" HBox.hgrow="ALWAYS">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic></MFXButton>
-                    </HBox>
-
-                    <HBox alignment="CENTER_RIGHT" />
-
-                    <padding>
-                        <Insets bottom="10" left="10" right="10" top="10" />
-                    </padding>
-
-                </VBox>
-
+                  <!-- RIGHT: form -->
+                  <VBox spacing="10" HBox.hgrow="ALWAYS" maxHeight="1.7976931348623157E308">
+                     <children>
+                        <Label styleClass="jfx-label" text="Datos del empleado"/>
+                        <MFXButton onAction="#onActionBtnNew" styleClass="jfx-btn-nuevo" text="Nuevo">
+                           <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"/></graphic>
+                        </MFXButton>
+                        <MFXTextField fx:id="txtName" floatingText="Nombre"
+                                      maxWidth="1.7976931348623157E308" prefHeight="43.0"/>
+                        <MFXTextField fx:id="txtId" floatingText="ID"
+                                      maxWidth="1.7976931348623157E308" prefHeight="43.0"/>
+                        <MFXTextField fx:id="txtPin" floatingText="PIN"
+                                      maxWidth="1.7976931348623157E308" prefHeight="43.0"/>
+                        <ComboBox fx:id="cmbBranch" maxWidth="1.7976931348623157E308"
+                                  prefHeight="35.0" promptText="Seleccione sucursal"/>
+                        <ComboBox fx:id="cmbStation" maxWidth="1.7976931348623157E308"
+                                  prefHeight="35.0" promptText="Seleccione estación"/>
+                        <HBox spacing="10">
+                           <children>
+                              <MFXButton onAction="#onActionBtnSave" styleClass="jfx-btn-save" text="Guardar">
+                                 <graphic><ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true"/></graphic>
+                              </MFXButton>
+                              <MFXButton onAction="#onActionBtnDelete" styleClass="jfx-btn-delete" text="Eliminar" HBox.hgrow="ALWAYS">
+                                 <graphic><ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true"/></graphic>
+                              </MFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding><Insets bottom="10" left="10" right="10" top="10"/></padding>
+                  </VBox>
+               </children>
             </HBox>
-
-        </VBox>
-
-    </children>
+         </children>
+         <padding><Insets bottom="10" left="10" right="10" top="10"/></padding>
+      </VBox>
+   </children>
 </AnchorPane>

@@ -29,7 +29,7 @@ public class ProceduresMaintenanceController extends Controller {
     @FXML private ListView<Procedure> listProcedures;
     @FXML private TextField           tfT_Procedure;
 
-    private static final String PROCEDURES_PATH = "data/procedures.json";
+    private static final String PROCEDURES_PATH = "procedures.json";
 
     private List<Procedure> procedures    = new ArrayList<>();
     private List<Procedure> allProcedures = new ArrayList<>();
