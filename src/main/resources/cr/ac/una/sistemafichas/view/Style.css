@@ -199,8 +199,8 @@
 ****************************/
 
 .combo-box {
-    -fx-background-color: #cccccc;
-    -fx-border-color: #999999;
+    -fx-background-color: -fx-base-color-claro;
+    -fx-border-color: -fx-base-color-oscuro;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
     -fx-padding: 5;
@@ -267,7 +267,7 @@
 
 /***********************************************************
 *
-*        Botones — Base MFX
+*        Botones  MFX
 *
 ************************************************************/
 
@@ -469,7 +469,7 @@
 .jfx-btn-filter,
 .jfx-btn-filter:armed,
 .jfx-btn-filter:focused {
-    -fx-background-color: #ccffff;
+    -fx-background-color: -fx-base-color-claro;
     -fx-border-color: black;
     -fx-border-width: 0.5px;
     -fx-border-radius: 10px;

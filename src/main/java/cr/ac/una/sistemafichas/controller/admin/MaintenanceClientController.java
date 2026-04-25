@@ -158,7 +158,7 @@ public class MaintenanceClientController extends Controller {
     private void OnActionBtnAddClient(ActionEvent event) {
         String invalidos = Validador.validarRequeridos(requeridos);
         if (!invalidos.isBlank()) {
-            new Mensaje().show(Alert.AlertType.INFORMATION, "Empty fields", "Please fill all fields");
+            new Mensaje().show(Alert.AlertType.INFORMATION, "Lineas Vacias", "Favor llene todas las lineas");
             return;
         }
 
@@ -168,7 +168,7 @@ public class MaintenanceClientController extends Controller {
 
         for (Client c : client) {
             if (c.getId().equalsIgnoreCase(id)) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "Client exists", "Client already exists.");
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Cliente existente", "Cliente ya existe.");
                 return;
             }
         }
@@ -178,7 +178,7 @@ public class MaintenanceClientController extends Controller {
             LocalDate date = LocalDate.parse(birthDate);
             age = Period.between(date, LocalDate.now()).getYears();
         } catch (Exception e) {
-            new Mensaje().show(Alert.AlertType.INFORMATION, "Invalid date", "Use format YYYY-MM-DD");
+            new Mensaje().show(Alert.AlertType.INFORMATION, "Fecha invalida", "Use formato YYYY-MM-DD");
             return;
         }
 
@@ -190,7 +190,7 @@ public class MaintenanceClientController extends Controller {
         refreshClients();
         clearClient();
         tempPhotoPath = null;
-        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Client added", getStage(), "Success");
+        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente agregado", getStage(), "Exito");
     }
 
     @FXML
@@ -251,13 +251,13 @@ public class MaintenanceClientController extends Controller {
     private void OnActionBtnEditClient(ActionEvent event) {
         try {
             if (selectedClient == null) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "No selection", "Select a client to edit.");
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Ninguna Seleccion", "Selecciona un cliente para editar.");
                 return;
             }
 
             String invalidos = Validador.validarRequeridos(requeridos);
             if (!invalidos.isBlank()) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "Empty fields", "Please fill all fields.");
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Lineas vacias", "Favor llene las lineas.");
                 return;
             }
 
@@ -267,7 +267,7 @@ public class MaintenanceClientController extends Controller {
 
             for (Client c : client) {
                 if (c.getId().equalsIgnoreCase(id) && !c.getId().equalsIgnoreCase(selectedClient.getId())) {
-                    new Mensaje().show(Alert.AlertType.INFORMATION, "Duplicate ID", "Another client already uses this ID.");
+                    new Mensaje().show(Alert.AlertType.INFORMATION, "Duplicación ID", "Otro cliente tiene esta ID.");
                     return;
                 }
             }
@@ -277,7 +277,7 @@ public class MaintenanceClientController extends Controller {
                 LocalDate date = LocalDate.parse(birthDate);
                 age = Period.between(date, LocalDate.now()).getYears();
             } catch (Exception e) {
-                new Mensaje().show(Alert.AlertType.INFORMATION, "Invalid date", "Use format YYYY-MM-DD");
+                new Mensaje().show(Alert.AlertType.INFORMATION, "Fecha Invalida", "Use formato YYYY-MM-DD");
                 return;
             }
 
@@ -291,7 +291,7 @@ public class MaintenanceClientController extends Controller {
             JsonUtil.write(CLIENTS_PATH, client);
             refreshClients();
             clearClient();
-            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Client updated", getStage(), "Updated successfully");
+            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cliente registrado", getStage(), "Registrado con exito");
         } catch (Exception ex) {
             Logger.getLogger(MaintenanceClientController.class.getName()).log(Level.SEVERE, null, ex);
         }

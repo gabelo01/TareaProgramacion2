@@ -32,7 +32,7 @@ public class App extends Application {
         String mode;
 
     if (getParameters().getRaw().isEmpty()) {
-        mode = "projection";// cambiar el nombre del mode para abrir una pantalla en especifico
+        mode = "admin";// cambiar el nombre del mode para abrir una pantalla en especifico desde aqui
     } else {
         mode = getParameters().getRaw().get(0);
     }

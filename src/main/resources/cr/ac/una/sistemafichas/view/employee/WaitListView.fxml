@@ -58,8 +58,8 @@
                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
             </graphic></MFXButton>
          <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <MFXTextField fx:id="txtTicketNumber" floatingText="Numero de Ticket" prefWidth="150" styleClass="mfx-text-field" />
-            <MFXButton fx:id="btnCallByNumber" onAction="#onActionBtnCallByNumber" prefHeight="42.0" prefWidth="189.0" styleClass="jfx-btn-search" text="Llamar por # Ticket">
+            <MFXTextField fx:id="txtTicketNumber" floatingText="Numero de Ticket" prefWidth="170.0" styleClass="mfx-text-field" />
+            <MFXButton fx:id="btnCallByNumber" onAction="#onActionBtnCallByNumber" prefHeight="40.0" prefWidth="182.0" styleClass="jfx-btn-search" text="Llamar por # Ticket">
             <graphic>
                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
             </graphic></MFXButton>

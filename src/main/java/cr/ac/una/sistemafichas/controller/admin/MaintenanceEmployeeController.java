@@ -123,43 +123,56 @@ public class MaintenanceEmployeeController extends Controller {
 
     @FXML
     private void onActionBtnSave() {
-        try {
-            if (txtName.getText().trim().isEmpty() || txtId.getText().trim().isEmpty()
-                    || txtPin.getText().trim().isEmpty()
-                    || cmbBranch.getValue() == null || cmbStation.getValue() == null) {
-                new Mensaje().showConfirmation("Campos incompletos", getStage(), "Todos los campos deben estar llenos");
-
-                return;
-            }
-
-            if (selected == null) {
-                Employee e = new Employee(
-                    txtName.getText(), txtId.getText(), txtPin.getText(),
-                    cmbBranch.getValue(), cmbStation.getValue()
-                );
-                employees.add(e);
-            } else {
-                selected.setName(txtName.getText());
-                selected.setId(txtId.getText());
-                selected.setPin(txtPin.getText());
-                selected.setBranchName(cmbBranch.getValue());
-                selected.setStationName(cmbStation.getValue());
-            }
-
-            JsonUtil.write(PATH, employees);
-            load();
-            applyFilter();
-            clear();
-
-            Notifications.create()
-                .title("Guardado correctamente").text("Empleado guardado")
-                .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
-        } catch (Exception ex) {
-            Notifications.create()
-                .title("ERROR").text("Error al guardar")
-                .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showError();
+    try {
+        if (txtName.getText().trim().isEmpty() || txtId.getText().trim().isEmpty()
+                || txtPin.getText().trim().isEmpty()
+                || cmbBranch.getValue() == null || cmbStation.getValue() == null) {
+            new Mensaje().showConfirmation("Campos incompletos", getStage(), "Todos los campos deben estar llenos");
+            return;
         }
+
+        String branch  = cmbBranch.getValue();
+        String station = cmbStation.getValue();
+
+        boolean stationTaken = employees.stream() // Validar que no tenga la misma estacion que otro
+            .filter(e -> selected == null || !e.getId().equals(selected.getId())) // excluye el que se está editando
+            .anyMatch(e -> branch.equals(e.getBranchName()) && station.equals(e.getStationName()));
+
+        if (stationTaken) {
+            new Mensaje().show(Alert.AlertType.WARNING, "Estación ocupada",
+                "La estación " + station + " de " + branch + " ya tiene un empleado asignado.");
+            return;
+        }
+
+        if (selected == null) {
+            Employee e = new Employee(
+                txtName.getText(), txtId.getText(), txtPin.getText(),
+                branch, station
+            );
+            employees.add(e);
+        } else {
+            selected.setName(txtName.getText());
+            selected.setId(txtId.getText());
+            selected.setPin(txtPin.getText());
+            selected.setBranchName(branch);
+            selected.setStationName(station);
+        }
+
+        JsonUtil.write(PATH, employees);
+        load();
+        applyFilter();
+        clear();
+
+        Notifications.create()
+            .title("Guardado correctamente").text("Empleado guardado")
+            .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showInformation();
+
+    } catch (Exception ex) {
+        Notifications.create()
+            .title("ERROR").text("Error al guardar")
+            .position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(2)).showError();
     }
+}
 
     @FXML
     private void onActionBtnDelete() {

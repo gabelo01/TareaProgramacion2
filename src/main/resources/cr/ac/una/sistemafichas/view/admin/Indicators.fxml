@@ -26,7 +26,7 @@
             <!-- ══════════════════ TAB CLIENTES ══════════════════ -->
             <Tab text="Top Clientes">
                <content>
-                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                  <MFXScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="color-fondo-claro">
                      <content>
                         <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" styleClass="vBox">
                            <children>

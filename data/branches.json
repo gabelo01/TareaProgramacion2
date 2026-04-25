@@ -8,7 +8,8 @@
         "preferential": true,
         "branchName": "Cajon",
         "procedureNames": [
-          "Prestamos"
+          "Retiros",
+          "Afiliacion"
         ],
         "active": true
       },
@@ -17,7 +18,8 @@
         "preferential": false,
         "branchName": "Cajon",
         "procedureNames": [
-          "Retiros"
+          "Retiros",
+          "Cobro"
         ],
         "active": true
       }
